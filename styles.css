@@ -137,6 +137,7 @@ body.contact-active .site-header {
   justify-content: space-between;
   color: var(--muted);
   font-weight: 500;
+  text-transform: uppercase;
 }
 
 .case-grid {

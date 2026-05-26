@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   about,
   cases,
@@ -32,32 +32,33 @@ function Header() {
 }
 
 function CustomCursor() {
-  const [state, setState] = useState({
-    x: 0,
-    y: 0,
-    visible: false,
-    active: false,
-    label: "VIEW",
-  });
+  const cursorRef = useRef(null);
+  const labelRef = useRef(null);
 
   useEffect(() => {
     if (!window.matchMedia("(pointer: fine)").matches) {
       return undefined;
     }
 
+    const cursor = cursorRef.current;
+    const labelEl = labelRef.current;
+    let currentLabel = "VIEW";
+
     const onMove = (event) => {
       const target = event.target.closest?.("[data-cursor]");
-      setState({
-        x: event.clientX,
-        y: event.clientY,
-        visible: true,
-        active: Boolean(target),
-        label: target?.dataset.cursor || "VIEW",
-      });
+      cursor.style.left = `${event.clientX}px`;
+      cursor.style.top = `${event.clientY}px`;
+      cursor.classList.add("is-visible");
+      cursor.classList.toggle("is-active", Boolean(target));
+      const nextLabel = target?.dataset.cursor || "VIEW";
+      if (nextLabel !== currentLabel) {
+        currentLabel = nextLabel;
+        labelEl.textContent = nextLabel;
+      }
     };
 
     const onLeave = () => {
-      setState((current) => ({ ...current, visible: false, active: false }));
+      cursor.classList.remove("is-visible", "is-active");
     };
 
     window.addEventListener("pointermove", onMove);
@@ -70,16 +71,8 @@ function CustomCursor() {
   }, []);
 
   return (
-    <div
-      className={[
-        "cursor",
-        state.visible ? "is-visible" : "",
-        state.active ? "is-active" : "",
-      ].join(" ")}
-      style={{ left: state.x, top: state.y }}
-      aria-hidden="true"
-    >
-      <span>{state.label}</span>
+    <div ref={cursorRef} className="cursor" aria-hidden="true">
+      <span ref={labelRef}>VIEW</span>
     </div>
   );
 }
@@ -89,10 +82,10 @@ function Hero() {
     <section className="section hero snap-section" id="top">
       <div className="grid-shell hero-grid">
         <h1>
-          {hero.lines.map((line) => (
+          {hero.lines.map((line, index) => (
             <span key={line}>
               {line}
-              <br />
+              {index < hero.lines.length - 1 && <br />}
             </span>
           ))}
         </h1>
@@ -107,7 +100,8 @@ function Hero() {
 
 function CaseSection({ item, first }) {
   return (
-    <section className="section case snap-section" id={first ? "work" : undefined}>
+    <section className="section case snap-section" id={item.id}>
+      {first && <span id="work" aria-hidden="true" />}
       <article className="grid-shell case-grid">
         <div className="case-copy">
           <h2>{item.title}</h2>
