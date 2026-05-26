@@ -76,8 +76,7 @@ export const extraWork = {
 
 export const about = [
   "Senior product designer, 8+ years across B2B SaaS, design systems, and AI products. I design complex platforms and stay close enough to engineering to ship them.",
-  "Lead Product Designer at Sber India. Previously Openprovider (NL), SnapSoft (US), ClearScale (US).",
-  "I care about systems, sharp interaction details, and the quiet parts that make complex tools feel obvious.",
+  "Lead Product Designer at Sber. Previously Openprovider, SnapSoft, ClearScale. I care about systems, sharp interaction details, and the quiet parts that make complex tools feel obvious.",
 ];
 
 export const recognition = [

@@ -22,10 +22,21 @@ function Header() {
           <a href="#work">Work</a>
           <a href="#about">About</a>
         </div>
-        <a className="contact-link" href="#contact">
-          <span className="desktop-only">Contact</span>
-          <span className="mobile-only">@</span>
-        </a>
+        <div className="nav-actions">
+          <a className="contact-link" href="#contact">
+            <span className="desktop-only">Contact</span>
+            <span className="mobile-only">@</span>
+          </a>
+          <a
+            className="cv-link"
+            href={`${import.meta.env.BASE_URL}cv.pdf`}
+            target="_blank"
+            rel="noopener noreferrer"
+            download
+          >
+            CV ↗
+          </a>
+        </div>
       </nav>
     </header>
   );
@@ -200,7 +211,7 @@ function About() {
       <div className="grid-shell about-grid">
         <img
           className="portrait"
-          src="/portrait.png"
+          src={`${import.meta.env.BASE_URL}portrait.png`}
           alt={`Portrait of ${profile.name}`}
         />
         <div className="about-text">
@@ -342,6 +353,44 @@ function ContactObserver() {
   return null;
 }
 
+function ScrollFade() {
+  useEffect(() => {
+    const scroller = document.querySelector(".snap-container");
+    const contactSection = document.querySelector("#contact");
+
+    if (!scroller || !contactSection) {
+      return undefined;
+    }
+
+    const update = () => {
+      const vh = scroller.clientHeight || window.innerHeight;
+      const scrollTop = scroller.scrollTop;
+      const heroOpacity = Math.max(0, Math.min(1, 1 - scrollTop / (vh * 0.6)));
+
+      const contactTop = contactSection.offsetTop;
+      const distance = contactTop - scrollTop;
+      const contactOpacity = Math.max(
+        0,
+        Math.min(1, 1 - distance / (vh * 0.6))
+      );
+
+      document.body.style.setProperty("--hero-meta-opacity", heroOpacity);
+      document.body.style.setProperty("--contact-year-opacity", contactOpacity);
+    };
+
+    update();
+    scroller.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+
+    return () => {
+      scroller.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, []);
+
+  return null;
+}
+
 export default function App() {
   return (
     <>
@@ -359,6 +408,7 @@ export default function App() {
       </main>
       <CaseIndicator />
       <ContactObserver />
+      <ScrollFade />
     </>
   );
 }
