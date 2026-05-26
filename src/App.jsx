@@ -401,6 +401,7 @@ export default function App() {
           <CustomCursor />
           <Header />
           <CaseStudy study={study} />
+          <ContactObserver />
         </>
       );
     }
