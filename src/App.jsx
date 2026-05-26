@@ -3,10 +3,28 @@ import {
   about,
   cases,
   extraWork,
+  getCaseStudy,
   hero,
   profile,
   recognition,
 } from "./data/portfolio.js";
+import CaseStudy from "./CaseStudy.jsx";
+import Contact from "./Contact.jsx";
+
+function parseRoute(hash) {
+  const m = (hash || "").match(/^#\/case\/([\w-]+)/);
+  return m ? { name: "case", id: m[1] } : { name: "home" };
+}
+
+function useRoute() {
+  const [route, setRoute] = useState(() => parseRoute(window.location.hash));
+  useEffect(() => {
+    const onHash = () => setRoute(parseRoute(window.location.hash));
+    window.addEventListener("hashchange", onHash);
+    return () => window.removeEventListener("hashchange", onHash);
+  }, []);
+  return [route, setRoute];
+}
 
 function Header() {
   const [firstName, lastName] = profile.name.split(" ");
@@ -156,7 +174,7 @@ function CaseSection({ item, first }) {
               ? "case-media-mobile"
               : "case-media-placeholder"
           }`}
-          href={`#${item.id}`}
+          href={`#/case/${item.id}`}
           data-cursor="VIEW"
           aria-label={`View ${item.title} case study`}
         >
@@ -242,25 +260,6 @@ function Recognition() {
           </ul>
         </div>
       ))}
-    </section>
-  );
-}
-
-function Contact() {
-  return (
-    <section className="section contact snap-section" id="contact">
-      <div className="grid-shell contact-grid">
-        <h2>Think of all the useful things we could build together</h2>
-        <div className="contact-methods">
-          <a href={`mailto:${profile.email}`} data-cursor="SAY HI">
-            Get in touch ↗<span>{profile.email}</span>
-          </a>
-          <a href={profile.linkedin} data-cursor="OPEN">
-            LinkedIn ↗<span>{profile.linkedinLabel}</span>
-          </a>
-        </div>
-        <span className="contact-year">© {profile.year}</span>
-      </div>
     </section>
   );
 }
@@ -392,6 +391,21 @@ function ScrollFade() {
 }
 
 export default function App() {
+  const [route] = useRoute();
+
+  if (route.name === "case") {
+    const study = getCaseStudy(route.id);
+    if (study) {
+      return (
+        <>
+          <CustomCursor />
+          <Header />
+          <CaseStudy study={study} />
+        </>
+      );
+    }
+  }
+
   return (
     <>
       <CustomCursor />
