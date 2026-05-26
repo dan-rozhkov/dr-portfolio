@@ -1,6 +1,6 @@
 # DR Portfolio
 
-Personal portfolio website for Danil Rozhkov.
+Personal portfolio website for Danil Rozhkov, built with Vite and React.
 
 The first version is a static site inspired by a presentation-like product design portfolio structure:
 
@@ -10,4 +10,10 @@ The first version is a static site inspired by a presentation-like product desig
 - mobile editorial feed layout
 - custom desktop cursor states
 
-Open `index.html` in a browser to view the site.
+## Commands
+
+```bash
+npm install
+npm run dev
+npm run build
+```
