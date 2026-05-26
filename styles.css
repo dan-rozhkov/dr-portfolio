@@ -28,6 +28,7 @@ body {
   font-size: var(--case);
   line-height: 1.28;
   letter-spacing: 0;
+  text-wrap: balance;
 }
 
 body,
