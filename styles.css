@@ -68,9 +68,10 @@ body.contact-active .site-header {
   min-height: 96px;
   align-items: start;
   padding-top: 32px;
-  font-size: 14px;
+  font-size: 17px;
   font-weight: 500;
   line-height: 1.05;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
@@ -156,9 +157,10 @@ body.contact-active .site-header {
 .extra-list h2,
 .list-section h2 {
   margin: 0 0 16px;
-  font-size: 16px;
+  font-size: 20px;
   line-height: 1.1;
   font-weight: 500;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
@@ -700,10 +702,11 @@ body.contact-active .site-header {
   pointer-events: none;
   opacity: 0;
   transform: translate(-50%, -50%) scale(.32);
-  background: #111;
-  color: #fff;
+  background: #fff;
+  color: #000;
   font-size: 14px;
   font-weight: 500;
+  mix-blend-mode: difference;
   transition: opacity .16s ease, transform .28s cubic-bezier(.34, 1.56, .64, 1), background .16s ease, color .16s ease;
 }
 
@@ -711,8 +714,23 @@ body.contact-active .site-header {
   opacity: 1;
 }
 
+.cursor > span {
+  opacity: 0;
+  transition: opacity .16s ease;
+}
+
 .cursor.is-active {
   transform: translate(-50%, -50%) scale(1);
+}
+
+.cursor.is-active.has-label {
+  background: #111;
+  color: #fff;
+  mix-blend-mode: normal;
+}
+
+.cursor.is-active > span {
+  opacity: 1;
 }
 
 @media (max-width: 900px) {

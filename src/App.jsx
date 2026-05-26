@@ -42,15 +42,37 @@ function CustomCursor() {
 
     const cursor = cursorRef.current;
     const labelEl = labelRef.current;
-    let currentLabel = "VIEW";
+    const SAFE_ZONE = 24;
+    let currentLabel = "";
 
     const onMove = (event) => {
-      const target = event.target.closest?.("[data-cursor]");
+      let target = event.target.closest?.("a, button, [data-cursor]");
+
+      if (!target) {
+        const candidates = document.querySelectorAll("a, button, [data-cursor]");
+        let best = null;
+        let bestDist = SAFE_ZONE;
+        for (const el of candidates) {
+          const rect = el.getBoundingClientRect();
+          if (!rect.width || !rect.height) continue;
+          const dx = Math.max(rect.left - event.clientX, 0, event.clientX - rect.right);
+          const dy = Math.max(rect.top - event.clientY, 0, event.clientY - rect.bottom);
+          const dist = Math.hypot(dx, dy);
+          if (dist < bestDist) {
+            bestDist = dist;
+            best = el;
+          }
+        }
+        target = best;
+      }
+
       cursor.style.left = `${event.clientX}px`;
       cursor.style.top = `${event.clientY}px`;
       cursor.classList.add("is-visible");
       cursor.classList.toggle("is-active", Boolean(target));
-      const nextLabel = target?.dataset.cursor || "VIEW";
+
+      const nextLabel = target?.dataset.cursor || "";
+      cursor.classList.toggle("has-label", Boolean(nextLabel));
       if (nextLabel !== currentLabel) {
         currentLabel = nextLabel;
         labelEl.textContent = nextLabel;
@@ -58,7 +80,7 @@ function CustomCursor() {
     };
 
     const onLeave = () => {
-      cursor.classList.remove("is-visible", "is-active");
+      cursor.classList.remove("is-visible", "is-active", "has-label");
     };
 
     window.addEventListener("pointermove", onMove);
@@ -72,7 +94,7 @@ function CustomCursor() {
 
   return (
     <div ref={cursorRef} className="cursor" aria-hidden="true">
-      <span ref={labelRef}>VIEW</span>
+      <span ref={labelRef} />
     </div>
   );
 }
