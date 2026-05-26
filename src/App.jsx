@@ -113,7 +113,7 @@ function Hero() {
         </h1>
         <div className="hero-meta">
           <span>{profile.location}</span>
-          <span>©{profile.year}</span>
+          <span>© {profile.year}</span>
         </div>
       </div>
     </section>
@@ -140,113 +140,26 @@ function CaseSection({ item, first }) {
           </dl>
         </div>
         <a
-          className={`case-media media-${item.visual}`}
+          className={`case-media ${
+            item.variant === "mobile"
+              ? "case-media-mobile"
+              : "case-media-placeholder"
+          }`}
           href={`#${item.id}`}
           data-cursor="VIEW"
           aria-label={`View ${item.title} case study`}
         >
-          <CaseVisual type={item.visual} />
+          {item.variant === "mobile" && (
+            <div className="mobile-stack" aria-hidden="true">
+              <span />
+              <span />
+              <span />
+            </div>
+          )}
         </a>
+
       </article>
     </section>
-  );
-}
-
-function CaseVisual({ type }) {
-  if (type === "finance") {
-    return <FinanceVisual />;
-  }
-
-  if (type === "index") {
-    return <IndexVisual />;
-  }
-
-  return <AiVisual />;
-}
-
-function AiVisual() {
-  return (
-    <div className="desktop-composition ai-composition" aria-hidden="true">
-      <div className="phone phone-large">
-        <div className="phone-top" />
-        <div className="task-stack">
-          <span />
-          <span />
-          <span />
-        </div>
-        <div className="metric">84%</div>
-        <div className="screen-card" />
-      </div>
-      <div className="phone phone-large muted-phone">
-        <div className="orbital" />
-        <div className="timeline">
-          <span />
-          <span />
-          <span />
-          <span />
-        </div>
-      </div>
-      <div className="phone phone-large">
-        <div className="chat-row strong" />
-        <div className="chat-row" />
-        <div className="chat-row short" />
-        <div className="keypad">
-          {Array.from({ length: 9 }, (_, index) => (
-            <span key={index} />
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function FinanceVisual() {
-  return (
-    <div className="desktop-composition dashboard-composition" aria-hidden="true">
-      <div className="dashboard-window">
-        <div className="dashboard-sidebar">
-          <span />
-          <span />
-          <span />
-          <span />
-        </div>
-        <div className="dashboard-main">
-          <div className="chart-card">
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-          </div>
-          <div className="data-grid">
-            {Array.from({ length: 8 }, (_, index) => (
-              <span key={index} />
-            ))}
-          </div>
-        </div>
-      </div>
-      <div className="floating-panel">
-        <b>Transfer</b>
-        <strong>$48,200</strong>
-        <span />
-      </div>
-    </div>
-  );
-}
-
-function IndexVisual() {
-  return (
-    <div className="desktop-composition search-composition" aria-hidden="true">
-      <div className="search-window">
-        <div className="search-brand">Index</div>
-        <div className="search-bar" />
-        <div className="signal-row">
-          <span />
-          <span />
-          <span />
-        </div>
-      </div>
-    </div>
   );
 }
 
@@ -254,7 +167,7 @@ function ExtraWork() {
   const [activeTab, setActiveTab] = useState(extraWork.tabs[0]);
 
   return (
-    <section className="section extra-work snap-section">
+    <section className="section extra-work snap-section" id="also-shipped">
       <article className="grid-shell extra-grid">
         <div className="extra-list">
           <h2>{extraWork.title}</h2>
@@ -271,29 +184,11 @@ function ExtraWork() {
           ))}
         </div>
         <a
-          className="large-preview"
+          className="large-preview case-media-placeholder"
           href="#systems"
           data-cursor="PLAY"
           aria-label="Open interaction systems preview"
-        >
-          <div className="preview-stage" aria-hidden="true">
-            <div className="preview-topbar">
-              <span />
-              <span />
-              <span />
-            </div>
-            <div className="preview-grid">
-              {Array.from({ length: 8 }, (_, index) => (
-                <div key={index} />
-              ))}
-            </div>
-            <div className="command-panel">
-              <span />
-              <span />
-              <span />
-            </div>
-          </div>
-        </a>
+        />
       </article>
     </section>
   );
@@ -303,10 +198,11 @@ function About() {
   return (
     <section className="section about snap-section" id="about">
       <div className="grid-shell about-grid">
-        <div className="portrait" aria-label="Portrait placeholder">
-          <div className="portrait-head" />
-          <div className="portrait-body" />
-        </div>
+        <img
+          className="portrait"
+          src="/portrait.png"
+          alt={`Portrait of ${profile.name}`}
+        />
         <div className="about-text">
           {about.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
@@ -343,22 +239,80 @@ function Contact() {
   return (
     <section className="section contact snap-section" id="contact">
       <div className="grid-shell contact-grid">
-        <h2>
-          Think of all the useful things
-          <br />
-          we could build together
-        </h2>
+        <h2>Think of all the useful things we could build together</h2>
         <div className="contact-methods">
           <a href={`mailto:${profile.email}`} data-cursor="SAY HI">
             Get in touch ↗<span>{profile.email}</span>
           </a>
-          <a href={profile.github} data-cursor="OPEN">
-            GitHub ↗<span>{profile.githubLabel}</span>
+          <a href={profile.linkedin} data-cursor="OPEN">
+            LinkedIn ↗<span>{profile.linkedinLabel}</span>
           </a>
         </div>
-        <span className="contact-year">©{profile.year}</span>
+        <span className="contact-year">© {profile.year}</span>
       </div>
     </section>
+  );
+}
+
+function CaseIndicator() {
+  const [activeId, setActiveId] = useState(null);
+  const [visible, setVisible] = useState(false);
+
+  const items = [
+    ...cases.map((item) => ({ id: item.id, label: item.title })),
+    { id: "also-shipped", label: extraWork.title },
+  ];
+
+  useEffect(() => {
+    const sections = items
+      .map((item) => document.getElementById(item.id))
+      .filter(Boolean);
+
+    if (!sections.length) return undefined;
+
+    const visibility = new Map();
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          visibility.set(entry.target.id, entry.intersectionRatio);
+        }
+        let bestId = null;
+        let bestRatio = 0;
+        for (const [id, ratio] of visibility) {
+          if (ratio > bestRatio) {
+            bestRatio = ratio;
+            bestId = id;
+          }
+        }
+        setVisible(bestRatio > 0.35);
+        if (bestId) setActiveId(bestId);
+      },
+      { threshold: [0, 0.25, 0.5, 0.75, 1] }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <nav
+      className={`case-indicator ${visible ? "is-visible" : ""}`}
+      aria-label="Case study navigation"
+      aria-hidden={!visible}
+    >
+      {items.map((item) => (
+        <a
+          key={item.id}
+          href={`#${item.id}`}
+          className={`case-indicator-dot ${
+            activeId === item.id ? "is-active" : ""
+          }`}
+          aria-label={item.label}
+          aria-current={activeId === item.id ? "true" : undefined}
+        />
+      ))}
+    </nav>
   );
 }
 
@@ -403,6 +357,7 @@ export default function App() {
         <Recognition />
         <Contact />
       </main>
+      <CaseIndicator />
       <ContactObserver />
     </>
   );
