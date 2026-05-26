@@ -1,5 +1,13 @@
 # DR Portfolio
 
-Personal portfolio repository.
+Personal portfolio website for Danil Rozhkov.
 
-This project is currently in its initial setup stage. Documentation and project notes will live in the `docs` directory.
+The first version is a static site inspired by a presentation-like product design portfolio structure:
+
+- full-screen desktop sections
+- fixed navigation
+- featured case study blocks
+- mobile editorial feed layout
+- custom desktop cursor states
+
+Open `index.html` in a browser to view the site.
