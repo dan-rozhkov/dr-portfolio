@@ -100,8 +100,11 @@ button {
   pointer-events: auto;
 }
 
-.mobile-break,
 .mobile-only {
+  display: none;
+}
+
+.mobile-break {
   display: none;
 }
 
@@ -841,8 +844,7 @@ body.contact-active .cursor.is-active.has-label {
     display: none;
   }
 
-  .mobile-only,
-  .mobile-break {
+  .mobile-only {
     display: inline;
   }
 
@@ -865,14 +867,9 @@ body.contact-active .cursor.is-active.has-label {
 
   .site-header {
     min-height: 72px;
-    background: var(--bg);
   }
 
 
-  .contact-link {
-    font-size: 28px;
-    line-height: .8;
-  }
 
   .snap-container {
     height: auto;
@@ -1502,6 +1499,10 @@ body:has(.case-study)::-webkit-scrollbar {
   text-transform: uppercase;
 }
 
+.cs-slider-mobile {
+  display: none;
+}
+
 @media (max-width: 900px) {
   .cs-title-name,
   .cs-title-intro,
@@ -1513,6 +1514,61 @@ body:has(.case-study)::-webkit-scrollbar {
   .cs-outcomes-stats,
   .cs-outcomes-text {
     grid-column: 1 / 17;
+  }
+
+  .case-study {
+    padding-top: 72px;
+  }
+
+  .cs-title-block {
+    padding-top: 16px;
+    padding-bottom: 40px;
+  }
+
+  .cs-title-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .cs-title-name,
+  .cs-title-intro,
+  .cs-title-meta {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .cs-title-intro {
+    padding-top: 0;
+  }
+
+  .cs-title-meta {
+    margin-top: 8px;
+  }
+
+  .cs-title-meta,
+  .cs-title-meta thead,
+  .cs-title-meta tbody,
+  .cs-title-meta tr {
+    display: block;
+  }
+
+  .cs-title-meta thead {
+    display: none;
+  }
+
+  .cs-title-meta td {
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    gap: 16px;
+    padding: 12px 0;
+    border-top: 1px solid var(--line);
+    white-space: normal;
+  }
+
+  .cs-title-meta td::before {
+    content: attr(data-label);
+    color: var(--muted);
   }
 
   .cs-label {
@@ -1532,7 +1588,7 @@ body:has(.case-study)::-webkit-scrollbar {
   }
 
   .cs-outcomes-stats {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr;
   }
 
   .cs-image,
@@ -1546,33 +1602,37 @@ body:has(.case-study)::-webkit-scrollbar {
   }
 
   .cs-slider-sticky {
-    position: static;
-    height: auto;
-    overflow: visible;
-  }
-
-  .cs-slider-grid {
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
-
-  .cs-slider-text,
-  .cs-slider-media {
-    grid-column: 1 / -1;
-    position: static;
-    min-height: 0;
-  }
-
-  .cs-slider-slide,
-  .cs-slider-media-slide {
-    position: static;
-    opacity: 1;
-    transform: none;
-    pointer-events: auto;
-    margin-bottom: 32px;
-  }
-
-  .cs-slider-dots {
     display: none;
+  }
+
+  .cs-slider-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    padding-inline: var(--pad);
+  }
+
+  .cs-slider-pair {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .cs-slider-pair h3 {
+    margin: 0;
+    font-size: var(--cs-logline-size);
+    line-height: var(--cs-logline-lh);
+    font-weight: 400;
+    letter-spacing: var(--cs-logline-tracking);
+  }
+
+  .cs-slider-pair p {
+    margin: 0;
+    font-size: var(--cs-case-size);
+    line-height: var(--cs-case-lh);
+  }
+
+  .cs-slider-pair .cs-image {
+    border-radius: 20px;
   }
 }

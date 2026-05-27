@@ -139,6 +139,15 @@ function Slider({ items }) {
           </div>
         </div>
       </div>
+      <div className="cs-slider-mobile" aria-hidden="true">
+        {items.map((item, i) => (
+          <div className="cs-slider-pair" key={i}>
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+            <Placeholder aspect={item.aspect || "4 / 3"} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -193,7 +202,7 @@ export default function CaseStudy({ study }) {
             <tbody>
               <tr>
                 {meta.map(([label, value]) => (
-                  <td key={label}>{value}</td>
+                  <td key={label} data-label={label}>{value}</td>
                 ))}
               </tr>
             </tbody>
