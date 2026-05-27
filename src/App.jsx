@@ -11,18 +11,75 @@ import {
 import CaseStudy from "./CaseStudy.jsx";
 import Contact from "./Contact.jsx";
 
-function parseRoute(hash) {
-  const m = (hash || "").match(/^#\/case\/([\w-]+)/);
+const BASE = import.meta.env.BASE_URL;
+const BASE_NO_SLASH = BASE.replace(/\/$/, "");
+
+function parseRoute(pathname) {
+  const rel = (pathname || "/").replace(BASE_NO_SLASH, "") || "/";
+  const m = rel.match(/^\/case\/([\w-]+)\/?$/);
   return m ? { name: "case", id: m[1] } : { name: "home" };
 }
 
-function useRoute() {
-  const [route, setRoute] = useState(() => parseRoute(window.location.hash));
+function useRoute(initialPath) {
+  const [route, setRoute] = useState(() => parseRoute(initialPath));
+
   useEffect(() => {
-    const onHash = () => setRoute(parseRoute(window.location.hash));
-    window.addEventListener("hashchange", onHash);
-    return () => window.removeEventListener("hashchange", onHash);
+    const onPop = () => setRoute(parseRoute(window.location.pathname));
+    window.addEventListener("popstate", onPop);
+
+    const onClick = (event) => {
+      if (
+        event.defaultPrevented ||
+        event.button !== 0 ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.shiftKey ||
+        event.altKey
+      ) {
+        return;
+      }
+      const link = event.target.closest?.("a");
+      if (!link) return;
+      if (link.target && link.target !== "_self") return;
+      if (link.hasAttribute("download")) return;
+      const href = link.getAttribute("href");
+      if (!href) return;
+
+      // In-page hash anchors: from a case page, redirect to home + hash.
+      if (href.startsWith("#")) {
+        if (window.location.pathname.replace(/\/$/, "") !== BASE_NO_SLASH) {
+          event.preventDefault();
+          window.history.pushState({}, "", BASE + href);
+          setRoute(parseRoute(BASE));
+          // After paint, jump to the anchor.
+          requestAnimationFrame(() => {
+            const id = href.slice(1);
+            const el = id && document.getElementById(id);
+            if (el) el.scrollIntoView();
+          });
+        }
+        return;
+      }
+
+      const url = new URL(link.href, window.location.origin);
+      if (url.origin !== window.location.origin) return;
+      if (!url.pathname.startsWith(BASE_NO_SLASH)) return;
+      // External-looking files served from BASE (e.g., cv.pdf) — let browser handle.
+      if (/\.[a-z0-9]+$/i.test(url.pathname)) return;
+
+      event.preventDefault();
+      window.history.pushState({}, "", url.pathname + url.search + url.hash);
+      setRoute(parseRoute(url.pathname));
+      window.scrollTo(0, 0);
+    };
+    document.addEventListener("click", onClick);
+
+    return () => {
+      window.removeEventListener("popstate", onPop);
+      document.removeEventListener("click", onClick);
+    };
   }, []);
+
   return [route, setRoute];
 }
 
@@ -174,7 +231,7 @@ function CaseSection({ item, first }) {
               ? "case-media-mobile"
               : "case-media-placeholder"
           }`}
-          href={`#/case/${item.id}`}
+          href={`${BASE}case/${item.id}`}
           data-cursor="VIEW"
           aria-label={`View ${item.title} case study`}
         >
@@ -390,8 +447,11 @@ function ScrollFade() {
   return null;
 }
 
-export default function App() {
-  const [route] = useRoute();
+export default function App({ initialPath }) {
+  const path =
+    initialPath ??
+    (typeof window !== "undefined" ? window.location.pathname : "/");
+  const [route] = useRoute(path);
 
   if (route.name === "case") {
     const study = getCaseStudy(route.id);
