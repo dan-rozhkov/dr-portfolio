@@ -27,12 +27,14 @@ export interface CaseSummary {
   meta: MetaEntry[];
   visual: string;
   variant?: "mobile";
+  preview?: { src: string; alt: string };
 }
 
 export interface ExtraWork {
   title: string;
   description: string;
   tabs: string[];
+  previews: Record<string, { src: string; alt: string }>;
 }
 
 export type SectionStat = [value: string, label: string];
@@ -96,6 +98,7 @@ export const cases: CaseSummary[] = [
     ],
     visual: "finance",
     variant: "mobile",
+    preview: { src: "images/openprovider/mobile.png", alt: "Openprovider mobile screens" },
   },
   {
     id: "clearscale-msp",
@@ -111,6 +114,7 @@ export const cases: CaseSummary[] = [
       ["Output", "React MSP portal, redesigned client workflows"],
     ],
     visual: "cloud",
+    preview: { src: "images/clearscale/billing-details.png", alt: "ClearScale MSP billing details" },
   },
   {
     id: "seligoai",
@@ -127,6 +131,7 @@ export const cases: CaseSummary[] = [
     ],
     visual: "education",
     variant: "mobile",
+    preview: { src: "images/seligoai/hero.png", alt: "SeligoAI platform" },
   },
 ];
 
@@ -142,6 +147,9 @@ export const extraWork: ExtraWork = {
     "LucidBots (SnapSoft)",
     "NDA AI tools",
   ],
+  previews: {
+    TalkPilot: { src: "images/talkpilot/hero.png", alt: "TalkPilot product hero" },
+  },
 };
 
 export const about: string[] = [

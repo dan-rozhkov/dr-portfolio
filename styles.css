@@ -58,7 +58,8 @@ button {
   inset: 0 0 auto;
   z-index: 20;
   pointer-events: none;
-  transition: color .18s ease;
+  color: #fff;
+  mix-blend-mode: difference;
 }
 
 .nav {
@@ -208,7 +209,7 @@ button {
   grid-column: 5 / 16;
   position: relative;
   display: block;
-  min-height: 520px;
+  aspect-ratio: 16 / 9;
 }
 
 .case-indicator {
@@ -255,8 +256,25 @@ button {
 }
 
 .case-media-placeholder {
-  background: #ececec;
+  background: #fff;
   border-radius: 36px;
+}
+
+.case-media-image {
+  border-radius: 36px;
+  background: #fff;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.case-media-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  display: block;
 }
 
 .case-media-mobile {
@@ -277,7 +295,7 @@ button {
 
 .mobile-stack span {
   display: block;
-  background: #ececec;
+  background: #fff;
   border-radius: 28px;
   aspect-ratio: 9 / 18;
   width: 100%;
@@ -793,8 +811,8 @@ button {
   left: 0;
   top: 0;
   z-index: 100;
-  width: 80px;
-  height: 80px;
+  width: 112px;
+  height: 112px;
   display: grid;
   place-items: center;
   border-radius: 50%;
@@ -803,8 +821,10 @@ button {
   transform: translate(-50%, -50%) scale(.32);
   background: #fff;
   color: #000;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   mix-blend-mode: difference;
   transition: opacity .16s ease, transform .28s cubic-bezier(.34, 1.56, .64, 1), background .16s ease, color .16s ease;
 }

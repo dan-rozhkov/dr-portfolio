@@ -133,11 +133,13 @@ function CustomCursor() {
     if (!cursor || !labelEl) return undefined;
     const SAFE_ZONE = 24;
     let currentLabel = "";
+    let magnetTarget: HTMLElement | null = null;
 
     const onMove = (event: PointerEvent) => {
       const startTarget = event.target as Element | null;
       let target: HTMLElement | null =
         (startTarget?.closest?.("a, button, [data-cursor]") as HTMLElement | null) ?? null;
+      const directHit = target;
 
       if (!target) {
         const candidates = document.querySelectorAll<HTMLElement>(
@@ -164,6 +166,8 @@ function CustomCursor() {
       cursor.classList.add("is-visible");
       cursor.classList.toggle("is-active", Boolean(target));
 
+      magnetTarget = target && !directHit ? target : null;
+
       const nextLabel = target?.dataset.cursor || "";
       cursor.classList.toggle("has-label", Boolean(nextLabel));
       if (nextLabel !== currentLabel) {
@@ -174,14 +178,26 @@ function CustomCursor() {
 
     const onLeave = () => {
       cursor.classList.remove("is-visible", "is-active", "has-label");
+      magnetTarget = null;
+    };
+
+    const onClick = (event: MouseEvent) => {
+      if (!magnetTarget) return;
+      const clickTarget = event.target as Element | null;
+      if (clickTarget?.closest?.("a, button, [data-cursor]")) return;
+      event.preventDefault();
+      event.stopPropagation();
+      magnetTarget.click();
     };
 
     window.addEventListener("pointermove", onMove);
     window.addEventListener("pointerleave", onLeave);
+    window.addEventListener("click", onClick, true);
 
     return () => {
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("pointerleave", onLeave);
+      window.removeEventListener("click", onClick, true);
     };
   }, []);
 
@@ -234,7 +250,9 @@ function CaseSection({ item, first }: { item: CaseSummary; first: boolean }) {
         </div>
         <a
           className={`case-media ${
-            item.variant === "mobile"
+            item.preview
+              ? "case-media-image"
+              : item.variant === "mobile"
               ? "case-media-mobile"
               : "case-media-placeholder"
           }`}
@@ -242,13 +260,19 @@ function CaseSection({ item, first }: { item: CaseSummary; first: boolean }) {
           data-cursor="VIEW"
           aria-label={`View ${item.title} case study`}
         >
-          {item.variant === "mobile" && (
+          {item.preview ? (
+            <img
+              src={`${BASE}${item.preview.src}`}
+              alt={item.preview.alt}
+              loading="lazy"
+            />
+          ) : item.variant === "mobile" ? (
             <div className="mobile-stack" aria-hidden="true">
               <span />
               <span />
               <span />
             </div>
-          )}
+          ) : null}
         </a>
 
       </article>
@@ -257,7 +281,9 @@ function CaseSection({ item, first }: { item: CaseSummary; first: boolean }) {
 }
 
 function ExtraWork() {
-  const [activeTab, setActiveTab] = useState(extraWork.tabs[0]);
+  const [activeTab, setActiveTab] = useState(
+    extraWork.tabs.find((t) => extraWork.previews[t]) ?? extraWork.tabs[0],
+  );
 
   return (
     <section className="section extra-work snap-section" id="also-shipped">
@@ -277,11 +303,21 @@ function ExtraWork() {
           ))}
         </div>
         <a
-          className="large-preview case-media-placeholder"
+          className={`large-preview ${
+            extraWork.previews[activeTab] ? "case-media-image" : "case-media-placeholder"
+          }`}
           href="#systems"
           data-cursor="PLAY"
           aria-label="Open interaction systems preview"
-        />
+        >
+          {extraWork.previews[activeTab] && (
+            <img
+              src={`${BASE}${extraWork.previews[activeTab].src}`}
+              alt={extraWork.previews[activeTab].alt}
+              loading="lazy"
+            />
+          )}
+        </a>
       </article>
     </section>
   );
