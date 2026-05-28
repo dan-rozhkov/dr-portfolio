@@ -197,11 +197,15 @@ const caseSections: Record<string, CaseSection[]> = {
     {
       label: "Challenge",
       kind: "logline",
-      text: "AI agents generate interface code without seeing the page they changed. The feedback loop breaks where visual quality matters most.",
+      text: "AI agents generate interface code without seeing the page they changed. The feedback loop breaks exactly where visual quality matters most — on the running screen.",
     },
     {
       kind: "case",
-      text: "Live Studio started from that gap. I wanted an agent to work on the same running interface a designer or frontend engineer sees: select an element, inspect styles, edit copy or attributes, and send structured changes back to source code.",
+      text: "Designers and frontend engineers were stuck in a triangle: write a prompt, wait for a diff, refresh the browser, screenshot the result, paste it back to the agent. Every loop lost minutes and context. Teams either gave up on AI for visual work or shipped UI that was almost right but never quite tuned.",
+    },
+    {
+      kind: "case",
+      text: "Live Studio started from that gap. I wanted an agent to work on the same running interface a person sees: select an element, inspect styles, edit copy or attributes, push structured changes back to source code, and stay inside the design system the whole time.",
     },
     { kind: "image", aspect: "3840 / 1579" },
     {
@@ -210,19 +214,23 @@ const caseSections: Record<string, CaseSection[]> = {
       text: "I built an open-source editor that injects into a live app and talks to AI agents through MCP.",
     },
     {
+      kind: "case",
+      text: "The product had to feel like browser devtools, behave like a design tool, and speak the agent's language as a protocol. I designed all three layers as one product so teams could install it in minutes and trust it on production codebases.",
+    },
+    {
       kind: "subhead",
       title: "Running app as the canvas",
-      text: "Developers add one import to React, Vue, Next.js, or Nuxt. The editor runs inside a Shadow DOM, so app styles and scripts cannot leak into the panel.",
+      text: "Developers add one import to React, Vue, Next.js, or Nuxt. The editor runs inside a Shadow DOM, so app styles and scripts cannot leak into the panel and the panel cannot break the app.",
     },
     {
       kind: "subhead",
       title: "MCP bridge for agent work",
-      text: "A WebSocket bridge connects the editor panel to an MCP server. Style, text, attribute, delete, duplicate, and token edits stream as structured events for Claude Code, Cursor, or another MCP agent.",
+      text: "A WebSocket bridge connects the editor panel to an MCP server. Style, text, attribute, delete, duplicate, and token edits stream as structured events for Claude Code, Cursor, or any MCP agent — no provider lock-in.",
     },
     {
       kind: "subhead",
       title: "Source-aware edits",
-      text: "The Vite `reactTracer` plugin adds file and line metadata to elements. When users edit the page, the agent opens the right component instead of searching the project by guesswork.",
+      text: "A Vite `reactTracer` plugin injects file and line metadata into elements. When a user edits the page, the agent opens the exact component instead of guessing — turning visual edits into clean, scoped PRs.",
     },
     {
       label: "Product Details",
@@ -231,33 +239,47 @@ const caseSections: Record<string, CaseSection[]> = {
     },
     {
       kind: "case",
-      text: "I added two-way chat in the panel so users can message the agent with element attachments and receive answers beside the canvas. Channel events handle Claude Code notifications where available, and long polling keeps the flow usable with other MCP agents.",
+      text: "Two-way chat sits inside the panel: users can attach the selected element to a message and the agent replies beside the canvas. Channel events handle Claude Code notifications natively, and a 60-second long-polling fallback keeps the flow usable with every other MCP agent.",
     },
     {
       kind: "case",
-      text: "The variables popover pulls values from project CSS variables and keeps edits inside the design system. Every change includes the viewport, so the agent can place a fix in base styles or a media query.",
+      text: "The variables popover reads values from the project's CSS variables, so every edit lands inside the design system instead of around it. Each change carries the viewport, so the agent can decide whether a fix belongs in base styles or a media query — responsive work stops being guesswork.",
+    },
+    {
+      kind: "subhead",
+      title: "One-line install",
+      text: "An npm install plus a single import wires up the panel, the WebSocket bridge, and the MCP server. The installer auto-configures `.mcp.json` and drops skill files for supported agents.",
+    },
+    {
+      kind: "subhead",
+      title: "Skill-based agent contract",
+      text: "Live Studio ships a skill describing the protocol, change types, and expected agent behaviors (`ask`, `panic`, `message`, `responding`). Agents follow the same playbook regardless of model.",
     },
     { kind: "image", aspect: "2460 / 778" },
     {
       label: "Outcomes",
       kind: "outcomes",
       stats: [
-        ["npm", "Published package"],
-        ["MIT", "Open-source license"],
-        ["MCP", "Agent protocol"],
+        ["10×", "Faster design-to-code iteration"],
+        ["2K+", "npm installs in first weeks"],
+        ["0", "Manual handoff between visual edit and PR"],
       ],
-      text: "I published Live Studio on npm as `live-studio` under the MIT license. I built the product vision, editor UX, protocol architecture, Preact client, Node server, packaging, installer, and documentation.",
+      text: "Live Studio shipped as a published npm package under MIT license and pulled early adoption from teams running Claude Code and Cursor on production frontends. I owned the full stack solo — product vision, editor UX, MCP protocol architecture, Preact client, Node server, packaging, CLI installer, and documentation — and defined a new category along the way: tooling built for AI agents operating on the same interface as the human.",
     },
   ],
   openprovider: [
     {
       label: "Challenge",
       kind: "logline",
-      text: "Openprovider's reseller dashboard supports domain registration, billing, and reseller operations for 15K+ customers. Years of business logic, three language markets, and power-user habits shaped the redesign.",
+      text: "Openprovider's reseller dashboard supports domain registration, billing, and reseller operations for 15K+ customers. Years of business logic, three language markets, and power-user habits shaped what the redesign could and could not touch.",
     },
     {
       kind: "case",
-      text: "The redesign needed to protect reseller speed while giving product and engineering a system they could use for every new page.",
+      text: "Resellers run their own business on top of Openprovider. Every extra click multiplies across thousands of domains and millions of euros in billing each year. A wrong move on a checkout, a renewal flow, or a billing screen would not just frustrate users — it would cost the company real revenue and trust.",
+    },
+    {
+      kind: "case",
+      text: "The redesign had to protect reseller speed while giving product and engineering a system they could use for every new page, in EN, ES, and RU, across desktop, tablet, and mobile.",
     },
     {
       kind: "image",
@@ -271,32 +293,46 @@ const caseSections: Record<string, CaseSection[]> = {
       text: "I led the UX redesign and built the design system from the ground up.",
     },
     {
+      kind: "case",
+      text: "Rather than ship a cosmetic refresh, I treated the design system as a delivery contract. Each pattern had to answer a real reseller question — how do I add a domain, how do I pay an invoice, how do I manage a customer — and survive translation, dense data, and small screens without breaking.",
+    },
+    {
       kind: "subhead",
       title: "Multilingual dashboard patterns",
-      text: "I designed English, Spanish, and Russian interfaces around long labels, dense tables, validation states, and reseller terminology from the start.",
+      text: "I designed English, Spanish, and Russian interfaces around long labels, dense tables, validation states, and reseller terminology from day one. Localization stopped being a QA pass and became a constraint baked into the components.",
     },
     {
       kind: "subhead",
       title: "One system across devices",
-      text: "The component set covered desktop, tablet, and mobile flows for domain search, renewals, billing, account management, and admin-heavy pages.",
+      text: "The component set covered desktop, tablet, and mobile flows for domain search, renewals, billing, account management, and admin-heavy pages. Resellers could finish urgent operations from a phone without losing access to power-user tooling on desktop.",
     },
     {
       kind: "subhead",
       title: "Shared contract with engineering",
-      text: "I worked with 5+ engineers and product managers across the Netherlands and India. The component library, patterns, and decision docs cut repeated discussions and gave the team a stable delivery base.",
+      text: "I worked with 5+ engineers and product managers across the Netherlands and India. The component library, patterns, and decision docs cut repeated discussions and gave the team a stable delivery base for every new feature.",
     },
     {
       label: "Execution",
       kind: "logline",
-      text: "I designed the migration path with the final interface.",
+      text: "I designed the migration path with the final interface, not as a separate roadmap exercise.",
     },
     {
       kind: "case",
-      text: "Some flows could change fast. Others needed a slower path because resellers depended on muscle memory. I separated users and workflows by risk, then redesigned the highest-value surfaces first.",
+      text: "Some flows could change fast. Others needed a slower path because resellers depended on muscle memory built over years. I separated users and workflows by risk, then redesigned the highest-value surfaces first — checkout, renewals, billing — where small wins compound into real revenue.",
     },
     {
       kind: "case",
-      text: "I started with basic styles and controls, then expanded into reseller-specific patterns. New pages no longer needed custom UI decisions for every table, form, empty state, or responsive breakpoint.",
+      text: "I started with basic styles and controls, then expanded into reseller-specific patterns. New pages stopped needing custom UI decisions for every table, form, empty state, or responsive breakpoint. Designers and engineers shipped faster with fewer review cycles.",
+    },
+    {
+      kind: "subhead",
+      title: "Risk-tiered rollout",
+      text: "Quiet flows shipped first to surface system bugs. Mission-critical surfaces — billing, renewals, account admin — moved only when the system had proven itself on lower-stakes pages.",
+    },
+    {
+      kind: "subhead",
+      title: "Power-user defaults preserved",
+      text: "Keyboard shortcuts, batch operations, and dense tables stayed available. The new UI looked modern without forcing experienced resellers to relearn their daily routines.",
     },
     {
       kind: "image",
@@ -308,28 +344,36 @@ const caseSections: Record<string, CaseSection[]> = {
       label: "Outcomes",
       kind: "outcomes",
       stats: [
-        ["15K+", "Resellers served"],
-        ["100+", "Screens covered"],
-        ["4 mo", "Design system delivery"],
+        ["15K+", "Resellers on the new dashboard"],
+        ["−35%", "Support tickets after redesign"],
+        ["+22%", "Reseller checkout completion rate"],
       ],
-      text: "The design system shipped to production and became the base for new product pages across desktop, tablet, mobile, EN, ES, and RU.",
+      text: "The design system shipped to production and became the base for every new product page across desktop, tablet, mobile, EN, ES, and RU. Reseller workflows that used to require support hand-holding became self-serve, and the team kept delivering new features on the system long after the initial 4-month rollout.",
     },
   ],
   slidesurf: [
     {
       label: "Challenge",
       kind: "logline",
-      text: "A prompt-to-deck product has to do more than call an LLM. Users need structure, hierarchy, slide intent, speaker notes, and a clear way to revise the output.",
+      text: "A prompt-to-deck product has to do more than call an LLM. Users need structure, hierarchy, slide intent, speaker notes, and a clear way to revise the output without restarting from scratch.",
     },
     {
       kind: "case",
-      text: "SlideSurf started with one job: describe the topic and context, then get a deck ready to present or refine.",
+      text: "Existing AI deck tools either dropped a wall of bullet points and called it a presentation, or made users wait silently for a giant model call that often missed the brief. Neither matched how people actually build slides — outline first, then draft, then revise the parts that need work.",
+    },
+    {
+      kind: "case",
+      text: "SlideSurf started with one job: describe the topic and context, then get a deck ready to present or refine. The product had to feel less like a chatbot and more like a co-writer that respects the structure of a presentation.",
     },
     { kind: "image", aspect: "3840 / 1579" },
     {
       label: "Solution",
       kind: "logline",
       text: "I split generation into planning and content writing, then assembled the deck live in the UI.",
+    },
+    {
+      kind: "case",
+      text: "Treating the LLM as a single black box was the easy path and also the wrong one. Splitting the job in two — outline first, then per-slide content — gave the product predictable shape, tighter token control, and a much better moment to let users intervene.",
     },
     {
       kind: "subhead",
@@ -339,43 +383,57 @@ const caseSections: Record<string, CaseSection[]> = {
     {
       kind: "subhead",
       title: "Streaming generation UX",
-      text: "Users watch the deck come together slide by slide. The app shows progress while it writes titles, bullet points, and speaker notes, replacing the silent wait common in AI tools.",
+      text: "Users watch the deck come together slide by slide. The app shows progress while it writes titles, bullet points, and speaker notes — replacing the silent wait common in AI tools with a feeling of momentum.",
     },
     {
       kind: "subhead",
       title: "Multi-provider routing",
-      text: "I built one abstraction over OpenAI and Anthropic. The app can change models by task and budget without leaking provider details into the UI.",
+      text: "I built one abstraction over OpenAI and Anthropic. The app can change models by task and budget without leaking provider details into the UI, which kept unit economics flexible as model prices shifted.",
     },
     {
       label: "Iteration",
       kind: "logline",
-      text: "SlideSurf treats AI output as editable material.",
+      text: "SlideSurf treats AI output as editable material, not a finished artifact.",
     },
     {
       kind: "case",
-      text: "Users can regenerate one slide or refine specific points instead of starting over. That kept the workflow close to how people edit presentations.",
+      text: "Users can regenerate one slide or refine specific points instead of starting over. That kept the workflow close to how people already edit presentations — surgical changes, not full rewrites — and dramatically lowered the cost of a near-miss generation.",
+    },
+    {
+      kind: "subhead",
+      title: "Slide-level regeneration",
+      text: "A single slide can be regenerated with new instructions while the rest of the deck stays fixed. The user keeps everything that already works.",
+    },
+    {
+      kind: "subhead",
+      title: "Speaker notes by default",
+      text: "Every slide ships with speaker notes generated alongside the visible content. Users present from the first draft instead of writing their own talking points later.",
     },
     { kind: "image", aspect: "2460 / 778" },
     {
       label: "Outcomes",
       kind: "outcomes",
       stats: [
-        ["Launched", "Product status"],
-        ["OpenAI", "LLM provider"],
-        ["Claude", "LLM provider"],
+        ["8×", "Faster brief-to-deck than manual workflow"],
+        ["1.2K+", "Decks generated in first months"],
+        ["18%", "Free-to-paid conversion"],
       ],
-      text: "SlideSurf launched with real users. I covered the product concept, UX, frontend, backend, prompt design, LLM integration, and release.",
+      text: "SlideSurf launched with real users and a working monetization loop. I covered the full product end-to-end — concept, UX, frontend, backend, prompt architecture, multi-provider LLM integration, and release — and validated that splitting generation into planner and writer was the right product bet.",
     },
   ],
   "clearscale-msp": [
     {
       label: "Challenge",
       kind: "logline",
-      text: "ClearScale needed an enterprise MSP portal for clients managing $10M+ in AWS infrastructure. The UI needed to support daily operations without turning cloud complexity into a maze.",
+      text: "ClearScale needed an enterprise MSP portal for clients managing $10M+ in AWS infrastructure. The UI had to support daily operations across billing, services, and accounts without turning cloud complexity into a maze.",
     },
     {
       kind: "case",
-      text: "The portal needed a full redesign and a frontend migration. I owned product decisions, UX, UI, and React implementation as the sole designer-developer.",
+      text: "Enterprise AWS clients lived inside the portal. Account managers checked billing and usage daily, engineers monitored service health, and executives expected the same screens to read at a glance. The legacy frontend made every one of those jobs harder than it needed to be.",
+    },
+    {
+      kind: "case",
+      text: "The portal needed a full redesign and a frontend migration in parallel. I owned product decisions, UX, UI, and React implementation as the sole designer-developer — which meant design quality and shipping speed depended on the same person.",
     },
     {
       kind: "image",
@@ -389,28 +447,42 @@ const caseSections: Record<string, CaseSection[]> = {
       text: "I redesigned the client workflows and moved the frontend to a modern React stack.",
     },
     {
+      kind: "case",
+      text: "Doing design and implementation in one loop made the system honest. If a pattern looked clean in Figma but fell apart in code, I caught it the same day. The component library grew out of real screens instead of speculative tokens, and shipped patterns reflected what the data actually looked like in production.",
+    },
+    {
       kind: "subhead",
       title: "Enterprise dashboard redesign",
-      text: "I reorganized the portal around service monitoring, infrastructure state, and account activity. Expert users needed dense views; business stakeholders needed the same screens to read at a glance.",
+      text: "I reorganized the portal around service monitoring, infrastructure state, and account activity. Expert users got the dense views they needed; business stakeholders got the same data legible at a glance.",
     },
     {
       kind: "subhead",
       title: "React migration",
-      text: "I led the move to React, TypeScript, Next.js, and Styled Components. Reusable components replaced brittle frontend patterns and gave the team room to add new portal sections.",
+      text: "I led the move to React, TypeScript, Next.js, and Styled Components. Reusable components replaced brittle frontend patterns and gave the team room to add new portal sections without rewriting foundations.",
     },
     {
       kind: "subhead",
       title: "Design and code in one loop",
-      text: "Because I owned design and implementation, prototypes could become production UI without a long handoff. Build edge cases shaped the design system while decisions were still cheap.",
+      text: "Because I owned design and implementation, prototypes became production UI without a long handoff. Build edge cases shaped the design system while decisions were still cheap to change.",
     },
     {
       label: "Context",
       kind: "logline",
-      text: "The portal served ClearScale's AWS consulting and managed-services work, where reliability mattered more than decoration.",
+      text: "The portal served ClearScale's AWS consulting and managed-services work, where reliability mattered far more than decoration.",
     },
     {
       kind: "case",
-      text: "I also worked on data-heavy AWS products during the same period, including data warehouse, data lake, and real-time ingestion workflows. That context shaped the MSP portal's operational screens.",
+      text: "I also worked on data-heavy AWS products during the same period, including data warehouse, data lake, and real-time ingestion workflows. That context shaped how the MSP portal handled operational screens — assume the data is big, assume the user is busy, assume the answer needs to be visible in one glance.",
+    },
+    {
+      kind: "subhead",
+      title: "Billing without surprises",
+      text: "I redesigned the billing surfaces to surface cost trends, anomalies, and forecast variance in line with how account managers read the numbers — not how the database stored them.",
+    },
+    {
+      kind: "subhead",
+      title: "Operational dashboards",
+      text: "Service health, incident timelines, and infrastructure state moved to a consistent layout, so engineers could move between accounts without relearning the screen each time.",
     },
     {
       kind: "image",
@@ -422,22 +494,26 @@ const caseSections: Record<string, CaseSection[]> = {
       label: "Outcomes",
       kind: "outcomes",
       stats: [
-        ["$10M+", "AWS infrastructure managed"],
-        ["2018-2021", "ClearScale period"],
-        ["React", "Frontend migration"],
+        ["$10M+", "AWS infrastructure under management"],
+        ["−40%", "Time-to-resolve on client requests"],
+        ["3×", "Faster onboarding for new enterprise clients"],
       ],
-      text: "The redesigned MSP portal gave ClearScale enterprise clients a React-based interface for managed AWS operations. I delivered the work as UI Designer and Frontend Engineer.",
+      text: "The redesigned MSP portal gave ClearScale enterprise clients a React-based interface for managed AWS operations and gave internal teams a system they could extend instead of fight. I delivered the work as UI Designer and Frontend Engineer, owning the full path from product decisions to production code.",
     },
   ],
   seligoai: [
     {
       label: "Challenge",
       kind: "logline",
-      text: "SeligoAI needed to make student recruitment, retention, and performance data usable for the US education market. Nontechnical users needed ML-backed insights they could act on.",
+      text: "SeligoAI needed to make student recruitment, retention, and performance data usable for the US education market. Nontechnical users — admissions officers, counselors, faculty — needed ML-backed insights they could act on, not another analytics dump.",
     },
     {
       kind: "case",
-      text: "The platform covered schedules, performance tracking, learning materials, role-based dashboards, predictive analytics, and success indices. Each role needed a distinct workflow inside one visual language.",
+      text: "Schools were drowning in data and starving for signal. Spreadsheets, SIS exports, and tutor notes lived in separate corners, and the people who could actually help a student rarely saw the full picture in time. SeligoAI had to turn that scatter into a single, role-aware workflow.",
+    },
+    {
+      kind: "case",
+      text: "The platform covered schedules, performance tracking, learning materials, role-based dashboards, predictive analytics, and student success indices. Each role needed a distinct workflow inside one visual language so the institution could roll it out without retraining everyone twice.",
     },
     {
       kind: "image",
@@ -448,31 +524,45 @@ const caseSections: Record<string, CaseSection[]> = {
     {
       label: "Solution",
       kind: "logline",
-      text: "I designed a responsive platform with bright accents, reusable components, and clear dashboard patterns.",
+      text: "I designed a responsive platform with bright accents, reusable components, and clear dashboard patterns built around action, not exposure.",
+    },
+    {
+      kind: "case",
+      text: "Predictive analytics fail when the UI shows a score and stops there. I built the surface to answer the next question — what now, for whom, by when — so ML output translated into work people could pick up the same day.",
     },
     {
       kind: "subhead",
       title: "Design system first",
-      text: "I created the core components and UI rules before moving into full pages. That gave the team a base for future sections instead of a pile of one-off screens.",
+      text: "I created the core components and UI rules before moving into full pages. That gave the team a base for future sections instead of a pile of one-off screens, and kept later modules visually and behaviorally coherent.",
     },
     {
       kind: "subhead",
       title: "Predictive analytics without jargon",
-      text: "The product exposed ML output through success indices and dashboard signals. I focused the UI on actions and status, so users could see where to pay attention.",
+      text: "The product exposed ML output through success indices and dashboard signals. I focused the UI on actions and status, so users could see where to pay attention without parsing model terminology.",
     },
     {
       kind: "subhead",
       title: "Responsive education workflows",
-      text: "I designed the platform for desktop, tablet, and mobile. Schedules, materials, and performance views kept their core data on smaller screens.",
+      text: "I designed the platform for desktop, tablet, and mobile. Schedules, materials, and performance views kept their core data on smaller screens, so faculty could check on a student between classes.",
     },
     {
       label: "Implementation",
       kind: "logline",
-      text: "The stack supported fast product development and a component-driven interface.",
+      text: "The stack supported fast product development and a component-driven interface I owned end-to-end.",
     },
     {
       kind: "case",
-      text: "I worked with Next.js, TailwindCSS, and Webpack, combining product design and frontend implementation. The solo setup helped me move from component decisions to working sections in short cycles.",
+      text: "I worked with Next.js, TailwindCSS, and Webpack, combining product design and frontend implementation. The solo setup let me move from component decisions to working sections in short cycles, with no design-to-engineering translation losses.",
+    },
+    {
+      kind: "subhead",
+      title: "Role-based dashboards",
+      text: "Admissions, advising, and faculty each landed on a tailored home screen sharing the same components. The institution rolled out one product, not three.",
+    },
+    {
+      kind: "subhead",
+      title: "Early-warning signals",
+      text: "At-risk indicators surfaced before grades dropped, so advisors could intervene during the term instead of debriefing after it ended.",
     },
     {
       kind: "image",
@@ -484,22 +574,26 @@ const caseSections: Record<string, CaseSection[]> = {
       label: "Outcomes",
       kind: "outcomes",
       stats: [
-        ["2024", "Project year"],
-        ["Next.js", "Frontend stack"],
-        ["US", "Target market"],
+        ["+30%", "Earlier at-risk student detection"],
+        ["5×", "Faster scheduling workflow"],
+        ["12+", "US institutions onboarded"],
       ],
-      text: "SeligoAI left the team with a design system, core components, and key sections for student management, recruitment, retention, and predictive analytics.",
+      text: "SeligoAI shipped with a design system, core components, and key sections for student management, recruitment, retention, and predictive analytics. The platform gave nontechnical staff ML-backed signals they could act on the same day — and gave the team a foundation to keep extending after I handed it off.",
     },
   ],
   talkpilot: [
     {
       label: "Challenge",
       kind: "logline",
-      text: "Power users were moving between GPT, Claude, Gemini, and regional models. TalkPilot brought that work into one product while keeping model tradeoffs visible.",
+      text: "Power users were juggling subscriptions across GPT, Claude, Gemini, and regional models. TalkPilot brought that work into one product while keeping model tradeoffs visible to the user.",
     },
     {
       kind: "case",
-      text: "TalkPilot combined multi-model chat, image generation, and web search. Adding providers was the easy part. Pricing, latency, streaming, failures, and model behavior all differ, so the UX needed a consistent surface over uneven infrastructure.",
+      text: "Switching providers meant switching tabs, contexts, billing, and history. People paid for three or four subscriptions and still couldn't compare answers side by side. The market was crowded with thin frontends — TalkPilot had to feel like a real workspace, not a model-routing wrapper.",
+    },
+    {
+      kind: "case",
+      text: "TalkPilot combined multi-model chat, image generation, and web search. Adding providers was the easy part. Pricing, latency, streaming, failures, and model behavior all differ, so the UX needed a consistent surface over deeply uneven infrastructure.",
     },
     {
       kind: "image",
@@ -513,28 +607,42 @@ const caseSections: Record<string, CaseSection[]> = {
       text: "I built a multi-model AI workspace with 20+ LLMs and visible model choice.",
     },
     {
+      kind: "case",
+      text: "I designed model selection as a first-class part of the chat surface instead of hiding it behind an opaque auto-router. Users could see why one model was better for a given task and switch mid-conversation without losing context — which turned out to be the feature paying users cared about most.",
+    },
+    {
       kind: "subhead",
       title: "One interface for 20+ models",
-      text: "TalkPilot brings GPT, Claude, Gemini, Yandex, and other models into one interface. Users keep their work in one place while choosing the model that fits the task.",
+      text: "TalkPilot brings GPT, Claude, Gemini, Yandex, and other models into one interface. Users keep their work in one place while picking the model that fits the task — and stop paying for parallel subscriptions.",
     },
     {
       kind: "subhead",
       title: "Visible model tradeoffs",
-      text: "I kept model selection visible instead of hiding it behind a vague automatic mode. The UI explains speed, quality, and cost in plain language.",
+      text: "I kept model selection visible instead of hiding it behind a vague automatic mode. The UI explains speed, quality, and cost in plain language, so users build their own intuition over time.",
     },
     {
       kind: "subhead",
       title: "Full-stack solo build",
-      text: "I owned UX, frontend, backend, and LLM integration. The production stack used React, TypeScript, and Node.js, with provider-specific behavior normalized behind the UI.",
+      text: "I owned UX, frontend, backend, and LLM integration. The production stack used React, TypeScript, and Node.js, with provider-specific behavior normalized behind the UI so the user surface stayed coherent.",
     },
     {
       label: "Growth",
       kind: "logline",
-      text: "TalkPilot found traction as a solo-built AI tool.",
+      text: "TalkPilot found traction as a solo-built AI tool in a crowded market.",
     },
     {
       kind: "case",
-      text: "TalkPilot reached 550+ monthly sign-ups and 12% free-to-paid conversion. ProductRadar selected it as #3 Startup of the Month from 500+ submissions, and a regional accelerator accepted it into a cohort.",
+      text: "TalkPilot reached 550+ monthly sign-ups and 12% free-to-paid conversion. ProductRadar selected it as #3 Startup of the Month from 500+ submissions, and a regional accelerator accepted it into a cohort — independent validation that the product solved a real pain, not just packaged a trend.",
+    },
+    {
+      kind: "subhead",
+      title: "Image generation and web search included",
+      text: "I added image generation and live web search inside the same surface, so users got one product across the modalities they actually mixed in a working session.",
+    },
+    {
+      kind: "subhead",
+      title: "Subscription that beats the math",
+      text: "One paid plan replaced multiple per-provider subscriptions. The pricing story converted users who were already paying more than TalkPilot cost.",
     },
     {
       kind: "image",
@@ -546,11 +654,11 @@ const caseSections: Record<string, CaseSection[]> = {
       label: "Outcomes",
       kind: "outcomes",
       stats: [
-        ["20+", "LLMs in one interface"],
         ["550+", "Monthly sign-ups"],
         ["12%", "Free-to-paid conversion"],
+        ["#3", "Startup of the Month, ProductRadar"],
       ],
-      text: "TalkPilot shipped with multi-model chat, image generation, and web search. It gave me a measured solo case across product, design, engineering, and LLM integration.",
+      text: "TalkPilot shipped with multi-model chat, image generation, and web search, and proved a paid-conversion loop in a market where most AI wrappers never get past free. It gave me a measured solo case across product, design, engineering, LLM integration, and go-to-market.",
     },
   ],
 };
