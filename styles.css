@@ -1233,12 +1233,10 @@ body:has(.case-study)::-webkit-scrollbar {
 }
 
 .cs-hero {
-  padding-inline: var(--pad);
-  animation: cs-hero-rise 550ms cubic-bezier(.2,.7,.2,1) both;
-}
-
-.cs-hero .cs-image {
+  margin-inline: var(--pad);
+  background: #efefef;
   border-radius: 36px;
+  animation: cs-hero-rise 550ms cubic-bezier(.2,.7,.2,1) both;
 }
 
 @keyframes cs-hero-rise {
@@ -1302,15 +1300,25 @@ body:has(.case-study)::-webkit-scrollbar {
   line-height: var(--cs-case-lh);
 }
 
-.cs-image-row {
-  padding-inline: var(--pad);
-}
-
 .cs-image {
   display: block;
   width: 100%;
   background: #ececec;
   border-radius: 36px;
+}
+
+.cs-image-row {
+  background: #efefef;
+  border-radius: 36px;
+  margin-inline: var(--pad);
+}
+
+.cs-image-row .cs-image,
+.cs-hero .cs-image {
+  max-width: 800px;
+  margin-inline: auto;
+  background: transparent;
+  border-radius: 0;
 }
 
 .cs-subhead {
@@ -1593,8 +1601,12 @@ body:has(.case-study)::-webkit-scrollbar {
   }
 
   .cs-image,
-  .cs-hero .cs-image,
   .cs-subhead-media .cs-image {
+    border-radius: 20px;
+  }
+
+  .cs-image-row,
+  .cs-hero {
     border-radius: 20px;
   }
 

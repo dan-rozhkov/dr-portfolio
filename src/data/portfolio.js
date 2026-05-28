@@ -544,6 +544,7 @@ const caseHeroImages = {
   talkpilot: {
     src: "/images/talkpilot/hero.png",
     alt: "TalkPilot product preview",
+    background: "rgb(31 31 31)",
   },
 };
 
@@ -558,6 +559,7 @@ export const caseStudies = Object.fromEntries(
       sections: caseSections[c.id],
       heroImage: caseHeroImages[c.id]?.src,
       heroImageAlt: caseHeroImages[c.id]?.alt,
+      heroBackground: caseHeroImages[c.id]?.background,
     },
   ])
 );

@@ -233,7 +233,10 @@ export default function CaseStudy({ study }) {
         </div>
       </header>
 
-      <div className="cs-hero">
+      <div
+        className="cs-hero"
+        style={study.heroBackground ? { background: study.heroBackground } : undefined}
+      >
         <CaseImage
           src={study.heroImage}
           alt={study.heroImageAlt}
