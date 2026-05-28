@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from "react";
-import Contact from "./Contact.jsx";
+import Contact from "./Contact";
+import type { CaseSection, CaseStudy as CaseStudyType } from "./data/portfolio";
 
-function imageUrl(src) {
+function imageUrl(src: string): string {
   return `${import.meta.env.BASE_URL}${src.replace(/^\/+/, "")}`;
 }
 
-function Placeholder({ aspect }) {
+function Placeholder({ aspect }: { aspect?: string }) {
   return (
     <div
       className="cs-image"
@@ -15,7 +16,14 @@ function Placeholder({ aspect }) {
   );
 }
 
-function CaseImage({ src, alt, aspect, loading = "lazy" }) {
+interface CaseImageProps {
+  src?: string;
+  alt?: string;
+  aspect?: string;
+  loading?: "lazy" | "eager";
+}
+
+function CaseImage({ src, alt, aspect, loading = "lazy" }: CaseImageProps) {
   if (!src) {
     return <Placeholder aspect={aspect} />;
   }
@@ -30,7 +38,7 @@ function CaseImage({ src, alt, aspect, loading = "lazy" }) {
   );
 }
 
-function Section({ section }) {
+function Section({ section }: { section: CaseSection }) {
   if (section.kind === "image") {
     return (
       <div className="cs-image-row">
@@ -88,8 +96,10 @@ function Section({ section }) {
   );
 }
 
-function Slider({ items }) {
-  const containerRef = useRef(null);
+type SubheadSection = Extract<CaseSection, { kind: "subhead" }>;
+
+function Slider({ items }: { items: SubheadSection[] }) {
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const [active, setActive] = useState(0);
 
   useEffect(() => {
@@ -175,9 +185,13 @@ function Slider({ items }) {
   );
 }
 
-function groupSections(sections) {
-  const groups = [];
-  let buffer = [];
+type Group =
+  | { kind: "slider"; items: SubheadSection[] }
+  | { kind: "single"; section: CaseSection };
+
+function groupSections(sections: CaseSection[]): Group[] {
+  const groups: Group[] = [];
+  let buffer: SubheadSection[] = [];
   const flush = () => {
     if (buffer.length === 0) return;
     if (buffer.length > 1) {
@@ -200,7 +214,7 @@ function groupSections(sections) {
   return groups;
 }
 
-export default function CaseStudy({ study }) {
+export default function CaseStudy({ study }: { study: CaseStudyType }) {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [study.id]);

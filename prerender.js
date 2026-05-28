@@ -7,11 +7,8 @@ const distDir = path.join(__dirname, "dist");
 const ssrDir = path.join(__dirname, "dist-ssr");
 
 const template = fs.readFileSync(path.join(distDir, "index.html"), "utf8");
-const { render } = await import(
+const { render, cases } = await import(
   pathToFileURL(path.join(ssrDir, "entry-server.js")).href
-);
-const { cases } = await import(
-  pathToFileURL(path.join(__dirname, "src/data/portfolio.js")).href
 );
 
 const BASE = "/dr-portfolio/";

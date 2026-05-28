@@ -7,27 +7,30 @@ import {
   hero,
   profile,
   recognition,
-} from "./data/portfolio.js";
-import CaseStudy from "./CaseStudy.jsx";
-import Contact from "./Contact.jsx";
+} from "./data/portfolio";
+import type { CaseSummary } from "./data/portfolio";
+import CaseStudy from "./CaseStudy";
+import Contact from "./Contact";
 
 const BASE = import.meta.env.BASE_URL;
 const BASE_NO_SLASH = BASE.replace(/\/$/, "");
 
-function parseRoute(pathname) {
+type Route = { name: "home" } | { name: "case"; id: string };
+
+function parseRoute(pathname: string): Route {
   const rel = (pathname || "/").replace(BASE_NO_SLASH, "") || "/";
   const m = rel.match(/^\/case\/([\w-]+)\/?$/);
   return m ? { name: "case", id: m[1] } : { name: "home" };
 }
 
-function useRoute(initialPath) {
-  const [route, setRoute] = useState(() => parseRoute(initialPath));
+function useRoute(initialPath: string): [Route, (r: Route) => void] {
+  const [route, setRoute] = useState<Route>(() => parseRoute(initialPath));
 
   useEffect(() => {
     const onPop = () => setRoute(parseRoute(window.location.pathname));
     window.addEventListener("popstate", onPop);
 
-    const onClick = (event) => {
+    const onClick = (event: MouseEvent) => {
       if (
         event.defaultPrevented ||
         event.button !== 0 ||
@@ -38,7 +41,8 @@ function useRoute(initialPath) {
       ) {
         return;
       }
-      const link = event.target.closest?.("a");
+      const target = event.target as Element | null;
+      const link = target?.closest?.("a") as HTMLAnchorElement | null;
       if (!link) return;
       if (link.target && link.target !== "_self") return;
       if (link.hasAttribute("download")) return;
@@ -51,10 +55,9 @@ function useRoute(initialPath) {
           event.preventDefault();
           window.history.pushState({}, "", BASE + href);
           setRoute(parseRoute(BASE));
-          // After paint, jump to the anchor.
           requestAnimationFrame(() => {
             const id = href.slice(1);
-            const el = id && document.getElementById(id);
+            const el = id ? document.getElementById(id) : null;
             if (el) el.scrollIntoView();
           });
         }
@@ -64,7 +67,6 @@ function useRoute(initialPath) {
       const url = new URL(link.href, window.location.origin);
       if (url.origin !== window.location.origin) return;
       if (!url.pathname.startsWith(BASE_NO_SLASH)) return;
-      // External-looking files served from BASE (e.g., cv.pdf) — let browser handle.
       if (/\.[a-z0-9]+$/i.test(url.pathname)) return;
 
       event.preventDefault();
@@ -118,8 +120,8 @@ function Header() {
 }
 
 function CustomCursor() {
-  const cursorRef = useRef(null);
-  const labelRef = useRef(null);
+  const cursorRef = useRef<HTMLDivElement | null>(null);
+  const labelRef = useRef<HTMLSpanElement | null>(null);
 
   useEffect(() => {
     if (!window.matchMedia("(pointer: fine)").matches) {
@@ -128,15 +130,20 @@ function CustomCursor() {
 
     const cursor = cursorRef.current;
     const labelEl = labelRef.current;
+    if (!cursor || !labelEl) return undefined;
     const SAFE_ZONE = 24;
     let currentLabel = "";
 
-    const onMove = (event) => {
-      let target = event.target.closest?.("a, button, [data-cursor]");
+    const onMove = (event: PointerEvent) => {
+      const startTarget = event.target as Element | null;
+      let target: HTMLElement | null =
+        (startTarget?.closest?.("a, button, [data-cursor]") as HTMLElement | null) ?? null;
 
       if (!target) {
-        const candidates = document.querySelectorAll("a, button, [data-cursor]");
-        let best = null;
+        const candidates = document.querySelectorAll<HTMLElement>(
+          "a, button, [data-cursor]"
+        );
+        let best: HTMLElement | null = null;
         let bestDist = SAFE_ZONE;
         for (const el of candidates) {
           const rect = el.getBoundingClientRect();
@@ -206,7 +213,7 @@ function Hero() {
   );
 }
 
-function CaseSection({ item, first }) {
+function CaseSection({ item, first }: { item: CaseSummary; first: boolean }) {
   return (
     <section className="section case snap-section" id={item.id}>
       {first && <span id="work" aria-hidden="true" />}
@@ -322,7 +329,7 @@ function Recognition() {
 }
 
 function CaseIndicator() {
-  const [activeId, setActiveId] = useState(null);
+  const [activeId, setActiveId] = useState<string | null>(null);
   const [visible, setVisible] = useState(false);
 
   const items = [
@@ -333,18 +340,18 @@ function CaseIndicator() {
   useEffect(() => {
     const sections = items
       .map((item) => document.getElementById(item.id))
-      .filter(Boolean);
+      .filter((el): el is HTMLElement => Boolean(el));
 
     if (!sections.length) return undefined;
 
-    const visibility = new Map();
+    const visibility = new Map<string, number>();
 
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
           visibility.set(entry.target.id, entry.intersectionRatio);
         }
-        let bestId = null;
+        let bestId: string | null = null;
         let bestRatio = 0;
         for (const [id, ratio] of visibility) {
           if (ratio > bestRatio) {
@@ -411,8 +418,8 @@ function ContactObserver() {
 
 function ScrollFade() {
   useEffect(() => {
-    const scroller = document.querySelector(".snap-container");
-    const contactSection = document.querySelector("#contact");
+    const scroller = document.querySelector<HTMLElement>(".snap-container");
+    const contactSection = document.querySelector<HTMLElement>("#contact");
 
     if (!scroller || !contactSection) {
       return undefined;
@@ -430,8 +437,8 @@ function ScrollFade() {
         Math.min(1, 1 - distance / (vh * 0.6))
       );
 
-      document.body.style.setProperty("--hero-meta-opacity", heroOpacity);
-      document.body.style.setProperty("--contact-year-opacity", contactOpacity);
+      document.body.style.setProperty("--hero-meta-opacity", String(heroOpacity));
+      document.body.style.setProperty("--contact-year-opacity", String(contactOpacity));
     };
 
     update();
@@ -447,7 +454,7 @@ function ScrollFade() {
   return null;
 }
 
-export default function App({ initialPath }) {
+export default function App({ initialPath }: { initialPath?: string }) {
   const path =
     initialPath ??
     (typeof window !== "undefined" ? window.location.pathname : "/");

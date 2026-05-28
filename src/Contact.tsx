@@ -1,4 +1,4 @@
-import { profile } from "./data/portfolio.js";
+import { profile } from "./data/portfolio";
 
 export default function Contact() {
   return (

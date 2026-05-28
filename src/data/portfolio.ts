@@ -1,4 +1,71 @@
-export const profile = {
+export type MetaEntry = [label: string, value: string];
+
+export type RecognitionItem = [title: string, detail: string, href: string];
+
+export interface RecognitionGroup {
+  title: string;
+  items: RecognitionItem[];
+}
+
+export interface Profile {
+  name: string;
+  location: string;
+  year: string;
+  email: string;
+  linkedin: string;
+  linkedinLabel: string;
+}
+
+export interface Hero {
+  lines: string[];
+}
+
+export interface CaseSummary {
+  id: string;
+  title: string;
+  description: string[];
+  meta: MetaEntry[];
+  visual: string;
+  variant?: "mobile";
+}
+
+export interface ExtraWork {
+  title: string;
+  description: string;
+  tabs: string[];
+}
+
+export type SectionStat = [value: string, label: string];
+
+export type CaseSection =
+  | { kind: "logline"; label?: string; text: string }
+  | { kind: "case"; label?: string; text: string }
+  | { kind: "image"; src?: string; alt?: string; aspect?: string }
+  | {
+      kind: "subhead";
+      title: string;
+      text: string;
+      aspect?: string;
+    }
+  | {
+      kind: "outcomes";
+      label?: string;
+      stats: SectionStat[];
+      text: string;
+    };
+
+export interface CaseStudy {
+  id: string;
+  title: string;
+  intro: string;
+  meta: MetaEntry[];
+  sections: CaseSection[];
+  heroImage?: string;
+  heroImageAlt?: string;
+  heroBackground?: string;
+}
+
+export const profile: Profile = {
   name: "Danil Rozhkov",
   location: "Georgia",
   year: "2026",
@@ -7,13 +74,13 @@ export const profile = {
   linkedinLabel: "in/danil-rozhkov",
 };
 
-export const hero = {
+export const hero: Hero = {
   lines: [
     "Lead Product Designer for AI and B2B products, from UX to shipped interface",
   ],
 };
 
-export const cases = [
+export const cases: CaseSummary[] = [
   {
     id: "live-studio",
     title: "Live Studio",
@@ -108,19 +175,19 @@ export const cases = [
   },
 ];
 
-export const extraWork = {
+export const extraWork: ExtraWork = {
   title: "Also Shipped",
   description:
     "AI-first workflows, internal tools, and B2B platforms across Sber and SnapSoft. The work spans prototype generation, design-system tooling, and production AI products.",
   tabs: ["Sber India Prototype Tool", "LucidBots (SnapSoft)", "NDA AI tools"],
 };
 
-export const about = [
+export const about: string[] = [
   "Senior product designer, 8+ years across B2B SaaS, design systems, and AI products. I design complex platforms and stay close enough to engineering to ship them.",
   "Lead Product Designer at Sber. Previously Openprovider, SnapSoft, and ClearScale. I care about systems, sharp interaction details, and the quiet parts that make complex tools feel obvious.",
 ];
 
-export const recognition = [
+export const recognition: RecognitionGroup[] = [
   {
     title: "Recognition",
     items: [
@@ -163,7 +230,7 @@ export const recognition = [
   },
 ];
 
-const caseSections = {
+const caseSections: Record<string, CaseSection[]> = {
   "live-studio": [
     {
       label: "Challenge",
@@ -526,9 +593,13 @@ const caseSections = {
   ],
 };
 
-const findCase = (id) => cases.find((c) => c.id === id);
+interface HeroImage {
+  src: string;
+  alt: string;
+  background?: string;
+}
 
-const caseHeroImages = {
+const caseHeroImages: Record<string, HeroImage> = {
   openprovider: {
     src: "/images/openprovider/hero.png",
     alt: "Openprovider dashboard preview",
@@ -548,8 +619,8 @@ const caseHeroImages = {
   },
 };
 
-export const caseStudies = Object.fromEntries(
-  cases.map((c) => [
+export const caseStudies: Record<string, CaseStudy> = Object.fromEntries(
+  cases.map((c): [string, CaseStudy] => [
     c.id,
     {
       id: c.id,
@@ -564,5 +635,8 @@ export const caseStudies = Object.fromEntries(
   ])
 );
 
-export const getCaseStudy = (id) => caseStudies[id] || null;
-export const getCase = findCase;
+export const getCaseStudy = (id: string): CaseStudy | null =>
+  caseStudies[id] ?? null;
+
+export const getCase = (id: string): CaseSummary | undefined =>
+  cases.find((c) => c.id === id);
