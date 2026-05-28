@@ -230,7 +230,12 @@ const caseSections = {
       kind: "case",
       text: "A clean redesign was not enough. The work had to preserve the speed expected by existing resellers while giving product and engineering a system they could use for every new page.",
     },
-    { kind: "image", aspect: "3840 / 1579" },
+    {
+      kind: "image",
+      src: "/images/openprovider/components.png",
+      alt: "Openprovider design system components",
+      aspect: "3840 / 1579",
+    },
     {
       label: "Solution",
       kind: "logline",
@@ -264,7 +269,12 @@ const caseSections = {
       kind: "case",
       text: "The system started with basic styles and controls, then expanded into reseller-specific patterns. New pages no longer needed custom UI decisions for every table, form, empty state, or responsive breakpoint.",
     },
-    { kind: "image", aspect: "2460 / 778" },
+    {
+      kind: "image",
+      src: "/images/openprovider/mobile.png",
+      alt: "Openprovider mobile dashboard preview",
+      aspect: "2460 / 778",
+    },
     {
       label: "Outcomes",
       kind: "outcomes",
@@ -338,7 +348,12 @@ const caseSections = {
       kind: "case",
       text: "The existing portal needed a complete redesign and a frontend migration. I owned both sides of the work as the sole designer-developer, which meant product decisions, UX, UI, and React implementation stayed tightly connected.",
     },
-    { kind: "image", aspect: "3840 / 1579" },
+    {
+      kind: "image",
+      src: "/images/clearscale/billing-history.png",
+      alt: "ClearScale billing history section",
+      aspect: "3840 / 1579",
+    },
     {
       label: "Solution",
       kind: "logline",
@@ -368,7 +383,12 @@ const caseSections = {
       kind: "case",
       text: "I also contributed to data-heavy AWS products during the same period, including UX for data warehouse, data lake, and real-time ingestion workflows. That context shaped how I approached complex operational screens in the MSP portal.",
     },
-    { kind: "image", aspect: "2460 / 778" },
+    {
+      kind: "image",
+      src: "/images/clearscale/dashboard.png",
+      alt: "ClearScale MSP dashboard",
+      aspect: "2460 / 778",
+    },
     {
       label: "Outcomes",
       kind: "outcomes",
@@ -390,7 +410,12 @@ const caseSections = {
       kind: "case",
       text: "The platform covered schedules, performance tracking, learning materials, role-based dashboards, predictive analytics, and success indices. Each section needed a common visual language without flattening the differences between user roles.",
     },
-    { kind: "image", aspect: "3840 / 1579" },
+    {
+      kind: "image",
+      src: "/images/seligoai/inner-01.png",
+      alt: "SeligoAI student management platform",
+      aspect: "3840 / 1579",
+    },
     {
       label: "Solution",
       kind: "logline",
@@ -420,7 +445,12 @@ const caseSections = {
       kind: "case",
       text: "I worked with Next.js, TailwindCSS, and Webpack, combining product design and frontend implementation. The solo designer-developer setup helped move from component decisions to working sections quickly.",
     },
-    { kind: "image", aspect: "2460 / 778" },
+    {
+      kind: "image",
+      src: "/images/seligoai/inner-02.png",
+      alt: "SeligoAI analytics and management interface",
+      aspect: "2460 / 778",
+    },
     {
       label: "Outcomes",
       kind: "outcomes",
@@ -442,7 +472,12 @@ const caseSections = {
       kind: "case",
       text: "The product combined multi-model chat, image generation, and web search. The hard part was not only adding providers. Pricing, latency, streaming, failures, and model behavior all differ, so the UX needed a consistent surface over uneven infrastructure.",
     },
-    { kind: "image", aspect: "3840 / 1579" },
+    {
+      kind: "image",
+      src: "/images/talkpilot/inner-01.png",
+      alt: "TalkPilot multi-model chat interface",
+      aspect: "3840 / 1579",
+    },
     {
       label: "Solution",
       kind: "logline",
@@ -472,7 +507,12 @@ const caseSections = {
       kind: "case",
       text: "TalkPilot reached 550+ monthly sign-ups and 12% free-to-paid conversion. It was selected as #3 Startup of the Month on ProductRadar from 500+ submissions and joined a regional accelerator.",
     },
-    { kind: "image", aspect: "2460 / 778" },
+    {
+      kind: "image",
+      src: "/images/talkpilot/inner-02.png",
+      alt: "TalkPilot neural network aggregator interface",
+      aspect: "2460 / 778",
+    },
     {
       label: "Outcomes",
       kind: "outcomes",
@@ -488,6 +528,25 @@ const caseSections = {
 
 const findCase = (id) => cases.find((c) => c.id === id);
 
+const caseHeroImages = {
+  openprovider: {
+    src: "/images/openprovider/hero.png",
+    alt: "Openprovider dashboard preview",
+  },
+  "clearscale-msp": {
+    src: "/images/clearscale/billing-details.png",
+    alt: "ClearScale billing details section",
+  },
+  seligoai: {
+    src: "/images/seligoai/hero.png",
+    alt: "SeligoAI student management platform",
+  },
+  talkpilot: {
+    src: "/images/talkpilot/hero.png",
+    alt: "TalkPilot product preview",
+  },
+};
+
 export const caseStudies = Object.fromEntries(
   cases.map((c) => [
     c.id,
@@ -497,6 +556,8 @@ export const caseStudies = Object.fromEntries(
       intro: c.description[0],
       meta: c.meta,
       sections: caseSections[c.id],
+      heroImage: caseHeroImages[c.id]?.src,
+      heroImageAlt: caseHeroImages[c.id]?.alt,
     },
   ])
 );

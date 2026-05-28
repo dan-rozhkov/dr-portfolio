@@ -1,6 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import Contact from "./Contact.jsx";
 
+function imageUrl(src) {
+  return `${import.meta.env.BASE_URL}${src.replace(/^\/+/, "")}`;
+}
+
 function Placeholder({ aspect }) {
   return (
     <div
@@ -11,11 +15,30 @@ function Placeholder({ aspect }) {
   );
 }
 
+function CaseImage({ src, alt, aspect, loading = "lazy" }) {
+  if (!src) {
+    return <Placeholder aspect={aspect} />;
+  }
+
+  return (
+    <img
+      className="cs-image"
+      src={imageUrl(src)}
+      alt={alt || ""}
+      loading={loading}
+    />
+  );
+}
+
 function Section({ section }) {
   if (section.kind === "image") {
     return (
       <div className="cs-image-row">
-        <Placeholder aspect={section.aspect} />
+        <CaseImage
+          src={section.src}
+          alt={section.alt}
+          aspect={section.aspect}
+        />
       </div>
     );
   }
@@ -211,7 +234,12 @@ export default function CaseStudy({ study }) {
       </header>
 
       <div className="cs-hero">
-        <Placeholder aspect="3840 / 1579" />
+        <CaseImage
+          src={study.heroImage}
+          alt={study.heroImageAlt}
+          aspect="3840 / 1579"
+          loading="eager"
+        />
       </div>
 
       <div className="cs-sections">
