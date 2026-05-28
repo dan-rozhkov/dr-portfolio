@@ -165,6 +165,10 @@ function CustomCursor() {
       cursor.style.top = `${event.clientY}px`;
       cursor.classList.add("is-visible");
       cursor.classList.toggle("is-active", Boolean(target));
+      cursor.classList.toggle(
+        "is-compact",
+        Boolean(target?.closest(".extra-tab, .site-header a")),
+      );
 
       magnetTarget = target && !directHit ? target : null;
 
@@ -177,7 +181,7 @@ function CustomCursor() {
     };
 
     const onLeave = () => {
-      cursor.classList.remove("is-visible", "is-active", "has-label");
+      cursor.classList.remove("is-visible", "is-active", "has-label", "is-compact");
       magnetTarget = null;
     };
 
@@ -284,6 +288,19 @@ function ExtraWork() {
   const [activeTab, setActiveTab] = useState(
     extraWork.tabs.find((t) => extraWork.previews[t]) ?? extraWork.tabs[0],
   );
+  const [navDir, setNavDir] = useState<"NEXT" | "PREV">("NEXT");
+
+  const cycle = (dir: "NEXT" | "PREV") => {
+    const tabs = extraWork.tabs;
+    const idx = tabs.indexOf(activeTab);
+    const next = dir === "NEXT" ? (idx + 1) % tabs.length : (idx - 1 + tabs.length) % tabs.length;
+    setActiveTab(tabs[next]);
+  };
+
+  const onPreviewMove = (event: React.PointerEvent<HTMLButtonElement>) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    setNavDir(event.clientX - rect.left > rect.width / 2 ? "NEXT" : "PREV");
+  };
 
   return (
     <section className="section extra-work snap-section" id="also-shipped">
@@ -302,13 +319,15 @@ function ExtraWork() {
             </button>
           ))}
         </div>
-        <a
+        <button
+          type="button"
           className={`large-preview ${
             extraWork.previews[activeTab] ? "case-media-image" : "case-media-placeholder"
           }`}
-          href="#systems"
-          data-cursor="PLAY"
-          aria-label="Open interaction systems preview"
+          data-cursor={navDir}
+          aria-label={`${navDir === "NEXT" ? "Next" : "Previous"} project preview`}
+          onPointerMove={onPreviewMove}
+          onClick={() => cycle(navDir)}
         >
           {extraWork.previews[activeTab] && (
             <img
@@ -317,7 +336,7 @@ function ExtraWork() {
               loading="lazy"
             />
           )}
-        </a>
+        </button>
       </article>
     </section>
   );

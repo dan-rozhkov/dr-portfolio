@@ -210,6 +210,13 @@ button {
   position: relative;
   display: block;
   aspect-ratio: 16 / 9;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  width: 100%;
+  font: inherit;
+  color: inherit;
+  text-align: inherit;
 }
 
 .case-indicator {
@@ -792,18 +799,12 @@ button {
 }
 
 .contact-year {
-  display: none;
-  position: absolute;
-  right: var(--pad);
-  bottom: 32px;
-  color: rgb(255 255 255 / 72%);
-  font-size: 20px;
-  line-height: 1.1;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  opacity: var(--contact-year-opacity, 0);
-  transition: opacity .12s linear;
+  display: block;
+  grid-column: 14 / -1;
+  grid-row: 2;
+  align-self: end;
+  justify-self: end;
+  color: rgb(255 255 255 / 62%);
 }
 
 .cursor {
@@ -840,6 +841,10 @@ button {
 
 .cursor.is-active {
   transform: translate(-50%, -50%) scale(1);
+}
+
+.cursor.is-active.is-compact {
+  transform: translate(-50%, -50%) scale(.65);
 }
 
 .cursor.is-active.has-label {
