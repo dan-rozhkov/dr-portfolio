@@ -297,9 +297,22 @@ function About() {
           alt={`Portrait of ${profile.name}`}
         />
         <div className="about-text">
-          {about.map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
-          ))}
+          {about.map((paragraph) => {
+            const idx = paragraph.indexOf("Sber");
+            if (idx === -1) return <p key={paragraph}>{paragraph}</p>;
+            return (
+              <p key={paragraph}>
+                {paragraph.slice(0, idx)}
+                <img
+                  className="inline-logo"
+                  src={`${import.meta.env.BASE_URL}sber-logo.avif`}
+                  alt=""
+                  aria-hidden="true"
+                />
+                {paragraph.slice(idx)}
+              </p>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -313,14 +326,19 @@ function Recognition() {
         <div className="grid-shell list-section" key={group.title}>
           <h2>{group.title}</h2>
           <ul className="recognition-grid">
-            {group.items.map(([title, detail, href]) => (
-              <li key={title}>
-                <a href={href}>
-                  {title}
-                  <span>{detail}</span>
-                </a>
-              </li>
-            ))}
+            {group.items.map(([title, detail, href]) => {
+              const resolvedHref = href.startsWith("/case/")
+                ? `${BASE_NO_SLASH}${href}`
+                : href;
+              return (
+                <li key={title}>
+                  <a href={resolvedHref}>
+                    {title}
+                    <span>{detail}</span>
+                  </a>
+                </li>
+              );
+            })}
           </ul>
         </div>
       ))}

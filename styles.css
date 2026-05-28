@@ -681,6 +681,15 @@ button {
   text-wrap: balance;
 }
 
+.inline-logo {
+  display: inline-block;
+  height: 0.9em;
+  width: auto;
+  vertical-align: -0.08em;
+  margin-right: 0.1em;
+  border-radius: 50%;
+}
+
 .recognition {
   min-height: auto;
   display: flex;
@@ -1158,7 +1167,7 @@ body:has(.case-study)::-webkit-scrollbar {
   --cs-logline-lh: 1.06;
   --cs-logline-tracking: -0.02em;
   --cs-case-size: clamp(17px, 1.41vw, 20px);
-  --cs-case-lh: 1.33;
+  --cs-case-lh: 1.4;
   --cs-nav-size: 20px;
   --cs-nav-lh: 1.1;
   padding-top: 96px;
@@ -1200,7 +1209,7 @@ body:has(.case-study)::-webkit-scrollbar {
   grid-row: 1;
   font-size: var(--cs-case-size);
   line-height: var(--cs-case-lh);
-  padding-top: 24px;
+  padding-top: 8px;
 }
 
 .cs-title-meta {
@@ -1216,7 +1225,7 @@ body:has(.case-study)::-webkit-scrollbar {
 
 .cs-title-meta th {
   color: var(--muted);
-  font-weight: 500;
+  font-weight: 400;
   text-transform: none;
   letter-spacing: 0;
   padding: 0 32px 8px 0;
@@ -1227,7 +1236,7 @@ body:has(.case-study)::-webkit-scrollbar {
 .cs-title-meta td {
   padding: 0 32px 0 0;
   vertical-align: top;
-  font-weight: 500;
+  font-weight: 400;
   text-transform: none;
   letter-spacing: 0;
 }

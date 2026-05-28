@@ -3,6 +3,10 @@ import { createRoot, hydrateRoot } from "react-dom/client";
 import App from "./App";
 import "../styles.css";
 
+if (import.meta.env.DEV) {
+  import("live-studio").then(({ startStudio }) => startStudio());
+}
+
 const container = document.getElementById("root");
 if (!container) {
   throw new Error("Root container not found");

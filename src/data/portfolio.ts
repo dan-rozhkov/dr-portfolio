@@ -82,21 +82,6 @@ export const hero: Hero = {
 
 export const cases: CaseSummary[] = [
   {
-    id: "live-studio",
-    title: "Live Studio",
-    description: [
-      "An open-source visual UI editor that lets AI agents inspect and change a running app through MCP.",
-      "I built the editor, protocol, Preact client, Node server, npm package, installer, and docs as a solo AI Product Engineer.",
-    ],
-    meta: [
-      ["Year", "2025-2026"],
-      ["Role", "AI Product Engineer · Solo"],
-      ["Scope", "Product, UX/UI, Interaction Design, Implementation"],
-      ["Output", "Open-source npm package, MIT license, agent UX patterns"],
-    ],
-    visual: "ai",
-  },
-  {
     id: "openprovider",
     title: "Openprovider Reseller Dashboard",
     description: [
@@ -111,21 +96,6 @@ export const cases: CaseSummary[] = [
     ],
     visual: "finance",
     variant: "mobile",
-  },
-  {
-    id: "slidesurf",
-    title: "SlideSurf",
-    description: [
-      "A launched AI product that turns a short prompt into a structured slide deck with titles, bullets, and speaker notes.",
-      "I designed and built the generation flow, streaming UX, prompt architecture, frontend, backend, and LLM integration.",
-    ],
-    meta: [
-      ["Year", "2024-2025"],
-      ["Role", "AI Product Engineer · Solo"],
-      ["Scope", "Product, UX, Interaction Design, AI UX patterns"],
-      ["Output", "Launched product, streaming generation UX"],
-    ],
-    visual: "index",
   },
   {
     id: "clearscale-msp",
@@ -158,28 +128,20 @@ export const cases: CaseSummary[] = [
     visual: "education",
     variant: "mobile",
   },
-  {
-    id: "talkpilot",
-    title: "TalkPilot",
-    description: [
-      "A multi-model AI workspace with 20+ LLMs in one interface, including GPT, Claude, Gemini, and Yandex models.",
-      "I shipped the product as a solo designer-developer across UX, frontend, backend, and LLM integration.",
-    ],
-    meta: [
-      ["Year", "2024"],
-      ["Role", "Founder · Designer & Developer"],
-      ["Scope", "Product, UX, Frontend, Backend, LLM Integration"],
-      ["Output", "Multi-model chat, image generation, web search"],
-    ],
-    visual: "ai",
-  },
 ];
 
 export const extraWork: ExtraWork = {
   title: "Also Shipped",
   description:
     "AI workflows, internal tools, and B2B platforms across Sber and SnapSoft, including prototype generation, design-system tooling, and production AI products.",
-  tabs: ["Sber India Prototype Tool", "LucidBots (SnapSoft)", "NDA AI tools"],
+  tabs: [
+    "Live Studio",
+    "SlideSurf",
+    "TalkPilot",
+    "Sber India Prototype Tool",
+    "LucidBots (SnapSoft)",
+    "NDA AI tools",
+  ],
 };
 
 export const about: string[] = [
@@ -212,19 +174,19 @@ export const recognition: RecognitionGroup[] = [
     title: "Selected Work",
     items: [
       [
-        "TalkPilot ↗",
-        "20+ LLMs, 550+ monthly sign-ups, 12% free-to-paid",
-        "#talkpilot",
+        "Openprovider Reseller Dashboard ↗",
+        "100+ screens, 15K+ resellers",
+        "/case/openprovider",
       ],
       [
-        "Openprovider Design System ↗",
-        "100+ screens, 15K+ resellers",
-        "#openprovider",
+        "ClearScale MSP Portal ↗",
+        "$10M+ AWS infrastructure, React migration",
+        "/case/clearscale-msp",
       ],
       [
         "SeligoAI ↗",
         "ML platform for student recruitment and retention",
-        "#seligoai",
+        "/case/seligoai",
       ],
     ],
   },
