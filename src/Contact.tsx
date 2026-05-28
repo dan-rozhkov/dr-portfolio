@@ -4,7 +4,7 @@ export default function Contact() {
   return (
     <section className="section contact" id="contact">
       <div className="grid-shell contact-grid">
-        <h2>Think of all the useful things we could build together</h2>
+        <h2>Let’s build something useful together</h2>
         <div className="contact-methods">
           <a href={`mailto:${profile.email}`} data-cursor="SAY HI">
             Get in touch ↗<span>{profile.email}</span>

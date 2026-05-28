@@ -76,7 +76,7 @@ export const profile: Profile = {
 
 export const hero: Hero = {
   lines: [
-    "Lead Product Designer for AI and B2B products, from UX to shipped interface",
+    "Lead Product Designer for AI and B2B tools, from product logic to shipped UI",
   ],
 };
 
@@ -85,8 +85,8 @@ export const cases: CaseSummary[] = [
     id: "live-studio",
     title: "Live Studio",
     description: [
-      "An open-source visual UI editor that connects AI agents to a running app through the Model Context Protocol.",
-      "I built the product end to end as a solo AI Product Engineer: editor UX, MCP protocol, Preact client, Node server, npm package, and docs.",
+      "An open-source visual UI editor that lets AI agents inspect and change a running app through MCP.",
+      "I built the editor, protocol, Preact client, Node server, npm package, installer, and docs as a solo AI Product Engineer.",
     ],
     meta: [
       ["Year", "2025-2026"],
@@ -100,8 +100,8 @@ export const cases: CaseSummary[] = [
     id: "openprovider",
     title: "Openprovider Reseller Dashboard",
     description: [
-      "A business-critical B2B dashboard for 15K+ resellers across English, Spanish, and Russian markets.",
-      "I led the UX redesign and shipped a design system covering 100+ screens on desktop, tablet, and mobile in four months.",
+      "A reseller dashboard used by 15K+ customers across English, Spanish, and Russian markets.",
+      "I led the UX redesign and shipped a design system for 100+ desktop, tablet, and mobile screens in four months.",
     ],
     meta: [
       ["Years", "2022-2025"],
@@ -116,8 +116,8 @@ export const cases: CaseSummary[] = [
     id: "slidesurf",
     title: "SlideSurf",
     description: [
-      "A launched AI product that turns a short prompt into a full slide deck with structure, titles, bullet points, and speaker notes.",
-      "I designed and built the product as a solo AI Product Engineer, including the generation flow, streaming UX, prompt architecture, and LLM integration.",
+      "A launched AI product that turns a short prompt into a structured slide deck with titles, bullets, and speaker notes.",
+      "I designed and built the generation flow, streaming UX, prompt architecture, frontend, backend, and LLM integration.",
     ],
     meta: [
       ["Year", "2024-2025"],
@@ -131,8 +131,8 @@ export const cases: CaseSummary[] = [
     id: "clearscale-msp",
     title: "ClearScale MSP Portal",
     description: [
-      "An enterprise managed-services portal for ClearScale clients managing $10M+ in AWS infrastructure.",
-      "I redesigned the portal and led the frontend migration to React, TypeScript, Next.js, and Styled Components as the sole designer-developer.",
+      "An enterprise managed-services portal for ClearScale clients with $10M+ in AWS infrastructure.",
+      "I redesigned the portal and moved the frontend to React, TypeScript, Next.js, and Styled Components as the sole designer-developer.",
     ],
     meta: [
       ["Years", "2018-2021"],
@@ -146,8 +146,8 @@ export const cases: CaseSummary[] = [
     id: "seligoai",
     title: "SeligoAI",
     description: [
-      "A student management platform for the US market, built around recruitment, retention, schedules, performance, materials, and predictive analytics.",
-      "I designed the platform, the design system, basic components, responsive layouts, and key sections, then helped move it into frontend implementation.",
+      "A US student management platform for recruitment, retention, schedules, performance, materials, and predictive analytics.",
+      "I designed the platform, design system, core components, responsive layouts, and key sections, then helped move them into frontend implementation.",
     ],
     meta: [
       ["Year", "2024"],
@@ -162,7 +162,7 @@ export const cases: CaseSummary[] = [
     id: "talkpilot",
     title: "TalkPilot",
     description: [
-      "A neural network aggregator that brings 20+ LLMs into one interface, including GPT, Claude, Gemini, and Yandex models.",
+      "A multi-model AI workspace with 20+ LLMs in one interface, including GPT, Claude, Gemini, and Yandex models.",
       "I shipped the product as a solo designer-developer across UX, frontend, backend, and LLM integration.",
     ],
     meta: [
@@ -178,13 +178,13 @@ export const cases: CaseSummary[] = [
 export const extraWork: ExtraWork = {
   title: "Also Shipped",
   description:
-    "AI-first workflows, internal tools, and B2B platforms across Sber and SnapSoft. The work spans prototype generation, design-system tooling, and production AI products.",
+    "AI workflows, internal tools, and B2B platforms across Sber and SnapSoft, including prototype generation, design-system tooling, and production AI products.",
   tabs: ["Sber India Prototype Tool", "LucidBots (SnapSoft)", "NDA AI tools"],
 };
 
 export const about: string[] = [
-  "Senior product designer, 8+ years across B2B SaaS, design systems, and AI products. I design complex platforms and stay close enough to engineering to ship them.",
-  "Lead Product Designer at Sber. Previously Openprovider, SnapSoft, and ClearScale. I care about systems, sharp interaction details, and the quiet parts that make complex tools feel obvious.",
+  "Senior product designer with 8+ years in B2B SaaS, design systems, and AI products. I design complex platforms and stay close to engineering until they ship.",
+  "Lead Product Designer at Sber, with past work at Openprovider, SnapSoft, and ClearScale. I care about systems, precise interaction details, and the quiet decisions that make complex tools feel obvious.",
 ];
 
 export const recognition: RecognitionGroup[] = [
@@ -235,45 +235,45 @@ const caseSections: Record<string, CaseSection[]> = {
     {
       label: "Challenge",
       kind: "logline",
-      text: "AI agents can generate interface code, but they usually cannot see the page they just changed. The feedback loop breaks at the exact point where visual quality matters.",
+      text: "AI agents generate interface code without seeing the page they changed. The feedback loop breaks where visual quality matters most.",
     },
     {
       kind: "case",
-      text: "Live Studio started from that gap. I wanted an agent to work on the same running interface a designer or frontend engineer sees, select an element, inspect its styles, edit copy or attributes, and send structured changes back to source code.",
+      text: "Live Studio started from that gap. I wanted an agent to work on the same running interface a designer or frontend engineer sees: select an element, inspect styles, edit copy or attributes, and send structured changes back to source code.",
     },
     { kind: "image", aspect: "3840 / 1579" },
     {
       label: "Solution",
       kind: "logline",
-      text: "I built an open-source editor that injects into a live app and connects to AI agents through MCP.",
+      text: "I built an open-source editor that injects into a live app and talks to AI agents through MCP.",
     },
     {
       kind: "subhead",
       title: "Running app as the canvas",
-      text: "The tool plugs into React, Vue, Next.js, or Nuxt with a one-line import. The editor runs inside a Shadow DOM so product styles and scripts do not leak into the panel.",
+      text: "Developers add one import to React, Vue, Next.js, or Nuxt. The editor runs inside a Shadow DOM, so app styles and scripts cannot leak into the panel.",
     },
     {
       kind: "subhead",
       title: "MCP bridge for agent work",
-      text: "A WebSocket bridge connects the editor panel to an MCP server. Style, text, attribute, delete, duplicate, and token edits stream as structured events that Claude Code, Cursor, or another MCP agent can apply to the source.",
+      text: "A WebSocket bridge connects the editor panel to an MCP server. Style, text, attribute, delete, duplicate, and token edits stream as structured events for Claude Code, Cursor, or another MCP agent.",
     },
     {
       kind: "subhead",
       title: "Source-aware edits",
-      text: "The Vite `reactTracer` plugin adds file and line metadata to elements. When a user edits the page, the agent knows which component to open instead of searching through the project by guesswork.",
+      text: "The Vite `reactTracer` plugin adds file and line metadata to elements. When users edit the page, the agent opens the right component instead of searching the project by guesswork.",
     },
     {
       label: "Product Details",
       kind: "logline",
-      text: "The product is not only an inspector. It is a working contract between a human, a browser surface, and an AI agent.",
+      text: "Live Studio turns the browser into a shared work surface for a human and an AI agent.",
     },
     {
       kind: "case",
-      text: "I added two-way chat in the panel so users can message the agent with element attachments and receive answers in the same place. Channel events handle Claude Code notifications where available, and a 60-second long-polling fallback keeps the flow usable with other MCP agents.",
+      text: "I added two-way chat in the panel so users can message the agent with element attachments and receive answers beside the canvas. Channel events handle Claude Code notifications where available, and long polling keeps the flow usable with other MCP agents.",
     },
     {
       kind: "case",
-      text: "The variables popover pulls values from project CSS variables, so edits stay inside the design system. The viewport ships with every change, which lets the agent decide whether a fix belongs in base styles or inside a media query.",
+      text: "The variables popover pulls values from project CSS variables and keeps edits inside the design system. Every change includes the viewport, so the agent can place a fix in base styles or a media query.",
     },
     { kind: "image", aspect: "2460 / 778" },
     {
@@ -284,18 +284,18 @@ const caseSections: Record<string, CaseSection[]> = {
         ["MIT", "Open-source license"],
         ["MCP", "Agent protocol"],
       ],
-      text: "Live Studio is published on npm as `live-studio` and released under the MIT license. I built the product vision, editor UX, protocol architecture, Preact client, Node server, packaging, installer, and documentation.",
+      text: "I published Live Studio on npm as `live-studio` under the MIT license. I built the product vision, editor UX, protocol architecture, Preact client, Node server, packaging, installer, and documentation.",
     },
   ],
   openprovider: [
     {
       label: "Challenge",
       kind: "logline",
-      text: "Openprovider's reseller dashboard supports domain registration, billing, and reseller operations for 15K+ customers. The product had years of business logic, three language markets, and many power-user habits baked into it.",
+      text: "Openprovider's reseller dashboard supports domain registration, billing, and reseller operations for 15K+ customers. Years of business logic, three language markets, and power-user habits shaped the redesign.",
     },
     {
       kind: "case",
-      text: "A clean redesign was not enough. The work had to preserve the speed expected by existing resellers while giving product and engineering a system they could use for every new page.",
+      text: "The redesign needed to protect reseller speed while giving product and engineering a system they could use for every new page.",
     },
     {
       kind: "image",
@@ -306,35 +306,35 @@ const caseSections: Record<string, CaseSection[]> = {
     {
       label: "Solution",
       kind: "logline",
-      text: "I led the full UX redesign and built the design system from the ground up.",
+      text: "I led the UX redesign and built the design system from the ground up.",
     },
     {
       kind: "subhead",
       title: "Multilingual dashboard patterns",
-      text: "The system covered English, Spanish, and Russian interfaces. I treated long labels, dense tables, validation states, and reseller terminology as design constraints from the start.",
+      text: "I designed English, Spanish, and Russian interfaces around long labels, dense tables, validation states, and reseller terminology from the start.",
     },
     {
       kind: "subhead",
       title: "One system across devices",
-      text: "The design system covered desktop, tablet, and mobile. Components had to work for domain search, renewals, billing, account management, and admin-heavy product pages.",
+      text: "The component set covered desktop, tablet, and mobile flows for domain search, renewals, billing, account management, and admin-heavy pages.",
     },
     {
       kind: "subhead",
       title: "Shared contract with engineering",
-      text: "I worked with 5+ engineers and product managers across the Netherlands and India. The component library, patterns, and decision docs reduced repeated discussions and gave the team a stable base for delivery.",
+      text: "I worked with 5+ engineers and product managers across the Netherlands and India. The component library, patterns, and decision docs cut repeated discussions and gave the team a stable delivery base.",
     },
     {
       label: "Execution",
       kind: "logline",
-      text: "The key decision was to design migration, not only the final state.",
+      text: "I designed the migration path with the final interface.",
     },
     {
       kind: "case",
-      text: "Some flows could change quickly. Others needed a slower path because resellers depended on muscle memory. I separated users and workflows by risk, then redesigned the high-value surfaces first.",
+      text: "Some flows could change fast. Others needed a slower path because resellers depended on muscle memory. I separated users and workflows by risk, then redesigned the highest-value surfaces first.",
     },
     {
       kind: "case",
-      text: "The system started with basic styles and controls, then expanded into reseller-specific patterns. New pages no longer needed custom UI decisions for every table, form, empty state, or responsive breakpoint.",
+      text: "I started with basic styles and controls, then expanded into reseller-specific patterns. New pages no longer needed custom UI decisions for every table, form, empty state, or responsive breakpoint.",
     },
     {
       kind: "image",
@@ -350,48 +350,48 @@ const caseSections: Record<string, CaseSection[]> = {
         ["100+", "Screens covered"],
         ["4 mo", "Design system delivery"],
       ],
-      text: "The design system shipped in production and became the base for all new product pages. It covered desktop, tablet, and mobile across EN, ES, and RU markets.",
+      text: "The design system shipped to production and became the base for new product pages across desktop, tablet, mobile, EN, ES, and RU.",
     },
   ],
   slidesurf: [
     {
       label: "Challenge",
       kind: "logline",
-      text: "A prompt-to-deck product has to do more than call an LLM. Users need a presentation with structure, hierarchy, slide intent, speaker notes, and a clear path to revise the output.",
+      text: "A prompt-to-deck product has to do more than call an LLM. Users need structure, hierarchy, slide intent, speaker notes, and a clear way to revise the output.",
     },
     {
       kind: "case",
-      text: "SlideSurf started as a solo product build around a simple job: describe the topic and context, then get a deck that is ready to present or refine.",
+      text: "SlideSurf started with one job: describe the topic and context, then get a deck ready to present or refine.",
     },
     { kind: "image", aspect: "3840 / 1579" },
     {
       label: "Solution",
       kind: "logline",
-      text: "I split generation into planning and content writing, then made the deck assemble live in the UI.",
+      text: "I split generation into planning and content writing, then assembled the deck live in the UI.",
     },
     {
       kind: "subhead",
       title: "Planner before content",
-      text: "The first LLM step creates the deck structure. A separate generator expands each slide. This gives the product better token control and a more predictable shape than asking one model for everything at once.",
+      text: "The first LLM step creates the deck structure. A separate generator expands each slide. This gave SlideSurf tighter token control and a more predictable shape than one large model call.",
     },
     {
       kind: "subhead",
       title: "Streaming generation UX",
-      text: "Users watch the deck come together slide by slide. The interface shows progress while the system writes titles, bullet points, and speaker notes, which removes the silent wait common in AI tools.",
+      text: "Users watch the deck come together slide by slide. The app shows progress while it writes titles, bullet points, and speaker notes, replacing the silent wait common in AI tools.",
     },
     {
       kind: "subhead",
       title: "Multi-provider routing",
-      text: "The product uses one abstraction over OpenAI and Anthropic. Model choice can change by task and budget without forcing the UI to care about provider-specific details.",
+      text: "I built one abstraction over OpenAI and Anthropic. The app can change models by task and budget without leaking provider details into the UI.",
     },
     {
       label: "Iteration",
       kind: "logline",
-      text: "The product treats AI output as editable material, not a finished artifact.",
+      text: "SlideSurf treats AI output as editable material.",
     },
     {
       kind: "case",
-      text: "Users can regenerate a single slide or refine specific points instead of starting from scratch. That decision kept the workflow close to how people actually edit presentations.",
+      text: "Users can regenerate one slide or refine specific points instead of starting over. That kept the workflow close to how people edit presentations.",
     },
     { kind: "image", aspect: "2460 / 778" },
     {
@@ -402,18 +402,18 @@ const caseSections: Record<string, CaseSection[]> = {
         ["OpenAI", "LLM provider"],
         ["Claude", "LLM provider"],
       ],
-      text: "SlideSurf launched with real users. I covered the product concept, UX, frontend, backend, prompt design, LLM integration, and production release.",
+      text: "SlideSurf launched with real users. I covered the product concept, UX, frontend, backend, prompt design, LLM integration, and release.",
     },
   ],
   "clearscale-msp": [
     {
       label: "Challenge",
       kind: "logline",
-      text: "ClearScale needed an enterprise MSP portal for clients managing $10M+ in AWS infrastructure. The interface had to support operational work without turning cloud complexity into a maze.",
+      text: "ClearScale needed an enterprise MSP portal for clients managing $10M+ in AWS infrastructure. The UI needed to support daily operations without turning cloud complexity into a maze.",
     },
     {
       kind: "case",
-      text: "The existing portal needed a complete redesign and a frontend migration. I owned both sides of the work as the sole designer-developer, which meant product decisions, UX, UI, and React implementation stayed tightly connected.",
+      text: "The portal needed a full redesign and a frontend migration. I owned product decisions, UX, UI, and React implementation as the sole designer-developer.",
     },
     {
       kind: "image",
@@ -429,26 +429,26 @@ const caseSections: Record<string, CaseSection[]> = {
     {
       kind: "subhead",
       title: "Enterprise dashboard redesign",
-      text: "I reorganized the portal around the information clients needed to monitor services, infrastructure state, and account activity. The UI had to be dense enough for expert users and clear enough for business stakeholders.",
+      text: "I reorganized the portal around service monitoring, infrastructure state, and account activity. Expert users needed dense views; business stakeholders needed the same screens to read at a glance.",
     },
     {
       kind: "subhead",
       title: "React migration",
-      text: "I led the migration to React, TypeScript, Next.js, and Styled Components. The move replaced brittle frontend patterns with reusable components and a codebase that could support new portal sections.",
+      text: "I led the move to React, TypeScript, Next.js, and Styled Components. Reusable components replaced brittle frontend patterns and gave the team room to add new portal sections.",
     },
     {
       kind: "subhead",
       title: "Design and code in one loop",
-      text: "Because I owned both design and implementation, prototypes could become production UI without a long handoff. Edge cases from the build shaped the design system instead of arriving too late.",
+      text: "Because I owned design and implementation, prototypes could become production UI without a long handoff. Build edge cases shaped the design system while decisions were still cheap.",
     },
     {
       label: "Context",
       kind: "logline",
-      text: "The portal sat inside ClearScale's AWS consulting and managed-services work, where reliability mattered more than decoration.",
+      text: "The portal served ClearScale's AWS consulting and managed-services work, where reliability mattered more than decoration.",
     },
     {
       kind: "case",
-      text: "I also contributed to data-heavy AWS products during the same period, including UX for data warehouse, data lake, and real-time ingestion workflows. That context shaped how I approached complex operational screens in the MSP portal.",
+      text: "I also worked on data-heavy AWS products during the same period, including data warehouse, data lake, and real-time ingestion workflows. That context shaped the MSP portal's operational screens.",
     },
     {
       kind: "image",
@@ -464,18 +464,18 @@ const caseSections: Record<string, CaseSection[]> = {
         ["2018-2021", "ClearScale period"],
         ["React", "Frontend migration"],
       ],
-      text: "The redesigned MSP portal gave ClearScale enterprise clients a React-based interface for managed AWS operations. I delivered the work as UI Designer & Frontend Engineer.",
+      text: "The redesigned MSP portal gave ClearScale enterprise clients a React-based interface for managed AWS operations. I delivered the work as UI Designer and Frontend Engineer.",
     },
   ],
   seligoai: [
     {
       label: "Challenge",
       kind: "logline",
-      text: "SeligoAI needed to make student recruitment, retention, and performance data usable for a US education market audience. The product had ML-backed insights, but the interface had to stay clear for nontechnical users.",
+      text: "SeligoAI needed to make student recruitment, retention, and performance data usable for the US education market. Nontechnical users needed ML-backed insights they could act on.",
     },
     {
       kind: "case",
-      text: "The platform covered schedules, performance tracking, learning materials, role-based dashboards, predictive analytics, and success indices. Each section needed a common visual language without flattening the differences between user roles.",
+      text: "The platform covered schedules, performance tracking, learning materials, role-based dashboards, predictive analytics, and success indices. Each role needed a distinct workflow inside one visual language.",
     },
     {
       kind: "image",
@@ -486,31 +486,31 @@ const caseSections: Record<string, CaseSection[]> = {
     {
       label: "Solution",
       kind: "logline",
-      text: "I designed a responsive platform with a bright accent style, reusable components, and clear dashboard patterns.",
+      text: "I designed a responsive platform with bright accents, reusable components, and clear dashboard patterns.",
     },
     {
       kind: "subhead",
       title: "Design system first",
-      text: "I created the basic components and UI rules before pushing into full pages. That gave the product a base for future sections instead of a pile of one-off screens.",
+      text: "I created the core components and UI rules before moving into full pages. That gave the team a base for future sections instead of a pile of one-off screens.",
     },
     {
       kind: "subhead",
       title: "Predictive analytics without jargon",
-      text: "The product needed to expose ML output through success indices and dashboard signals. I focused the UI on actions and status, so users could understand where attention was needed.",
+      text: "The product exposed ML output through success indices and dashboard signals. I focused the UI on actions and status, so users could see where to pay attention.",
     },
     {
       kind: "subhead",
       title: "Responsive education workflows",
-      text: "The platform was designed for desktop, tablet, and mobile. Schedules, materials, and performance views had to survive smaller screens without losing the data users came for.",
+      text: "I designed the platform for desktop, tablet, and mobile. Schedules, materials, and performance views kept their core data on smaller screens.",
     },
     {
       label: "Implementation",
       kind: "logline",
-      text: "The stack matched the need for fast product development and a component-driven interface.",
+      text: "The stack supported fast product development and a component-driven interface.",
     },
     {
       kind: "case",
-      text: "I worked with Next.js, TailwindCSS, and Webpack, combining product design and frontend implementation. The solo designer-developer setup helped move from component decisions to working sections quickly.",
+      text: "I worked with Next.js, TailwindCSS, and Webpack, combining product design and frontend implementation. The solo setup helped me move from component decisions to working sections in short cycles.",
     },
     {
       kind: "image",
@@ -526,18 +526,18 @@ const caseSections: Record<string, CaseSection[]> = {
         ["Next.js", "Frontend stack"],
         ["US", "Target market"],
       ],
-      text: "SeligoAI left the team with a design system, core components, and key platform sections for student management, recruitment, retention, and predictive analytics.",
+      text: "SeligoAI left the team with a design system, core components, and key sections for student management, recruitment, retention, and predictive analytics.",
     },
   ],
   talkpilot: [
     {
       label: "Challenge",
       kind: "logline",
-      text: "Power users were already moving between GPT, Claude, Gemini, and regional models. TalkPilot needed to bring that work into one product without hiding the model tradeoffs that matter.",
+      text: "Power users were moving between GPT, Claude, Gemini, and regional models. TalkPilot brought that work into one product while keeping model tradeoffs visible.",
     },
     {
       kind: "case",
-      text: "The product combined multi-model chat, image generation, and web search. The hard part was not only adding providers. Pricing, latency, streaming, failures, and model behavior all differ, so the UX needed a consistent surface over uneven infrastructure.",
+      text: "TalkPilot combined multi-model chat, image generation, and web search. Adding providers was the easy part. Pricing, latency, streaming, failures, and model behavior all differ, so the UX needed a consistent surface over uneven infrastructure.",
     },
     {
       kind: "image",
@@ -548,31 +548,31 @@ const caseSections: Record<string, CaseSection[]> = {
     {
       label: "Solution",
       kind: "logline",
-      text: "I built a neural network aggregator with 20+ LLMs and made model choice visible to users.",
+      text: "I built a multi-model AI workspace with 20+ LLMs and visible model choice.",
     },
     {
       kind: "subhead",
       title: "One interface for 20+ models",
-      text: "TalkPilot brings GPT, Claude, Gemini, Yandex, and other models into one interface. Users can keep their work in one place while choosing the model that fits the task.",
+      text: "TalkPilot brings GPT, Claude, Gemini, Yandex, and other models into one interface. Users keep their work in one place while choosing the model that fits the task.",
     },
     {
       kind: "subhead",
       title: "Visible model tradeoffs",
-      text: "I chose not to bury model selection behind a vague automatic mode. The interface explains tradeoffs in plain language, including speed, quality, and cost.",
+      text: "I kept model selection visible instead of hiding it behind a vague automatic mode. The UI explains speed, quality, and cost in plain language.",
     },
     {
       kind: "subhead",
       title: "Full-stack solo build",
-      text: "I owned UX, frontend, backend, and LLM integration. The production stack used React, TypeScript, and Node.js, with provider-specific behavior normalized behind the product UI.",
+      text: "I owned UX, frontend, backend, and LLM integration. The production stack used React, TypeScript, and Node.js, with provider-specific behavior normalized behind the UI.",
     },
     {
       label: "Growth",
       kind: "logline",
-      text: "The product found traction as a solo-built AI tool, not a concept demo.",
+      text: "TalkPilot found traction as a solo-built AI tool.",
     },
     {
       kind: "case",
-      text: "TalkPilot reached 550+ monthly sign-ups and 12% free-to-paid conversion. It was selected as #3 Startup of the Month on ProductRadar from 500+ submissions and joined a regional accelerator.",
+      text: "TalkPilot reached 550+ monthly sign-ups and 12% free-to-paid conversion. ProductRadar selected it as #3 Startup of the Month from 500+ submissions, and a regional accelerator accepted it into a cohort.",
     },
     {
       kind: "image",
@@ -588,7 +588,7 @@ const caseSections: Record<string, CaseSection[]> = {
         ["550+", "Monthly sign-ups"],
         ["12%", "Free-to-paid conversion"],
       ],
-      text: "TalkPilot shipped as a full product with multi-model chat, image generation, and web search. It gave me a measured solo case across product, design, engineering, and LLM integration.",
+      text: "TalkPilot shipped with multi-model chat, image generation, and web search. It gave me a measured solo case across product, design, engineering, and LLM integration.",
     },
   ],
 };
