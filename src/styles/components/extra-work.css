@@ -5,6 +5,8 @@
   padding-bottom: 56px;
 }
 
+@custom-media --mobile (max-width: 900px);
+
 .extra-list {
   grid-column: 1 / 5;
 }
@@ -78,9 +80,11 @@
 
 @media (--mobile) {
   .extra-grid {
+    display: block;
     min-height: auto;
     padding-top: 30px;
     padding-bottom: 36px;
+    padding-inline: 20px;
   }
 
   .extra-work {

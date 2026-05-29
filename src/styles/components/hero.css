@@ -5,6 +5,8 @@
   padding-bottom: 32px;
 }
 
+@custom-media --mobile (max-width: 900px);
+
 .hero h1 {
   grid-column: 5 / 15;
   align-self: center;
@@ -30,12 +32,28 @@
 }
 
 @media (--mobile) {
+  .snap-container {
+    height: auto;
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+
+  .section {
+    min-height: auto;
+    scroll-snap-align: none;
+  }
+
+  .snap-section {
+    scroll-margin-top: var(--space-xl);
+  }
+
   .hero-grid {
     display: flex;
     align-items: center;
     min-height: 100vh;
     padding-top: 80px;
     padding-bottom: 40px;
+    padding-inline: 20px;
   }
 
   .hero h1 {

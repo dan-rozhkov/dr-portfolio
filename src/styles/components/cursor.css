@@ -21,6 +21,8 @@
   transition: opacity var(--t-fast) ease, transform .28s cubic-bezier(.34, 1.56, .64, 1), background var(--t-fast) ease, color var(--t-fast) ease;
 }
 
+@custom-media --mobile (max-width: 900px);
+
 .cursor.is-visible {
   opacity: 1;
 }
@@ -54,6 +56,12 @@ body.contact-active .cursor.is-active.has-label {
 }
 
 @media (--mobile) {
+  body,
+  a,
+  button {
+    cursor: auto;
+  }
+
   .cursor {
     display: none;
   }

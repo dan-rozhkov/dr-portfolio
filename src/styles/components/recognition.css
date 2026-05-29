@@ -8,6 +8,8 @@
   padding-bottom: 64px;
 }
 
+@custom-media --mobile (max-width: 900px);
+
 .list-section {
   row-gap: 96px;
   align-items: start;
@@ -46,6 +48,12 @@
   .recognition {
     gap: 34px;
     padding: 42px 0 46px;
+  }
+
+  .list-section {
+    display: block;
+    padding-inline: 20px;
+    padding-block: 0;
   }
 
   .recognition-grid {

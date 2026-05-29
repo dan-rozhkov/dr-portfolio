@@ -2,6 +2,8 @@ html:has(.case-study) {
   scrollbar-width: none;
 }
 
+@custom-media --mobile (max-width: 900px);
+
 html:has(.case-study)::-webkit-scrollbar,
 body:has(.case-study)::-webkit-scrollbar {
   display: none;
@@ -380,6 +382,9 @@ body:has(.case-study)::-webkit-scrollbar {
   }
 
   .case-study {
+    --cs-logline-size: clamp(34px, 10vw, 48px);
+    --cs-case-size: clamp(16px, 4.5vw, 18px);
+
     padding-top: var(--space-xl);
   }
 
@@ -412,10 +417,11 @@ body:has(.case-study)::-webkit-scrollbar {
 
   .cs-title-meta > div {
     display: grid;
-    grid-template-columns: 96px 1fr;
+    grid-template-columns: minmax(76px, 28%) 1fr;
     gap: 16px;
     padding: 12px 0;
     border-top: 1px solid var(--line);
+    overflow-wrap: anywhere;
   }
 
   .cs-title-meta dt {
@@ -427,6 +433,11 @@ body:has(.case-study)::-webkit-scrollbar {
     grid-column: 1 / 17;
     padding-top: 0;
     color: var(--muted);
+  }
+
+  .cs-row,
+  .cs-subhead {
+    row-gap: 16px;
   }
 
   .cs-sections {

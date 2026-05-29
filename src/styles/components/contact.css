@@ -4,6 +4,8 @@
   color: var(--light);
 }
 
+@custom-media --mobile (max-width: 900px);
+
 .contact-grid {
   position: relative;
   align-content: center;
@@ -48,9 +50,11 @@
 
 @media (--mobile) {
   .contact-grid {
+    display: block;
     min-height: 82vh;
     padding-top: var(--space-xl);
     padding-bottom: 34px;
+    padding-inline: 20px;
   }
 
   .contact h2 {

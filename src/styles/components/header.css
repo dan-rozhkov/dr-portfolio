@@ -7,6 +7,8 @@
   mix-blend-mode: difference;
 }
 
+@custom-media --mobile (max-width: 900px);
+
 .nav {
   align-items: start;
   min-height: var(--space-2xl);
@@ -64,12 +66,28 @@
     display: inline;
   }
 
+  .mobile-break {
+    display: block;
+  }
+
   .nav {
     display: flex;
+    gap: 18px;
     justify-content: space-between;
     min-height: var(--space-xl);
     padding-top: 14px;
+    padding-inline: 20px;
     font-size: 16px;
+  }
+
+  .brand {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .nav-actions {
+    flex: 0 0 auto;
+    gap: 16px;
   }
 
   .site-header {
