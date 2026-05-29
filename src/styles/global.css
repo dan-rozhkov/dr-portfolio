@@ -41,8 +41,8 @@ button {
 
 .snap-container {
   height: 100vh;
-  overflow-y: auto;
   overflow-x: hidden;
+  overflow-y: auto;
   scroll-snap-type: y mandatory;
   scrollbar-width: none;
 }

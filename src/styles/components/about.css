@@ -1,18 +1,18 @@
 .about-grid {
-  min-height: max(100vh, 700px);
   align-items: start;
+  min-height: max(100vh, 700px);
   padding-top: var(--space-3xl);
   padding-bottom: 56px;
 }
 
 .portrait {
+  display: block;
   grid-column: 1 / 5;
+  align-self: start;
   width: min(100%, 280px);
   aspect-ratio: 4 / 5;
-  align-self: start;
   object-fit: cover;
   filter: grayscale(1);
-  display: block;
 }
 
 .about-text {
@@ -31,11 +31,11 @@
 
 .inline-logo {
   display: inline-block;
-  height: 0.9em;
   width: auto;
-  vertical-align: -0.08em;
+  height: 0.9em;
   margin-right: 0.1em;
   border-radius: 50%;
+  vertical-align: -0.08em;
 }
 
 @media (--mobile) {
@@ -47,10 +47,6 @@
 
   .about {
     padding-top: 36px;
-  }
-
-  .about-grid {
-    padding-top: 30px;
   }
 
   .portrait {

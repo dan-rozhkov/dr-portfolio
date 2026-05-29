@@ -1,23 +1,23 @@
 .cursor {
   position: fixed;
-  left: 0;
   top: 0;
+  left: 0;
   z-index: 100;
-  width: 112px;
-  height: 112px;
   display: grid;
   place-items: center;
+  width: 112px;
+  height: 112px;
   border-radius: 50%;
-  pointer-events: none;
-  opacity: 0;
-  transform: translate(-50%, -50%) scale(.32);
   background: #fff;
+  opacity: 0;
   color: #000;
   font-size: 20px;
   font-weight: 400;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+  pointer-events: none;
   mix-blend-mode: difference;
+  transform: translate(-50%, -50%) scale(.32);
   transition: opacity var(--t-fast) ease, transform .28s cubic-bezier(.34, 1.56, .64, 1), background var(--t-fast) ease, color var(--t-fast) ease;
 }
 

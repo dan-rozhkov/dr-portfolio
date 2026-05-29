@@ -15,6 +15,7 @@ body:has(.case-study)::-webkit-scrollbar {
   --cs-case-lh: 1.4;
   --cs-nav-size: 20px;
   --cs-nav-lh: 1.1;
+
   padding-top: var(--space-2xl);
   font-size: var(--cs-case-size);
   line-height: var(--cs-case-lh);
@@ -34,8 +35,8 @@ body:has(.case-study)::-webkit-scrollbar {
   display: grid;
   grid-template-columns: repeat(16, minmax(0, 1fr));
   gap: var(--gap);
-  padding-inline: var(--pad);
   align-items: start;
+  padding-inline: var(--pad);
 }
 
 .cs-title-name {
@@ -43,8 +44,8 @@ body:has(.case-study)::-webkit-scrollbar {
   grid-row: 1 / span 2;
   align-self: start;
   font-size: clamp(38px, 3.5vw, 68px);
-  line-height: 1.06;
   font-weight: 500;
+  line-height: 1.06;
   letter-spacing: -0.02em;
   text-wrap: balance;
 }
@@ -52,18 +53,18 @@ body:has(.case-study)::-webkit-scrollbar {
 .cs-title-intro {
   grid-column: 7 / 15;
   grid-row: 1;
+  padding-top: 8px;
   font-size: var(--cs-case-size);
   line-height: var(--cs-case-lh);
-  padding-top: 8px;
 }
 
 .cs-title-meta {
-  grid-column: 7 / 17;
-  grid-row: 2;
-  margin: 32px 0 0;
   display: flex;
   flex-wrap: wrap;
+  grid-column: 7 / 17;
+  grid-row: 2;
   gap: 8px 32px;
+  margin: 32px 0 0;
   font-size: var(--cs-case-size);
   line-height: var(--cs-case-lh);
   letter-spacing: 0;
@@ -75,9 +76,9 @@ body:has(.case-study)::-webkit-scrollbar {
 }
 
 .cs-title-meta dt {
+  padding-bottom: 8px;
   color: var(--muted);
   font-weight: 400;
-  padding-bottom: 8px;
   white-space: nowrap;
 }
 
@@ -88,8 +89,8 @@ body:has(.case-study)::-webkit-scrollbar {
 
 .cs-hero {
   margin-inline: var(--pad);
-  background: #efefef;
   border-radius: var(--radius-xl);
+  background: #efefef;
   animation: cs-hero-rise 550ms cubic-bezier(.2,.7,.2,1) both;
 }
 
@@ -98,6 +99,7 @@ body:has(.case-study)::-webkit-scrollbar {
     opacity: 0;
     transform: translateY(24px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -121,19 +123,19 @@ body:has(.case-study)::-webkit-scrollbar {
   display: grid;
   grid-template-columns: repeat(16, minmax(0, 1fr));
   gap: var(--gap);
-  padding-inline: var(--pad);
   align-items: start;
+  padding-inline: var(--pad);
 }
 
 .cs-label {
   grid-column: 1 / 7;
-  font-size: var(--cs-nav-size);
-  line-height: var(--cs-nav-lh);
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
   padding-top: 8px;
   color: var(--ink);
+  font-size: var(--cs-nav-size);
+  font-weight: 500;
+  line-height: var(--cs-nav-lh);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .cs-label-spacer {
@@ -143,8 +145,8 @@ body:has(.case-study)::-webkit-scrollbar {
 .cs-logline {
   grid-column: 7 / 16;
   font-size: var(--cs-logline-size);
-  line-height: var(--cs-logline-lh);
   font-weight: 500;
+  line-height: var(--cs-logline-lh);
   letter-spacing: var(--cs-logline-tracking);
 }
 
@@ -157,30 +159,30 @@ body:has(.case-study)::-webkit-scrollbar {
 .cs-image {
   display: block;
   width: 100%;
-  background: #ececec;
   border-radius: var(--radius-xl);
+  background: #ececec;
 }
 
 .cs-image-row {
-  background: #efefef;
-  border-radius: var(--radius-xl);
   margin-inline: var(--pad);
+  border-radius: var(--radius-xl);
+  background: #efefef;
 }
 
 .cs-image-row .cs-image,
 .cs-hero .cs-image {
   max-width: 800px;
   margin-inline: auto;
-  background: transparent;
   border-radius: 0;
+  background: transparent;
 }
 
 .cs-subhead {
   display: grid;
   grid-template-columns: repeat(16, minmax(0, 1fr));
   gap: var(--gap);
-  padding-inline: var(--pad);
   align-items: start;
+  padding-inline: var(--pad);
 }
 
 .cs-subhead-side {
@@ -190,8 +192,8 @@ body:has(.case-study)::-webkit-scrollbar {
 .cs-subhead-side h3 {
   margin: 0 0 16px;
   font-size: var(--cs-logline-size);
-  line-height: var(--cs-logline-lh);
   font-weight: 500;
+  line-height: var(--cs-logline-lh);
   letter-spacing: var(--cs-logline-tracking);
 }
 
@@ -217,25 +219,25 @@ body:has(.case-study)::-webkit-scrollbar {
 .cs-slider-sticky {
   position: sticky;
   top: 0;
-  height: 100vh;
   display: flex;
   align-items: center;
+  height: 100vh;
   overflow: hidden;
 }
 
 .cs-slider-grid {
   position: relative;
-  width: 100%;
   display: grid;
   grid-template-columns: repeat(16, minmax(0, 1fr));
   gap: var(--gap);
-  padding-inline: var(--pad);
   align-items: start;
+  width: 100%;
+  padding-inline: var(--pad);
 }
 
 .cs-slider-text {
-  grid-column: 1 / 7;
   position: relative;
+  grid-column: 1 / 7;
   min-height: 200px;
 }
 
@@ -243,15 +245,15 @@ body:has(.case-study)::-webkit-scrollbar {
   position: absolute;
   inset: 0;
   opacity: 0;
+  pointer-events: none;
   transform: translateY(40px);
   transition: opacity .45s ease, transform .55s cubic-bezier(.2,.7,.2,1);
-  pointer-events: none;
 }
 
 .cs-slider-slide.is-active {
   opacity: 1;
-  transform: translateY(0);
   pointer-events: auto;
+  transform: translateY(0);
 }
 
 .cs-slider-slide.is-past {
@@ -262,8 +264,8 @@ body:has(.case-study)::-webkit-scrollbar {
 .cs-slider-slide h3 {
   margin: 0 0 16px;
   font-size: var(--cs-logline-size);
-  line-height: var(--cs-logline-lh);
   font-weight: 500;
+  line-height: var(--cs-logline-lh);
   letter-spacing: var(--cs-logline-tracking);
 }
 
@@ -274,8 +276,8 @@ body:has(.case-study)::-webkit-scrollbar {
 }
 
 .cs-slider-media {
-  grid-column: 7 / 16;
   position: relative;
+  grid-column: 7 / 16;
   aspect-ratio: 4 / 3;
 }
 
@@ -296,19 +298,19 @@ body:has(.case-study)::-webkit-scrollbar {
 }
 
 .cs-slider-dots {
-  grid-column: 16 / 17;
-  justify-self: end;
-  align-self: center;
   display: flex;
   flex-direction: column;
+  grid-column: 16 / 17;
   gap: 10px;
+  align-self: center;
+  justify-self: end;
 }
 
 .cs-slider-dots .cs-dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.14);
+  background: rgb(0, 0, 0, 0.14);
   transition: background var(--t-base) ease, transform var(--t-base) ease;
 }
 
@@ -326,24 +328,24 @@ body:has(.case-study)::-webkit-scrollbar {
 }
 
 .cs-outcomes-stats {
-  grid-column: 7 / 16;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-column: 7 / 16;
   gap: var(--gap);
 }
 
 .cs-stat-value {
+  margin-bottom: 8px;
   font-size: var(--cs-logline-size);
+  font-weight: 500;
   line-height: var(--cs-logline-lh);
   letter-spacing: var(--cs-logline-tracking);
-  font-weight: 500;
-  margin-bottom: 8px;
 }
 
 .cs-stat-label {
+  color: var(--muted);
   font-size: var(--cs-case-size);
   line-height: var(--cs-case-lh);
-  color: var(--muted);
 }
 
 .cs-outcomes-text {
@@ -475,8 +477,8 @@ body:has(.case-study)::-webkit-scrollbar {
   .cs-slider-pair h3 {
     margin: 0;
     font-size: var(--cs-logline-size);
-    line-height: var(--cs-logline-lh);
     font-weight: 500;
+    line-height: var(--cs-logline-lh);
     letter-spacing: var(--cs-logline-tracking);
   }
 

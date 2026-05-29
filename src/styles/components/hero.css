@@ -1,6 +1,6 @@
 .hero-grid {
-  min-height: max(100vh, 700px);
   grid-template-rows: 1fr auto;
+  min-height: max(100vh, 700px);
   padding-top: 112px;
   padding-bottom: 32px;
 }
@@ -16,24 +16,24 @@
 }
 
 .hero-meta {
-  grid-column: 1 / 17;
   display: flex;
+  grid-column: 1 / 17;
   justify-content: space-between;
+  opacity: var(--hero-meta-opacity, 1);
   color: var(--muted);
   font-size: 20px;
-  line-height: 1.1;
   font-weight: 500;
+  line-height: 1.1;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  opacity: var(--hero-meta-opacity, 1);
   transition: opacity .12s linear;
 }
 
 @media (--mobile) {
   .hero-grid {
-    min-height: 100vh;
     display: flex;
     align-items: center;
+    min-height: 100vh;
     padding-top: 80px;
     padding-bottom: 40px;
   }

@@ -1,6 +1,6 @@
 .extra-grid {
-  min-height: max(100vh, 700px);
   align-items: center;
+  min-height: max(100vh, 700px);
   padding-top: var(--space-3xl);
   padding-bottom: 56px;
 }
@@ -30,10 +30,10 @@
 
 .preview-stage {
   position: relative;
-  overflow: hidden;
   padding: 38px;
   background: #101018;
   color: #fff;
+  overflow: hidden;
 }
 
 .preview-topbar {
@@ -112,9 +112,9 @@
   }
 
   .command-panel {
-    width: min(58%, 250px);
     right: 20px;
     bottom: 20px;
+    width: min(58%, 250px);
     padding: 18px;
   }
 }

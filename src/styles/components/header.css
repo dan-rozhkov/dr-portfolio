@@ -2,14 +2,14 @@
   position: fixed;
   inset: 0 0 auto;
   z-index: 20;
-  pointer-events: none;
   color: #fff;
+  pointer-events: none;
   mix-blend-mode: difference;
 }
 
 .nav {
-  min-height: var(--space-2xl);
   align-items: start;
+  min-height: var(--space-2xl);
   padding-top: 32px;
   font-size: 20px;
   font-weight: 500;
@@ -27,8 +27,8 @@
 }
 
 .nav-links {
-  grid-column: 5 / 13;
   display: flex;
+  grid-column: 5 / 13;
   gap: 32px;
 }
 
@@ -37,12 +37,12 @@
 }
 
 .nav-actions {
-  grid-column: 13 / 17;
-  justify-self: end;
   display: flex;
   flex-wrap: nowrap;
-  white-space: nowrap;
+  grid-column: 13 / 17;
   gap: 32px;
+  justify-self: end;
+  white-space: nowrap;
   pointer-events: auto;
 }
 
