@@ -1,0 +1,39 @@
+:root {
+  --bg: #f8f8f8;
+  --ink: rgb(0 0 0 / 86%);
+  --muted: rgb(0 0 0 / 48%);
+  --line: #d4d4d4;
+  --dark: #121214;
+  --light: rgb(255 255 255 / 96%);
+  --pad: clamp(20px, 5vw, 64px);
+  --gap: clamp(18px, 3.75vw, 48px);
+  --display: clamp(36px, 3.4vw, 68px);
+  --case: clamp(15px, 1.1vw, 18px);
+
+  /* Radii */
+  --radius-xl: 36px;
+  --radius-lg: 28px;
+  --radius-md: 24px;
+  --radius-sm: 20px;
+  --radius-xs: 16px;
+
+  /* Breakpoints */
+  --bp-mobile: 900px;
+
+  /* Spacing */
+  --space-xl: 72px;
+  --space-2xl: 96px;
+  --space-3xl: 120px;
+
+  /* Shadows */
+  --shadow-soft: 0 20px 70px rgb(0 0 0 / 6%);
+  --shadow-strong: 0 20px 70px rgb(0 0 0 / 22%);
+
+  /* Transition durations */
+  --t-fast: 0.16s;
+  --t-base: 0.2s;
+
+  color-scheme: light;
+}
+
+@custom-media --mobile (max-width: 900px);

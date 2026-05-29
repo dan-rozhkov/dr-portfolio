@@ -12,6 +12,7 @@ const { render, cases } = await import(
 );
 
 const BASE = "/dr-portfolio/";
+const SITE_ORIGIN = "https://dan-rozhkov.github.io";
 
 function writePage(outPath, routePath) {
   const html = render(routePath);
@@ -38,6 +39,24 @@ fs.copyFileSync(
   path.join(distDir, "index.html"),
   path.join(distDir, "404.html")
 );
+
+const today = new Date().toISOString().slice(0, 10);
+const sitemapUrls = [
+  `${SITE_ORIGIN}${BASE}`,
+  ...cases.map((c) => `${SITE_ORIGIN}${BASE}case/${c.id}`),
+];
+const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${sitemapUrls
+  .map(
+    (loc) =>
+      `  <url><loc>${loc}</loc><lastmod>${today}</lastmod></url>`
+  )
+  .join("\n")}
+</urlset>
+`;
+fs.writeFileSync(path.join(distDir, "sitemap.xml"), sitemap);
+console.log("wrote sitemap.xml");
 
 // Clean up the SSR build output — not needed in the published site.
 fs.rmSync(ssrDir, { recursive: true, force: true });

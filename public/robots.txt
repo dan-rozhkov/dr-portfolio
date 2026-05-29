@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://dan-rozhkov.github.io/dr-portfolio/sitemap.xml

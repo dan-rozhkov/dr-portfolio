@@ -1,0 +1,77 @@
+.contact {
+  min-height: auto;
+  background: var(--dark);
+  color: var(--light);
+}
+
+.contact-grid {
+  position: relative;
+  align-content: center;
+  padding-top: var(--space-3xl);
+  padding-bottom: var(--space-3xl);
+}
+
+.contact h2 {
+  grid-column: 5 / 14;
+  margin: 0 0 80px;
+  font-size: clamp(38px, 3.5vw, 68px);
+  font-weight: 500;
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+}
+
+.contact-methods {
+  grid-column: 5 / 14;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px;
+}
+
+.contact-methods a {
+  display: block;
+}
+
+.contact-methods span {
+  display: block;
+  margin-top: 6px;
+  color: rgb(255 255 255 / 62%);
+}
+
+.contact-year {
+  display: block;
+  grid-column: 14 / -1;
+  grid-row: 2;
+  align-self: end;
+  justify-self: end;
+  color: rgb(255 255 255 / 62%);
+}
+
+@media (--mobile) {
+  .contact-grid {
+    min-height: 82vh;
+    padding-top: var(--space-xl);
+    padding-bottom: 34px;
+  }
+
+  .contact h2 {
+    margin-bottom: 56px;
+    font-size: clamp(36px, 10vw, 50px);
+    overflow-wrap: anywhere;
+  }
+
+  .contact-methods {
+    display: block;
+  }
+
+  .contact-methods a {
+    padding: 18px 0;
+    border-top: 1px solid rgb(255 255 255 / 20%);
+    overflow-wrap: anywhere;
+  }
+
+  .contact-year {
+    position: static;
+    display: block;
+    margin-top: 48px;
+  }
+}

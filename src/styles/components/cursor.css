@@ -1,0 +1,60 @@
+.cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  width: 112px;
+  height: 112px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(.32);
+  background: #fff;
+  color: #000;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  mix-blend-mode: difference;
+  transition: opacity var(--t-fast) ease, transform .28s cubic-bezier(.34, 1.56, .64, 1), background var(--t-fast) ease, color var(--t-fast) ease;
+}
+
+.cursor.is-visible {
+  opacity: 1;
+}
+
+.cursor > span {
+  opacity: 0;
+  transition: opacity var(--t-fast) ease;
+}
+
+.cursor.is-active {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.cursor.is-active.is-compact {
+  transform: translate(-50%, -50%) scale(.65);
+}
+
+.cursor.is-active.has-label {
+  background: #111;
+  color: #fff;
+  mix-blend-mode: normal;
+}
+
+body.contact-active .cursor.is-active.has-label {
+  background: #fff;
+  color: #111;
+}
+
+.cursor.is-active > span {
+  opacity: 1;
+}
+
+@media (--mobile) {
+  .cursor {
+    display: none;
+  }
+}

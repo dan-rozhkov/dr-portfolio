@@ -1,0 +1,85 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "General Sans", "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
+  font-size: var(--case);
+  line-height: 1.28;
+  letter-spacing: 0;
+  text-wrap: balance;
+}
+
+body,
+a,
+button {
+  cursor: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+}
+
+.grid-shell {
+  display: grid;
+  grid-template-columns: repeat(16, minmax(0, 1fr));
+  gap: var(--gap);
+  padding-inline: var(--pad);
+}
+
+.snap-container {
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-snap-type: y mandatory;
+  scrollbar-width: none;
+}
+
+.snap-container::-webkit-scrollbar {
+  display: none;
+}
+
+.section {
+  min-height: max(100vh, 700px);
+  scroll-snap-align: start;
+}
+
+@media (--mobile) {
+  body,
+  a,
+  button {
+    cursor: auto;
+  }
+
+  .grid-shell {
+    display: block;
+    padding-inline: 20px;
+  }
+
+  .snap-section {
+    scroll-margin-top: var(--space-xl);
+  }
+
+  .snap-container {
+    height: auto;
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+
+  .section {
+    min-height: auto;
+    scroll-snap-align: none;
+  }
+}

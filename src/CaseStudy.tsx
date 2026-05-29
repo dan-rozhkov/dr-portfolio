@@ -226,24 +226,16 @@ export default function CaseStudy({ study }: { study: CaseStudyType }) {
     <main className="case-study">
       <header className="cs-title-block">
         <div className="cs-title-grid">
-          <div className="cs-title-name">{study.title}</div>
+          <h1 className="cs-title-name">{study.title}</h1>
           <div className="cs-title-intro">{study.intro}</div>
-          <table className="cs-title-meta">
-            <thead>
-              <tr>
-                {meta.map(([label]) => (
-                  <th key={label}>{label}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                {meta.map(([label, value]) => (
-                  <td key={label} data-label={label}>{value}</td>
-                ))}
-              </tr>
-            </tbody>
-          </table>
+          <dl className="cs-title-meta">
+            {meta.map(([label, value]) => (
+              <div key={label}>
+                <dt>{label}</dt>
+                <dd>{value}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </header>
 
