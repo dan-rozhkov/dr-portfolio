@@ -100,7 +100,6 @@ export const extraWork: ExtraWork = {
     "Live Studio",
     "SlideSurf",
     "TalkPilot",
-    "Sber India Prototype Tool",
     "LucidBots (SnapSoft)",
     "NDA AI tools",
   ],
@@ -697,6 +696,11 @@ const caseSections: Record<string, CaseSection[]> = {
 };
 
 const caseHeroImages: Record<string, { src: string; alt: string; background?: string }> = {
+  "sber-india-proto": {
+    src: "/images/sber-india-proto/hero.png",
+    alt: "Сетка компонентов прототип-инструмента Sber India",
+    background: "rgb(248 248 248)",
+  },
   openprovider: {
     src: "/images/openprovider/hero.png",
     alt: "Предпросмотр панели Openprovider",

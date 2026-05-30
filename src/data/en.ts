@@ -161,7 +161,6 @@ export const extraWork: ExtraWork = {
     "Live Studio",
     "SlideSurf",
     "TalkPilot",
-    "Sber India Prototype Tool",
     "LucidBots (SnapSoft)",
     "NDA AI tools",
   ],
@@ -764,6 +763,11 @@ interface HeroImage {
 }
 
 const caseHeroImages: Record<string, HeroImage> = {
+  "sber-india-proto": {
+    src: "/images/sber-india-proto/hero.png",
+    alt: "Sber India prototype tool component grid",
+    background: "rgb(248 248 248)",
+  },
   openprovider: {
     src: "/images/openprovider/hero.png",
     alt: "Openprovider dashboard preview",
