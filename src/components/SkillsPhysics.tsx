@@ -72,8 +72,10 @@ export default function SkillsPhysics() {
         c.x = Math.random() * Math.max(1, bounds.width - c.w);
         c.y = Math.random() * Math.max(1, bounds.height - c.h);
         const a = Math.random() * Math.PI * 2;
-        c.vx = Math.cos(a) * CONFIG.speed;
-        c.vy = Math.sin(a) * CONFIG.speed;
+        const s = CONFIG.speed * (0.3 + Math.random() * 1.4);
+        c.vx = Math.cos(a) * s;
+        c.vy = Math.sin(a) * s;
+        c.va = (Math.random() - 0.5) * CONFIG.rotation * 120;
       });
     };
     place();

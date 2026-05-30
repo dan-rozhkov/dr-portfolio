@@ -48,7 +48,6 @@
 }
 
 .skill-chip.is-grabbed {
-  color: var(--light);
   cursor: grabbing;
 }
 
