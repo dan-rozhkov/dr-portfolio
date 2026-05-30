@@ -22,7 +22,7 @@ interface Chip {
 // drag, springy collisions, throw-on-release, gentle rotation.
 const CONFIG = {
   speed: 0.45, // initial drift speed
-  frictionAir: 0.998, // velocity retained per frame (1 = no drag)
+  frictionAir: 1.0, // velocity retained per frame (1 = no drag)
   restitution: 0.6, // wall/chip bounce energy
   throwStrength: 0.1, // how much pointer velocity transfers on release
   hoverImpulse: 0.3, // nudge when the cursor brushes a resting chip
@@ -231,7 +231,6 @@ export default function SkillsPhysics() {
         c.x += c.vx;
         c.y += c.vy;
         c.angle += c.va;
-        c.va *= 0.96;
 
         // walls
         if (c.x < 0) {
