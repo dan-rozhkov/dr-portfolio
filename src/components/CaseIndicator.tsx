@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
-import { cases, extraWork } from "../data/portfolio";
+import { getCases, getExtraWork } from "../data/portfolio";
 
 export default function CaseIndicator() {
   const [activeId, setActiveId] = useState<string | null>(null);
   const [visible, setVisible] = useState(false);
+
+  const cases = getCases();
+  const extraWork = getExtraWork();
 
   const items = [
     ...cases.map((item) => ({ id: item.id, label: item.title })),

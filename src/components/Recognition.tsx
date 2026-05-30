@@ -1,7 +1,10 @@
-import { recognition } from "../data/portfolio";
-import { BASE_NO_SLASH } from "../lib/url";
+import { getRecognition } from "../data/portfolio";
+import { useLang } from "../i18n/context";
 
 export default function Recognition() {
+  const recognition = getRecognition();
+  const lang = useLang();
+
   return (
     <section className="section recognition snap-section">
       {recognition.map((group) => (
@@ -10,7 +13,7 @@ export default function Recognition() {
           <ul className="recognition-grid">
             {group.items.map(([title, detail, href]) => {
               const resolvedHref = href.startsWith("/case/")
-                ? `${BASE_NO_SLASH}${href}`
+                ? `/${lang}${href}`
                 : href;
               return (
                 <li key={title}>

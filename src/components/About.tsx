@@ -1,7 +1,9 @@
-import { about, profile } from "../data/portfolio";
+import { getAbout, getProfile } from "../data/portfolio";
 import { assetUrl } from "../lib/url";
 
 export default function About() {
+  const about = getAbout();
+  const profile = getProfile();
   return (
     <section className="section about snap-section" id="about">
       <div className="grid-shell about-grid">

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import Contact from "./Contact";
 import type { CaseSection, CaseStudy as CaseStudyType } from "./data/portfolio";
+import { useT } from "./i18n/context";
 
 function imageUrl(src: string): string {
   return `${import.meta.env.BASE_URL}${src.replace(/^\/+/, "")}`;
@@ -39,6 +40,8 @@ function CaseImage({ src, alt, aspect, loading = "lazy" }: CaseImageProps) {
 }
 
 function Section({ section }: { section: CaseSection }) {
+  const t = useT();
+
   if (section.kind === "image") {
     return (
       <div className="cs-image-row">
@@ -54,7 +57,7 @@ function Section({ section }: { section: CaseSection }) {
   if (section.kind === "outcomes") {
     return (
       <div className="cs-row cs-outcomes">
-        <div className="cs-label">Outcomes</div>
+        <div className="cs-label">{t("case.outcomes")}</div>
         <div className="cs-outcomes-stats">
           {section.stats.map(([value, label]) => (
             <div className="cs-stat" key={value}>

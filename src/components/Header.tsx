@@ -1,24 +1,27 @@
-import { profile } from "../data/portfolio";
+import { getProfile } from "../data/portfolio";
 import { assetUrl } from "../lib/url";
+import { useT } from "../i18n/context";
 
 export default function Header() {
+  const profile = getProfile();
+  const t = useT();
   const [firstName, lastName] = profile.name.split(" ");
 
   return (
     <header className="site-header">
-      <nav className="nav grid-shell" aria-label="Primary navigation">
+      <nav className="nav grid-shell" aria-label={t("nav.ariaLabel")}>
         <a className="brand" href="#top">
           {firstName}
           <br className="mobile-break" /> {lastName}
         </a>
         <div className="nav-links">
-          <a href="#work">Work</a>
-          <a href="#about">About</a>
+          <a href="#work">{t("nav.work")}</a>
+          <a href="#about">{t("nav.about")}</a>
         </div>
         <div className="nav-actions">
           <a className="contact-link" href="#contact">
-            <span className="desktop-only">Contact</span>
-            <span className="mobile-only">@</span>
+            <span className="desktop-only">{t("nav.contact")}</span>
+            <span className="mobile-only">{t("nav.contactMobile")}</span>
           </a>
           <a
             className="cv-link"
@@ -27,7 +30,7 @@ export default function Header() {
             rel="noopener noreferrer"
             download
           >
-            CV ↗
+            {t("nav.cv")}
           </a>
         </div>
       </nav>

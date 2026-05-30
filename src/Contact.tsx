@@ -1,16 +1,20 @@
-import { profile } from "./data/portfolio";
+import { getProfile } from "./data/portfolio";
+import { useT } from "./i18n/context";
 
 export default function Contact() {
+  const profile = getProfile();
+  const t = useT();
+
   return (
     <section className="section contact" id="contact">
       <div className="grid-shell contact-grid">
-        <h2>Let’s build something useful together</h2>
+        <h2>{t("contact.heading")}</h2>
         <div className="contact-methods">
           <a href={`mailto:${profile.email}`} data-cursor="SAY HI">
-            Get in touch ↗<span>{profile.email}</span>
+            {t("contact.email")}<span>{profile.email}</span>
           </a>
           <a href={profile.linkedin} data-cursor="OPEN">
-            LinkedIn ↗<span>{profile.linkedinLabel}</span>
+            {t("contact.linkedin")}<span>{profile.linkedinLabel}</span>
           </a>
         </div>
         <span className="contact-year">© {profile.year}</span>

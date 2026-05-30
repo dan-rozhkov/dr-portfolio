@@ -1,10 +1,13 @@
 import { useState } from "react";
-import { extraWork } from "../data/portfolio";
+import { getExtraWork } from "../data/portfolio";
 import { assetUrl } from "../lib/url";
+import { useT } from "../i18n/context";
 
 export default function ExtraWork() {
+  const t = useT();
+  const extraWork = getExtraWork();
   const [activeTab, setActiveTab] = useState(
-    extraWork.tabs.find((t) => extraWork.previews[t]) ?? extraWork.tabs[0],
+    extraWork.tabs.find((tab) => extraWork.previews[tab]) ?? extraWork.tabs[0],
   );
   const [navDir, setNavDir] = useState<"NEXT" | "PREV">("NEXT");
 
@@ -43,7 +46,7 @@ export default function ExtraWork() {
             extraWork.previews[activeTab] ? "case-media-image" : "case-media-placeholder"
           }`}
           data-cursor={navDir}
-          aria-label={`${navDir === "NEXT" ? "Next" : "Previous"} project preview`}
+          aria-label={navDir === "NEXT" ? t("extra.nextProject") : t("extra.prevProject")}
           onPointerMove={onPreviewMove}
           onClick={() => cycle(navDir)}
         >

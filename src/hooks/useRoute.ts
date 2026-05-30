@@ -1,12 +1,23 @@
 import { useEffect, useState } from "react";
-import { BASE, BASE_NO_SLASH } from "../lib/url";
+import { BASE_NO_SLASH } from "../lib/url";
+import type { Lang } from "../i18n/translations";
 
-export type Route = { name: "home" } | { name: "case"; id: string };
+export type Route = { name: "home"; lang: Lang } | { name: "case"; id: string; lang: Lang };
+
+export function extractLang(pathname: string): Lang {
+  const rel = (pathname || "/").replace(BASE_NO_SLASH, "") || "/";
+  const m = rel.match(/^\/(en|ru)(\/|$)/);
+  return m ? (m[1] as Lang) : "en";
+}
 
 export function parseRoute(pathname: string): Route {
+  const lang = extractLang(pathname);
   const rel = (pathname || "/").replace(BASE_NO_SLASH, "") || "/";
-  const m = rel.match(/^\/case\/([\w-]+)\/?$/);
-  return m ? { name: "case", id: m[1] } : { name: "home" };
+  // Strip language prefix for case matching
+  const stripped = rel.replace(/^\/(en|ru)\//, "/").replace(/^\/(en|ru)$/, "/");
+  const m = stripped.match(/^\/case\/([\w-]+)\/?$/);
+  if (m) return { name: "case", id: m[1], lang };
+  return { name: "home", lang };
 }
 
 export function useRoute(initialPath: string): [Route, (r: Route) => void] {
@@ -36,10 +47,12 @@ export function useRoute(initialPath: string): [Route, (r: Route) => void] {
       if (!href) return;
 
       if (href.startsWith("#")) {
-        if (window.location.pathname.replace(/\/$/, "") !== BASE_NO_SLASH) {
+        const currentPath = window.location.pathname.replace(/\/$/, "");
+        const currentBase = BASE_NO_SLASH.replace(/\/$/, "");
+        if (currentPath !== currentBase) {
           event.preventDefault();
-          window.history.pushState({}, "", BASE + href);
-          setRoute(parseRoute(BASE));
+          window.history.pushState({}, "", window.location.pathname + href);
+          setRoute(parseRoute(window.location.pathname + href));
           requestAnimationFrame(() => {
             const id = href.slice(1);
             const el = id ? document.getElementById(id) : null;

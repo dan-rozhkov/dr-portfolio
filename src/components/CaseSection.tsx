@@ -1,7 +1,11 @@
 import type { CaseSummary } from "../data/portfolio";
 import { assetUrl, caseLink } from "../lib/url";
+import { useT, useLang } from "../i18n/context";
 
 export default function CaseSection({ item, first }: { item: CaseSummary; first: boolean }) {
+  const t = useT();
+  const lang = useLang();
+
   return (
     <section className="section case snap-section" id={item.id}>
       {first && <span id="work" aria-hidden="true" />}
@@ -28,9 +32,9 @@ export default function CaseSection({ item, first }: { item: CaseSummary; first:
               ? "case-media-mobile"
               : "case-media-placeholder"
           }`}
-          href={caseLink(item.id)}
-          data-cursor="VIEW"
-          aria-label={`View ${item.title} case study`}
+          href={caseLink(item.id, lang)}
+          data-cursor={t("case.viewCase")}
+          aria-label={`${t("case.viewCase")} ${item.title}`}
         >
           {item.preview ? (
             <img
