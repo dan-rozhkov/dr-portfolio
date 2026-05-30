@@ -8,6 +8,7 @@ import CaseSection from "./components/CaseSection";
 import ExtraWork from "./components/ExtraWork";
 import About from "./components/About";
 import Recognition from "./components/Recognition";
+import SkillsPhysics from "./components/SkillsPhysics";
 import CaseIndicator from "./components/CaseIndicator";
 import ContactObserver from "./components/ContactObserver";
 import ScrollFade from "./components/ScrollFade";
@@ -49,6 +50,7 @@ export default function App({ initialPath }: { initialPath?: string }) {
         <ExtraWork />
         <About />
         <Recognition />
+        <SkillsPhysics />
         <Contact />
       </main>
       <CaseIndicator />

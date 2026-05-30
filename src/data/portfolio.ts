@@ -17,6 +17,7 @@ export const getCases = () => _data.cases;
 export const getExtraWork = () => _data.extraWork;
 export const getAbout = () => _data.about;
 export const getRecognition = () => _data.recognition;
+export const getSkills = () => _data.skills;
 export const getCaseStudy = (id: string) => _data.getCaseStudy(id);
 export const getCase = (id: string) => _data.getCase(id);
 

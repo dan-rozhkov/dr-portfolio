@@ -113,6 +113,14 @@ export const about: string[] = [
   "Lead Product Designer в Sber, ранее — Openprovider, SnapSoft и ClearScale. Для меня важны системы, точные детали взаимодействия и те незаметные решения, которые делают сложные инструменты очевидными.",
 ];
 
+export const skills: string[] = [
+  "Продуктовый дизайн",
+  "Дизайн-системы",
+  "AI-продукты",
+  "B2B SaaS",
+  "Прототипирование",
+];
+
 export const recognition: RecognitionGroup[] = [
   {
     title: "Признание",

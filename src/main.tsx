@@ -12,6 +12,7 @@ import "./styles/components/case-section.css";
 import "./styles/components/extra-work.css";
 import "./styles/components/about.css";
 import "./styles/components/recognition.css";
+import "./styles/components/skills-physics.css";
 import "./styles/components/contact.css";
 import "./styles/components/case-indicator.css";
 import "./styles/components/case-study.css";

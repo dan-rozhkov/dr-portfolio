@@ -1,0 +1,91 @@
+.skills-physics {
+  display: flex;
+  align-items: center;
+}
+
+.skills-grid {
+  align-items: center;
+  width: 100%;
+  min-height: clamp(450px, 58vh, 620px);
+  padding: 0;
+}
+
+.skills-heading {
+  grid-column: 1 / 8;
+  align-self: start;
+  margin: 0;
+}
+
+.skills-stage {
+  position: relative;
+  grid-column: 1 / 17;
+  height: clamp(450px, 58vh, 620px);
+  overflow: hidden;
+  touch-action: none;
+}
+
+.skills-layer {
+  position: absolute;
+  inset: 0;
+}
+
+.skill-chip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline-flex;
+  align-items: center;
+  padding: 14px 28px;
+  border-radius: 999px;
+  color: var(--ink);
+  font-size: var(--text-2xl);
+  font-weight: 500;
+  line-height: 1.06;
+  white-space: nowrap;
+  cursor: grab;
+  user-select: none;
+  will-change: transform;
+}
+
+.skill-chip.is-grabbed {
+  color: var(--light);
+  cursor: grabbing;
+}
+
+/* Screen-reader / no-JS plain list, visually hidden when stage is active */
+.skills-fallback {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skill-chip {
+    cursor: default;
+  }
+}
+
+@media (--mobile) {
+  .skills-grid {
+    display: block;
+    min-height: clamp(420px, 70vh, 560px);
+    padding: 0;
+    padding-inline: 20px;
+  }
+
+  .skills-stage {
+    height: clamp(420px, 70vh, 560px);
+  }
+
+  .skill-chip {
+    padding: 11px 22px;
+    font-size: var(--text-2xl);
+    font-weight: 500;
+    line-height: 1.06;
+  }
+}

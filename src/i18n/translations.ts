@@ -11,6 +11,8 @@ export interface Translations {
   "contact.heading": string;
   "contact.email": string;
   "contact.linkedin": string;
+  // Skills physics section
+  "skills.heading": string;
   // Case study section labels
   "case.viewCase": string;
   // Extra work
@@ -39,6 +41,7 @@ const en: Translations = {
   "contact.heading": "Let's build something useful together",
   "contact.email": "Get in touch ↗",
   "contact.linkedin": "LinkedIn ↗",
+  "skills.heading": "",
   "case.viewCase": "VIEW",
   "extra.next": "NEXT",
   "extra.prev": "PREV",
@@ -62,6 +65,7 @@ const ru: Translations = {
   "contact.heading": "Давайте сделаем что-то полезное вместе",
   "contact.email": "Написать ↗",
   "contact.linkedin": "LinkedIn ↗",
+  "skills.heading": "",
   "case.viewCase": "СМОТРЕТЬ",
   "extra.next": "ДАЛЕЕ",
   "extra.prev": "НАЗАД",

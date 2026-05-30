@@ -174,6 +174,14 @@ export const about: string[] = [
   "Lead Product Designer at Sber, with past work at Openprovider, SnapSoft, and ClearScale. I care about systems, precise interaction details, and the quiet decisions that make complex tools feel obvious.",
 ];
 
+export const skills: string[] = [
+  "Product Design",
+  "Design Systems",
+  "AI Products",
+  "B2B SaaS",
+  "Prototyping",
+];
+
 export const recognition: RecognitionGroup[] = [
   {
     title: "Recognition",
