@@ -51,8 +51,10 @@ export function useRoute(initialPath: string): [Route, (r: Route) => void] {
         const currentBase = BASE_NO_SLASH.replace(/\/$/, "");
         if (currentPath !== currentBase) {
           event.preventDefault();
-          window.history.pushState({}, "", window.location.pathname + href);
-          setRoute(parseRoute(window.location.pathname + href));
+          const lang = extractLang(window.location.pathname);
+          const targetPath = `/${lang}${href}`;
+          window.history.pushState({}, "", targetPath);
+          setRoute(parseRoute(targetPath));
           requestAnimationFrame(() => {
             const id = href.slice(1);
             const el = id ? document.getElementById(id) : null;
