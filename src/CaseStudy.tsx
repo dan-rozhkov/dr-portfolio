@@ -7,6 +7,43 @@ function imageUrl(src: string): string {
   return `${import.meta.env.BASE_URL}${src.replace(/^\/+/, "")}`;
 }
 
+function isVideo(src: string): boolean {
+  return /\.(mp4|webm|mov)$/i.test(src);
+}
+
+function Media({
+  src,
+  alt,
+  aspect,
+}: {
+  src?: string;
+  alt?: string;
+  aspect?: string;
+}) {
+  if (!src) return <Placeholder aspect={aspect} />;
+  if (isVideo(src)) {
+    return (
+      <video
+        className="cs-image"
+        src={imageUrl(src)}
+        autoPlay
+        loop
+        muted
+        playsInline
+        aria-label={alt || ""}
+      />
+    );
+  }
+  return (
+    <img
+      className="cs-image"
+      src={imageUrl(src)}
+      alt={alt || ""}
+      loading="lazy"
+    />
+  );
+}
+
 function Placeholder({ aspect }: { aspect?: string }) {
   return (
     <div
@@ -79,16 +116,7 @@ function Section({ section }: { section: CaseSection }) {
           <p>{section.text}</p>
         </div>
         <div className="cs-subhead-media">
-          {section.src ? (
-            <img
-              className="cs-image"
-              src={imageUrl(section.src)}
-              alt={section.alt || ""}
-              loading="lazy"
-            />
-          ) : (
-            <Placeholder aspect={section.aspect || "4 / 3"} />
-          )}
+          <Media src={section.src} alt={section.alt} aspect={section.aspect} />
         </div>
       </div>
     );
@@ -170,16 +198,7 @@ function Slider({ items }: { items: SubheadSection[] }) {
                 key={i}
                 aria-hidden={i !== active}
               >
-                {item.src ? (
-                  <img
-                    className="cs-image"
-                    src={imageUrl(item.src)}
-                    alt={item.alt || ""}
-                    loading="lazy"
-                  />
-                ) : (
-                  <Placeholder aspect={item.aspect || "4 / 3"} />
-                )}
+                <Media src={item.src} alt={item.alt} aspect={item.aspect} />
               </div>
             ))}
           </div>
@@ -198,16 +217,7 @@ function Slider({ items }: { items: SubheadSection[] }) {
           <div className="cs-slider-pair" key={i}>
             <h3>{item.title}</h3>
             <p>{item.text}</p>
-            {item.src ? (
-              <img
-                className="cs-image"
-                src={imageUrl(item.src)}
-                alt={item.alt || ""}
-                loading="lazy"
-              />
-            ) : (
-              <Placeholder aspect={item.aspect || "4 / 3"} />
-            )}
+            <Media src={item.src} alt={item.alt} aspect={item.aspect} />
           </div>
         ))}
       </div>

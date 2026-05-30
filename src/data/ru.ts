@@ -195,11 +195,15 @@ const caseSections: Record<string, CaseSection[]> = {
       kind: "subhead",
       title: "Figma MCP как источник истины",
       text: "Компоненты и токены читаются напрямую из Figma — генератор работает внутри существующей системы, а не рядом с ней. Прототипы попадают на правильные рельсы с первого раза: без галлюцинированных кнопок, без посторонних отступов, без тихого расхождения с продакшен-библиотекой.",
+      src: "/images/sber-india-proto/slider-1.mp4",
+      alt: "Figma MCP reading design system components",
     },
     {
       kind: "subhead",
       title: "Claude Code как исполнитель",
       text: "Генерация и правки идут через Claude Code, который понимает структуру репозитория прототипов. Дизайнеры и PM правят прототип текстом или визуально — и агент применяет изменения к исходнику, а не переписывает экраны с нуля.",
+      src: "/images/sber-india-proto/slider-2.mp4",
+      alt: "Claude Code generating prototype from brief",
     },
     {
       kind: "subhead",

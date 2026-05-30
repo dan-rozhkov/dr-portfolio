@@ -256,11 +256,15 @@ const caseSections: Record<string, CaseSection[]> = {
       kind: "subhead",
       title: "Figma MCP as the source of truth",
       text: "Components and tokens are read directly from Figma, so the generator operates inside the existing system rather than around it. Prototypes land on the right rails the first time — no hallucinated buttons, no off-brand spacing, no quiet drift away from the production library.",
+      src: "/images/sber-india-proto/slider-1.mp4",
+      alt: "Figma MCP reading design system components",
     },
     {
       kind: "subhead",
       title: "Claude Code as the executor",
       text: "Generation and follow-up edits run through a Claude Code agent that knows the prototype repo's structure. Designers and PMs can iterate by typing changes or pushing visual edits, and the agent applies them to the source instead of rewriting screens from scratch.",
+      src: "/images/sber-india-proto/slider-2.mp4",
+      alt: "Claude Code generating prototype from brief",
     },
     {
       kind: "subhead",
