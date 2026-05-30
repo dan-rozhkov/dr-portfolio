@@ -28,6 +28,7 @@ const CONFIG = {
   hoverImpulse: 0.3, // nudge when the cursor brushes a resting chip
   rotation: 0.015, // base spin amount
   maxSpeed: 12,
+  maxAngularSpeed: 3,
 };
 
 export default function SkillsPhysics() {
@@ -217,6 +218,8 @@ export default function SkillsPhysics() {
     let raf = 0;
     const clamp = (v: number) =>
       Math.max(-CONFIG.maxSpeed, Math.min(CONFIG.maxSpeed, v));
+    const clampAngular = (v: number) =>
+      Math.max(-CONFIG.maxAngularSpeed, Math.min(CONFIG.maxAngularSpeed, v));
 
     const step = () => {
       const W = bounds.width;
@@ -231,6 +234,8 @@ export default function SkillsPhysics() {
         c.x += c.vx;
         c.y += c.vy;
         c.angle += c.va;
+        c.va *= 0.98;
+        c.va = clampAngular(c.va);
 
         // walls
         if (c.x < 0) {
