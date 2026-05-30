@@ -3,6 +3,6 @@ import react from "@vitejs/plugin-react";
 import { reactTracer } from "live-studio/vite";
 
 export default defineConfig({
-  base: "/dr-portfolio/",
+  base: "/",
   plugins: [react(), reactTracer()],
 });

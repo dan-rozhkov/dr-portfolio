@@ -11,7 +11,7 @@ const { render, cases } = await import(
   pathToFileURL(path.join(ssrDir, "entry-server.js")).href
 );
 
-const BASE = "/dr-portfolio/";
+const BASE = "/";
 const SITE_ORIGIN = "https://dan-rozhkov.github.io";
 
 function writePage(outPath, routePath) {
