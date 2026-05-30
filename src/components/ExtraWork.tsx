@@ -45,7 +45,7 @@ export default function ExtraWork() {
           className={`large-preview ${
             extraWork.previews[activeTab] ? "case-media-image" : "case-media-placeholder"
           }`}
-          data-cursor={navDir}
+          data-cursor={navDir === "NEXT" ? t("extra.next") : t("extra.prev")}
           aria-label={navDir === "NEXT" ? t("extra.nextProject") : t("extra.prevProject")}
           onPointerMove={onPreviewMove}
           onClick={() => cycle(navDir)}

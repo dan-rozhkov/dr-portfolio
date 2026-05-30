@@ -11,7 +11,7 @@
   background: #fff;
   opacity: 0;
   color: #000;
-  font-size: 20px;
+  font-size: var(--text-lg);
   font-weight: 400;
   letter-spacing: 0.04em;
   text-transform: uppercase;

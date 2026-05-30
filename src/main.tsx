@@ -1,6 +1,8 @@
 import { StrictMode } from "react";
 import { createRoot, hydrateRoot } from "react-dom/client";
 import App from "./App";
+import { setDataLang } from "./data/portfolio";
+import { extractLang } from "./hooks/useRoute";
 import "./styles/tokens.css";
 import "./styles/global.css";
 import "./styles/components/header.css";
@@ -22,6 +24,8 @@ const container = document.getElementById("root");
 if (!container) {
   throw new Error("Root container not found");
 }
+
+setDataLang(extractLang(window.location.pathname));
 
 const tree = (
   <StrictMode>

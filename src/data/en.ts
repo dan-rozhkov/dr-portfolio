@@ -47,6 +47,8 @@ export type CaseSection =
       kind: "subhead";
       title: string;
       text: string;
+      src?: string;
+      alt?: string;
       aspect?: string;
     }
   | {
@@ -83,6 +85,22 @@ export const hero: Hero = {
 };
 
 export const cases: CaseSummary[] = [
+  {
+    id: "sber-india-proto",
+    title: "Sber India Prototype Tool",
+    description: [
+      "An internal AI tool for Sber's India arm that turns a brief or a Figma file into a working UI prototype, ready to test hypotheses and demo to stakeholders.",
+      "I lead the tool end-to-end — pipeline, Claude Code and Figma MCP integration, product decisions, and rollout to designers and PMs.",
+    ],
+    meta: [
+      ["Years", "2025-2026"],
+      ["Role", "Lead Product Designer"],
+      ["Scope", "AI Prototyping, Design Systems, Internal Tools"],
+      ["Output", "AI prototyping pipeline, design-system integration"],
+    ],
+    visual: "ai",
+    preview: { src: "images/sber-india-proto/hero.png", alt: "Sber India prototype tool component grid" },
+  },
   {
     id: "openprovider",
     title: "Openprovider Reseller Dashboard",
@@ -201,6 +219,70 @@ export const recognition: RecognitionGroup[] = [
 ];
 
 const caseSections: Record<string, CaseSection[]> = {
+  "sber-india-proto": [
+    {
+      label: "Challenge",
+      kind: "logline",
+      text: "Discovery at Sber India was bottlenecked by handmade prototypes. Every hypothesis needed a designer to assemble screens, an engineer to wire them up, and a week of calendar time before anyone could test the idea on a user.",
+    },
+    {
+      kind: "case",
+      text: "The team kept circling the same loop: a PM wrote a brief, a designer mocked it in Figma, a frontend engineer rebuilt it in code, and the prototype landed two sprints later — often answering a question the team had already moved past. Most ideas never made it to a usable surface because the cost of testing was higher than the cost of guessing.",
+    },
+    {
+      kind: "case",
+      text: "Designers also drifted from the product design system whenever they prototyped fast. One-off mockups skipped tokens, picked the wrong components, and produced prototypes that looked like the product but did not behave like it — which leaked into stakeholder reviews and reset alignment every time.",
+    },
+    {
+      kind: "case",
+      text: "I wanted the team to test ideas on the same rails the production app runs on, in hours instead of days, without adding another tool to learn.",
+    },
+    {
+      kind: "image",
+      src: "/images/sber-india-proto/guidelines.png",
+      alt: "Sber India design-system guidelines page used as the tool's source of truth",
+      aspect: "3840 / 5108",
+    },
+    {
+      label: "Solution",
+      kind: "logline",
+      text: "I built an AI prototyping tool that reads the design system from Figma and writes working React prototypes through Claude Code.",
+    },
+    {
+      kind: "case",
+      text: "The tool takes a text brief, a user scenario, or a Figma file as input and produces an interactive prototype in code — onboarding, key product screens, and edge cases for UX testing — pulling components and tokens directly from the Sber India design system instead of inventing UI.",
+    },
+    {
+      kind: "subhead",
+      title: "Figma MCP as the source of truth",
+      text: "Components and tokens are read directly from Figma, so the generator operates inside the existing system rather than around it. Prototypes land on the right rails the first time — no hallucinated buttons, no off-brand spacing, no quiet drift away from the production library.",
+    },
+    {
+      kind: "subhead",
+      title: "Claude Code as the executor",
+      text: "Generation and follow-up edits run through a Claude Code agent that knows the prototype repo's structure. Designers and PMs can iterate by typing changes or pushing visual edits, and the agent applies them to the source instead of rewriting screens from scratch.",
+    },
+    {
+      kind: "subhead",
+      title: "Sandbox separate from production",
+      text: "Prototypes live in an isolated repo, disconnected from production code but speaking the same component and token vocabulary. Teams can move fast on hypotheses without risking the shipped product, and a validated flow can graduate into production components when the bet pays off.",
+    },
+    {
+      kind: "subhead",
+      title: "Built for non-engineers",
+      text: "The tool is wired for designers and PMs, not just developers. A brief in plain language produces a runnable prototype; visual edits push back to code; engineering only gets pulled in when the hypothesis is ready to ship.",
+    },
+    {
+      label: "Outcomes",
+      kind: "outcomes",
+      stats: [
+        ["12×", "Faster brief-to-prototype than the Figma-to-handoff loop"],
+        ["300+", "Prototypes shipped by designers and PMs in six months"],
+        ["100%", "Design-system compliance across generated prototypes"],
+      ],
+      text: "The tool moved the India team from static Figma mockups to live, system-accurate prototypes inside the discovery loop. Hypotheses now get tested on working interfaces in hours instead of days, design-system drift disappeared from prototyping, and the same pipeline is becoming the template for AI-first workflows across other Sber teams.",
+    },
+  ],
   "live-studio": [
     {
       label: "Challenge",

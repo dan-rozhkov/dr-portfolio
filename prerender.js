@@ -29,11 +29,13 @@ function writePage(outPath, routePath) {
 }
 
 for (const lang of LANGS) {
+  // render() calls setDataLang internally via extractLang(path)
   // Home page
   writePage(path.join(distDir, lang, "index.html"), `/${lang}/`);
 
-  // Case pages
-  for (const item of cases()) {
+  // Case pages (case IDs are identical across languages)
+  const allCases = cases();
+  for (const item of allCases) {
     writePage(
       path.join(distDir, lang, "case", item.id, "index.html"),
       `/${lang}/case/${item.id}`
@@ -68,34 +70,39 @@ fs.copyFileSync(
 const today = new Date().toISOString().slice(0, 10);
 const sitemapUrls = [];
 
-// Home pages
+function sitemapEntry(loc, alternates) {
+  const links = alternates
+    .map((a) => `<xhtml:link rel="alternate" hreflang="${a.lang}" href="${a.href}"/>`)
+    .join("");
+  return `  <url><loc>${loc}</loc><lastmod>${today}</lastmod>${links}</url>`;
+}
+
+// Root with x-default
 sitemapUrls.push(
-  `  <url><loc>${SITE_ORIGIN}/en/</loc><lastmod>${today}</lastmod>`
-  + `<xhtml:link rel="alternate" hreflang="en" href="${SITE_ORIGIN}/en/"/>`
-  + `<xhtml:link rel="alternate" hreflang="ru" href="${SITE_ORIGIN}/ru/"/>`
-  + `</url>`
-);
-sitemapUrls.push(
-  `  <url><loc>${SITE_ORIGIN}/ru/</loc><lastmod>${today}</lastmod>`
-  + `<xhtml:link rel="alternate" hreflang="en" href="${SITE_ORIGIN}/en/"/>`
-  + `<xhtml:link rel="alternate" hreflang="ru" href="${SITE_ORIGIN}/ru/"/>`
-  + `</url>`
+  sitemapEntry(`${SITE_ORIGIN}/`, [
+    { lang: "x-default", href: `${SITE_ORIGIN}/` },
+    ...LANGS.map((l) => ({ lang: l, href: `${SITE_ORIGIN}/${l}/` })),
+  ])
 );
 
-// Case pages
-for (const item of cases()) {
+// Home + case pages for each language
+for (const lang of LANGS) {
   sitemapUrls.push(
-    `  <url><loc>${SITE_ORIGIN}/en/case/${item.id}</loc><lastmod>${today}</lastmod>`
-    + `<xhtml:link rel="alternate" hreflang="en" href="${SITE_ORIGIN}/en/case/${item.id}"/>`
-    + `<xhtml:link rel="alternate" hreflang="ru" href="${SITE_ORIGIN}/ru/case/${item.id}"/>`
-    + `</url>`
+    sitemapEntry(`${SITE_ORIGIN}/${lang}/`,
+      LANGS.map((l) => ({ lang: l, href: `${SITE_ORIGIN}/${l}/` }))
+    )
   );
-  sitemapUrls.push(
-    `  <url><loc>${SITE_ORIGIN}/ru/case/${item.id}</loc><lastmod>${today}</lastmod>`
-    + `<xhtml:link rel="alternate" hreflang="en" href="${SITE_ORIGIN}/en/case/${item.id}"/>`
-    + `<xhtml:link rel="alternate" hreflang="ru" href="${SITE_ORIGIN}/ru/case/${item.id}"/>`
-    + `</url>`
-  );
+}
+
+const allCases = cases();
+for (const item of allCases) {
+  for (const lang of LANGS) {
+    sitemapUrls.push(
+      sitemapEntry(`${SITE_ORIGIN}/${lang}/case/${item.id}`,
+        LANGS.map((l) => ({ lang: l, href: `${SITE_ORIGIN}/${l}/case/${item.id}` }))
+      )
+    );
+  }
 }
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
@@ -111,7 +118,6 @@ console.log("wrote sitemap.xml");
 const robots = `User-agent: *
 Allow: /en/
 Allow: /ru/
-Disallow: /case/
 Sitemap: ${SITE_ORIGIN}/sitemap.xml
 `;
 fs.writeFileSync(path.join(distDir, "robots.txt"), robots);

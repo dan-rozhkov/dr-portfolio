@@ -79,7 +79,16 @@ function Section({ section }: { section: CaseSection }) {
           <p>{section.text}</p>
         </div>
         <div className="cs-subhead-media">
-          <Placeholder aspect={section.aspect || "4 / 3"} />
+          {section.src ? (
+            <img
+              className="cs-image"
+              src={imageUrl(section.src)}
+              alt={section.alt || ""}
+              loading="lazy"
+            />
+          ) : (
+            <Placeholder aspect={section.aspect || "4 / 3"} />
+          )}
         </div>
       </div>
     );
@@ -161,7 +170,16 @@ function Slider({ items }: { items: SubheadSection[] }) {
                 key={i}
                 aria-hidden={i !== active}
               >
-                <Placeholder aspect={item.aspect || "4 / 3"} />
+                {item.src ? (
+                  <img
+                    className="cs-image"
+                    src={imageUrl(item.src)}
+                    alt={item.alt || ""}
+                    loading="lazy"
+                  />
+                ) : (
+                  <Placeholder aspect={item.aspect || "4 / 3"} />
+                )}
               </div>
             ))}
           </div>
@@ -180,7 +198,16 @@ function Slider({ items }: { items: SubheadSection[] }) {
           <div className="cs-slider-pair" key={i}>
             <h3>{item.title}</h3>
             <p>{item.text}</p>
-            <Placeholder aspect={item.aspect || "4 / 3"} />
+            {item.src ? (
+              <img
+                className="cs-image"
+                src={imageUrl(item.src)}
+                alt={item.alt || ""}
+                loading="lazy"
+              />
+            ) : (
+              <Placeholder aspect={item.aspect || "4 / 3"} />
+            )}
           </div>
         ))}
       </div>

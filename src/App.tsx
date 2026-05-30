@@ -13,18 +13,14 @@ import ContactObserver from "./components/ContactObserver";
 import ScrollFade from "./components/ScrollFade";
 import { useRoute } from "./hooks/useRoute";
 import { I18nProvider } from "./i18n/context";
-import { setDataLang } from "./data/portfolio";
-import type { Lang } from "./i18n/translations";
-import { extractLang } from "./hooks/useRoute";
 
 export default function App({ initialPath }: { initialPath?: string }) {
   const path =
     initialPath ??
     (typeof window !== "undefined" ? window.location.pathname : "/");
-  const lang: Lang = extractLang(path);
-  setDataLang(lang);
 
   const [route] = useRoute(path);
+  const lang = route.lang;
   const cases = getCases();
 
   if (route.name === "case") {

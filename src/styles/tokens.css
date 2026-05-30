@@ -7,8 +7,15 @@
   --light: rgb(255 255 255 / 96%);
   --pad: clamp(20px, 5vw, 64px);
   --gap: clamp(18px, 3.75vw, 48px);
-  --display: clamp(36px, 3.4vw, 68px);
-  --case: clamp(15px, 1.1vw, 18px);
+
+  /* Type scale */
+  --text-xs: 14px;
+  --text-sm: 16px;
+  --text-base: clamp(16px, 1.1vw, 18px);
+  --text-lg: 20px;
+  --text-xl: 36px;
+  --text-2xl: clamp(36px, 3.5vw, 64px);
+  --text-3xl: clamp(44px, 4vw, 80px);
 
   /* Radii */
   --radius-xl: 36px;
@@ -37,3 +44,9 @@
 }
 
 @custom-media --mobile (max-width: 900px);
+
+@media (max-width: 900px) {
+  :root {
+    --text-2xl: clamp(28px, 5vw, 52px);
+  }
+}

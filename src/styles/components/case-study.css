@@ -10,17 +10,9 @@ body:has(.case-study)::-webkit-scrollbar {
 }
 
 .case-study {
-  --cs-logline-size: clamp(38px, 3.5vw, 68px);
-  --cs-logline-lh: 1.06;
-  --cs-logline-tracking: -0.02em;
-  --cs-case-size: clamp(17px, 1.41vw, 20px);
-  --cs-case-lh: 1.4;
-  --cs-nav-size: 20px;
-  --cs-nav-lh: 1.1;
-
   padding-top: var(--space-2xl);
-  font-size: var(--cs-case-size);
-  line-height: var(--cs-case-lh);
+  font-size: var(--text-lg);
+  line-height: 1.4;
   letter-spacing: 0.005em;
 }
 
@@ -45,7 +37,7 @@ body:has(.case-study)::-webkit-scrollbar {
   grid-column: 1 / 7;
   grid-row: 1 / span 2;
   align-self: start;
-  font-size: clamp(38px, 3.5vw, 68px);
+  font-size: var(--text-2xl);
   font-weight: 500;
   line-height: 1.06;
   letter-spacing: -0.02em;
@@ -56,8 +48,6 @@ body:has(.case-study)::-webkit-scrollbar {
   grid-column: 7 / 15;
   grid-row: 1;
   padding-top: 8px;
-  font-size: var(--cs-case-size);
-  line-height: var(--cs-case-lh);
 }
 
 .cs-title-meta {
@@ -67,8 +57,6 @@ body:has(.case-study)::-webkit-scrollbar {
   grid-row: 2;
   gap: 8px 32px;
   margin: 32px 0 0;
-  font-size: var(--cs-case-size);
-  line-height: var(--cs-case-lh);
   letter-spacing: 0;
 }
 
@@ -133,9 +121,9 @@ body:has(.case-study)::-webkit-scrollbar {
   grid-column: 1 / 7;
   padding-top: 8px;
   color: var(--ink);
-  font-size: var(--cs-nav-size);
+  font-size: var(--text-lg);
   font-weight: 500;
-  line-height: var(--cs-nav-lh);
+  line-height: 1.1;
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
@@ -146,16 +134,14 @@ body:has(.case-study)::-webkit-scrollbar {
 
 .cs-logline {
   grid-column: 7 / 16;
-  font-size: var(--cs-logline-size);
+  font-size: var(--text-2xl);
   font-weight: 500;
-  line-height: var(--cs-logline-lh);
-  letter-spacing: var(--cs-logline-tracking);
+  line-height: 1.06;
+  letter-spacing: -0.02em;
 }
 
 .cs-case-text {
   grid-column: 7 / 15;
-  font-size: var(--cs-case-size);
-  line-height: var(--cs-case-lh);
 }
 
 .cs-image {
@@ -193,16 +179,14 @@ body:has(.case-study)::-webkit-scrollbar {
 
 .cs-subhead-side h3 {
   margin: 0 0 16px;
-  font-size: var(--cs-logline-size);
+  font-size: var(--text-2xl);
   font-weight: 500;
-  line-height: var(--cs-logline-lh);
-  letter-spacing: var(--cs-logline-tracking);
+  line-height: 1.06;
+  letter-spacing: -0.02em;
 }
 
 .cs-subhead-side p {
   margin: 0;
-  font-size: var(--cs-case-size);
-  line-height: var(--cs-case-lh);
 }
 
 .cs-subhead-media {
@@ -265,16 +249,14 @@ body:has(.case-study)::-webkit-scrollbar {
 
 .cs-slider-slide h3 {
   margin: 0 0 16px;
-  font-size: var(--cs-logline-size);
+  font-size: var(--text-2xl);
   font-weight: 500;
-  line-height: var(--cs-logline-lh);
-  letter-spacing: var(--cs-logline-tracking);
+  line-height: 1.06;
+  letter-spacing: -0.02em;
 }
 
 .cs-slider-slide p {
   margin: 0;
-  font-size: var(--cs-case-size);
-  line-height: var(--cs-case-lh);
 }
 
 .cs-slider-media {
@@ -338,27 +320,23 @@ body:has(.case-study)::-webkit-scrollbar {
 
 .cs-stat-value {
   margin-bottom: 8px;
-  font-size: var(--cs-logline-size);
+  font-size: var(--text-2xl);
   font-weight: 500;
-  line-height: var(--cs-logline-lh);
-  letter-spacing: var(--cs-logline-tracking);
+  line-height: 1.06;
+  letter-spacing: -0.02em;
 }
 
 .cs-stat-label {
   color: var(--muted);
-  font-size: var(--cs-case-size);
-  line-height: var(--cs-case-lh);
 }
 
 .cs-outcomes-text {
   grid-column: 7 / 15;
   margin-top: 32px;
-  font-size: var(--cs-case-size);
-  line-height: var(--cs-case-lh);
 }
 
 .cs-back {
-  font-size: 14px;
+  font-size: var(--text-xs);
   font-weight: 500;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -382,10 +360,8 @@ body:has(.case-study)::-webkit-scrollbar {
   }
 
   .case-study {
-    --cs-logline-size: clamp(34px, 10vw, 48px);
-    --cs-case-size: clamp(16px, 4.5vw, 18px);
-
     padding-top: var(--space-xl);
+    font-size: var(--text-base);
   }
 
   .cs-title-block {
@@ -404,6 +380,14 @@ body:has(.case-study)::-webkit-scrollbar {
   .cs-title-meta {
     grid-column: auto;
     grid-row: auto;
+  }
+
+  .cs-title-name,
+  .cs-logline,
+  .cs-subhead-side h3,
+  .cs-slider-slide h3,
+  .cs-stat-value {
+    font-size: var(--text-2xl);
   }
 
   .cs-title-intro {
@@ -487,16 +471,14 @@ body:has(.case-study)::-webkit-scrollbar {
 
   .cs-slider-pair h3 {
     margin: 0;
-    font-size: var(--cs-logline-size);
+    font-size: var(--text-2xl);
     font-weight: 500;
-    line-height: var(--cs-logline-lh);
-    letter-spacing: var(--cs-logline-tracking);
+    line-height: 1.06;
+    letter-spacing: -0.02em;
   }
 
   .cs-slider-pair p {
     margin: 0;
-    font-size: var(--cs-case-size);
-    line-height: var(--cs-case-lh);
   }
 
   .cs-slider-pair .cs-image {

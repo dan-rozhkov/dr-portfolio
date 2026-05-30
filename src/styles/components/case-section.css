@@ -16,7 +16,7 @@
 .extra-list h2,
 .list-section h2 {
   margin: 0 0 16px;
-  font-size: 20px;
+  font-size: var(--text-lg);
   font-weight: 500;
   line-height: 1.1;
   letter-spacing: 0.04em;
@@ -174,7 +174,7 @@
 
 .metric {
   margin-top: 18px;
-  font-size: clamp(36px, 4.5vw, 58px);
+  font-size: var(--text-2xl);
   font-weight: 500;
 }
 
@@ -344,7 +344,7 @@
 
 .floating-panel strong {
   margin-top: 16px;
-  font-size: 34px;
+  font-size: var(--text-xl);
   font-weight: 500;
 }
 
@@ -371,7 +371,7 @@
 .search-brand {
   display: inline-block;
   margin-right: 16px;
-  font-size: clamp(34px, 4vw, 52px);
+  font-size: var(--text-xl);
   font-weight: 500;
 }
 
@@ -424,7 +424,7 @@
     margin-bottom: 10px;
     padding-top: 18px;
     border-top: 1.5px solid #111;
-    font-size: 19px;
+    font-size: var(--text-lg);
     text-transform: none;
   }
 
@@ -546,7 +546,7 @@
   }
 
   .search-brand {
-    font-size: 34px;
+    font-size: var(--text-xl);
   }
 
   .signal-row {
