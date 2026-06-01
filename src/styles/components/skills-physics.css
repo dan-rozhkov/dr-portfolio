@@ -35,7 +35,7 @@
   left: 0;
   display: inline-flex;
   align-items: center;
-  padding: 14px 28px;
+  padding: 0;
   border-radius: 999px;
   color: var(--ink);
   font-size: var(--text-2xl);
@@ -82,7 +82,7 @@
   }
 
   .skill-chip {
-    padding: 11px 22px;
+    padding: 0;
     font-size: var(--text-2xl);
     font-weight: 500;
     line-height: 1.06;
