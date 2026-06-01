@@ -48,12 +48,13 @@ const redirectHtml = `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <script>location.replace((navigator.language||"").toLowerCase().startsWith("ru")?"/ru/":"/en/")</script>
   <meta http-equiv="refresh" content="0;url=/en/">
   <link rel="canonical" href="${SITE_ORIGIN}/en/">
   <title>Danil Rozhkov</title>
 </head>
 <body>
-  <p><a href="/en/">English</a> · <a href="/ru/">Русский</a></p>
+  <noscript><p><a href="/en/">English</a> · <a href="/ru/">Русский</a></p></noscript>
 </body>
 </html>
 `;
