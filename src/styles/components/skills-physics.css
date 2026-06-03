@@ -1,17 +1,30 @@
 .skills-physics {
   display: flex;
-  align-items: center;
+  /* Shorter than the default full-viewport `.section`. Floored at 500px so the
+     stage stays tall enough (≈404px) to contain the widest chip (~377px) even
+     when it rotates fully vertical — otherwise it would be clipped at the
+     footer edge. */
+  min-height: clamp(500px, 56vh, 620px);
+  /* Stretch so the play area fills the whole section, leaving no dead space
+     between the floating skills and the footer below. */
+  align-items: stretch;
 }
 
 .skills-grid {
-  align-items: center;
+  align-items: stretch;
   width: 100%;
-  min-height: clamp(450px, 58vh, 620px);
+  min-height: 0;
   padding: 0;
+  /* Clear the fixed header so chips never collide with it, then let the stage
+     fill the rest of the section down to the footer. */
+  padding-top: var(--space-2xl);
+  grid-template-rows: 1fr;
+  row-gap: 0;
 }
 
 .skills-heading {
   grid-column: 1 / 8;
+  grid-row: 1;
   align-self: start;
   margin: 0;
 }
@@ -19,7 +32,9 @@
 .skills-stage {
   position: relative;
   grid-column: 1 / 17;
-  height: clamp(450px, 58vh, 620px);
+  grid-row: 1;
+  /* Fills the 1fr row above; overflow:hidden keeps chips inside the section. */
+  height: auto;
   overflow: hidden;
   touch-action: none;
 }

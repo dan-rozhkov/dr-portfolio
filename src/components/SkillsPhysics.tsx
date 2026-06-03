@@ -222,6 +222,10 @@ export default function SkillsPhysics() {
       Math.max(-CONFIG.maxAngularSpeed, Math.min(CONFIG.maxAngularSpeed, v));
 
     const step = () => {
+      // Re-read the stage size each frame: its height is layout-driven
+      // (1fr grid row) and can change after mount, web-font load, or resize.
+      // Stale bounds let chips drift outside the visible stage.
+      bounds = stage.getBoundingClientRect();
       const W = bounds.width;
       const H = bounds.height;
 
@@ -237,21 +241,33 @@ export default function SkillsPhysics() {
         c.va *= 0.98;
         c.va = clampAngular(c.va);
 
-        // walls
-        if (c.x < 0) {
-          c.x = 0;
+        // Rotated bounding-box half-extents: a spinning chip is wider/taller
+        // than its unrotated box, so clamp against these to keep the whole
+        // chip inside the stage (no corner pokes past — and gets clipped — at
+        // the header above or the footer below).
+        const rad = (c.angle * Math.PI) / 180;
+        const cos = Math.abs(Math.cos(rad));
+        const sin = Math.abs(Math.sin(rad));
+        const exW = (c.w * cos + c.h * sin) / 2;
+        const exH = (c.w * sin + c.h * cos) / 2;
+        const cx = c.x + c.w / 2;
+        const cy = c.y + c.h / 2;
+
+        // walls (compare the chip's center against its rotated extents)
+        if (cx - exW < 0) {
+          c.x = exW - c.w / 2;
           c.vx = Math.abs(c.vx) * CONFIG.restitution;
           c.va += c.vy * 0.02;
-        } else if (c.x + c.w > W) {
-          c.x = W - c.w;
+        } else if (cx + exW > W) {
+          c.x = W - exW - c.w / 2;
           c.vx = -Math.abs(c.vx) * CONFIG.restitution;
           c.va -= c.vy * 0.02;
         }
-        if (c.y < 0) {
-          c.y = 0;
+        if (cy - exH < 0) {
+          c.y = exH - c.h / 2;
           c.vy = Math.abs(c.vy) * CONFIG.restitution;
-        } else if (c.y + c.h > H) {
-          c.y = H - c.h;
+        } else if (cy + exH > H) {
+          c.y = H - exH - c.h / 2;
           c.vy = -Math.abs(c.vy) * CONFIG.restitution;
         }
       }
@@ -263,10 +279,38 @@ export default function SkillsPhysics() {
         }
       }
 
-      // keep dragged chip in-bounds too
+      // Collisions can shove a chip past a wall after its wall check ran, so
+      // re-confine every chip to the rotated-extent bounds before rendering.
+      for (const c of chips) {
+        if (c === dragged) continue;
+        const rad = (c.angle * Math.PI) / 180;
+        const exW =
+          (c.w * Math.abs(Math.cos(rad)) + c.h * Math.abs(Math.sin(rad))) / 2;
+        const exH =
+          (c.w * Math.abs(Math.sin(rad)) + c.h * Math.abs(Math.cos(rad))) / 2;
+        c.x = Math.max(exW - c.w / 2, Math.min(W - exW - c.w / 2, c.x));
+        c.y = Math.max(exH - c.h / 2, Math.min(H - exH - c.h / 2, c.y));
+      }
+
+      // keep dragged chip in-bounds too (rotated extents, same as the walls)
       if (dragged) {
-        dragged.x = Math.max(0, Math.min(W - dragged.w, dragged.x));
-        dragged.y = Math.max(0, Math.min(H - dragged.h, dragged.y));
+        const rad = (dragged.angle * Math.PI) / 180;
+        const exW =
+          (dragged.w * Math.abs(Math.cos(rad)) +
+            dragged.h * Math.abs(Math.sin(rad))) /
+          2;
+        const exH =
+          (dragged.w * Math.abs(Math.sin(rad)) +
+            dragged.h * Math.abs(Math.cos(rad))) /
+          2;
+        dragged.x = Math.max(
+          exW - dragged.w / 2,
+          Math.min(W - exW - dragged.w / 2, dragged.x),
+        );
+        dragged.y = Math.max(
+          exH - dragged.h / 2,
+          Math.min(H - exH - dragged.h / 2, dragged.y),
+        );
       }
 
       for (const c of chips) {
