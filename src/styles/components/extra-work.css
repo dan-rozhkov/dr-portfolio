@@ -1,5 +1,5 @@
 .extra-grid {
-  align-items: center;
+  align-items: start;
   min-height: max(100vh, 700px);
   padding-top: var(--space-3xl);
   padding-bottom: 56px;
