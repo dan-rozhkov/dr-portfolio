@@ -119,6 +119,7 @@ export const skills: string[] = [
   "AI-продукты",
   "B2B SaaS",
   "Прототипирование",
+  "UI/UX",
 ];
 
 export const recognition: RecognitionGroup[] = [

@@ -80,7 +80,9 @@ export const profile: Profile = {
 
 export const hero: Hero = {
   lines: [
-    "Lead Product Designer for AI and B2B tools, from product logic to shipped UI",
+    "Lead Product Designer",
+    "building B2B products with AI",
+    "from logic to shipped UI",
   ],
 };
 
@@ -180,6 +182,7 @@ export const skills: string[] = [
   "AI Products",
   "B2B SaaS",
   "Prototyping",
+  "UI/UX",
 ];
 
 export const recognition: RecognitionGroup[] = [
