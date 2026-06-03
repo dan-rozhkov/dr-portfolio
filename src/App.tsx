@@ -1,4 +1,5 @@
-import { getCases, getCaseStudy } from "./data/portfolio";
+import { useEffect } from "react";
+import { getCases, getCaseStudy, setDataLang } from "./data/portfolio";
 import CaseStudy from "./CaseStudy";
 import Contact from "./Contact";
 import Header from "./components/Header";
@@ -14,6 +15,7 @@ import ContactObserver from "./components/ContactObserver";
 import ScrollFade from "./components/ScrollFade";
 import { useRoute } from "./hooks/useRoute";
 import { I18nProvider } from "./i18n/context";
+import { getPageTitle } from "./lib/pageTitle";
 
 export default function App({ initialPath }: { initialPath?: string }) {
   const path =
@@ -22,7 +24,14 @@ export default function App({ initialPath }: { initialPath?: string }) {
 
   const [route] = useRoute(path);
   const lang = route.lang;
+  setDataLang(lang);
+
+  const pageTitle = getPageTitle(route);
   const cases = getCases();
+
+  useEffect(() => {
+    document.title = pageTitle;
+  }, [pageTitle]);
 
   if (route.name === "case") {
     const study = getCaseStudy(route.id);

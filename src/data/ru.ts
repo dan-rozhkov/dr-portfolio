@@ -38,7 +38,7 @@ export const cases: CaseSummary[] = [
       ["Результат", "AI-конвейер прототипирования, интеграция с дизайн-системой"],
     ],
     visual: "ai",
-    preview: { src: "images/sber-india-proto/hero.png", alt: "Сетка компонентов прототайп-инструмента Sber India" },
+    preview: { src: "images/sber-india-proto/case-preview.png", alt: "Сетка компонентов прототайп-инструмента Sber India" },
   },
   {
     id: "openprovider",
@@ -185,9 +185,9 @@ const caseSections: Record<string, CaseSection[]> = {
     },
     {
       kind: "image",
-      src: "/images/sber-india-proto/guidelines.png",
-      alt: "Гайдлайны дизайн-системы Sber India — источник истины для инструмента",
-      aspect: "3840 / 5108",
+      src: "/images/sber-india-proto/big-preview.png",
+      alt: "Превью прототайп-инструмента Sber India",
+      aspect: "3200 / 2128",
     },
     {
       label: "Решение",
@@ -202,25 +202,22 @@ const caseSections: Record<string, CaseSection[]> = {
       kind: "subhead",
       title: "Figma MCP как источник истины",
       text: "Компоненты и токены читаются напрямую из Figma — генератор работает внутри существующей системы, а не рядом с ней. Прототипы попадают на правильные рельсы с первого раза: без галлюцинированных кнопок, без посторонних отступов, без тихого расхождения с продакшен-библиотекой.",
-      src: "/images/sber-india-proto/slider-1.mp4",
+      src: "/images/sber-india-proto/Slider 1.png",
       alt: "Figma MCP reading design system components",
     },
     {
       kind: "subhead",
       title: "Claude Code как исполнитель",
       text: "Генерация и правки идут через Claude Code, который понимает структуру репозитория прототипов. Дизайнеры и PM правят прототип текстом или визуально — и агент применяет изменения к исходнику, а не переписывает экраны с нуля.",
-      src: "/images/sber-india-proto/slider-2.mp4",
+      src: "/images/sber-india-proto/Slider 2.png",
       alt: "Claude Code generating prototype from brief",
-    },
-    {
-      kind: "subhead",
-      title: "Песочница отдельно от продакшена",
-      text: "Прототипы живут в изолированном репозитории — без связи с продакшен-кодом, но на том же словаре компонентов и токенов. Команда быстро гоняет гипотезы без риска для боевого продукта, а проверенный сценарий потом переходит в продакшен-компоненты, если ставка сыграла.",
     },
     {
       kind: "subhead",
       title: "Сделано для не-инженеров",
       text: "Инструмент рассчитан на дизайнеров и PM, а не только на разработчиков. Бриф обычным языком превращается в рабочий прототип, визуальные правки уходят обратно в код, а разработку подключают только тогда, когда гипотеза готова к релизу.",
+      src: "/images/sber-india-proto/Slider 3.png",
+      alt: "Prototype tool interface for non-engineers",
     },
     {
       label: "Результаты",
@@ -708,7 +705,7 @@ const caseSections: Record<string, CaseSection[]> = {
 
 const caseHeroImages: Record<string, { src: string; alt: string; background?: string }> = {
   "sber-india-proto": {
-    src: "/images/sber-india-proto/hero.png",
+    src: "/images/sber-india-proto/hero-inner.png",
     alt: "Сетка компонентов прототип-инструмента Sber India",
     background: "rgb(248 248 248)",
   },

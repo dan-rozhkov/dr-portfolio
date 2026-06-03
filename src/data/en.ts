@@ -99,7 +99,7 @@ export const cases: CaseSummary[] = [
       ["Output", "AI prototyping pipeline, design-system integration"],
     ],
     visual: "ai",
-    preview: { src: "images/sber-india-proto/hero.png", alt: "Sber India prototype tool component grid" },
+    preview: { src: "images/sber-india-proto/case-preview.png", alt: "Sber India prototype tool component grid" },
   },
   {
     id: "openprovider",
@@ -246,9 +246,9 @@ const caseSections: Record<string, CaseSection[]> = {
     },
     {
       kind: "image",
-      src: "/images/sber-india-proto/guidelines.png",
-      alt: "Sber India design-system guidelines page used as the tool's source of truth",
-      aspect: "3840 / 5108",
+      src: "/images/sber-india-proto/big-preview.png",
+      alt: "Sber India prototype tool preview",
+      aspect: "3200 / 2128",
     },
     {
       label: "Solution",
@@ -263,25 +263,22 @@ const caseSections: Record<string, CaseSection[]> = {
       kind: "subhead",
       title: "Figma MCP as the source of truth",
       text: "Components and tokens are read directly from Figma, so the generator operates inside the existing system rather than around it. Prototypes land on the right rails the first time — no hallucinated buttons, no off-brand spacing, no quiet drift away from the production library.",
-      src: "/images/sber-india-proto/slider-1.mp4",
+      src: "/images/sber-india-proto/Slider 1.png",
       alt: "Figma MCP reading design system components",
     },
     {
       kind: "subhead",
       title: "Claude Code as the executor",
       text: "Generation and follow-up edits run through a Claude Code agent that knows the prototype repo's structure. Designers and PMs can iterate by typing changes or pushing visual edits, and the agent applies them to the source instead of rewriting screens from scratch.",
-      src: "/images/sber-india-proto/slider-2.mp4",
+      src: "/images/sber-india-proto/Slider 2.png",
       alt: "Claude Code generating prototype from brief",
-    },
-    {
-      kind: "subhead",
-      title: "Sandbox separate from production",
-      text: "Prototypes live in an isolated repo, disconnected from production code but speaking the same component and token vocabulary. Teams can move fast on hypotheses without risking the shipped product, and a validated flow can graduate into production components when the bet pays off.",
     },
     {
       kind: "subhead",
       title: "Built for non-engineers",
       text: "The tool is wired for designers and PMs, not just developers. A brief in plain language produces a runnable prototype; visual edits push back to code; engineering only gets pulled in when the hypothesis is ready to ship.",
+      src: "/images/sber-india-proto/Slider 3.png",
+      alt: "Prototype tool interface for non-engineers",
     },
     {
       label: "Outcomes",
@@ -775,7 +772,7 @@ interface HeroImage {
 
 const caseHeroImages: Record<string, HeroImage> = {
   "sber-india-proto": {
-    src: "/images/sber-india-proto/hero.png",
+    src: "/images/sber-india-proto/hero-inner.png",
     alt: "Sber India prototype tool component grid",
     background: "rgb(248 248 248)",
   },

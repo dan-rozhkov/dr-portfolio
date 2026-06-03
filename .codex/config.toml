@@ -1,0 +1,3 @@
+[mcp_servers.live-studio]
+command = "node"
+args = ["/Users/daniilrozhkov/codex-prj/dr-portfolio/node_modules/.bin/live-studio"]

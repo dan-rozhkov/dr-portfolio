@@ -7,18 +7,27 @@ const distDir = path.join(__dirname, "dist");
 const ssrDir = path.join(__dirname, "dist-ssr");
 
 const template = fs.readFileSync(path.join(distDir, "index.html"), "utf8");
-const { render, cases } = await import(
+const { render, cases, pageTitle } = await import(
   pathToFileURL(path.join(ssrDir, "entry-server.js")).href
 );
 
 const SITE_ORIGIN = "https://dan-rozhkov.github.io";
 const LANGS = ["en", "ru"];
 
+function escapeHtml(value) {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
 function writePage(outPath, routePath) {
   const html = render(routePath);
   const lang = routePath.startsWith("/ru") ? "ru" : "en";
+  const title = pageTitle(routePath);
   const full = template
     .replace('<html lang="en">', `<html lang="${lang}">`)
+    .replace(/<title>.*?<\/title>/, `<title>${escapeHtml(title)}</title>`)
     .replace(
       '<div id="root"></div>',
       `<div id="root">${html}</div>`
