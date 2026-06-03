@@ -116,7 +116,7 @@ export const cases: CaseSummary[] = [
     ],
     visual: "finance",
     variant: "mobile",
-    preview: { src: "images/openprovider/mobile.png", alt: "Openprovider mobile screens" },
+    preview: { src: "images/openprovider/openprovider-case-cover.png", alt: "Openprovider dashboard preview" },
   },
   {
     id: "clearscale-msp",
@@ -401,6 +401,9 @@ const caseSections: Record<string, CaseSection[]> = {
       kind: "subhead",
       title: "Multilingual dashboard patterns",
       text: "I designed English, Spanish, and Russian interfaces around long labels, dense tables, validation states, and reseller terminology from day one. Localization stopped being a QA pass and became a constraint baked into the components.",
+      src: "/images/openprovider/openprovider-case-cover.png",
+      alt: "Openprovider dashboard preview",
+      aspect: "2170 / 1356",
     },
     {
       kind: "subhead",

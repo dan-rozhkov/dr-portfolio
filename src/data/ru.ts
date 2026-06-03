@@ -55,7 +55,7 @@ export const cases: CaseSummary[] = [
     ],
     visual: "finance",
     variant: "mobile",
-    preview: { src: "images/openprovider/mobile.png", alt: "Мобильные экраны Openprovider" },
+    preview: { src: "images/openprovider/openprovider-case-cover.png", alt: "Предпросмотр панели Openprovider" },
   },
   {
     id: "clearscale-msp",
@@ -340,6 +340,9 @@ const caseSections: Record<string, CaseSection[]> = {
       kind: "subhead",
       title: "Мультиязычные паттерны дашборда",
       text: "Я спроектировал английский, испанский и русский интерфейсы с учётом длинных меток, плотных таблиц, состояний валидации и реселлерской терминологии с первого дня. Локализация перестала быть этапом QA и стала ограничением, встроенным в компоненты.",
+      src: "/images/openprovider/openprovider-case-cover.png",
+      alt: "Предпросмотр панели Openprovider",
+      aspect: "2170 / 1356",
     },
     {
       kind: "subhead",
