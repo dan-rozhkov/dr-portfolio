@@ -7,9 +7,35 @@ const distDir = path.join(__dirname, "dist");
 const ssrDir = path.join(__dirname, "dist-ssr");
 
 const template = fs.readFileSync(path.join(distDir, "index.html"), "utf8");
+
+/**
+ * Vite names the SSR bundle `entry-server.js`, but a plugin can add a hash and
+ * an `assets/` subfolder (`assets/entry-server-BqANBvsP.js`). Look in both
+ * places so the prerender step never depends on the bundle name.
+ */
+function findSsrEntry(dir) {
+  const direct = path.join(dir, "entry-server.js");
+  if (fs.existsSync(direct)) return direct;
+
+  const assetsDir = path.join(dir, "assets");
+  if (fs.existsSync(assetsDir)) {
+    const hashed = fs
+      .readdirSync(assetsDir)
+      .find((name) => name.startsWith("entry-server") && name.endsWith(".js"));
+    if (hashed) return path.join(assetsDir, hashed);
+  }
+
+  throw new Error(
+    `SSR entry not found in ${dir}. Contents: ${
+      fs.existsSync(dir) ? fs.readdirSync(dir).join(", ") : "(directory missing)"
+    }`
+  );
+}
+
 const { render, cases, pageTitle } = await import(
-  pathToFileURL(path.join(ssrDir, "entry-server.js")).href
+  pathToFileURL(findSsrEntry(ssrDir)).href
 );
+
 
 const SITE_ORIGIN = "https://dan-rozhkov.github.io";
 const LANGS = ["en", "ru"];
