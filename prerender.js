@@ -37,7 +37,10 @@ const { render, cases, pageTitle } = await import(
 );
 
 
-const SITE_ORIGIN = "https://dan-rozhkov.github.io";
+const SITE_ORIGIN = (process.env.SITE_ORIGIN || "https://drozhkov.com").replace(
+  /\/+$/,
+  ""
+);
 const LANGS = ["en", "ru"];
 
 function escapeHtml(value) {
@@ -47,17 +50,42 @@ function escapeHtml(value) {
     .replace(/>/g, "&gt;");
 }
 
+function escapeAttr(value) {
+  return escapeHtml(value).replace(/"/g, "&quot;");
+}
+
+/** Absolute URL for a route. Every page is served from a directory, so it ends with a slash. */
+function pageUrl(routePath) {
+  const path = routePath.endsWith("/") ? routePath : `${routePath}/`;
+  return `${SITE_ORIGIN}${path}`;
+}
+
 function writePage(outPath, routePath) {
   const html = render(routePath);
   const lang = routePath.startsWith("/ru") ? "ru" : "en";
   const title = pageTitle(routePath);
-  const full = template
+  let full = template
     .replace('<html lang="en">', `<html lang="${lang}">`)
     .replace(/<title>.*?<\/title>/, `<title>${escapeHtml(title)}</title>`)
     .replace(
       '<div id="root"></div>',
       `<div id="root">${html}</div>`
     );
+
+  const tokens = {
+    "%PAGE_URL%": escapeAttr(pageUrl(routePath)),
+    "%PAGE_TITLE%": escapeAttr(title),
+    "%SITE_ORIGIN%": SITE_ORIGIN,
+    "%OG_LOCALE%": lang === "ru" ? "ru_RU" : "en_US",
+  };
+  for (const [token, value] of Object.entries(tokens)) {
+    full = full.split(token).join(value);
+  }
+
+  const leftover = full.match(/%[A-Z_]+%/);
+  if (leftover) {
+    throw new Error(`Unreplaced token ${leftover[0]} in ${outPath}`);
+  }
   fs.mkdirSync(path.dirname(outPath), { recursive: true });
   fs.writeFileSync(outPath, full);
   console.log("prerendered", routePath, "->", path.relative(distDir, outPath));
@@ -134,8 +162,8 @@ const allCases = cases();
 for (const item of allCases) {
   for (const lang of LANGS) {
     sitemapUrls.push(
-      sitemapEntry(`${SITE_ORIGIN}/${lang}/case/${item.id}`,
-        LANGS.map((l) => ({ lang: l, href: `${SITE_ORIGIN}/${l}/case/${item.id}` }))
+      sitemapEntry(pageUrl(`/${lang}/case/${item.id}`),
+        LANGS.map((l) => ({ lang: l, href: pageUrl(`/${l}/case/${item.id}`) }))
       )
     );
   }
