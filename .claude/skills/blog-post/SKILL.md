@@ -101,6 +101,7 @@ Do not deploy if either step was skipped.
 
 Every correction Danil sends becomes a rule here (and in Claude's memory). Newest first.
 
+- 2026-11-01 — Image corner radius was too big; images have no rounding site-wide.
 - 2026-10-31 — Texts too long. Shorten and make them sell Danil as a professional, in the voice and length of the case studies.
 - 2026-10-31 — Also take close-up screenshots of interface parts, not only full windows.
 - 2026-10-31 — No black background behind screenshots: light gray (like cases) or none; don't bake a backdrop into images.

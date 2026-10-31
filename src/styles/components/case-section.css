@@ -63,7 +63,7 @@
 }
 
 .case-media-placeholder {
-  border-radius: var(--radius-xl);
+  border-radius: 0;
   background: #fff;
 }
 
@@ -71,7 +71,7 @@
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  border-radius: var(--radius-xl);
+  border-radius: 0;
   background: #fff;
   overflow: hidden;
 }
@@ -112,7 +112,7 @@
 .preview-stage {
   width: 100%;
   min-height: 520px;
-  border-radius: var(--radius-xl);
+  border-radius: 0;
 }
 
 .desktop-composition {
