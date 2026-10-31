@@ -16,6 +16,7 @@ import ScrollFade from "./components/ScrollFade";
 import { useRoute } from "./hooks/useRoute";
 import { I18nProvider } from "./i18n/context";
 import WritingIndex from "./writing/WritingIndex";
+import JobsPage from "./jobs/JobsPage";
 import PostPage from "./writing/PostPage";
 import { getPost } from "./writing/posts";
 import { getPageTitle } from "./lib/pageTitle";
@@ -56,6 +57,18 @@ export default function App({ initialPath }: { initialPath?: string }) {
         <CustomCursor />
         <Header />
         <WritingIndex category={route.category} />
+        <Contact />
+        <ContactObserver />
+      </I18nProvider>
+    );
+  }
+
+  if (route.name === "jobs") {
+    return (
+      <I18nProvider lang={lang}>
+        <CustomCursor />
+        <Header />
+        <JobsPage />
         <Contact />
         <ContactObserver />
       </I18nProvider>

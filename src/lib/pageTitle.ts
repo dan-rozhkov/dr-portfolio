@@ -17,6 +17,10 @@ export function getPageTitle(route: Route): string {
     return `Writing | ${siteTitle}`;
   }
 
+  if (route.name === "jobs") {
+    return `Jobs | ${siteTitle}`;
+  }
+
   if (route.name === "post") {
     const post = getPost(route.slug);
     return post ? `${post.title} | ${siteTitle}` : `Post not found | ${siteTitle}`;

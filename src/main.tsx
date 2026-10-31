@@ -17,6 +17,7 @@ import "./styles/components/contact.css";
 import "./styles/components/case-indicator.css";
 import "./styles/components/case-study.css";
 import "./styles/components/writing.css";
+import "./styles/components/jobs.css";
 
 if (import.meta.env.DEV) {
   import("live-studio").then(({ startStudio }) => startStudio());
