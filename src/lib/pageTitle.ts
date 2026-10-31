@@ -1,5 +1,6 @@
 import { getCaseStudy } from "../data/portfolio";
 import { t } from "../i18n/translations";
+import { getPost } from "../writing/posts";
 import type { Route } from "../hooks/useRoute";
 
 export function getPageTitle(route: Route): string {
@@ -14,6 +15,11 @@ export function getPageTitle(route: Route): string {
 
   if (route.name === "writing") {
     return `Writing | ${siteTitle}`;
+  }
+
+  if (route.name === "post") {
+    const post = getPost(route.slug);
+    return post ? `${post.title} | ${siteTitle}` : `Post not found | ${siteTitle}`;
   }
 
   return siteTitle;
