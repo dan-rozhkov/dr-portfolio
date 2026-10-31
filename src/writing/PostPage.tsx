@@ -1,6 +1,6 @@
 import Contact from "../Contact";
-import type { Post } from "./types";
-import { assetUrl } from "../lib/url";
+import type { Post, PostBlock, PostSection } from "./types";
+import { Media, Section, Slider } from "../components/caseBlocks";
 import { writingLink } from "../lib/writingUrl";
 
 const DATE_FORMAT = new Intl.DateTimeFormat("en-GB", {
@@ -19,32 +19,63 @@ function repoName(url: string, fallback: string): string {
   return last && !/^https?:$/.test(last) ? last : fallback;
 }
 
-function isVideo(src: string): boolean {
-  return /\.(mp4|webm)$/i.test(src);
-}
-
 function Cover({ post }: { post: Post }) {
-  const src = post.cover;
+  if (!post.cover) return null;
   return (
     <div className="post-cover">
-      {src ? (
-        isVideo(src) ? (
-          <video
-            className="cs-image"
-            src={assetUrl(src)}
-            autoPlay
-            loop
-            muted
-            playsInline
-            aria-label={post.title}
-          />
-        ) : (
-          <img className="cs-image" src={assetUrl(src)} alt={post.title} />
-        )
-      ) : (
-        <div className="post-cover-empty" aria-hidden="true" />
-      )}
+      <Media src={post.cover} alt={post.title} />
     </div>
+  );
+}
+
+function Label({ label }: { label: string }) {
+  return label ? (
+    <h2 className="cs-label">{label}</h2>
+  ) : (
+    <div className="cs-label cs-label-spacer" aria-hidden="true" />
+  );
+}
+
+function Block({ block, label }: { block: PostBlock; label: string }) {
+  switch (block.kind) {
+    case "prose":
+      return (
+        <div className="cs-row">
+          <Label label={label} />
+          <div className="cs-case-text post-body" dangerouslySetInnerHTML={{ __html: block.html }} />
+        </div>
+      );
+    case "logline":
+      return (
+        <div className="cs-row">
+          <Label label={label} />
+          <div className="cs-logline">{block.text}</div>
+        </div>
+      );
+    case "image":
+      return <Section section={{ kind: "image", src: block.src, alt: block.alt }} />;
+    case "outcomes":
+      return <Section section={{ kind: "outcomes", stats: block.stats, text: block.text }} />;
+    case "slider":
+      return <Slider items={block.items.map((it) => ({ kind: "subhead", ...it }))} />;
+  }
+}
+
+/** The label goes on the first row that has a label slot; otherwise on a row of its own. */
+function SectionBlocks({ section }: { section: PostSection }) {
+  const first = section.blocks[0];
+  const labelled = first?.kind === "prose" || first?.kind === "logline";
+  return (
+    <>
+      {!labelled && section.label && (
+        <div className="cs-row">
+          <Label label={section.label} />
+        </div>
+      )}
+      {section.blocks.map((block, i) => (
+        <Block block={block} label={i === 0 && labelled ? section.label : ""} key={i} />
+      ))}
+    </>
   );
 }
 
@@ -118,17 +149,7 @@ export default function PostPage({ post }: { post: Post | undefined }) {
 
         <div className="cs-sections post-sections">
           {post.sections.map((s, i) => (
-            <div className="cs-row" key={i}>
-              {s.label ? (
-                <h2 className="cs-label">{s.label}</h2>
-              ) : (
-                <div className="cs-label cs-label-spacer" aria-hidden="true" />
-              )}
-              <div
-                className="cs-case-text post-body"
-                dangerouslySetInnerHTML={{ __html: s.html }}
-              />
-            </div>
+            <SectionBlocks section={s} key={i} />
           ))}
         </div>
       </article>

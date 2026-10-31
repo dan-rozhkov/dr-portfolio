@@ -175,12 +175,6 @@
   margin-inline: var(--pad);
 }
 
-.post-cover-empty {
-  aspect-ratio: 16 / 8;
-  border-radius: var(--radius-xl);
-  background: var(--dark);
-}
-
 .post-sections h2.cs-label {
   margin: 0;
 }
@@ -234,23 +228,17 @@
   .post-cover {
     margin-bottom: 40px;
   }
-
-  .post-cover-empty {
-    aspect-ratio: 16 / 10;
-  }
 }
 
 .post-cover .cs-image {
-  aspect-ratio: 16 / 8;
-  object-fit: cover;
+  height: auto;
+}
+
+.post-sections .cs-slider-media-slide .cs-image {
+  object-fit: contain;
 }
 
 .post-sections {
   padding-bottom: var(--space-3xl);
 }
 
-@media (--mobile) {
-  .post-cover .cs-image {
-    aspect-ratio: 16 / 10;
-  }
-}

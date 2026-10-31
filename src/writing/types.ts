@@ -6,10 +6,25 @@ export const CATEGORY_LABEL: Record<Category, string> = {
   "product-building": "Product building",
 };
 
+export interface PostSliderItem {
+  title: string;
+  text: string;
+  src?: string;
+  alt?: string;
+}
+
+/** Body building blocks; each maps to a case-study block. */
+export type PostBlock =
+  | { kind: "prose"; html: string }
+  | { kind: "logline"; text: string }
+  | { kind: "slider"; items: PostSliderItem[] }
+  | { kind: "image"; src: string; alt: string }
+  | { kind: "outcomes"; stats: [value: string, label: string][]; text: string };
+
 /** label is "" for text before the first `##` heading. */
 export interface PostSection {
   label: string;
-  html: string;
+  blocks: PostBlock[];
 }
 
 export interface Post {

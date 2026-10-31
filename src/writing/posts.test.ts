@@ -31,7 +31,8 @@ describe("parsePost", () => {
     expect(p.tldr.length).toBe(3);
     expect(p.sections[0].label).toBe("");
     expect(p.sections[1].label).toBe("Split execution");
-    expect(p.sections[1].html).toContain("<p>");
+    expect(p.sections[1].blocks[0]).toMatchObject({ kind: "prose" });
+    expect(JSON.stringify(p.sections[1].blocks)).toContain("<p>");
   });
 
   it("does not split on ## lines inside fenced code blocks", () => {
@@ -41,8 +42,9 @@ describe("parsePost", () => {
     );
     const p = parsePost(md, "x");
     expect(p.sections.map((s) => s.label)).toEqual(["", "Split execution"]);
-    expect(p.sections[1].html).toContain("## Install");
-    expect(p.sections[1].html).toContain("## Tilde");
+    const html = JSON.stringify(p.sections[1].blocks);
+    expect(html).toContain("## Install");
+    expect(html).toContain("## Tilde");
   });
 
   it("reads optional ogImage", () => {
@@ -78,6 +80,64 @@ describe("sortPosts", () => {
     const a = parsePost(valid, "a");
     const b = parsePost(valid.replace("2026-10-01", "2026-11-01"), "b");
     expect(sortPosts([a, b]).map((p) => p.slug)).toEqual(["b", "a"]);
+  });
+});
+
+describe("directives", () => {
+  const withBody = (body: string) => valid.replace(/Intro paragraph\.[\s\S]*$/, body);
+  const blocks = (body: string) => parsePost(withBody(body), "x").sections.flatMap((s) => s.blocks);
+
+  it("parses logline", () => {
+    expect(blocks("## A\n\n:::logline\nBig  idea\nhere.\n:::\n")).toEqual([
+      { kind: "logline", text: "Big idea here." },
+    ]);
+  });
+
+  it("parses slider with two items", () => {
+    const b = blocks(
+      "## A\n\n:::slider\n### One\nFirst text.\n\n![alt one](/a.png)\n\n### Two\nSecond.\n![v](/b.mp4)\n:::\n",
+    );
+    expect(b).toEqual([
+      {
+        kind: "slider",
+        items: [
+          { title: "One", text: "First text.", src: "/a.png", alt: "alt one" },
+          { title: "Two", text: "Second.", src: "/b.mp4", alt: "v" },
+        ],
+      },
+    ]);
+  });
+
+  it("parses outcomes", () => {
+    const b = blocks("## A\n\n:::outcomes\n- 3x — faster\n- 40% — fewer bugs\n\nSummary text.\n:::\n");
+    expect(b).toEqual([
+      {
+        kind: "outcomes",
+        stats: [
+          ["3x", "faster"],
+          ["40%", "fewer bugs"],
+        ],
+        text: "Summary text.",
+      },
+    ]);
+  });
+
+  it("parses full-width image and keeps other images in prose", () => {
+    const b = blocks('## A\n\nText.\n\n![wide](/w.png "full")\n\n![small](/s.png)\n');
+    expect(b.map((x) => x.kind)).toEqual(["prose", "image", "prose"]);
+    expect(b[1]).toEqual({ kind: "image", src: "/w.png", alt: "wide" });
+    expect(JSON.stringify(b[2])).toContain("<img");
+  });
+
+  it("ignores directives inside fenced code", () => {
+    const b = blocks("## A\n\n```md\n:::slider\n### x\n```\n\nAfter.\n");
+    expect(b.map((x) => x.kind)).toEqual(["prose"]);
+  });
+
+  it("fails on an unclosed directive, naming file and line", () => {
+    expect(() => parsePost(withBody("## A\n\n:::slider\n### One\n"), "my-post")).toThrow(
+      /my-post\.md: unclosed ":::slider" directive opened at line 17/,
+    );
   });
 });
 

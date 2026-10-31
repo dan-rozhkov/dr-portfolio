@@ -26,7 +26,7 @@ Recruiters and hiring managers (goal: they write to Danil), and people coming fr
 ## Post file format
 
 - One file per post: `content/posts/<slug>.md`. The slug is the URL: `/en/writing/<slug>/`. Files starting with `_` are skipped.
-- Images: `public/images/writing/<slug>/` (cover as `.webp`/`.jpg` ≤ 400 KB, or `.mp4`/`.webm`). Use a real screenshot of the running project, never a mockup from another product. The cover is shown at 16:8 (16:10 on mobile) with `object-fit: cover`, so put a screenshot on a 16:8 dark canvas rather than letting it crop.
+- Images: `public/images/writing/<slug>/` (cover as `.webp`/`.jpg` ≤ 400 KB, or `.mp4`/`.webm`). Use a real screenshot of the running project, never a mockup from another product. The cover is shown at its natural size on the light-gray rounded case-media block (no black backdrop); omit `cover` and nothing is rendered.
 - Parser: `src/writing/posts.ts`. A missing `title`, `dek`, `date`, `tldr` or a bad `category` fails the build.
 
 ```markdown
@@ -42,14 +42,39 @@ stack:                       # optional
 links:                       # optional; only public URLs you checked (gh repo view … --json visibility)
   - label: Code
     url: https://github.com/dan-rozhkov/<repo>
-cover: /images/writing/<slug>/cover.webp  # optional; omit → dark block
+cover: /images/writing/<slug>/cover.webp  # optional; omit → no cover
 ---
 
 ## Section label
 
 Each `##` becomes a row: the heading is the left label, the text goes on the right.
-Text before the first `##` becomes a row with no label. Images in the body render full width.
+Text before the first `##` becomes a row with no label. Prose is Markdown.
+Images in prose stay at text width; `![alt](src "full")` alone in a paragraph is a full-width image row.
+
+:::logline
+A one-sentence statement, shown big like a case logline.
+:::
+
+:::slider
+### First step
+Short text next to the media.
+![alt](/images/writing/<slug>/one.webp)
+
+### Second step
+Another short text.
+![alt](/images/writing/<slug>/two.mp4)
+:::
+
+![alt](/images/writing/<slug>/wide.webp "full")
+
+:::outcomes
+- 3x — faster
+- 40% — fewer errors
+Optional closing sentence.
+:::
 ```
+
+Directives (`:::logline`, `:::slider`, `:::outcomes`) sit on their own lines and are closed by `:::`; they are ignored inside fenced code. An unclosed or unknown directive fails the build with the file name and line. Slider items are `### Title`, text, and one image/video each (2+ items for the sticky scroll effect). Outcome stats are `- VALUE — Label` (em dash). Directive text is plain (no inline Markdown). All blocks render with the same components as case studies (`src/components/caseBlocks.tsx`).
 
 ## Screenshots
 

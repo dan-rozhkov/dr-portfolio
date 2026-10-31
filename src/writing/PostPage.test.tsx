@@ -16,9 +16,9 @@ const post: Post = {
   links: [{ label: "GitHub", url: "https://example.com/repo" }],
   readMinutes: 4,
   sections: [
-    { label: "", html: "<p>Intro text</p>" },
-    { label: "Context", html: "<p>Context text</p>" },
-    { label: "Outcome", html: "<p>Outcome text</p>" },
+    { label: "", blocks: [{ kind: "prose", html: "<p>Intro text</p>" }] },
+    { label: "Context", blocks: [{ kind: "prose", html: "<p>Context text</p>" }] },
+    { label: "Outcome", blocks: [{ kind: "prose", html: "<p>Outcome text</p>" }] },
   ],
 };
 
@@ -55,5 +55,36 @@ describe("PostPage", () => {
     const html = render(undefined);
     expect(html).toContain("Post not found");
     expect(html).toContain("/en/writing/");
+  });
+
+  it("renders rich blocks with the case-study markup", () => {
+    const html = render({
+      ...post,
+      sections: [
+        {
+          label: "Rich",
+          blocks: [
+            { kind: "logline", text: "Big statement" },
+            {
+              kind: "slider",
+              items: [
+                { title: "One", text: "First", src: "/a.png", alt: "a" },
+                { title: "Two", text: "Second", src: "/b.png", alt: "b" },
+              ],
+            },
+            { kind: "image", src: "/wide.png", alt: "wide" },
+            { kind: "outcomes", stats: [["3x", "faster"]], text: "Done" },
+          ],
+        },
+      ],
+    });
+    for (const c of ["cs-logline", "cs-slider", "cs-slider-sticky", "cs-slider-slide", "cs-slider-dots", "cs-image-row", "cs-outcomes", "cs-stat-value"])
+      expect(html).toContain(c);
+    expect(html).toContain("Big statement");
+    expect(html).toContain("Rich");
+  });
+
+  it("renders nothing for a missing cover", () => {
+    expect(render(post)).not.toContain("post-cover");
   });
 });
