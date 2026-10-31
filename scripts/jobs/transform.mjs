@@ -54,8 +54,15 @@ const orNull = (value) => {
   return v === "" || v === "unknown" ? null : v;
 };
 
+// Family labels alone are not a relevance review. Explicit responsibility-based
+// exclusions win; reject backend/infra titles even if a later collection mislabels them.
+export function isTargetRole(row) {
+  if (/(?:^|[;|\s])target_selection=excluded(?:$|[;|\s])/.test(row.notes ?? "")) return false;
+  return !/\b(?:dev\s*ops|back[ -]?end|site reliability|infrastructure engineer|platform engineer)\b/i.test(row.title_original ?? "");
+}
+
 export function transformRows(rows) {
-  const eligible = rows.filter((r) => r.market === "world" && r.role_family in FAMILIES);
+  const eligible = rows.filter((r) => r.market === "world" && r.role_family in FAMILIES && isTargetRole(r));
 
   const exportedRaw = eligible.filter((r) => {
     if (r.status !== "active") return false;

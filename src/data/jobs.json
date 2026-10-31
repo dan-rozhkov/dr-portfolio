@@ -1,26 +1,12 @@
 {
   "generatedFrom": "labor-market-radar",
-  "lastCheck": "2026-10-31T20:55:33.999Z",
+  "lastCheck": "2026-10-31T20:55:32.891Z",
   "stats": {
-    "open": 54,
-    "newThisWeek": 36,
+    "open": 50,
+    "newThisWeek": 32,
     "closedThisWeek": 2
   },
   "jobs": [
-    {
-      "id": "cognition_589326d3-9dc0-447e-ae0c-972b808f831d",
-      "title": "Devops Engineer, Federal",
-      "company": "Cognition",
-      "family": "Product Builder",
-      "location": "Washington, DC, United States",
-      "mode": "hybrid",
-      "seniority": null,
-      "salary": null,
-      "firstSeen": "2026-10-31T20:55:33.999Z",
-      "lastChecked": "2026-10-31T20:55:33.999Z",
-      "skills": [],
-      "url": "https://jobs.ashbyhq.com/cognition/589326d3-9dc0-447e-ae0c-972b808f831d"
-    },
     {
       "id": "cognition_dabc56df-b50a-4056-9e01-14ca3e0b12a4",
       "title": "GTM Systems Engineer",
@@ -39,22 +25,6 @@
         "ai assisted building"
       ],
       "url": "https://jobs.ashbyhq.com/cognition/dabc56df-b50a-4056-9e01-14ca3e0b12a4"
-    },
-    {
-      "id": "openai_43174eb6-0ffe-4744-9323-c7969e7ea2e1",
-      "title": "Backend Software Engineer, GTM Innovation",
-      "company": "OpenAI",
-      "family": "GTM Engineer",
-      "location": "San Francisco, CA, United States",
-      "mode": "hybrid",
-      "seniority": null,
-      "salary": null,
-      "firstSeen": "2026-10-31T20:55:30.640Z",
-      "lastChecked": "2026-10-31T20:55:30.640Z",
-      "skills": [
-        "ai assisted building"
-      ],
-      "url": "https://jobs.ashbyhq.com/openai/43174eb6-0ffe-4744-9323-c7969e7ea2e1"
     },
     {
       "id": "uniti_1f2d6d5e-9c35-4399-bc27-5b1ac9dd05a3",
@@ -147,23 +117,6 @@
         "product discovery"
       ],
       "url": "https://jobs.ashbyhq.com/workyard/2c1afafe-dc46-4646-8945-a7cc4d0c5c9a"
-    },
-    {
-      "id": "radiant_c5c3c385-0ae8-4850-a6f2-f9777cd41091",
-      "title": "Senior Field Product Engineer",
-      "company": "Radiant",
-      "family": "Product Builder",
-      "location": "London, United Kingdom",
-      "mode": "hybrid",
-      "seniority": "senior",
-      "salary": null,
-      "firstSeen": "2026-10-31T20:55:27.029Z",
-      "lastChecked": "2026-10-31T20:55:27.029Z",
-      "skills": [
-        "product discovery",
-        "production delivery"
-      ],
-      "url": "https://jobs.ashbyhq.com/radiant/c5c3c385-0ae8-4850-a6f2-f9777cd41091"
     },
     {
       "id": "viktor_9047eb98-7826-42f6-ac76-e6e41da5779a",
@@ -312,23 +265,6 @@
         "frontend coding"
       ],
       "url": "https://jobs.ashbyhq.com/granola/31cd18b8-f208-4a48-b287-11f32c0e32dd"
-    },
-    {
-      "id": "granola_f928eaec-2215-4811-9593-eb084eddef6c",
-      "title": "Product Engineer (Backend)",
-      "company": "Granola",
-      "family": "Product Builder",
-      "location": "London",
-      "mode": "onsite",
-      "seniority": null,
-      "salary": "£100–130k / yr",
-      "firstSeen": "2026-10-30T06:45:00.000Z",
-      "lastChecked": "2026-10-31T20:50:13.262Z",
-      "skills": [
-        "production delivery",
-        "product discovery"
-      ],
-      "url": "https://jobs.ashbyhq.com/granola/f928eaec-2215-4811-9593-eb084eddef6c"
     },
     {
       "id": "oyster_f4caa57f-bdb1-42d8-a884-12bf341f677c",
