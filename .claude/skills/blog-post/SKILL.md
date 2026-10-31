@@ -15,6 +15,7 @@ Recruiters and hiring managers (goal: they write to Danil), and people coming fr
 
 - Facts only from the project repo in `~/prj/<project>` or from Danil. Never invent metrics, dates, stack or outcomes.
 - Never write about qure-app.
+- `~/prj/pen-editor-app` (pen-editor) is the product **Sideform** — always call it Sideform. Posts about it are only about (1) a part extracted as a library (Figma clipboard decoder, LLM-tolerant batch DSL with atomic rollback, TS flexbox engine, …) or (2) the desktop version (`pen-editor-desktop`). No general build-and-shut-down post-mortem; never claim Sideform was shut down.
 - TL;DR first: what it is, what Danil did, stack, outcome — scannable in 30 seconds.
 - Drafts are published immediately and publicly. Danil reviews on the live site.
 
@@ -33,4 +34,5 @@ Do not deploy if either step was skipped.
 
 Every correction Danil sends becomes a rule here (and in Claude's memory). Newest first.
 
+- 2026-10-31 — pen-editor is Sideform; posts only about its library parts or the desktop version (see Rules).
 - 2026-10-31 — Always run `/code-review` and check visually on desktop and mobile before deploying (see above).

@@ -56,7 +56,7 @@
 ```ts
 expect(parseRoute("/en/writing/")).toEqual({ name: "writing", lang: "en", category: null });
 expect(parseRoute("/ru/writing", "?category=ai-tools")).toEqual({ name: "writing", lang: "en", category: "ai-tools" });
-expect(parseRoute("/en/writing/pen-editor/")).toEqual({ name: "post", slug: "pen-editor", lang: "en" });
+expect(parseRoute("/en/writing/sideform-desktop/")).toEqual({ name: "post", slug: "pen-editor", lang: "en" });
 expect(parseRoute("/ru/jobs/")).toEqual({ name: "jobs", lang: "en" });
 expect(parseRoute("/en/case/openprovider")).toEqual({ name: "case", id: "openprovider", lang: "en" });
 expect(parseRoute("/ru/")).toEqual({ name: "home", lang: "ru" });
@@ -216,12 +216,12 @@ expect(parseRoute("/ru/")).toEqual({ name: "home", lang: "ru" });
 ### Task 9: First post and launch
 
 **Files:**
-- Create: `content/posts/pen-editor.md`, `public/images/writing/pen-editor/cover.*`
+- Create: `content/posts/sideform-desktop.md`, `public/images/writing/sideform-desktop/cover.*`
 - Modify: `.claude/skills/blog-post/SKILL.md` (front-matter format, file locations, `npm run shots` usage)
 
-- [ ] **Step 1: Write the post** following `.claude/skills/blog-post/SKILL.md`. Facts only from `~/prj/pen-editor-app` (`PORTFOLIO.md`, `MARKET-ANALYSIS.md`, `ROI.md`, sub-repo READMEs and git history: commit counts via `git rev-list --count HEAD` in each sub-repo). Category `product-building`. Sections (`##`): Context, Split execution, Making LLM output safe, Layout engine, The market check, What I'd do differently. Cover: a real screenshot of the running pen-editor (`~/prj/pen-editor-app/pen-editor`, `npm run dev`, open `/app`) — not the Claude Design screenshots in `claude_design_screens/`.
+- [ ] **Step 1: Write the post** about the **Sideform desktop app** following `.claude/skills/blog-post/SKILL.md` (product name Sideform; never claim it was shut down). Facts only from `~/prj/pen-editor-app/pen-editor-desktop` (its CLAUDE.md/README, code, git history incl. `git rev-list --count HEAD`) and how it relates to `pen-editor` (frontend) and `pen-editor-backend` (agent). Category `design-engineering`. Pick `##` sections from what the repo actually shows (e.g. why a desktop shell, tabs and native menus, the cross-repo command contract, shipping/updates). Cover: a real screenshot of the running Sideform desktop app or editor — not `claude_design_screens/` (that is Claude Design, not Sideform).
 - [ ] **Step 2: Update the skill** with the front-matter template and the `shots` command.
-- [ ] **Step 3: Verify** `npm test && npm run typecheck && npm run lint && npm run build`; preview; `npm run shots -- /en/ /en/writing/ /en/writing/pen-editor/ /en/jobs/` — look at all 8 images.
+- [ ] **Step 3: Verify** `npm test && npm run typecheck && npm run lint && npm run build`; preview; `npm run shots -- /en/ /en/writing/ /en/writing/sideform-desktop/ /en/jobs/` — look at all 8 images.
 - [ ] **Step 4: Run `/code-review`** on the branch; fix findings; repeat Step 3 if code changed.
-- [ ] **Step 5: Commit** `feat: first post — pen-editor`.
-- [ ] **Step 6: Deploy and push** `npm run deploy`, then merge to `main` and `git push origin main` in the same session. Check https://drozhkov.com/en/writing/pen-editor/ and https://drozhkov.com/en/jobs/ load.
+- [ ] **Step 5: Commit** `feat: first post — Sideform desktop`.
+- [ ] **Step 6: Deploy and push** `npm run deploy`, then merge to `main` and `git push origin main` in the same session. Check https://drozhkov.com/en/writing/sideform-desktop/ and https://drozhkov.com/en/jobs/ load.

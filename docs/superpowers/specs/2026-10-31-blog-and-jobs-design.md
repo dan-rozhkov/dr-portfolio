@@ -117,14 +117,14 @@ Failure visibility (my call):
 
 ## Scope of this plan vs. the posts (my call)
 
-- This plan builds: Writing index, post page, Jobs page, navigation, RSS/sitemap/OG, jobs sync and automation, plus the **first post (pen-editor)** as the end-to-end proof.
+- This plan builds: Writing index, post page, Jobs page, navigation, RSS/sitemap/OG, jobs sync and automation, plus the **first post (Sideform desktop)** as the end-to-end proof.
 - The WRITING link goes live together with the first post; JOBS goes live as soon as the page passes review.
 - Remaining posts are written one per session after that, in the order below, each with its own `/code-review` and screenshots. They are not part of this implementation plan.
 
 ## Post list (in this order — my call on order)
 
 Flagship
-1. **pen-editor** — "I built an AI design editor alone. Then I shut it down." Case + post-mortem. Sources: `~/prj/pen-editor-app/PORTFOLIO.md`, `MARKET-ANALYSIS.md`, `ROI.md`, subrepos. Later spin-off posts: Figma clipboard decoder, LLM-tolerant batch DSL with rollback, TS flexbox engine.
+1. **Sideform** (repo `~/prj/pen-editor-app`, a.k.a. pen-editor). Danil's rule (2026-10-31): posts only about (a) the desktop version (`pen-editor-desktop`) — first post — or (b) parts extracted as libraries: Figma clipboard decoder, LLM-tolerant batch DSL with atomic rollback, TS flexbox engine. No general post-mortem; never claim it was shut down.
 
 Design engineering
 2. **live-studio** — visual CSS editor with MCP for agents (npm).
