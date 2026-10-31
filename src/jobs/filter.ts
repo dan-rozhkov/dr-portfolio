@@ -1,9 +1,8 @@
 import type { Job, JobFamily } from "./types";
 
 const DAY = 24 * 60 * 60 * 1000;
-// The brief says 7 days, but its own example (24 Oct vs 30 Oct is "Since") needs a
-// shorter window; 3 days matches the mockup.
-const NEW_WINDOW = 3 * DAY;
+// Same window as the "new this week" stat.
+const NEW_WINDOW = 7 * DAY;
 
 const SHORT_DATE = new Intl.DateTimeFormat("en-GB", {
   day: "numeric",

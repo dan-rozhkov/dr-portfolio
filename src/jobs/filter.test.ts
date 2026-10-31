@@ -44,6 +44,6 @@ describe("badge", () => {
     expect(badge(mk("x", "GTM Engineer", null, "2026-10-28T00:00:00Z"), last)).toBe("New");
   });
   it("says Since for older", () => {
-    expect(badge(mk("x", "GTM Engineer", null, "2026-10-24T00:00:00Z"), last)).toBe("Since 24 Oct");
+    expect(badge(mk("x", "GTM Engineer", null, "2026-10-20T00:00:00Z"), last)).toBe("Since 20 Oct");
   });
 });
