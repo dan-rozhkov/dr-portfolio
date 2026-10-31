@@ -16,6 +16,7 @@ Recruiters and hiring managers (goal: they write to Danil), and people coming fr
 - Facts only from the project repo in `~/prj/<project>` or from Danil. Never invent metrics, dates, stack or outcomes.
 - Never write about qure-app.
 - `~/prj/pen-editor-app` (pen-editor) is the product **Sideform** — always call it Sideform. Posts about it are only about (1) a part extracted as a library (Figma clipboard decoder, LLM-tolerant batch DSL with atomic rollback, TS flexbox engine, …) or (2) the desktop version (`pen-editor-desktop`). No general build-and-shut-down post-mortem; never claim Sideform was shut down.
+- Short and selling, like the cases in `src/data/en.ts`: each text block is 1–3 sentences; a section opens with a one-line logline; write in first person about Danil's decisions and their effect ("I designed…", "I kept…, so users…"); end with outcomes. Cut anything that doesn't show his judgment, craft or result. A post reads in 2–3 minutes.
 - Product focus: lead with what the user can do, what problem it solves and how it feels. Technical internals get one short line at most, or are left out.
 - Visuals like a case study: a post is as rich as the cases on the home page (see `src/data/en.ts` cases): an image or video for almost every section, plus case extras — slider (sticky subheads with media), full-width images, logline statements, outcome stats. Text-only sections are the exception. Use real product screenshots/recordings only.
 - Never put screenshots on a black background. Use the light-gray rounded media block the cases use, or no background at all. Don't bake a backdrop into the image file either — export the screenshot itself.
@@ -75,6 +76,7 @@ Do not deploy if either step was skipped.
 
 Every correction Danil sends becomes a rule here (and in Claude's memory). Newest first.
 
+- 2026-10-31 — Texts too long. Shorten and make them sell Danil as a professional, in the voice and length of the case studies.
 - 2026-10-31 — Also take close-up screenshots of interface parts, not only full windows.
 - 2026-10-31 — No black background behind screenshots: light gray (like cases) or none; don't bake a backdrop into images.
 - 2026-10-31 — Too few images. Posts must be as visual as case studies: many real screenshots and case extras (slider, full-width images, loglines, outcomes).
