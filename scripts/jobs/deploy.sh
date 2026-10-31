@@ -12,8 +12,14 @@ PUSH="${PUSH:-1}"
 if [ ! -d "$DEPLOY_DIR/.git" ]; then
   mkdir -p "$(dirname "$DEPLOY_DIR")"
   git clone "$REPO_URL" "$DEPLOY_DIR"
+  : > "$DEPLOY_DIR/.git/deploy-clone"
 fi
 cd "$DEPLOY_DIR"
+# Marker lives in .git so `git clean` cannot remove it; protects real working copies.
+if [ ! -f .git/deploy-clone ]; then
+  echo "Refusing to reset/clean $DEPLOY_DIR: no .git/deploy-clone marker (not a deploy clone)" >&2
+  exit 1
+fi
 
 git fetch origin
 if [ -n "$REF" ]; then
@@ -21,7 +27,7 @@ if [ -n "$REF" ]; then
 else
   git reset --hard origin/main
 fi
-git clean -fdx -e node_modules
+git clean -fdx
 
 npm ci
 npm run sync:jobs
@@ -31,9 +37,15 @@ bash -c "$DEPLOY_CMD"
 
 if [ -n "$(git status --porcelain src/data/jobs.json)" ]; then
   git add src/data/jobs.json
-  git commit -m "chore: sync jobs [radar]"
+  git commit -m "chore: sync jobs [radar]" -- src/data/jobs.json
   if [ "$PUSH" = "1" ]; then
-    git push origin main
+    if ! git push origin main; then
+      git pull --rebase origin main
+      if ! git push origin main; then
+        echo "DEPLOYED, BUT PUSH FAILED: jobs.json not committed" >&2
+        exit 1
+      fi
+    fi
   else
     echo "PUSH=0: skipping push"
   fi
