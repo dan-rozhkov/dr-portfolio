@@ -50,7 +50,7 @@ A design agent needs references. The built-in browser lets it find them on the o
 
 The agent can also work inside other apps that are already open on your Mac — native apps and Electron apps — without restarting them. It reads the window, clicks, types and scrolls, and draws its cursor over the app so you can follow it.
 
-You stay in control. Every time the agent wants to use another app, the app asks you first in a native dialog. Password managers are always blocked. macOS asks for Accessibility permission, and Screen Recording only if the agent needs screenshots.
+You stay in control. Before the agent uses another app, Sideform asks you in a native dialog — you can allow it once or until you quit. Password managers are always blocked. macOS asks for Accessibility permission, and Screen Recording only if the agent needs screenshots.
 
 ## Your work stays on disk
 
@@ -59,7 +59,7 @@ Canvases, documents and agent chats are saved as files on your computer. Closing
 - Reopen any canvas or document from the Recent list.
 - Right-click a tab or a Recent item to show its file in Finder.
 - Save a document as a PDF.
-- Sign in through your usual browser; the app picks up the session securely.
+- Sign in through your usual browser, so you stay signed in.
 
 ## Works with Claude Code and Cursor
 
