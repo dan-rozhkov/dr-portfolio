@@ -16,6 +16,7 @@ import "./styles/components/skills-physics.css";
 import "./styles/components/contact.css";
 import "./styles/components/case-indicator.css";
 import "./styles/components/case-study.css";
+import "./styles/components/writing.css";
 
 if (import.meta.env.DEV) {
   import("live-studio").then(({ startStudio }) => startStudio());

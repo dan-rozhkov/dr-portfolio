@@ -1,0 +1,121 @@
+@custom-media --mobile (max-width: 900px);
+
+.writing-page {
+  min-height: 100vh;
+  padding-top: var(--space-2xl);
+  padding-bottom: var(--space-3xl);
+}
+
+.writing {
+  align-items: start;
+  padding-top: 48px;
+}
+
+.writing-side {
+  position: sticky;
+  top: 140px;
+  grid-column: 1 / 5;
+}
+
+.writing-title {
+  margin: 0 0 16px;
+  font-size: var(--text-xl);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.writing-side p {
+  margin: 0 0 32px;
+  line-height: 1.4;
+}
+
+.writing-filter {
+  margin: 0 0 28px;
+  padding: 0;
+  border-top: 1px solid var(--line);
+  list-style: none;
+}
+
+.writing-filter a {
+  display: flex;
+  justify-content: space-between;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  text-decoration: none;
+  transition: color var(--t-fast);
+}
+
+.writing-filter a:hover,
+.writing-filter a[aria-current="page"] {
+  color: var(--ink);
+}
+
+.writing-rss {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.writing-rss:hover {
+  color: var(--ink);
+}
+
+.writing-stream {
+  grid-column: 6 / 16;
+}
+
+.writing-stream article {
+  margin-bottom: 44px;
+  padding: 0 0 44px;
+  border-bottom: 1px solid var(--line);
+}
+
+.writing-stream article a {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.writing-meta {
+  color: var(--muted);
+  font-size: var(--text-sm);
+}
+
+.writing-stream h2 {
+  margin: 10px 0 12px;
+  font-size: var(--text-2xl);
+  font-weight: 500;
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+}
+
+.writing-stream article p,
+.writing-empty {
+  max-width: 640px;
+  margin: 0;
+  color: var(--muted);
+  font-size: var(--text-lg);
+  line-height: 1.4;
+}
+
+@media (--mobile) {
+  .writing-page {
+    padding-top: var(--space-xl);
+    padding-bottom: var(--space-xl);
+  }
+
+  .writing {
+    display: block;
+    padding-top: 24px;
+  }
+
+  .writing-side {
+    position: static;
+    margin-bottom: 40px;
+  }
+
+  .writing-stream article {
+    margin-bottom: 32px;
+    padding-bottom: 32px;
+  }
+}

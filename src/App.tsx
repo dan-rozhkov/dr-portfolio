@@ -15,6 +15,7 @@ import ContactObserver from "./components/ContactObserver";
 import ScrollFade from "./components/ScrollFade";
 import { useRoute } from "./hooks/useRoute";
 import { I18nProvider } from "./i18n/context";
+import WritingIndex from "./writing/WritingIndex";
 import { getPageTitle } from "./lib/pageTitle";
 
 export default function App({ initialPath }: { initialPath?: string }) {
@@ -45,6 +46,18 @@ export default function App({ initialPath }: { initialPath?: string }) {
         </I18nProvider>
       );
     }
+  }
+
+  if (route.name === "writing") {
+    return (
+      <I18nProvider lang={lang}>
+        <CustomCursor />
+        <Header />
+        <WritingIndex category={route.category} />
+        <Contact />
+        <ContactObserver />
+      </I18nProvider>
+    );
   }
 
   return (

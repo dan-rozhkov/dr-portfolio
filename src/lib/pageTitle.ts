@@ -12,5 +12,9 @@ export function getPageTitle(route: Route): string {
     }
   }
 
+  if (route.name === "writing") {
+    return `Writing | ${siteTitle}`;
+  }
+
   return siteTitle;
 }

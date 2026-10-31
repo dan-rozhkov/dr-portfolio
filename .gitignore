@@ -4,3 +4,4 @@ dist/
 dist-ssr/
 .wrangler/
 .dev.vars
+shots/
