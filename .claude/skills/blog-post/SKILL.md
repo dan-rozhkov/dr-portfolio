@@ -19,6 +19,44 @@ Recruiters and hiring managers (goal: they write to Danil), and people coming fr
 - TL;DR first: what it is, what Danil did, stack, outcome — scannable in 30 seconds.
 - Drafts are published immediately and publicly. Danil reviews on the live site.
 
+## Post file format
+
+- One file per post: `content/posts/<slug>.md`. The slug is the URL: `/en/writing/<slug>/`. Files starting with `_` are skipped.
+- Images: `public/images/writing/<slug>/` (cover as `.webp`/`.jpg` ≤ 400 KB, or `.mp4`/`.webm`). Use a real screenshot of the running project, never a mockup from another product. The cover is shown at 16:8 (16:10 on mobile) with `object-fit: cover`, so put a screenshot on a 16:8 dark canvas rather than letting it crop.
+- Parser: `src/writing/posts.ts`. A missing `title`, `dek`, `date`, `tldr` or a bad `category` fails the build.
+
+```markdown
+---
+title: Project name
+dek: One sentence for the index and the meta description.
+date: 2026-10-31             # YYYY-MM-DD, publication date
+category: design-engineering # design-engineering | ai-tools | product-building
+tldr:                        # 3–5 bullets: what it is, what Danil did, stack, outcome
+  - …
+stack:                       # optional
+  - Electron
+links:                       # optional; only public URLs you checked (gh repo view … --json visibility)
+  - label: Code
+    url: https://github.com/dan-rozhkov/<repo>
+cover: /images/writing/<slug>/cover.webp  # optional; omit → dark block
+---
+
+## Section label
+
+Each `##` becomes a row: the heading is the left label, the text goes on the right.
+Text before the first `##` becomes a row with no label. Images in the body render full width.
+```
+
+## Screenshots
+
+```bash
+npm run build
+npx vite preview --port 4173 &   # serves dist/; kill it afterwards
+npm run shots -- /en/writing/ /en/writing/<slug>/
+```
+
+`scripts/screenshots.mjs` writes `shots/<path>-desktop.png` (1440 wide) and `shots/<path>-mobile.png` (390 wide), full page, and exits non-zero if a mobile page scrolls horizontally. `SHOTS_ORIGIN` changes the server, `PW_CHROMIUM` the browser binary. Open every PNG and look at it.
+
 ## Mandatory before every deploy
 
 1. Run `/code-review` on the change and fix what it finds.
