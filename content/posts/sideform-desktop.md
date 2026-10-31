@@ -4,10 +4,10 @@ dek: A macOS app that puts an AI design agent next to your canvas, a real browse
 date: 2026-10-31
 category: design-engineering
 tldr:
-  - Sideform is an AI design editor. Sideform Desktop is its macOS app — a chat agent on the left, canvas, browser and document tabs on the right.
-  - I designed and built the desktop app, from the first sketch on 18 July 2026 to version 0.9.4 on 27 October — 257 commits, most of them co-written with Claude.
-  - It lets the agent do what a web page can't — browse the web with your logins, work inside other Mac apps, and keep canvases, documents and chats on disk.
-  - Built with Electron and TypeScript, plus a small Swift helper for controlling other macOS apps.
+  - Sideform is an AI design editor. I designed and built its macOS app — the agent docked on the left, canvas, browser and document tabs on the right.
+  - I took it from the first spec on 18 July 2026 to v0.9.4 on 27 October — 257 commits, 201 of them co-written with Claude.
+  - It gives the agent what a browser tab can't — the web with your logins, other Mac apps with your permission, and your work saved on disk.
+  - Electron and TypeScript, with a small Swift helper for macOS app control.
 stack:
   - Electron
   - TypeScript
@@ -21,51 +21,116 @@ cover: /images/writing/sideform-desktop/cover.webp
 ogImage: /images/writing/sideform-desktop/og.jpg
 ---
 
-## Why a desktop app
+## Challenge
 
-Sideform started as a design editor in the browser, with an AI agent that draws on the canvas for you. A browser tab sets limits on that agent. It can't open other websites with your accounts, it can't look at other apps, and your work lives in the tab's storage.
+:::logline
+Sideform's agent designs on a canvas — but inside a browser tab it was boxed in.
+:::
 
-The desktop app removes those limits. It wraps the same editor, so every improvement to the web version shows up in the app too, and adds what only a native app can do.
+It couldn't browse with the user's logins, couldn't look at other apps, and kept work in the tab's storage. I wanted to give the agent a real desktop to work in.
 
-## The agent sits beside your work
+## Solution
 
-The window has two parts. On the left is the agent chat. On the right are tabs: canvases, web pages and Markdown documents. You talk to the agent on the left and watch it work on the right.
+:::logline
+I designed one window: the agent on the left, canvas, browser and document tabs on the right.
+:::
 
-- An empty window asks "Where shall we start?" and offers three cards: a new canvas, a new browser tab or a new document. Below them is a list of recent canvases and documents, newest first.
-- Tabs can be dragged to a new order. Cmd+T opens a canvas. The chat panel hides and shows again with one button or Cmd+Option+B, and slides out of the way instead of jumping (it stays still if you turned on Reduce Motion in macOS).
-- Native menus and shortcuts: open, export, Settings (Cmd+,), Reveal in Finder.
-- On macOS the tab bar is translucent glass, and the app follows the editor's light or dark theme.
+![Start window: agent panel, start cards and Recent list](/images/writing/sideform-desktop/start-window.webp "full")
 
-## A browser the agent can use
+![Start cards: Canvas, Browser, Document](/images/writing/sideform-desktop/start-cards.webp)
 
-A design agent needs references. The built-in browser lets it find them on the open web — Pinterest, for example — with your own logged-in session.
+An empty window offers a canvas, a site or a brief in one click. I kept the same web editor inside, so every web release lands on the desktop for free.
 
-- Ads and trackers are blocked by default.
-- History works like in any browser: the address bar suggests pages you visited, and a History tab lists them.
-- You can save logins. The agent can sign in to a site with them, and the password never reaches the AI model.
-- While the agent drives a tab, that tab shows the agent's cursor, so you always see where it is working.
-- For testing, the agent can run several checks at once, each in its own private browser with separate cookies and accounts.
-- Each browsing run is saved as a trace. You open it in a tab and step through what the agent saw and did.
+## Agent
 
-## Beyond the browser: other apps on your Mac
+:::logline
+You talk on the left and watch the agent work on the right.
+:::
 
-The agent can also work inside other apps that are already open on your Mac — native apps and Electron apps — without restarting them. It reads the window, clicks, types and scrolls, and draws its cursor over the app so you can follow it.
+![Agent panel: a prompt, a reply and a finished Design step](/images/writing/sideform-desktop/agent-panel.webp)
 
-You stay in control. Before the agent uses another app, Sideform asks you in a native dialog — you can allow it once or until you quit. Password managers are always blocked. macOS asks for Accessibility permission, and Screen Recording only if the agent needs screenshots.
+I docked the agent beside every tab and made it hide with Cmd+Option+B, so the canvas gets full width when you need it. It slides away instead of jumping, and respects Reduce Motion.
 
-## Your work stays on disk
+![Chat composer](/images/writing/sideform-desktop/agent-composer.webp)
 
-Canvases, documents and agent chats are saved as files on your computer. Closing a tab or quitting the app doesn't lose anything: on quit, the app waits for unsaved work to finish writing first.
+## Tabs
 
-- Reopen any canvas or document from the Recent list.
-- Right-click a tab or a Recent item to show its file in Finder.
-- Save a document as a PDF.
-- Sign in through your usual browser, so you stay signed in.
+:::logline
+Canvas, web, history and logins live in one tab strip.
+:::
 
-## Works with Claude Code and Cursor
+:::slider
+### Canvas
+Design screens with the agent, with pages, layers and export.
+![Canvas tab with a focus app home screen](/images/writing/sideform-desktop/tab-canvas.webp)
 
-The app also runs a local MCP server. Install the app and the Sideform agent plugin, and a coding agent like Claude Code or Cursor can read and edit the document you have open — 37 tools, with no setup and no token to copy. It works only on your computer, and letting outside agents control the built-in browser is off until you turn it on in Settings.
+### Browser
+The agent finds references on the open web with your own session. Ads and trackers are blocked by default.
+![Built-in browser tab](/images/writing/sideform-desktop/tab-browser.webp)
 
-## How it's built
+### History
+Visited pages, grouped by day and searchable.
+![History tab](/images/writing/sideform-desktop/tab-history.webp)
 
-An Electron shell around the deployed web editor, with the AI agent running on Sideform's server. A small Swift helper does the macOS app control. Unit tests run on Vitest and end-to-end tests on Playwright, plus a separate test that runs the app against the live editor and agent.
+### Passwords
+Saved logins let the agent sign in to a site, and the password never reaches the AI model.
+![Passwords tab with demo logins](/images/writing/sideform-desktop/tab-passwords.webp)
+:::
+
+## Browser
+
+:::logline
+A browser built for an agent, not only for a person.
+:::
+
+![Address bar suggestions from history](/images/writing/sideform-desktop/address-suggestions.webp)
+
+The address bar suggests pages you visited. A tab the agent drives shows its cursor, and a run can be saved as a trace to step through.
+
+## Control
+
+:::logline
+The agent can work in other Mac apps — only after you allow it.
+:::
+
+Sideform asks first in a native dialog: allow once or until you quit. Password managers are always blocked.
+
+![Browser settings: traces, ad blocking, MCP browser control](/images/writing/sideform-desktop/settings-browser.webp)
+
+I kept risky switches off by default, so outside agents can't drive the browser until you allow it.
+
+## Craft
+
+:::logline
+It feels like a Mac app, in light and in dark.
+:::
+
+![Dark theme](/images/writing/sideform-desktop/dark-theme.webp "full")
+
+The tab bar is translucent glass and follows the editor's theme. Native menus cover open, export, Settings and Reveal in Finder.
+
+## On disk
+
+:::logline
+Canvases, documents and chats are files on your Mac.
+:::
+
+![Recent list](/images/writing/sideform-desktop/recent-list.webp)
+
+Quitting loses nothing: the app waits for unsaved work to finish writing. Any file reopens from Recent.
+
+## For coding agents
+
+:::logline
+Claude Code and Cursor can edit the open canvas too.
+:::
+
+The app runs a local MCP server with 37 tools. Install the Sideform agent plugin and it works with no setup and no token to copy.
+
+:::outcomes
+- 257 — commits from 18 Jul to 27 Oct 2026
+- v0.9.4 — shipped 14 weeks after the first spec
+- 37 — MCP tools for coding agents
+- 201 — commits co-written with Claude
+I owned the desktop app end to end, from the window design to the macOS layer, unit and end-to-end tests.
+:::
