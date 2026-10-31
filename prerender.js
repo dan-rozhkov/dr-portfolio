@@ -32,7 +32,7 @@ function findSsrEntry(dir) {
   );
 }
 
-const { render, cases, pageTitle } = await import(
+const { render, cases, pageMeta, posts, rss } = await import(
   pathToFileURL(findSsrEntry(ssrDir)).href
 );
 
@@ -42,6 +42,8 @@ const SITE_ORIGIN = (process.env.SITE_ORIGIN || "https://drozhkov.com").replace(
   ""
 );
 const LANGS = ["en", "ru"];
+const LEGACY_OG_DESCRIPTION =
+  "Lead Product Designer for AI and B2B tools, from product logic to shipped UI.";
 
 function escapeHtml(value) {
   return value
@@ -63,7 +65,9 @@ function pageUrl(routePath) {
 function writePage(outPath, routePath) {
   const html = render(routePath);
   const lang = routePath.startsWith("/ru") ? "ru" : "en";
-  const title = pageTitle(routePath);
+  const meta = pageMeta(routePath);
+  const title = meta.title;
+  const isLegacy = /^\/(en|ru)\/(case\/[\w-]+)?\/?$/.test(routePath);
   let full = template
     .replace('<html lang="en">', `<html lang="${lang}">`)
     .replace(/<title>.*?<\/title>/, `<title>${escapeHtml(title)}</title>`)
@@ -76,6 +80,9 @@ function writePage(outPath, routePath) {
     "%PAGE_URL%": escapeAttr(pageUrl(routePath)),
     "%PAGE_TITLE%": escapeAttr(title),
     "%SITE_ORIGIN%": SITE_ORIGIN,
+    "%PAGE_DESCRIPTION%": escapeAttr(meta.description),
+    "%OG_DESCRIPTION%": escapeAttr(isLegacy ? LEGACY_OG_DESCRIPTION : meta.description),
+    "%OG_IMAGE%": escapeAttr(`${SITE_ORIGIN}${meta.image}`),
     "%OG_LOCALE%": lang === "ru" ? "ru_RU" : "en_US",
   };
   for (const [token, value] of Object.entries(tokens)) {
@@ -105,6 +112,19 @@ for (const lang of LANGS) {
     );
   }
 }
+
+// English-only pages: writing index, posts, jobs, RSS
+const allPosts = posts();
+writePage(path.join(distDir, "en", "writing", "index.html"), "/en/writing/");
+for (const post of allPosts) {
+  writePage(
+    path.join(distDir, "en", "writing", post.slug, "index.html"),
+    `/en/writing/${post.slug}/`
+  );
+}
+writePage(path.join(distDir, "en", "jobs", "index.html"), "/en/jobs/");
+fs.writeFileSync(path.join(distDir, "en", "writing", "rss.xml"), rss(SITE_ORIGIN));
+console.log("wrote en/writing/rss.xml");
 
 // Root redirect to /en/
 const redirectHtml = `<!DOCTYPE html>
@@ -167,6 +187,18 @@ for (const item of allCases) {
       )
     );
   }
+}
+
+// English-only pages: single en alternate
+const enOnly = [
+  `/en/writing/`,
+  ...allPosts.map((p) => `/en/writing/${p.slug}/`),
+  `/en/jobs/`,
+];
+for (const route of enOnly) {
+  sitemapUrls.push(
+    sitemapEntry(pageUrl(route), [{ lang: "en", href: pageUrl(route) }])
+  );
 }
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
