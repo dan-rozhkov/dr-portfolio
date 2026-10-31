@@ -64,7 +64,7 @@ describe("PostPage", () => {
         {
           label: "Rich",
           blocks: [
-            { kind: "logline", text: "Big statement" },
+            { kind: "logline", html: "Big statement" },
             {
               kind: "slider",
               items: [
@@ -73,7 +73,7 @@ describe("PostPage", () => {
               ],
             },
             { kind: "image", src: "/wide.png", alt: "wide" },
-            { kind: "outcomes", stats: [["3x", "faster"]], text: "Done" },
+            { kind: "outcomes", stats: [["3x", "faster"]], html: "Done" },
           ],
         },
       ],
@@ -82,6 +82,54 @@ describe("PostPage", () => {
       expect(html).toContain(c);
     expect(html).toContain("Big statement");
     expect(html).toContain("Rich");
+  });
+
+  it("uses the section label for a leading outcomes block, with no extra label row", () => {
+    const html = render({
+      ...post,
+      sections: [
+        { label: "Results", blocks: [{ kind: "outcomes", stats: [["3x", "faster"]], html: "Done" }] },
+      ],
+    });
+    expect(html.match(/Results/g)).toHaveLength(1);
+    expect(html).not.toContain("Outcomes");
+  });
+
+  it("renders a one-item slider as a static subhead", () => {
+    const html = render({
+      ...post,
+      sections: [
+        { label: "S", blocks: [{ kind: "slider", items: [{ title: "Solo", text: "<p>x</p>", src: "/a.png", alt: "a" }] }] },
+      ],
+    });
+    expect(html).toContain("cs-subhead");
+    expect(html).not.toContain("cs-slider-sticky");
+  });
+
+  it("loads the cover eagerly", () => {
+    const html = render({ ...post, cover: "/img/c.webp" });
+    expect(html).toMatch(/<img[^>]*loading="eager"/);
+  });
+
+  it("exposes the mobile slider copy to assistive tech", () => {
+    const html = render({
+      ...post,
+      sections: [
+        {
+          label: "S",
+          blocks: [
+            {
+              kind: "slider",
+              items: [
+                { title: "A", text: "<p>1</p>" },
+                { title: "B", text: "<p>2</p>" },
+              ],
+            },
+          ],
+        },
+      ],
+    });
+    expect(html).not.toMatch(/cs-slider-mobile"[^>]*aria-hidden/);
   });
 
   it("renders nothing for a missing cover", () => {

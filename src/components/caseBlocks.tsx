@@ -1,10 +1,9 @@
 import { useEffect, useRef, useState } from "react";
+import type { ReactNode } from "react";
 import type { CaseSection } from "../data/portfolio";
 import { useT } from "../i18n/context";
 import { assetUrl } from "../lib/url";
 import type { SubheadSection } from "./caseGroups";
-
-const imageUrl = assetUrl;
 
 function isVideo(src: string): boolean {
   return /\.(mp4|webm|mov)$/i.test(src);
@@ -14,17 +13,19 @@ export function Media({
   src,
   alt,
   aspect,
+  loading = "lazy",
 }: {
   src?: string;
   alt?: string;
   aspect?: string;
+  loading?: "lazy" | "eager";
 }) {
   if (!src) return <Placeholder aspect={aspect} />;
   if (isVideo(src)) {
     return (
       <video
         className="cs-image"
-        src={imageUrl(src)}
+        src={assetUrl(src)}
         autoPlay
         loop
         muted
@@ -36,9 +37,9 @@ export function Media({
   return (
     <img
       className="cs-image"
-      src={imageUrl(src)}
+      src={assetUrl(src)}
       alt={alt || ""}
-      loading="lazy"
+      loading={loading}
     />
   );
 }
@@ -53,25 +54,57 @@ function Placeholder({ aspect }: { aspect?: string }) {
   );
 }
 
-interface CaseImageProps {
-  src?: string;
-  alt?: string;
-  aspect?: string;
-  loading?: "lazy" | "eager";
+/** `html` text is trusted, pre-rendered markup (paragraphs); plain text otherwise. */
+function RichText({ text, html }: { text: string; html?: boolean }) {
+  return html ? (
+    <div className="cs-rich" dangerouslySetInnerHTML={{ __html: text }} />
+  ) : (
+    <p>{text}</p>
+  );
 }
 
-export function CaseImage({ src, alt, aspect, loading = "lazy" }: CaseImageProps) {
-  if (!src) {
-    return <Placeholder aspect={aspect} />;
-  }
-
+export function Outcomes({
+  stats,
+  text,
+  html,
+  label,
+}: {
+  stats: [string, string][];
+  text: string;
+  html?: boolean;
+  label: ReactNode;
+}) {
   return (
-    <img
-      className="cs-image"
-      src={imageUrl(src)}
-      alt={alt || ""}
-      loading={loading}
-    />
+    <div className="cs-row cs-outcomes">
+      {label}
+      <div className="cs-outcomes-stats">
+        {stats.map(([value, name], i) => (
+          <div className="cs-stat" key={`${value}-${i}`}>
+            <div className="cs-stat-value">{value}</div>
+            <div className="cs-stat-label">{name}</div>
+          </div>
+        ))}
+      </div>
+      {html ? (
+        <div className="cs-outcomes-text" dangerouslySetInnerHTML={{ __html: text }} />
+      ) : (
+        <div className="cs-outcomes-text">{text}</div>
+      )}
+    </div>
+  );
+}
+
+export function Subhead({ item, html }: { item: SubheadSection; html?: boolean }) {
+  return (
+    <div className="cs-row cs-subhead">
+      <div className="cs-subhead-side">
+        <h3>{item.title}</h3>
+        <RichText text={item.text} html={html} />
+      </div>
+      <div className="cs-subhead-media">
+        <Media src={item.src} alt={item.alt} aspect={item.aspect} />
+      </div>
+    </div>
   );
 }
 
@@ -81,7 +114,7 @@ export function Section({ section }: { section: CaseSection }) {
   if (section.kind === "image") {
     return (
       <div className="cs-image-row">
-        <CaseImage
+        <Media
           src={section.src}
           alt={section.alt}
           aspect={section.aspect}
@@ -92,33 +125,16 @@ export function Section({ section }: { section: CaseSection }) {
 
   if (section.kind === "outcomes") {
     return (
-      <div className="cs-row cs-outcomes">
-        <div className="cs-label">{t("case.outcomes")}</div>
-        <div className="cs-outcomes-stats">
-          {section.stats.map(([value, label]) => (
-            <div className="cs-stat" key={value}>
-              <div className="cs-stat-value">{value}</div>
-              <div className="cs-stat-label">{label}</div>
-            </div>
-          ))}
-        </div>
-        <div className="cs-outcomes-text">{section.text}</div>
-      </div>
+      <Outcomes
+        stats={section.stats}
+        text={section.text}
+        label={<div className="cs-label">{t("case.outcomes")}</div>}
+      />
     );
   }
 
   if (section.kind === "subhead") {
-    return (
-      <div className="cs-row cs-subhead">
-        <div className="cs-subhead-side">
-          <h3>{section.title}</h3>
-          <p>{section.text}</p>
-        </div>
-        <div className="cs-subhead-media">
-          <Media src={section.src} alt={section.alt} aspect={section.aspect} />
-        </div>
-      </div>
-    );
+    return <Subhead item={section} />;
   }
 
   const textClass = section.kind === "logline" ? "cs-logline" : "cs-case-text";
@@ -135,7 +151,7 @@ export function Section({ section }: { section: CaseSection }) {
   );
 }
 
-export function Slider({ items }: { items: SubheadSection[] }) {
+export function Slider({ items, html }: { items: SubheadSection[]; html?: boolean }) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [active, setActive] = useState(0);
 
@@ -182,7 +198,7 @@ export function Slider({ items }: { items: SubheadSection[] }) {
                 aria-hidden={i !== active}
               >
                 <h3>{item.title}</h3>
-                <p>{item.text}</p>
+                <RichText text={item.text} html={html} />
               </div>
             ))}
           </div>
@@ -209,11 +225,12 @@ export function Slider({ items }: { items: SubheadSection[] }) {
           </div>
         </div>
       </div>
-      <div className="cs-slider-mobile" aria-hidden="true">
+      {/* Hidden with display:none on desktop, so only one copy is ever in the a11y tree. */}
+      <div className="cs-slider-mobile">
         {items.map((item, i) => (
           <div className="cs-slider-pair" key={i}>
             <h3>{item.title}</h3>
-            <p>{item.text}</p>
+            <RichText text={item.text} html={html} />
             <Media src={item.src} alt={item.alt} aspect={item.aspect} />
           </div>
         ))}

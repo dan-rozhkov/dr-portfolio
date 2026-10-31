@@ -89,7 +89,7 @@ describe("directives", () => {
 
   it("parses logline", () => {
     expect(blocks("## A\n\n:::logline\nBig  idea\nhere.\n:::\n")).toEqual([
-      { kind: "logline", text: "Big idea here." },
+      { kind: "logline", html: "Big idea here." },
     ]);
   });
 
@@ -101,8 +101,8 @@ describe("directives", () => {
       {
         kind: "slider",
         items: [
-          { title: "One", text: "First text.", src: "/a.png", alt: "alt one" },
-          { title: "Two", text: "Second.", src: "/b.mp4", alt: "v" },
+          { title: "One", text: "<p>First text.</p>", src: "/a.png", alt: "alt one" },
+          { title: "Two", text: "<p>Second.</p>", src: "/b.mp4", alt: "v" },
         ],
       },
     ]);
@@ -117,7 +117,7 @@ describe("directives", () => {
           ["3x", "faster"],
           ["40%", "fewer bugs"],
         ],
-        text: "Summary text.",
+        html: "Summary text.",
       },
     ]);
   });
@@ -144,5 +144,48 @@ describe("directives", () => {
 describe("getPosts", () => {
   it("returns an array", () => {
     expect(Array.isArray(getPosts())).toBe(true);
+  });
+});
+
+describe("directive blocks and prose", () => {
+  const withBody = (body: string) => parsePost(valid.replace("Body text here.", body), "x");
+  const blocks = (body: string) => withBody(body).sections[1].blocks;
+
+  it("resolves a reference link defined after a directive", () => {
+    const b = blocks("See [the docs][d] first.\n\n:::logline\nHi\n:::\n\nAnd [again][d].\n\n[d]: https://example.com/docs");
+    const html = JSON.stringify(b);
+    expect(html.match(/href=\\"https:\/\/example.com\/docs\\"/g)).toHaveLength(2);
+  });
+
+  it("renders inline markdown in logline", () => {
+    const b = blocks(":::logline\nA **bold** claim with [a link](https://e.com).\n:::");
+    expect(b[0]).toMatchObject({ kind: "logline" });
+    const html = (b[0] as { html: string }).html;
+    expect(html).toContain("<strong>bold</strong>");
+    expect(html).toContain('<a href="https://e.com">a link</a>');
+  });
+
+  it("keeps slider item paragraphs separate", () => {
+    const b = blocks(":::slider\n### One\nfirst line\nsame para\n\nsecond para\n:::");
+    const item = (b[0] as { items: { text: string }[] }).items[0];
+    expect(item.text).toBe("<p>first line same para</p><p>second para</p>");
+  });
+
+  it("ignores indented ::: lines", () => {
+    const b = blocks("- item\n\n  :::logline\n  not a directive\n  :::\n\nAfter.");
+    expect(b.every((x) => x.kind === "prose")).toBe(true);
+    expect(() => blocks("    :::\n\nText")).not.toThrow();
+  });
+
+  it("routes prose images through assetUrl", () => {
+    const html = (blocks("![shot](/img/a.png)")[0] as { html: string }).html;
+    expect(html).toContain('src="/img/a.png"');
+    expect(html).toContain('alt="shot"');
+  });
+
+  it("counts prose words only for read time", () => {
+    const noise = "![a b c d e f](/x.png)\n\n[link](https://example.com/a/b/c)\n\n:::logline\nx\n:::\n\n".repeat(20);
+    const p = parsePost(valid.replace("Body text here.", `${"word ".repeat(150)}\n\n${noise}`), "x");
+    expect(p.readMinutes).toBe(1);
   });
 });

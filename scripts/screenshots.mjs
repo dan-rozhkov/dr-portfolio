@@ -25,6 +25,29 @@ for (const path of paths) {
   for (const vp of viewports) {
     const page = await browser.newPage({ viewport: { width: vp.width, height: vp.height } });
     await page.goto(ORIGIN + path, { waitUntil: "networkidle" });
+    // Scroll through the page so lazy images load, then wait for all to finish.
+    await page.evaluate(async () => {
+      const step = Math.max(200, window.innerHeight / 2);
+      for (let y = 0; y < document.documentElement.scrollHeight; y += step) {
+        window.scrollTo(0, y);
+        await new Promise((r) => setTimeout(r, 100));
+      }
+      window.scrollTo(0, document.documentElement.scrollHeight);
+      await new Promise((r) => setTimeout(r, 100));
+      window.scrollTo(0, 0);
+      await Promise.all(
+        // Skip display:none images (e.g. the other breakpoint's slider copy): lazy ones never load.
+        [...document.images]
+          .filter((img) => img.complete === false && img.getClientRects().length > 0)
+          .map(
+            (img) =>
+              new Promise((r) => {
+                img.onload = img.onerror = r;
+                setTimeout(r, 5000);
+              }),
+          ),
+      );
+    });
     const file = `shots/${slug(path)}-${vp.name}.png`;
     await page.screenshot({ path: file, fullPage: true });
     console.log(file);

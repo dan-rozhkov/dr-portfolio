@@ -1,6 +1,7 @@
-import { marked } from "marked";
+import { Marked } from "marked";
 import type { Token, TokensList } from "marked";
 import { parse as parseYaml } from "yaml";
+import { assetUrl } from "../lib/url";
 import { CATEGORY_LABEL } from "./types";
 import type { Category, Post, PostBlock, PostSection, PostSliderItem } from "./types";
 
@@ -8,6 +9,26 @@ export function readMinutes(text: string): number {
   const words = text.trim().split(/\s+/).filter(Boolean).length;
   return Math.max(1, Math.ceil(words / 220));
 }
+
+/** Words a reader actually reads: no directive markers, image markdown or link URLs. */
+function proseWords(body: string): string {
+  return body
+    .replace(/^:::.*$/gm, " ")
+    .replace(/^ {0,3}\[[^\]]+\]:\s+\S.*$/gm, " ")
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, " ")
+    .replace(/\[([^\]]*)\]\([^)]*\)/g, "$1")
+    .replace(/<https?:[^>]*>/g, " ");
+}
+
+const md = new Marked({
+  renderer: {
+    image({ href, title, text }) {
+      const esc = (v: string) => v.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
+      const src = /^(?:[a-z][a-z0-9+.-]*:|\/\/|#)/i.test(href) ? href : assetUrl(href);
+      return `<img src="${esc(src)}" alt="${esc(text)}"${title ? ` title="${esc(title)}"` : ""}>`;
+    },
+  },
+});
 
 const FRONT_MATTER = /^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/;
 
@@ -65,7 +86,7 @@ function tokenize(body: string, firstLine: number, fail: (m: string) => never): 
     }
     if (fence === null && !f) {
       if (dir) {
-        if (line.trim() === ":::") {
+        if (/^:::\s*$/.test(line)) {
           sections[sections.length - 1].chunks.push({ type: "dir", ...dir });
           dir = null;
         } else {
@@ -73,14 +94,14 @@ function tokenize(body: string, firstLine: number, fail: (m: string) => never): 
         }
         return;
       }
-      const d = /^:::([a-z]+)\s*$/.exec(line.trim());
+      const d = /^:::([a-z]+)\s*$/.exec(line);
       if (d) {
         if (!DIRECTIVES.includes(d[1])) fail(`unknown directive ":::${d[1]}" at line ${lineNo}`);
         flushMd();
         dir = { name: d[1], lines: [], line: lineNo };
         return;
       }
-      if (line.trim() === ":::") fail(`stray ":::" at line ${lineNo}`);
+      if (/^:::\s*$/.test(line)) fail(`stray ":::" at line ${lineNo}`);
       if (line.startsWith("## ")) {
         flushMd();
         sections.push({ label: line.slice(3).trim(), chunks: [] });
@@ -98,14 +119,16 @@ function tokenize(body: string, firstLine: number, fail: (m: string) => never): 
 
 const IMG = /^!\[([^\]]*)\]\(\s*(\S+?)(?:\s+"([^"]*)")?\s*\)$/;
 
-function mdBlocks(text: string): PostBlock[] {
-  const tokens = marked.lexer(text);
+function mdBlocks(text: string, links: Record<string, unknown>): PostBlock[] {
+  const lexer = new md.Lexer();
+  Object.assign(lexer.tokens.links, links);
+  const tokens = lexer.lex(text);
   const blocks: PostBlock[] = [];
   let buf: Token[] = [];
   const flush = () => {
     if (buf.length === 0) return;
     const list = Object.assign([...buf], { links: tokens.links }) as unknown as TokensList;
-    blocks.push({ kind: "prose", html: marked.parser(list) });
+    blocks.push({ kind: "prose", html: md.parser(list) });
     buf = [];
   };
   for (const tok of tokens) {
@@ -123,17 +146,25 @@ function mdBlocks(text: string): PostBlock[] {
 
 function sliderBlock(lines: string[], where: string, fail: (m: string) => never): PostBlock {
   const items: PostSliderItem[] = [];
-  let cur: { title: string; text: string[]; src?: string; alt?: string } | null = null;
+  let cur: { title: string; text: string[][]; src?: string; alt?: string } | null = null;
+  let newPara = true;
   const push = () => {
-    if (cur) items.push({ title: cur.title, text: cur.text.join(" "), src: cur.src, alt: cur.alt });
+    if (cur) {
+      const text = cur.text.map((p) => `<p>${md.parseInline(p.join(" ")) as string}</p>`).join("");
+      items.push({ title: cur.title, text, src: cur.src, alt: cur.alt });
+    }
   };
   for (const raw of lines) {
     const line = raw.trim();
-    if (!line) continue;
+    if (!line) {
+      newPara = true;
+      continue;
+    }
     const h = /^###\s+(.+)$/.exec(line);
     if (h) {
       push();
       cur = { title: h[1].trim(), text: [] };
+      newPara = true;
       continue;
     }
     if (!cur) fail(`:::slider ${where}: expected "### Title" before "${line}"`);
@@ -141,8 +172,11 @@ function sliderBlock(lines: string[], where: string, fail: (m: string) => never)
     if (img) {
       cur!.src = img[2];
       cur!.alt = img[1];
+    } else if (newPara) {
+      cur!.text.push([line]);
+      newPara = false;
     } else {
-      cur!.text.push(line);
+      cur!.text[cur!.text.length - 1].push(line);
     }
   }
   push();
@@ -166,7 +200,7 @@ function outcomesBlock(lines: string[], where: string, fail: (m: string) => neve
     }
   }
   if (stats.length === 0) fail(`:::outcomes ${where}: no "- VALUE — Label" items`);
-  return { kind: "outcomes", stats, text: text.join(" ") };
+  return { kind: "outcomes", stats, html: md.parseInline(text.join(" ")) as string };
 }
 
 function directiveBlock(d: Extract<Chunk, { type: "dir" }>, fail: (m: string) => never): PostBlock {
@@ -175,14 +209,15 @@ function directiveBlock(d: Extract<Chunk, { type: "dir" }>, fail: (m: string) =>
   if (d.name === "outcomes") return outcomesBlock(d.lines, where, fail);
   const text = d.lines.map((l) => l.trim()).filter(Boolean).join(" ").replace(/\s+/g, " ");
   if (!text) fail(`:::logline ${where}: empty`);
-  return { kind: "logline", text };
+  return { kind: "logline", html: md.parseInline(text) as string };
 }
 
 function splitSections(body: string, firstLine: number, fail: (m: string) => never): PostSection[] {
+  const links = md.lexer(body).links;
   return tokenize(body, firstLine, fail)
     .map((s) => ({
       label: s.label,
-      blocks: s.chunks.flatMap((c) => (c.type === "md" ? mdBlocks(c.text) : [directiveBlock(c, fail)])),
+      blocks: s.chunks.flatMap((c) => (c.type === "md" ? mdBlocks(c.text, links) : [directiveBlock(c, fail)])),
     }))
     .filter((s) => s.label || s.blocks.length > 0);
 }
@@ -231,7 +266,7 @@ export function parsePost(raw: string, slug: string): Post {
     links,
     cover: str(fm.cover),
     ogImage: str(fm.ogImage),
-    readMinutes: readMinutes(body),
+    readMinutes: readMinutes(proseWords(body)),
     sections: splitSections(body, bodyLine, fail),
   };
 }

@@ -8,6 +8,7 @@ export const CATEGORY_LABEL: Record<Category, string> = {
 
 export interface PostSliderItem {
   title: string;
+  /** inline-rendered HTML paragraphs */
   text: string;
   src?: string;
   alt?: string;
@@ -16,10 +17,10 @@ export interface PostSliderItem {
 /** Body building blocks; each maps to a case-study block. */
 export type PostBlock =
   | { kind: "prose"; html: string }
-  | { kind: "logline"; text: string }
+  | { kind: "logline"; html: string }
   | { kind: "slider"; items: PostSliderItem[] }
   | { kind: "image"; src: string; alt: string }
-  | { kind: "outcomes"; stats: [value: string, label: string][]; text: string };
+  | { kind: "outcomes"; stats: [value: string, label: string][]; html: string };
 
 /** label is "" for text before the first `##` heading. */
 export interface PostSection {

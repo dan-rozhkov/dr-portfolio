@@ -192,6 +192,10 @@ body:has(.case-study)::-webkit-scrollbar {
   margin: 0;
 }
 
+.cs-rich p + p {
+  margin-top: 0.75em;
+}
+
 .cs-subhead-media {
   grid-column: 7 / 17;
 }

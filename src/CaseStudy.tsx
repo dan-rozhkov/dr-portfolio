@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import Contact from "./Contact";
 import type { CaseStudy as CaseStudyType } from "./data/portfolio";
-import { CaseImage, Section, Slider } from "./components/caseBlocks";
+import { Media, Section, Slider } from "./components/caseBlocks";
 import { groupSections } from "./components/caseGroups";
 
 export default function CaseStudy({ study }: { study: CaseStudyType }) {
@@ -33,7 +33,7 @@ export default function CaseStudy({ study }: { study: CaseStudyType }) {
         className="cs-hero"
         style={study.heroBackground ? { background: study.heroBackground } : undefined}
       >
-        <CaseImage
+        <Media
           src={study.heroImage}
           alt={study.heroImageAlt}
           aspect="3840 / 1579"

@@ -1,6 +1,6 @@
 import Contact from "../Contact";
 import type { Post, PostBlock, PostSection } from "./types";
-import { Media, Section, Slider } from "../components/caseBlocks";
+import { Media, Outcomes, Section, Slider, Subhead } from "../components/caseBlocks";
 import { writingLink } from "../lib/writingUrl";
 
 const DATE_FORMAT = new Intl.DateTimeFormat("en-GB", {
@@ -23,7 +23,7 @@ function Cover({ post }: { post: Post }) {
   if (!post.cover) return null;
   return (
     <div className="post-cover">
-      <Media src={post.cover} alt={post.title} />
+      <Media src={post.cover} alt={post.title} loading="eager" />
     </div>
   );
 }
@@ -36,7 +36,7 @@ function Label({ label }: { label: string }) {
   );
 }
 
-function Block({ block, label }: { block: PostBlock; label: string }) {
+function Block({ block, label, outcomesLabel }: { block: PostBlock; label: string; outcomesLabel?: string }) {
   switch (block.kind) {
     case "prose":
       return (
@@ -49,15 +49,24 @@ function Block({ block, label }: { block: PostBlock; label: string }) {
       return (
         <div className="cs-row">
           <Label label={label} />
-          <div className="cs-logline">{block.text}</div>
+          <div className="cs-logline" dangerouslySetInnerHTML={{ __html: block.html }} />
         </div>
       );
     case "image":
       return <Section section={{ kind: "image", src: block.src, alt: block.alt }} />;
     case "outcomes":
-      return <Section section={{ kind: "outcomes", stats: block.stats, text: block.text }} />;
-    case "slider":
-      return <Slider items={block.items.map((it) => ({ kind: "subhead", ...it }))} />;
+      return (
+        <Outcomes
+          stats={block.stats}
+          text={block.html}
+          html
+          label={<Label label={outcomesLabel ?? ""} />}
+        />
+      );
+    case "slider": {
+      const items = block.items.map((it) => ({ kind: "subhead" as const, ...it }));
+      return items.length === 1 ? <Subhead item={items[0]} html /> : <Slider items={items} html />;
+    }
   }
 }
 
@@ -65,15 +74,21 @@ function Block({ block, label }: { block: PostBlock; label: string }) {
 function SectionBlocks({ section }: { section: PostSection }) {
   const first = section.blocks[0];
   const labelled = first?.kind === "prose" || first?.kind === "logline";
+  const inOutcomes = first?.kind === "outcomes";
   return (
     <>
-      {!labelled && section.label && (
+      {!labelled && !inOutcomes && section.label && (
         <div className="cs-row">
           <Label label={section.label} />
         </div>
       )}
       {section.blocks.map((block, i) => (
-        <Block block={block} label={i === 0 && labelled ? section.label : ""} key={i} />
+        <Block
+          block={block}
+          label={i === 0 && labelled ? section.label : ""}
+          outcomesLabel={i === 0 && inOutcomes ? section.label : ""}
+          key={i}
+        />
       ))}
     </>
   );
