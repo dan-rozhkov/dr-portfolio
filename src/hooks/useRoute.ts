@@ -2,7 +2,12 @@ import { useEffect, useState } from "react";
 import { BASE_NO_SLASH } from "../lib/url";
 import type { Lang } from "../i18n/translations";
 
-export type Route = { name: "home"; lang: Lang } | { name: "case"; id: string; lang: Lang };
+export type Route =
+  | { name: "home"; lang: Lang }
+  | { name: "case"; id: string; lang: Lang }
+  | { name: "writing"; lang: "en"; category: string | null }
+  | { name: "post"; slug: string; lang: "en" }
+  | { name: "jobs"; lang: "en" };
 
 export function extractLang(pathname: string): Lang {
   const rel = (pathname || "/").replace(BASE_NO_SLASH, "") || "/";
@@ -10,13 +15,19 @@ export function extractLang(pathname: string): Lang {
   return m ? (m[1] as Lang) : "en";
 }
 
-export function parseRoute(pathname: string): Route {
+export function parseRoute(pathname: string, search = ""): Route {
   const lang = extractLang(pathname);
   const rel = (pathname || "/").replace(BASE_NO_SLASH, "") || "/";
   // Strip language prefix for case matching
   const stripped = rel.replace(/^\/(en|ru)\//, "/").replace(/^\/(en|ru)$/, "/");
   const m = stripped.match(/^\/case\/([\w-]+)\/?$/);
   if (m) return { name: "case", id: m[1], lang };
+  if (/^\/writing\/?$/.test(stripped)) {
+    return { name: "writing", lang: "en", category: new URLSearchParams(search).get("category") };
+  }
+  const post = stripped.match(/^\/writing\/([\w-]+)\/?$/);
+  if (post) return { name: "post", slug: post[1], lang: "en" };
+  if (/^\/jobs\/?$/.test(stripped)) return { name: "jobs", lang: "en" };
   return { name: "home", lang };
 }
 
@@ -24,7 +35,7 @@ export function useRoute(initialPath: string): [Route, (r: Route) => void] {
   const [route, setRoute] = useState<Route>(() => parseRoute(initialPath));
 
   useEffect(() => {
-    const onPop = () => setRoute(parseRoute(window.location.pathname));
+    const onPop = () => setRoute(parseRoute(window.location.pathname, window.location.search));
     window.addEventListener("popstate", onPop);
 
     const onClick = (event: MouseEvent) => {
@@ -71,7 +82,7 @@ export function useRoute(initialPath: string): [Route, (r: Route) => void] {
 
       event.preventDefault();
       window.history.pushState({}, "", url.pathname + url.search + url.hash);
-      setRoute(parseRoute(url.pathname));
+      setRoute(parseRoute(url.pathname, url.search));
       window.scrollTo(0, 0);
     };
     document.addEventListener("click", onClick);

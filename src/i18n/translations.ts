@@ -4,6 +4,8 @@ export interface Translations {
   // Header
   "nav.work": string;
   "nav.about": string;
+  "nav.writing": string;
+  "nav.jobs": string;
   "nav.contact": string;
   "nav.contactMobile": string;
   "nav.cv": string;
@@ -35,6 +37,8 @@ export interface Translations {
 const en: Translations = {
   "nav.work": "Work",
   "nav.about": "About",
+  "nav.writing": "Writing",
+  "nav.jobs": "Jobs",
   "nav.contact": "Contact",
   "nav.contactMobile": "@",
   "nav.cv": "CV ↗",
@@ -51,7 +55,8 @@ const en: Translations = {
   "meta.title": "Danil Rozhkov",
   "meta.description": "Personal portfolio for product, interface, and AI-assisted design work.",
   "meta.ogTitle": "Danil Rozhkov — Lead Product Designer",
-  "meta.ogDescription": "Lead Product Designer for AI and B2B tools, from product logic to shipped UI.",
+  "meta.ogDescription":
+    "Lead Product Designer for AI and B2B tools, from product logic to shipped UI.",
   "nav.ariaLabel": "Primary navigation",
   "case.ariaNav": "Case study navigation",
 };
@@ -59,6 +64,8 @@ const en: Translations = {
 const ru: Translations = {
   "nav.work": "Работы",
   "nav.about": "О себе",
+  "nav.writing": "Writing",
+  "nav.jobs": "Jobs",
   "nav.contact": "Контакты",
   "nav.contactMobile": "@",
   "nav.cv": "Резюме ↗",
@@ -75,7 +82,8 @@ const ru: Translations = {
   "meta.title": "Даниил Рожков",
   "meta.description": "Персональное портфолио продуктового и интерфейсного дизайна.",
   "meta.ogTitle": "Даниил Рожков — Lead Product Designer",
-  "meta.ogDescription": "Lead Product Designer для AI и B2B-инструментов, от продуктовой логики до реализованного интерфейса.",
+  "meta.ogDescription":
+    "Lead Product Designer для AI и B2B-инструментов, от продуктовой логики до реализованного интерфейса.",
   "nav.ariaLabel": "Основная навигация",
   "case.ariaNav": "Навигация по кейсам",
 };
