@@ -57,9 +57,13 @@
 }
 
 @media (--mobile) {
-  .desktop-only,
-  .nav-links {
+  .desktop-only {
     display: none;
+  }
+
+  .nav-links {
+    flex: 0 0 auto;
+    gap: 14px;
   }
 
   .mobile-only {
@@ -72,7 +76,7 @@
 
   .nav {
     display: flex;
-    gap: 18px;
+    gap: 14px;
     justify-content: space-between;
     min-height: var(--space-xl);
     padding-top: 14px;
@@ -87,7 +91,7 @@
 
   .nav-actions {
     flex: 0 0 auto;
-    gap: 16px;
+    gap: 14px;
   }
 
   .site-header {

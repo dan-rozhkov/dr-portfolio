@@ -2,7 +2,7 @@ import { CATEGORY_LABEL } from "./types";
 import type { Category, Post } from "./types";
 
 export function isCategory(value: string | null): value is Category {
-  return value !== null && value in CATEGORY_LABEL;
+  return value !== null && Object.hasOwn(CATEGORY_LABEL, value);
 }
 
 /** Unknown or missing category returns every post. */

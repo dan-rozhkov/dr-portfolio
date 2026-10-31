@@ -16,8 +16,8 @@ export default function Header() {
           <br className="mobile-break" /> {lastName}
         </a>
         <div className="nav-links">
-          <a href="#work">{t("nav.work")}</a>
-          <a href="#about">{t("nav.about")}</a>
+          <a className="desktop-only" href="#work">{t("nav.work")}</a>
+          <a className="desktop-only" href="#about">{t("nav.about")}</a>
           <a href={writingLink()}>{t("nav.writing")}</a>
           <a href={jobsLink()}>{t("nav.jobs")}</a>
         </div>

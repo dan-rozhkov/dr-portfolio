@@ -63,7 +63,7 @@ export function parsePost(raw: string, slug: string): Post {
   if (fm.date === undefined) fail("missing date");
   const date = normaliseDate(fm.date) ?? fail("bad date");
   if (fm.category === undefined) fail("missing category");
-  if (typeof fm.category !== "string" || !(fm.category in CATEGORY_LABEL)) fail("bad category");
+  if (typeof fm.category !== "string" || !Object.hasOwn(CATEGORY_LABEL, fm.category)) fail("bad category");
   const tldr = strList(fm.tldr);
   if (tldr.length === 0) fail("missing tldr");
 
@@ -87,6 +87,7 @@ export function parsePost(raw: string, slug: string): Post {
     stack: strList(fm.stack),
     links,
     cover: str(fm.cover),
+    ogImage: str(fm.ogImage),
     readMinutes: readMinutes(body),
     sections: splitSections(body),
   };
@@ -102,7 +103,14 @@ const files = import.meta.glob("/content/posts/*.md", {
   eager: true,
 }) as Record<string, string>;
 
+let cached: Post[] | undefined;
+
 export function getPosts(): Post[] {
+  cached ??= loadPosts();
+  return cached;
+}
+
+function loadPosts(): Post[] {
   const posts = Object.entries(files).flatMap(([path, raw]) => {
     const slug = path.split("/").pop()!.replace(/\.md$/, "");
     return slug.startsWith("_") ? [] : [parsePost(raw, slug)];

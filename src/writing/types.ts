@@ -24,6 +24,8 @@ export interface Post {
   links: { label: string; url: string }[];
   /** path under public/ */
   cover?: string;
+  /** path under public/; raster (not WebP) for social previews */
+  ogImage?: string;
   readMinutes: number;
   sections: PostSection[];
 }

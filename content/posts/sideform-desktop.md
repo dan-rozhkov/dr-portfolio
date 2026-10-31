@@ -18,6 +18,7 @@ links:
   - label: Code
     url: https://github.com/dan-rozhkov/pen-editor-desktop
 cover: /images/writing/sideform-desktop/cover.webp
+ogImage: /images/writing/sideform-desktop/og.jpg
 ---
 
 ## Why a desktop app

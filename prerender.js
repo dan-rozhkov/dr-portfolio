@@ -83,6 +83,7 @@ function writePage(outPath, routePath) {
     "%PAGE_DESCRIPTION%": escapeAttr(meta.description),
     "%OG_DESCRIPTION%": escapeAttr(isLegacy ? LEGACY_OG_DESCRIPTION : meta.description),
     "%OG_IMAGE%": escapeAttr(`${SITE_ORIGIN}${meta.image}`),
+    "%OG_TYPE%": meta.type,
     "%OG_LOCALE%": lang === "ru" ? "ru_RU" : "en_US",
   };
   for (const [token, value] of Object.entries(tokens)) {

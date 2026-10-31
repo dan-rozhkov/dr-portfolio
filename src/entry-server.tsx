@@ -51,21 +51,25 @@ export function pageMeta(path: string): {
   title: string;
   description: string;
   image: string;
+  type: "website" | "article";
 } {
   const route = parseRoute(path);
   const title = pageTitle(path);
   let description = HOME_DESCRIPTION;
   let image = "/portrait.png";
+  let type: "website" | "article" = "website";
   if (route.name === "writing") description = WRITING_DESCRIPTION;
   else if (route.name === "jobs") description = JOBS_DESCRIPTION;
   else if (route.name === "post") {
     const post = getPost(route.slug);
     if (post) {
       description = post.dek;
-      if (post.cover) image = `/${post.cover.replace(/^\/+/, "")}`;
+      type = "article";
+      const src = post.ogImage ?? post.cover;
+      if (src) image = `/${src.replace(/^\/+/, "")}`;
     }
   }
-  return { title, description, image };
+  return { title, description, image, type };
 }
 
 export function rss(origin: string): string {

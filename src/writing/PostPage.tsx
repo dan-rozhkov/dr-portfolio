@@ -15,6 +15,11 @@ function formatDate(iso: string): string {
   return DATE_FORMAT.format(new Date(`${iso}T00:00:00Z`));
 }
 
+function repoName(url: string, fallback: string): string {
+  const last = url.replace(/[?#].*$/, "").split("/").filter(Boolean).pop();
+  return last && !/^https?:$/.test(last) ? last : fallback;
+}
+
 function isVideo(src: string): boolean {
   return /\.(mp4|webm)$/i.test(src);
 }
@@ -69,6 +74,9 @@ export default function PostPage({ post }: { post: Post | undefined }) {
   return (
     <main className="post-page">
       <article>
+        <a className="post-back-link" href={writingLink()}>
+          ← All writing
+        </a>
         <header className="cs-title-grid post-head">
           <h1 className="cs-title-name">{post.title}</h1>
           <div className="cs-title-intro">
@@ -102,7 +110,7 @@ export default function PostPage({ post }: { post: Post | undefined }) {
                     <span key={l.url}>
                       {i > 0 && ", "}
                       <a href={l.url} target="_blank" rel="noopener noreferrer">
-                        {l.label} ↗
+                        {repoName(l.url, l.label)} ↗
                       </a>
                     </span>
                   ))}

@@ -34,6 +34,12 @@ describe("parsePost", () => {
     expect(p.sections[1].html).toContain("<p>");
   });
 
+  it("reads optional ogImage", () => {
+    expect(parsePost(valid, "x").ogImage).toBeUndefined();
+    const withOg = valid.replace("stack:", "ogImage: /img/og.jpg\nstack:");
+    expect(parsePost(withOg, "x").ogImage).toBe("/img/og.jpg");
+  });
+
   it("throws on missing title", () => {
     expect(() => parsePost(valid.replace("title: Parallel agents\n", ""), "x")).toThrow(
       /x\.md: missing title/,

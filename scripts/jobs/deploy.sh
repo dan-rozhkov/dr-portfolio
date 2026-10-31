@@ -21,6 +21,7 @@ if [ ! -f .git/deploy-clone ]; then
   exit 1
 fi
 
+git rebase --abort 2>/dev/null || true
 git fetch origin
 if [ -n "$REF" ]; then
   git reset --hard "$REF"
@@ -40,7 +41,11 @@ if [ -n "$(git status --porcelain src/data/jobs.json)" ]; then
   git commit -m "chore: sync jobs [radar]" -- src/data/jobs.json
   if [ "$PUSH" = "1" ]; then
     if ! git push origin main; then
-      git pull --rebase origin main
+      if ! git pull --rebase origin main; then
+        git rebase --abort 2>/dev/null || true
+        echo "DEPLOYED, BUT PUSH FAILED: jobs.json not committed" >&2
+        exit 1
+      fi
       if ! git push origin main; then
         echo "DEPLOYED, BUT PUSH FAILED: jobs.json not committed" >&2
         exit 1

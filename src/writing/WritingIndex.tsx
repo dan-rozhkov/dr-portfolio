@@ -50,7 +50,9 @@ export default function WritingIndex({ category }: { category: string | null }) 
         </aside>
         <div className="writing-stream">
           {posts.length === 0 ? (
-            <p className="writing-empty">First post is on its way.</p>
+            <p className="writing-empty">
+              {all.length === 0 ? "First post is on its way." : "No posts in this category yet."}
+            </p>
           ) : (
             posts.map((p) => (
               <article key={p.slug}>
