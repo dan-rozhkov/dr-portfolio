@@ -17,6 +17,8 @@ Recruiters and hiring managers (goal: they write to Danil), and people coming fr
 - Never write about qure-app.
 - `~/prj/pen-editor-app` (pen-editor) is the product **Sideform** — always call it Sideform. Posts about it are only about (1) a part extracted as a library (Figma clipboard decoder, LLM-tolerant batch DSL with atomic rollback, TS flexbox engine, …) or (2) the desktop version (`pen-editor-desktop`). No general build-and-shut-down post-mortem; never claim Sideform was shut down.
 - Product focus: lead with what the user can do, what problem it solves and how it feels. Technical internals get one short line at most, or are left out.
+- Visuals like a case study: a post is as rich as the cases on the home page (see `src/data/en.ts` cases): an image or video for almost every section, plus case extras — slider (sticky subheads with media), full-width images, logline statements, outcome stats. Text-only sections are the exception. Use real product screenshots/recordings only.
+- Never put screenshots on a black background. Use the light-gray rounded media block the cases use, or no background at all. Don't bake a backdrop into the image file either — export the screenshot itself.
 - TL;DR first: what it is, what Danil did, stack, outcome — scannable in 30 seconds.
 - Drafts are published immediately and publicly. Danil reviews on the live site.
 
@@ -73,6 +75,9 @@ Do not deploy if either step was skipped.
 
 Every correction Danil sends becomes a rule here (and in Claude's memory). Newest first.
 
+- 2026-10-31 — Also take close-up screenshots of interface parts, not only full windows.
+- 2026-10-31 — No black background behind screenshots: light gray (like cases) or none; don't bake a backdrop into images.
+- 2026-10-31 — Too few images. Posts must be as visual as case studies: many real screenshots and case extras (slider, full-width images, loglines, outcomes).
 - 2026-10-31 — Product capabilities first; little or no technical detail.
 - 2026-10-31 — pen-editor is Sideform; posts only about its library parts or the desktop version (see Rules).
 - 2026-10-31 — Always run `/code-review` and check visually on desktop and mobile before deploying (see above).
