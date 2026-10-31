@@ -32,6 +32,7 @@ export default function JobsPage() {
   const [stale, setStale] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- time-dependent; must not run during render (hydration)
     setStale(isStale(lastCheck, new Date()));
   }, []);
 
