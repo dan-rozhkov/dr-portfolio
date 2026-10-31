@@ -35,6 +35,10 @@ export function useRoute(initialPath: string): [Route, (r: Route) => void] {
   const [route, setRoute] = useState<Route>(() => parseRoute(initialPath));
 
   useEffect(() => {
+    // Initial state has no query string (keeps SSR/hydration markup identical);
+    // apply it right after hydration.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setRoute(parseRoute(window.location.pathname, window.location.search));
     const onPop = () => setRoute(parseRoute(window.location.pathname, window.location.search));
     window.addEventListener("popstate", onPop);
 
