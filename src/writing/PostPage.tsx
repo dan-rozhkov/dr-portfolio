@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import Contact from "../Contact";
 import type { Post } from "./types";
 import { assetUrl } from "../lib/url";
@@ -50,11 +49,6 @@ function Cover({ post }: { post: Post }) {
 }
 
 export default function PostPage({ post }: { post: Post | undefined }) {
-  const slug = post?.slug;
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [slug]);
-
   if (!post) {
     return (
       <main className="post-page">

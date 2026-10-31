@@ -34,6 +34,17 @@ describe("parsePost", () => {
     expect(p.sections[1].html).toContain("<p>");
   });
 
+  it("does not split on ## lines inside fenced code blocks", () => {
+    const md = valid.replace(
+      "Body text here.",
+      "Before.\n\n```md\n## Install\nnpm i\n```\n\n~~~\n## Tilde\n~~~\n\nAfter.",
+    );
+    const p = parsePost(md, "x");
+    expect(p.sections.map((s) => s.label)).toEqual(["", "Split execution"]);
+    expect(p.sections[1].html).toContain("## Install");
+    expect(p.sections[1].html).toContain("## Tilde");
+  });
+
   it("reads optional ogImage", () => {
     expect(parsePost(valid, "x").ogImage).toBeUndefined();
     const withOg = valid.replace("stack:", "ogImage: /img/og.jpg\nstack:");

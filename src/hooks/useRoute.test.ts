@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { parseRoute } from "./useRoute";
+import { hashAction, parseRoute } from "./useRoute";
 
 describe("parseRoute", () => {
   it("parses writing index", () => {
@@ -29,5 +29,18 @@ describe("parseRoute", () => {
       lang: "en",
     });
     expect(parseRoute("/ru/")).toEqual({ name: "home", lang: "ru" });
+  });
+});
+
+describe("hashAction", () => {
+  it("scrolls in place when the element exists off the home page", () => {
+    expect(hashAction(false, true)).toBe("scroll");
+  });
+  it("falls back to home when the element is missing off the home page", () => {
+    expect(hashAction(false, false)).toBe("home");
+  });
+  it("leaves hash links to the browser on the home page", () => {
+    expect(hashAction(true, true)).toBe("native");
+    expect(hashAction(true, false)).toBe("native");
   });
 });

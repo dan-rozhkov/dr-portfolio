@@ -31,8 +31,30 @@ function normaliseDate(v: unknown): string | undefined {
   return Number.isNaN(d.getTime()) || d.toISOString().slice(0, 10) !== s ? undefined : s;
 }
 
+/** Split on `## ` lines, ignoring those inside fenced code blocks. */
+function splitOnH2(body: string): string[] {
+  const parts: string[] = [];
+  let current: string[] = [];
+  let fence: string | null = null;
+  for (const line of body.split("\n")) {
+    const f = /^ {0,3}(`{3,}|~{3,})/.exec(line);
+    if (f) {
+      if (fence === null) fence = f[1];
+      else if (f[1][0] === fence[0] && f[1].length >= fence.length && line.trim() === f[1]) fence = null;
+    }
+    if (fence === null && line.startsWith("## ")) {
+      parts.push(current.join("\n"));
+      current = [line.slice(3)];
+    } else {
+      current.push(line);
+    }
+  }
+  parts.push(current.join("\n"));
+  return parts;
+}
+
 function splitSections(body: string): PostSection[] {
-  const parts = body.split(/^## /m);
+  const parts = splitOnH2(body);
   const sections: PostSection[] = [];
   const intro = parts[0].trim();
   if (intro) sections.push({ label: "", html: marked.parse(intro, { async: false }) });

@@ -106,6 +106,11 @@ describe("transformRows", () => {
     expect(j.skills).toEqual(["a b", "c", "d", "e"]);
   });
 
+  it("filters Cyrillic skills before limiting to four", () => {
+    const j = one({ required_skills: "дизайн|figma|react|css|motion" });
+    expect(j.skills).toEqual(["figma", "react", "css", "motion"]);
+  });
+
   it("computes stats and normalises dates as instants", () => {
     const result = transformRows([
       row({

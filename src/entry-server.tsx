@@ -2,6 +2,7 @@ import { StrictMode } from "react";
 import { renderToString } from "react-dom/server";
 import App from "./App";
 import { setDataLang } from "./data/portfolio";
+import { t } from "./i18n/translations";
 import { extractLang, parseRoute } from "./hooks/useRoute";
 import { getPageTitle } from "./lib/pageTitle";
 import { getPost, getPosts } from "./writing/posts";
@@ -23,24 +24,10 @@ export function pageTitle(path: string): string {
   return getPageTitle(parseRoute(path));
 }
 
-export function posts(): {
-  slug: string;
-  title: string;
-  dek: string;
-  date: string;
-  cover?: string;
-}[] {
-  return getPosts().map(({ slug, title, dek, date, cover }) => ({
-    slug,
-    title,
-    dek,
-    date,
-    cover,
-  }));
+export function postSlugs(): string[] {
+  return getPosts().map((p) => p.slug);
 }
 
-const HOME_DESCRIPTION =
-  "Personal portfolio for product, interface, and AI-assisted design work.";
 const WRITING_DESCRIPTION =
   "What I build and why. Long reads on design engineering, AI tooling and product decisions.";
 const JOBS_DESCRIPTION =
@@ -50,12 +37,15 @@ const JOBS_DESCRIPTION =
 export function pageMeta(path: string): {
   title: string;
   description: string;
+  ogDescription: string;
   image: string;
   type: "website" | "article";
 } {
   const route = parseRoute(path);
   const title = pageTitle(path);
-  let description = HOME_DESCRIPTION;
+  let description = t(route.lang, "meta.description");
+  let ogDescription = t(route.lang, "meta.ogDescription");
+  const legacy = route.name === "home" || route.name === "case";
   let image = "/portrait.png";
   let type: "website" | "article" = "website";
   if (route.name === "writing") description = WRITING_DESCRIPTION;
@@ -69,7 +59,8 @@ export function pageMeta(path: string): {
       if (src) image = `/${src.replace(/^\/+/, "")}`;
     }
   }
-  return { title, description, image, type };
+  if (!legacy) ogDescription = description;
+  return { title, description, ogDescription, image, type };
 }
 
 export function rss(origin: string): string {

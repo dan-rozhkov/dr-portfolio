@@ -32,7 +32,7 @@ function findSsrEntry(dir) {
   );
 }
 
-const { render, cases, pageMeta, posts, rss } = await import(
+const { render, cases, pageMeta, postSlugs, rss } = await import(
   pathToFileURL(findSsrEntry(ssrDir)).href
 );
 
@@ -42,8 +42,6 @@ const SITE_ORIGIN = (process.env.SITE_ORIGIN || "https://drozhkov.com").replace(
   ""
 );
 const LANGS = ["en", "ru"];
-const LEGACY_OG_DESCRIPTION =
-  "Lead Product Designer for AI and B2B tools, from product logic to shipped UI.";
 
 function escapeHtml(value) {
   return value
@@ -67,7 +65,6 @@ function writePage(outPath, routePath) {
   const lang = routePath.startsWith("/ru") ? "ru" : "en";
   const meta = pageMeta(routePath);
   const title = meta.title;
-  const isLegacy = /^\/(en|ru)\/(case\/[\w-]+)?\/?$/.test(routePath);
   let full = template
     .replace('<html lang="en">', `<html lang="${lang}">`)
     .replace(/<title>.*?<\/title>/, `<title>${escapeHtml(title)}</title>`)
@@ -81,7 +78,7 @@ function writePage(outPath, routePath) {
     "%PAGE_TITLE%": escapeAttr(title),
     "%SITE_ORIGIN%": SITE_ORIGIN,
     "%PAGE_DESCRIPTION%": escapeAttr(meta.description),
-    "%OG_DESCRIPTION%": escapeAttr(isLegacy ? LEGACY_OG_DESCRIPTION : meta.description),
+    "%OG_DESCRIPTION%": escapeAttr(meta.ogDescription),
     "%OG_IMAGE%": escapeAttr(`${SITE_ORIGIN}${meta.image}`),
     "%OG_TYPE%": meta.type,
     "%OG_LOCALE%": lang === "ru" ? "ru_RU" : "en_US",
@@ -115,12 +112,12 @@ for (const lang of LANGS) {
 }
 
 // English-only pages: writing index, posts, jobs, RSS
-const allPosts = posts();
+const allPosts = postSlugs();
 writePage(path.join(distDir, "en", "writing", "index.html"), "/en/writing/");
-for (const post of allPosts) {
+for (const slug of allPosts) {
   writePage(
-    path.join(distDir, "en", "writing", post.slug, "index.html"),
-    `/en/writing/${post.slug}/`
+    path.join(distDir, "en", "writing", slug, "index.html"),
+    `/en/writing/${slug}/`
   );
 }
 writePage(path.join(distDir, "en", "jobs", "index.html"), "/en/jobs/");
@@ -193,7 +190,7 @@ for (const item of allCases) {
 // English-only pages: single en alternate
 const enOnly = [
   `/en/writing/`,
-  ...allPosts.map((p) => `/en/writing/${p.slug}/`),
+  ...allPosts.map((s) => `/en/writing/${s}/`),
   `/en/jobs/`,
 ];
 for (const route of enOnly) {

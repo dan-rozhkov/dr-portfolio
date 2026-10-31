@@ -5,7 +5,7 @@ set -euo pipefail
 
 DEPLOY_DIR="${DEPLOY_DIR:-$HOME/prj/.deploy/dr-portfolio}"
 REPO_URL="${REPO_URL:-https://github.com/dan-rozhkov/dr-portfolio.git}"
-REF="${REF-origin/main}"
+REF="${REF:-}"
 DEPLOY_CMD="${DEPLOY_CMD:-npm run deploy}"
 PUSH="${PUSH:-1}"
 
@@ -23,11 +23,7 @@ fi
 
 git rebase --abort 2>/dev/null || true
 git fetch origin
-if [ -n "$REF" ]; then
-  git reset --hard "$REF"
-else
-  git reset --hard origin/main
-fi
+git reset --hard "${REF:-origin/main}"
 git clean -fdx
 
 npm ci
@@ -39,15 +35,17 @@ bash -c "$DEPLOY_CMD"
 if [ -n "$(git status --porcelain src/data/jobs.json)" ]; then
   git add src/data/jobs.json
   git commit -m "chore: sync jobs [radar]" -- src/data/jobs.json
-  if [ "$PUSH" = "1" ]; then
+  if [ "${REF:-origin/main}" != "origin/main" ]; then
+    echo "REF is not origin/main: skipping push"
+  elif [ "$PUSH" = "1" ]; then
     if ! git push origin main; then
       if ! git pull --rebase origin main; then
         git rebase --abort 2>/dev/null || true
-        echo "DEPLOYED, BUT PUSH FAILED: jobs.json not committed" >&2
+        echo "DEPLOYED, BUT PUSH FAILED: jobs.json commit is local only and will be lost on the next run" >&2
         exit 1
       fi
       if ! git push origin main; then
-        echo "DEPLOYED, BUT PUSH FAILED: jobs.json not committed" >&2
+        echo "DEPLOYED, BUT PUSH FAILED: jobs.json commit is local only and will be lost on the next run" >&2
         exit 1
       fi
     fi

@@ -17,6 +17,9 @@ const MODE_LABEL: Record<NonNullable<Job["mode"]>, string> = {
   onsite: "on-site",
 };
 
+const FAMILY_COUNT = Object.fromEntries(FAMILIES.map((f) => [f, jobs.filter((j) => j.family === f).length]));
+const MODE_COUNT = Object.fromEntries(MODES.map((m) => [m.value, jobs.filter((j) => j.mode === m.value).length]));
+
 const CHECK_FORMAT = new Intl.DateTimeFormat("en-GB", {
   day: "numeric",
   month: "short",
@@ -55,7 +58,7 @@ export default function JobsPage() {
               <li key={f}>
                 <button type="button" aria-pressed={family === f} onClick={() => setFamily(family === f ? null : f)}>
                   {f}
-                  <span>{jobs.filter((j) => j.family === f).length}</span>
+                  <span>{FAMILY_COUNT[f]}</span>
                 </button>
               </li>
             ))}
@@ -66,7 +69,7 @@ export default function JobsPage() {
               <li key={m.value}>
                 <button type="button" aria-pressed={mode === m.value} onClick={() => setMode(mode === m.value ? null : m.value)}>
                   {m.label}
-                  <span>{jobs.filter((j) => j.mode === m.value).length}</span>
+                  <span>{MODE_COUNT[m.value]}</span>
                 </button>
               </li>
             ))}
@@ -92,7 +95,7 @@ export default function JobsPage() {
                 </div>
                 {j.skills.length > 0 && (
                   <div className="jobs-chips">
-                    {j.skills.slice(0, 4).map((s) => <span key={s}>{s}</span>)}
+                    {j.skills.map((s) => <span key={s}>{s}</span>)}
                   </div>
                 )}
               </a>

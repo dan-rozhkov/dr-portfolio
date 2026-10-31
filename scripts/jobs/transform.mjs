@@ -44,9 +44,9 @@ function formatLocation(raw) {
 function formatSkills(raw) {
   return (raw ?? "")
     .split("|")
-    .slice(0, 4)
     .map((s) => s.trim().replaceAll("_", " "))
-    .filter((s) => s && !CYRILLIC.test(s));
+    .filter((s) => s && !CYRILLIC.test(s))
+    .slice(0, 4);
 }
 
 const orNull = (value) => {

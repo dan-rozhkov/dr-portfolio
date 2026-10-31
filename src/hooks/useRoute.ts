@@ -31,6 +31,18 @@ export function parseRoute(pathname: string, search = ""): Route {
   return { name: "home", lang };
 }
 
+export type HashAction = "native" | "scroll" | "home";
+
+/**
+ * How to handle an in-page `#id` link click. On the home route the browser
+ * handles it. Elsewhere, scroll to the element if this page has it, otherwise
+ * go to home#id.
+ */
+export function hashAction(onHome: boolean, elementExists: boolean): HashAction {
+  if (elementExists) return onHome ? "native" : "scroll";
+  return onHome ? "native" : "home";
+}
+
 export function useRoute(initialPath: string): [Route, (r: Route) => void] {
   const [route, setRoute] = useState<Route>(() => parseRoute(initialPath));
 
@@ -64,16 +76,22 @@ export function useRoute(initialPath: string): [Route, (r: Route) => void] {
       if (href.startsWith("#")) {
         const currentPath = window.location.pathname.replace(/\/$/, "");
         const currentBase = BASE_NO_SLASH.replace(/\/$/, "");
-        if (currentPath !== currentBase) {
+        const id = href.slice(1);
+        const el = id ? document.getElementById(id) : null;
+        const action = hashAction(currentPath === currentBase, !!el);
+        if (action === "scroll" && el) {
+          event.preventDefault();
+          window.history.replaceState({}, "", window.location.pathname + window.location.search + href);
+          el.scrollIntoView();
+        } else if (action === "home") {
           event.preventDefault();
           const lang = extractLang(window.location.pathname);
           const targetPath = `/${lang}${href}`;
           window.history.pushState({}, "", targetPath);
           setRoute(parseRoute(targetPath));
           requestAnimationFrame(() => {
-            const id = href.slice(1);
-            const el = id ? document.getElementById(id) : null;
-            if (el) el.scrollIntoView();
+            const target = id ? document.getElementById(id) : null;
+            if (target) target.scrollIntoView();
           });
         }
         return;
