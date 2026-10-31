@@ -5,9 +5,9 @@ date: 2026-11-01
 category: product-building
 tldr:
   - Biscuit Pet is a virtual pet for iPhone. Biscuit lives on while the app is closed, so a 30-second visit always matters.
-  - I designed and built it in four days, 28–31 October 2026 — 79 commits, 75 of them co-written with Claude.
+  - I designed and built it over four days, 28–31 October 2026 — 79 commits, 75 of them co-written with Claude.
   - Biscuit is AI-generated video. I made every pose on fal from one master still, so he looks like the same animal in every clip.
-  - Expo and TypeScript, 558 unit tests, with App Store metadata and screenshots ready for release.
+  - Expo and TypeScript, 558 unit tests, with App Store metadata and screenshots prepared for submission.
 stack:
   - Expo
   - React Native
@@ -34,7 +34,7 @@ Biscuit gets hungry, bored, sleepy and scruffy while the app is closed, and he i
 Biscuit is AI-generated, but he looks like the same animal in every frame.
 :::
 
-I wrote a short character bible and made every pose from one master still with nano-banana-pro on fal. Kling and Veo turned the stills into clips, and I matched their colour so moods blend without a jump.
+I wrote a short character bible and made every pose from one master still with nano-banana-pro on fal. Kling and Veo turned the stills into clips, and I measured their colour and corrected the outliers so moods blend.
 
 :::slider
 ### Idle
@@ -70,7 +70,7 @@ Four needs, four buttons, no menus.
 
 ![Need circles: Hunger, Joy, Sleep and Hygiene](/images/writing/biscuit-pet/needs.webp)
 
-I made each need circle both the meter and the button. The drumstick opens the pantry, the heart opens games, the moon turns off the light and the shower head runs a bath.
+I made each need circle both the meter and the button. The drumstick opens the pantry, the heart opens games, the moon turns off the light and the shower head runs a shower.
 
 ![Pantry tray with an apple, toast and a Shop button](/images/writing/biscuit-pet/pantry.webp)
 
@@ -81,7 +81,7 @@ Biscuit is the whole screen. Everything else sits around him.
 
 ### Feed
 Pick a snack from the pantry and he chews it on screen.
-![Biscuit chewing an apple](/images/writing/biscuit-pet/feed.webp)
+![Biscuit after a snack, with toast left in the pantry](/images/writing/biscuit-pet/feed.webp)
 
 ### Lights off
 He curls up and sleeps, and Sleep comes back.
@@ -109,10 +109,10 @@ A 60-second match-three on a 5×5 board.
 
 ### Fox Run
 Tap to jump over logs and collect paws.
-![Fox Run: Biscuit jumping for paw coins](/images/writing/biscuit-pet/fox-run.webp)
+![Fox Run: Biscuit on a meadow with paw coins](/images/writing/biscuit-pet/fox-run.webp)
 :::
 
-Each round raises Joy and costs Sleep, so a tired fox has to nap before he plays again.
+Each round raises Joy and costs Sleep, so a tired fox has to rest or have a coffee before he plays again.
 
 ![Shop with food cards, prices and effects](/images/writing/biscuit-pet/shop.webp)
 
@@ -138,10 +138,10 @@ Quiet by design.
 
 ![Event art: Biscuit curled up in a sunny spot](/images/writing/biscuit-pet/sunny-spot.webp)
 
-Reminders are local and only come when he gets hungry, bored or dirty after you leave. Everything stays on the phone, and fixes ship as over-the-air updates without a new build.
+Reminders are local and only come when he gets hungry, bored or dirty after you leave. No personal data leaves the phone, and fixes ship as over-the-air updates without a new build.
 
 :::outcomes
-- 4 days — from first commit to release docs
+- 4 days — from first commit, 28 Oct, to the release docs, 31 Oct
 - 79 — commits, 75 co-written with Claude
 - 11 — animated clips of one character
 - 558 — unit tests
