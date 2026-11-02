@@ -28,6 +28,7 @@ export default function Header() {
           </a>
           <a
             className="cv-link"
+            data-analytics="resume"
             href={assetUrl("cv.pdf")}
             target="_blank"
             rel="noopener noreferrer"

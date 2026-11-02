@@ -3,6 +3,7 @@ import { createRoot, hydrateRoot } from "react-dom/client";
 import App from "./App";
 import { setDataLang } from "./data/portfolio";
 import { extractLang } from "./hooks/useRoute";
+import { handleAnalyticsAuxClick, handleAnalyticsClick, initAnalytics } from "./analytics/analytics";
 import "./styles/tokens.css";
 import "./styles/global.css";
 import "./styles/components/header.css";
@@ -18,6 +19,7 @@ import "./styles/components/case-indicator.css";
 import "./styles/components/case-study.css";
 import "./styles/components/writing.css";
 import "./styles/components/jobs.css";
+import "./styles/components/consent.css";
 
 if (import.meta.env.DEV) {
   import("live-studio").then(({ startStudio }) => startStudio());
@@ -29,6 +31,11 @@ if (!container) {
 }
 
 setDataLang(extractLang(window.location.pathname));
+
+// Analytics starts only if the visitor accepted it earlier; otherwise nothing loads.
+initAnalytics();
+document.addEventListener("click", handleAnalyticsClick, true);
+document.addEventListener("auxclick", handleAnalyticsAuxClick, true);
 
 const tree = (
   <StrictMode>

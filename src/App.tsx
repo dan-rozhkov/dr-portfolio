@@ -20,6 +20,8 @@ import JobsPage from "./jobs/JobsPage";
 import PostPage from "./writing/PostPage";
 import { getPost } from "./writing/posts";
 import { getPageTitle } from "./lib/pageTitle";
+import ConsentBanner from "./components/ConsentBanner";
+import { trackPage } from "./analytics/analytics";
 
 export default function App({ initialPath }: { initialPath?: string }) {
   const path =
@@ -37,6 +39,11 @@ export default function App({ initialPath }: { initialPath?: string }) {
     document.title = pageTitle;
   }, [pageTitle]);
 
+  // One pageview per real pathname change; no-op until analytics is accepted.
+  useEffect(() => {
+    trackPage(window.location.pathname);
+  }, [route]);
+
   if (route.name === "case") {
     const study = getCaseStudy(route.id);
     if (study) {
@@ -46,6 +53,7 @@ export default function App({ initialPath }: { initialPath?: string }) {
           <Header />
           <CaseStudy study={study} />
           <ContactObserver />
+          <ConsentBanner />
         </I18nProvider>
       );
     }
@@ -59,6 +67,7 @@ export default function App({ initialPath }: { initialPath?: string }) {
         <WritingIndex category={route.category} />
         <Contact />
         <ContactObserver />
+        <ConsentBanner />
       </I18nProvider>
     );
   }
@@ -71,6 +80,7 @@ export default function App({ initialPath }: { initialPath?: string }) {
         <JobsPage />
         <Contact />
         <ContactObserver />
+        <ConsentBanner />
       </I18nProvider>
     );
   }
@@ -82,6 +92,7 @@ export default function App({ initialPath }: { initialPath?: string }) {
         <Header />
         <PostPage post={getPost(route.slug)} />
         <ContactObserver />
+        <ConsentBanner />
       </I18nProvider>
     );
   }
@@ -104,6 +115,7 @@ export default function App({ initialPath }: { initialPath?: string }) {
       <CaseIndicator />
       <ContactObserver />
       <ScrollFade />
+      <ConsentBanner />
     </I18nProvider>
   );
 }

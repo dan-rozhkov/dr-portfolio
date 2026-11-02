@@ -40,12 +40,16 @@
 }
 
 .contact-year {
-  display: block;
+  display: flex;
+  flex-direction: column;
   grid-column: 14 / -1;
   grid-row: 2;
+  gap: 12px;
+  align-items: end;
   align-self: end;
   justify-self: end;
   color: rgb(255 255 255 / 62%);
+  white-space: nowrap;
 }
 
 @media (--mobile) {
@@ -75,7 +79,6 @@
 
   .contact-year {
     position: static;
-    display: block;
     margin-top: 48px;
   }
 }

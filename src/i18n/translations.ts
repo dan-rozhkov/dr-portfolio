@@ -32,6 +32,17 @@ export interface Translations {
   // Navigation aria
   "nav.ariaLabel": string;
   "case.ariaNav": string;
+  // Analytics consent
+  "consent.label": string;
+  "consent.title": string;
+  "consent.body": string;
+  "consent.details": string;
+  "consent.accept": string;
+  "consent.reject": string;
+  "consent.close": string;
+  "consent.current.granted": string;
+  "consent.current.denied": string;
+  "consent.settings": string;
 }
 
 const en: Translations = {
@@ -59,6 +70,18 @@ const en: Translations = {
     "Lead Product Designer for AI and B2B tools, from product logic to shipped UI.",
   "nav.ariaLabel": "Primary navigation",
   "case.ariaNav": "Case study navigation",
+  "consent.label": "Analytics consent",
+  "consent.title": "Analytics",
+  "consent.body":
+    "Can I count visits with PostHog? It shows which pages and cases people open and which contact links they click. Nothing loads until you choose.",
+  "consent.details":
+    "Data goes to PostHog EU Cloud, hosted in the EU. No session recordings, no cookies, no form contents. If you accept, PostHog keeps an anonymous ID in your browser storage. Change your mind any time under “Analytics settings” at the bottom of the page.",
+  "consent.accept": "Accept analytics",
+  "consent.reject": "Reject analytics",
+  "consent.close": "Close",
+  "consent.current.granted": "Current choice: analytics accepted.",
+  "consent.current.denied": "Current choice: analytics rejected.",
+  "consent.settings": "Analytics settings",
 };
 
 const ru: Translations = {
@@ -86,6 +109,18 @@ const ru: Translations = {
     "Lead Product Designer для AI и B2B-инструментов, от продуктовой логики до реализованного интерфейса.",
   "nav.ariaLabel": "Основная навигация",
   "case.ariaNav": "Навигация по кейсам",
+  "consent.label": "Согласие на аналитику",
+  "consent.title": "Аналитика",
+  "consent.body":
+    "Можно я буду считать визиты через PostHog? Так я вижу, какие страницы и кейсы открывают и по каким контактам кликают. До вашего выбора ничего не загружается.",
+  "consent.details":
+    "Данные уходят в PostHog EU Cloud, серверы в ЕС. Без записи сессий, без cookies, без содержимого форм. Если вы согласитесь, PostHog сохранит анонимный ID в хранилище браузера. Передумать можно в любой момент: «Настройки аналитики» внизу страницы.",
+  "consent.accept": "Принять аналитику",
+  "consent.reject": "Отклонить аналитику",
+  "consent.close": "Закрыть",
+  "consent.current.granted": "Сейчас: аналитика разрешена.",
+  "consent.current.denied": "Сейчас: аналитика отклонена.",
+  "consent.settings": "Настройки аналитики",
 };
 
 const translations: Record<Lang, Translations> = { en, ru };

@@ -1,12 +1,27 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { trackCaseEnd } from "./analytics/analytics";
 import Contact from "./Contact";
 import type { CaseStudy as CaseStudyType } from "./data/portfolio";
 import { Media, Section, Slider } from "./components/caseBlocks";
 import { groupSections } from "./components/caseGroups";
 
 export default function CaseStudy({ study }: { study: CaseStudyType }) {
+  const endRef = useRef<HTMLDivElement | null>(null);
+
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, [study.id]);
+
+  // Report reaching the end of the case (the last section scrolled into view).
+  useEffect(() => {
+    const el = endRef.current;
+    if (!el || typeof IntersectionObserver === "undefined") return undefined;
+    const observer = new IntersectionObserver((entries) => {
+      // trackCaseEnd sends once per pageview; before consent it is held until Accept on this page.
+      if (entries.some((e) => e.isIntersecting)) trackCaseEnd(study.id);
+    });
+    observer.observe(el);
+    return () => observer.disconnect();
   }, [study.id]);
 
   const meta = study.meta.filter(([label]) => label.toLowerCase() !== "scope");
@@ -50,6 +65,7 @@ export default function CaseStudy({ study }: { study: CaseStudyType }) {
           )
         )}
       </div>
+      <div className="cs-end" ref={endRef} aria-hidden="true" />
 
       <Contact />
     </main>
