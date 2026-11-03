@@ -310,9 +310,17 @@ void main() {
 
 /** Colour presets: `sideform` is the landing's palette, unchanged; the others reuse the shader. */
 const GRADIENTS = {
-  sideform: { palette: ["#020202", "#020202", "#3c50a5", "#c0d5d0", "#ff4000", "#020202"], seed: 36 },
-  qure: { palette: ["#020202", "#020202", "#1f3f9e", "#c4f1e6", "#1fae9c", "#020202"], seed: 36 },
-} as const;
+  sideform: { palette: ["#020202", "#020202", "#3c50a5", "#c0d5d0", "#ff4000", "#020202"], seed: 36, uniforms: {} },
+  // Same shader, its own shape: a single diagonal S-ribbon instead of the landing's corner wave
+  qure: {
+    palette: ["#020202", "#020202", "#1f3f9e", "#c4f1e6", "#1fae9c", "#020202"],
+    seed: 58,
+    uniforms: { u_scale: 0.55 },
+  },
+} as const satisfies Record<
+  string,
+  { palette: readonly string[]; seed: number; uniforms: Record<string, number> }
+>;
 export type GradientName = keyof typeof GRADIENTS;
 
 /** Seconds into the animation used for the single frame drawn under reduced motion. */
@@ -403,7 +411,8 @@ function buildResources(gl: WebGL2RenderingContext, preset: GradientName): GlRes
   gl.uniform4fv(gl.getUniformLocation(program, "u_colors"), colors);
   gl.uniform1i(gl.getUniformLocation(program, "u_colors_length"), palette.length);
   gl.uniform1f(gl.getUniformLocation(program, "u_seed"), seed);
-  for (const [name, value] of Object.entries(NUMBER_UNIFORMS)) {
+  const overrides: Record<string, number> = GRADIENTS[preset].uniforms;
+  for (const [name, value] of Object.entries({ ...NUMBER_UNIFORMS, ...overrides })) {
     gl.uniform1f(gl.getUniformLocation(program, name), value);
   }
   return {

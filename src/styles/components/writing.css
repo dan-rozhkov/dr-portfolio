@@ -316,3 +316,54 @@
 .writing-thumb .live-cover {
   height: 100%;
 }
+
+/* Each `##` section is one group: blocks inside it sit closer than the sections do. */
+.post-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+@media (--mobile) {
+  .post-sections {
+    gap: 64px;
+    margin-top: 0;
+  }
+
+  .post-section {
+    gap: 20px;
+  }
+
+  /* An unlabelled row reserves no label line on mobile. */
+  .post-sections .cs-label-spacer {
+    display: none;
+  }
+
+  .post-sections h2.cs-label {
+    font-size: var(--text-xs);
+    letter-spacing: 0.08em;
+  }
+
+  .post-sections .cs-row {
+    row-gap: 8px;
+  }
+
+  /* Images and videos run edge to edge on mobile. */
+  .post-cover,
+  .post-sections .cs-image-row {
+    margin-inline: 0;
+  }
+
+  .post-sections .cs-slider-pair .cs-image,
+  .post-sections .cs-subhead-media,
+  .post-body img,
+  .post-body video {
+    width: calc(100% + 2 * var(--pad));
+    max-width: none;
+    margin-inline: calc(-1 * var(--pad));
+  }
+
+  .post-sections .cs-slider-mobile {
+    gap: 40px;
+  }
+}

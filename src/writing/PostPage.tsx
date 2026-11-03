@@ -111,7 +111,7 @@ function SectionBlocks({ section }: { section: PostSection }) {
   const labelled = first?.kind === "prose" || first?.kind === "logline";
   const inOutcomes = first?.kind === "outcomes";
   return (
-    <>
+    <section className="post-section">
       {!labelled && !inOutcomes && section.label && (
         <div className="cs-row">
           <Label label={section.label} />
@@ -125,7 +125,7 @@ function SectionBlocks({ section }: { section: PostSection }) {
           key={i}
         />
       ))}
-    </>
+    </section>
   );
 }
 
