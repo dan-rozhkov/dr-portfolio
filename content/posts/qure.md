@@ -38,7 +38,7 @@ Recorders produce brittle code nobody wants to keep, and general AI assistants d
 Show the flow once, get a test that passes.
 :::
 
-![Recording a new contact in the built-in browser, then the agent writes contacts.spec.ts and replays the flow with its mint cursor until the test passes](/images/writing/qure/video-record.mp4 "full")
+![Pixel symbols for Qure Demo Day](/images/writing/qure/demo-day-symbols.jpg "full")
 
 I moved Qure to a chat-first start: an empty chat opens on the jobs people come for, not on a dashboard. I also refined the agent's mint cursor, so you always see who is clicking in the page.
 
@@ -48,7 +48,7 @@ I moved Qure to a chat-first start: an empty chat opens on the jobs people come 
 Manual and automated tests in one place, with the last run one click away.
 :::
 
-![Opening a test in the Tests workspace and replaying its last run step by step](/images/writing/qure/video-tests.mp4 "full")
+![Blue and gold pixel pattern for Qure Demo Day](/images/writing/qure/demo-day-pattern.jpg "full")
 
 I merged test management into one Tests panel: folders, manual cases kept as Markdown, local and imported runs side by side. A test opens straight on its last run.
 
@@ -58,7 +58,7 @@ I merged test management into one Tests panel: folders, manual cases kept as Mar
 See what the suite really covers, and what nobody has checked.
 :::
 
-![Opening the coverage map: Contacts is verified by its tests, Reports has none and offers to plan coverage](/images/writing/qure/video-coverage.mp4 "full")
+![Qure Demo Day 2026 badge and lanyard](/images/writing/qure/demo-day-badge.jpg "full")
 
 The coverage map links suites, cases and the screens they touch. A link counts as verified only when the last run proves it, and unknown coverage stays visible instead of looking green.
 
@@ -67,8 +67,6 @@ The coverage map links suites, cases and the screens they touch. A link counts a
 :::logline
 Plan a regression run in the chat and get a report back.
 :::
-
-![Planning a release regression in chat, running it, and getting a report with the one failing test](/images/writing/qure/video-plan.mp4 "full")
 
 I built test plans and then moved the wizard into the chat, so planning, running and reporting are one conversation. The agent can create and edit plans too.
 
