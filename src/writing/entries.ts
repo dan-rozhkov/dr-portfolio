@@ -32,7 +32,7 @@ function formatDate(iso: string): string {
   return DATE_FORMAT.format(new Date(`${iso}T00:00:00Z`));
 }
 
-/** Cases page category of each home-page case study; the same in every language. */
+/** Cases page category of each home-page case study. */
 export const CASE_CATEGORY: Record<string, Category> = {
   "sber-india-proto": "ai-tools",
   openprovider: "product-building",

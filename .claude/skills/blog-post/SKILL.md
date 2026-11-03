@@ -101,7 +101,8 @@ Do not deploy if either step was skipped.
 
 Every correction Danil sends becomes a rule here (and in Claude's memory). Newest first.
 
-- 2026-11-03 — One Cases list: `/en/writing/` moved to `/en/cases/` (old URLs redirect). The Cases page lists posts and the home-page case studies together (`src/writing/entries.ts`; a home case needs a `category` in `src/data/en.ts` and `ru.ts`). The home page shows only the 3 newest as cards plus an "All cases" button.
+- 2026-11-03 — The Russian version is removed: the site is English only; old `/ru/` URLs redirect to `/en/`.
+- 2026-11-03 — One Cases list: `/en/writing/` moved to `/en/cases/` (old URLs redirect). The Cases page lists posts and the home-page case studies together (`src/writing/entries.ts`; a new home case needs a category in `CASE_CATEGORY` there). The home page shows only the 3 newest as cards plus an "All cases" button.
 - 2026-11-03 — Card thumbs are shown 16:10 (`object-fit: cover`), so crop the thumb to 16:10 yourself and keep the whole subject in frame (Biscuit's paws were cut off). Biscuit art uses the app's own colour grade (`PACK_GRADE` in `~/prj/tamagochi-exp/tools/make-event-stills.sh`, saturation 1.20) on the raw `.work/*/nano-banana-pro.png`, so it looks as rich as in the app.
 
 - 2026-11-03 — Qure case cover is live: the approved swirl animation (`coverLive: qure-swirl`, `src/components/SwirlCover.tsx`, one turn per π/0.5 ≈ 6.3 s), static `cover-swirl.webp` as fallback, reduced-motion frame and list thumbnail (`thumb`). LiquidGradient is back to the untouched Sideform shader.

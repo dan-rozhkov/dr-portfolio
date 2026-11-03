@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { getCaseStudy, setDataLang } from "./data/portfolio";
+import { getCaseStudy } from "./data/portfolio";
 import CaseStudy from "./CaseStudy";
 import Contact from "./Contact";
 import Header from "./components/Header";
@@ -26,7 +26,6 @@ export default function App({ initialPath }: { initialPath?: string }) {
 
   const [route] = useRoute(path);
   const lang = route.lang;
-  setDataLang(lang);
 
   const pageTitle = getPageTitle(route);
 

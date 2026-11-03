@@ -60,7 +60,7 @@ and closed tabs cannot be cleaned by this script. Previously loaded old tabs can
 continue running their old SDK until reloaded. Historical PostHog records are not
 removed by this change.
 
-The footer links to `/privacy.html#en` or `/privacy.html#ru`. All consent panels,
+The footer links to `/privacy.html` (English only). All consent panels,
 settings controls, consent translations and banner CSS/tests are removed.
 The Privacy page explains event-level storage, provider infrastructure processing,
 legacy data, and external destinations. Absence of cookies does **not** establish

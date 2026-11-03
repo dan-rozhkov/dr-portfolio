@@ -90,7 +90,7 @@ describe("identifier-free browser collection", () => {
     expect(send).not.toHaveBeenCalled();
     Object.defineProperty(navigator, "doNotTrack", { configurable: true, value: null });
     Object.defineProperty(navigator, "globalPrivacyControl", { configurable: true, value: true });
-    trackPage("/ru");
+    trackPage("/en/cases");
     expect(send).not.toHaveBeenCalled();
     Object.defineProperty(navigator, "globalPrivacyControl", { configurable: true, value: false });
   });

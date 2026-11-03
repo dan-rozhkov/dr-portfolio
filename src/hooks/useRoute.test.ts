@@ -9,8 +9,8 @@ describe("parseRoute", () => {
     expect(parseRoute("/en/writing/")).toEqual({ name: "cases", lang: "en", category: null });
     expect(parseRoute("/en/writing/qure/")).toEqual({ name: "post", slug: "qure", lang: "en" });
   });
-  it("parses cases category and forces en", () => {
-    expect(parseRoute("/ru/cases", "?category=ai-tools")).toEqual({
+  it("parses cases category", () => {
+    expect(parseRoute("/en/cases", "?category=ai-tools")).toEqual({
       name: "cases",
       lang: "en",
       category: "ai-tools",
@@ -24,7 +24,7 @@ describe("parseRoute", () => {
     });
   });
   it("parses jobs", () => {
-    expect(parseRoute("/ru/jobs/")).toEqual({ name: "jobs", lang: "en" });
+    expect(parseRoute("/en/jobs/")).toEqual({ name: "jobs", lang: "en" });
   });
   it("keeps case and home", () => {
     expect(parseRoute("/en/case/openprovider")).toEqual({
@@ -32,7 +32,8 @@ describe("parseRoute", () => {
       id: "openprovider",
       lang: "en",
     });
-    expect(parseRoute("/ru/")).toEqual({ name: "home", lang: "ru" });
+    // /ru/ was removed; old /ru/ paths open the English page.
+    expect(parseRoute("/ru/jobs/")).toEqual({ name: "jobs", lang: "en" });
   });
 });
 

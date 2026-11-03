@@ -1,10 +1,9 @@
 import { getProfile } from "./data/portfolio";
-import { useLang, useT } from "./i18n/context";
+import { useT } from "./i18n/context";
 
 export default function Contact() {
   const profile = getProfile();
   const t = useT();
-  const lang = useLang();
 
   return (
     <section className="section contact" id="contact">
@@ -21,8 +20,8 @@ export default function Contact() {
           </a>
         </div>
         <div className="contact-year">
-          <a className="contact-privacy" href={`/privacy.html#${lang}`}>
-            {lang === "ru" ? "Конфиденциальность" : "Privacy"}
+          <a className="contact-privacy" href="/privacy.html">
+            Privacy
           </a>
           <span>© {profile.year}</span>
         </div>

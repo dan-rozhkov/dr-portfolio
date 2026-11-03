@@ -41,7 +41,6 @@ const SITE_ORIGIN = (process.env.SITE_ORIGIN || "https://drozhkov.com").replace(
   /\/+$/,
   ""
 );
-const LANGS = ["en", "ru"];
 
 function escapeHtml(value) {
   return value
@@ -62,7 +61,7 @@ function pageUrl(routePath) {
 
 function writePage(outPath, routePath) {
   const html = render(routePath);
-  const lang = routePath.startsWith("/ru") ? "ru" : "en";
+  const lang = "en";
   const meta = pageMeta(routePath);
   const title = meta.title;
   let full = template
@@ -81,7 +80,7 @@ function writePage(outPath, routePath) {
     "%OG_DESCRIPTION%": escapeAttr(meta.ogDescription),
     "%OG_IMAGE%": escapeAttr(`${SITE_ORIGIN}${meta.image}`),
     "%OG_TYPE%": meta.type,
-    "%OG_LOCALE%": lang === "ru" ? "ru_RU" : "en_US",
+    "%OG_LOCALE%": "en_US",
   };
   for (const [token, value] of Object.entries(tokens)) {
     full = full.split(token).join(value);
@@ -96,22 +95,17 @@ function writePage(outPath, routePath) {
   console.log("prerendered", routePath, "->", path.relative(distDir, outPath));
 }
 
-for (const lang of LANGS) {
-  // render() calls setDataLang internally via extractLang(path)
-  // Home page
-  writePage(path.join(distDir, lang, "index.html"), `/${lang}/`);
-
-  // Case pages (case IDs are identical across languages)
-  const allCases = cases();
-  for (const item of allCases) {
-    writePage(
-      path.join(distDir, lang, "case", item.id, "index.html"),
-      `/${lang}/case/${item.id}`
-    );
-  }
+// Home page and case pages
+const allCases = cases();
+writePage(path.join(distDir, "en", "index.html"), "/en/");
+for (const item of allCases) {
+  writePage(
+    path.join(distDir, "en", "case", item.id, "index.html"),
+    `/en/case/${item.id}`
+  );
 }
 
-// English-only pages: cases index, posts, jobs, RSS
+// Cases index, posts, jobs, RSS
 const allPosts = postSlugs();
 writePage(path.join(distDir, "en", "cases", "index.html"), "/en/cases/");
 for (const slug of allPosts) {
@@ -126,6 +120,7 @@ fs.writeFileSync(path.join(distDir, "en", "cases", "rss.xml"), feed);
 console.log("wrote en/cases/rss.xml");
 
 // /en/writing/ was the old address of /en/cases/: keep old links and feed readers working.
+// (The removed Russian version, /ru/*, redirects to /en/* through public/_redirects.)
 function writeRedirect(outPath, target) {
   const url = `${SITE_ORIGIN}${target}`;
   const html = `<!DOCTYPE html>
@@ -162,7 +157,7 @@ const redirectHtml = `<!DOCTYPE html>
   <title>Danil Rozhkov</title>
 </head>
 <body>
-  <noscript><p><a href="/en/">English</a> · <a href="/ru/">Русский</a></p></noscript>
+  <noscript><p><a href="/en/">Danil Rozhkov</a></p></noscript>
 </body>
 </html>
 `;
@@ -175,60 +170,18 @@ fs.copyFileSync(
   path.join(distDir, "404.html")
 );
 
-// Sitemap with hreflang
+// Sitemap
 const today = new Date().toISOString().slice(0, 10);
-const sitemapUrls = [];
-
-function sitemapEntry(loc, alternates) {
-  const links = alternates
-    .map((a) => `<xhtml:link rel="alternate" hreflang="${a.lang}" href="${a.href}"/>`)
-    .join("");
-  return `  <url><loc>${loc}</loc><lastmod>${today}</lastmod>${links}</url>`;
-}
-
-// Root with x-default
-sitemapUrls.push(
-  sitemapEntry(`${SITE_ORIGIN}/`, [
-    { lang: "x-default", href: `${SITE_ORIGIN}/` },
-    ...LANGS.map((l) => ({ lang: l, href: `${SITE_ORIGIN}/${l}/` })),
-  ])
-);
-
-// Home + case pages for each language
-for (const lang of LANGS) {
-  sitemapUrls.push(
-    sitemapEntry(`${SITE_ORIGIN}/${lang}/`,
-      LANGS.map((l) => ({ lang: l, href: `${SITE_ORIGIN}/${l}/` }))
-    )
-  );
-}
-
-const allCases = cases();
-for (const item of allCases) {
-  for (const lang of LANGS) {
-    sitemapUrls.push(
-      sitemapEntry(pageUrl(`/${lang}/case/${item.id}`),
-        LANGS.map((l) => ({ lang: l, href: pageUrl(`/${l}/case/${item.id}`) }))
-      )
-    );
-  }
-}
-
-// English-only pages: single en alternate
-const enOnly = [
+const sitemapUrls = [
+  `/en/`,
+  ...allCases.map((item) => `/en/case/${item.id}/`),
   `/en/cases/`,
-  ...allPosts.map((s) => `/en/cases/${s}/`),
+  ...allPosts.map((slug) => `/en/cases/${slug}/`),
   `/en/jobs/`,
-];
-for (const route of enOnly) {
-  sitemapUrls.push(
-    sitemapEntry(pageUrl(route), [{ lang: "en", href: pageUrl(route) }])
-  );
-}
+].map((route) => `  <url><loc>${pageUrl(route)}</loc><lastmod>${today}</lastmod></url>`);
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${sitemapUrls.join("\n")}
 </urlset>
 `;
@@ -238,7 +191,6 @@ console.log("wrote sitemap.xml");
 // Update robots.txt to point to new sitemap location
 const robots = `User-agent: *
 Allow: /en/
-Allow: /ru/
 Sitemap: ${SITE_ORIGIN}/sitemap.xml
 `;
 fs.writeFileSync(path.join(distDir, "robots.txt"), robots);

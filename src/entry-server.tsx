@@ -1,9 +1,8 @@
 import { StrictMode } from "react";
 import { renderToString } from "react-dom/server";
 import App from "./App";
-import { setDataLang } from "./data/portfolio";
 import { t } from "./i18n/translations";
-import { extractLang, parseRoute } from "./hooks/useRoute";
+import { parseRoute } from "./hooks/useRoute";
 import { getPageTitle } from "./lib/pageTitle";
 import { getPost, getPosts } from "./writing/posts";
 import { buildRss } from "./writing/rss";
@@ -11,7 +10,6 @@ import { buildRss } from "./writing/rss";
 export { getCases as cases } from "./data/portfolio";
 
 export function render(path: string): string {
-  setDataLang(extractLang(path));
   return renderToString(
     <StrictMode>
       <App initialPath={path} />
@@ -20,7 +18,6 @@ export function render(path: string): string {
 }
 
 export function pageTitle(path: string): string {
-  setDataLang(extractLang(path));
   return getPageTitle(parseRoute(path));
 }
 

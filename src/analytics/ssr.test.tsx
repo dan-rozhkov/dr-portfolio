@@ -4,7 +4,7 @@ import { render } from "../entry-server";
 
 describe("prerender with analytics", () => {
   it("renders without window and without the consent panel", () => {
-    for (const path of ["/en/", "/ru/", "/en/case/sber-india-proto", "/en/cases/"]) {
+    for (const path of ["/en/", "/en/case/sber-india-proto", "/en/cases/"]) {
       const html = render(path);
       expect(html).not.toContain('class="consent"');
       expect(html).toContain("contact-privacy");
@@ -15,7 +15,6 @@ describe("prerender with analytics", () => {
     const analytics = await import("./analytics");
     analytics.initAnalytics();
     analytics.trackPage("/en/");
-    expect(render("/en/")).toContain('href="/privacy.html#en"');
-    expect(render("/ru/")).toContain('href="/privacy.html#ru"');
+    expect(render("/en/")).toContain('href="/privacy.html"');
   });
 });

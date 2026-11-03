@@ -1,9 +1,8 @@
+import { caseLink } from "../lib/url";
 import { getRecognition } from "../data/portfolio";
-import { useLang } from "../i18n/context";
 
 export default function Recognition() {
   const recognition = getRecognition();
-  const lang = useLang();
 
   return (
     <section className="section recognition snap-section">
@@ -13,7 +12,7 @@ export default function Recognition() {
           <ul className="recognition-grid">
             {group.items.map(([title, detail, href]) => {
               const resolvedHref = href.startsWith("/case/")
-                ? `/${lang}${href}`
+                ? caseLink(href.replace(/^\/case\//, "").replace(/\/$/, ""))
                 : href;
               return (
                 <li key={title}>

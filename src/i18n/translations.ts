@@ -1,4 +1,4 @@
-export type Lang = "en" | "ru";
+export type Lang = "en";
 
 export interface Translations {
   // Header
@@ -15,9 +15,6 @@ export interface Translations {
   "contact.linkedin": string;
   // Skills physics section
   "skills.heading": string;
-  // Home Cases block
-  "cases.heading": string;
-  "cases.all": string;
   // Extra work
   "extra.next": string;
   "extra.prev": string;
@@ -47,8 +44,6 @@ const en: Translations = {
   "contact.email": "Get in touch ↗",
   "contact.linkedin": "LinkedIn ↗",
   "skills.heading": "",
-  "cases.heading": "Cases",
-  "cases.all": "All cases",
   "extra.next": "NEXT",
   "extra.prev": "PREV",
   "extra.nextProject": "Next project preview",
@@ -63,35 +58,7 @@ const en: Translations = {
   "case.ariaNav": "Case study navigation",
 };
 
-const ru: Translations = {
-  "nav.work": "Работы",
-  "nav.about": "О себе",
-  "nav.writing": "Cases",
-  "nav.jobs": "Jobs",
-  "nav.contact": "Контакты",
-  "nav.contactMobile": "@",
-  "nav.cv": "Резюме ↗",
-  "contact.heading": "Давайте сделаем что-то полезное вместе",
-  "contact.email": "Написать ↗",
-  "contact.linkedin": "LinkedIn ↗",
-  "skills.heading": "",
-  "cases.heading": "Кейсы",
-  "cases.all": "Все кейсы",
-  "extra.next": "ДАЛЕЕ",
-  "extra.prev": "НАЗАД",
-  "extra.nextProject": "Следующий проект",
-  "extra.prevProject": "Предыдущий проект",
-  "case.outcomes": "Результаты",
-  "meta.title": "Даниил Рожков",
-  "meta.description": "Персональное портфолио продуктового и интерфейсного дизайна.",
-  "meta.ogTitle": "Даниил Рожков — Lead Product Designer",
-  "meta.ogDescription":
-    "Lead Product Designer для AI и B2B-инструментов, от продуктовой логики до реализованного интерфейса.",
-  "nav.ariaLabel": "Основная навигация",
-  "case.ariaNav": "Навигация по кейсам",
-};
-
-const translations: Record<Lang, Translations> = { en, ru };
+const translations: Record<Lang, Translations> = { en };
 
 export function t(lang: Lang, key: keyof Translations): string {
   return translations[lang][key] ?? key;

@@ -1,15 +1,4 @@
-import type { Lang } from "../i18n/translations";
-import * as enData from "./en";
-import * as ruData from "./ru";
-
-let _data: typeof enData = enData;
-
-export function setDataLang(lang: Lang): void {
-  _data = lang === "en" ? enData : ruData;
-}
-
-// Re-export all data through getter functions so
-// setDataLang() can switch the source before render.
+import * as _data from "./en";
 
 export const getProfile = () => _data.profile;
 export const getHero = () => _data.hero;

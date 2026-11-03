@@ -59,7 +59,6 @@ try {
     });
     for (const path of [
       "/en/",
-      "/ru/",
       "/en/case/seligoai/",
       "/en/cases/",
       "/en/cases/biscuit-pet/",
@@ -85,7 +84,7 @@ try {
           .count(),
         0,
       );
-      assert.equal(await page.locator('a.contact-privacy[href^="/privacy.html#"]').count(), 1);
+      assert.equal(await page.locator('a.contact-privacy[href="/privacy.html"]').count(), 1);
       assert.deepEqual(
         await page.evaluate(() => ({
           local: Object.keys(localStorage),
@@ -120,7 +119,7 @@ try {
     await page.goto(`${local}/en/`);
     await page.locator(".contact-privacy").evaluate((link) => link.click());
     await page.waitForURL(
-      (url) => /^\/privacy(?:\.html)?$/.test(url.pathname) && url.hash === "#en",
+      (url) => /^\/privacy(?:\.html)?$/.test(url.pathname),
     );
     await page.getByRole("heading", { name: "Privacy", exact: true }).waitFor({ state: "visible" });
     assert.deepEqual(unexpected, []);

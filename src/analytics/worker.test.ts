@@ -23,7 +23,7 @@ describe("server privacy boundary", () => {
     vi.stubGlobal("fetch", send);
     const response = await collect(
       request(
-        { event: "contact_clicked", page: "/ru/case/seligoai", channel: "email" },
+        { event: "contact_clicked", page: "/en/case/seligoai", channel: "email" },
         {
           Cookie: "ph_old=private",
           Referer: "https://drozhkov.com/en/?token=private",
@@ -52,8 +52,8 @@ describe("server privacy boundary", () => {
       distinct_id: "portfolio-aggregate-v1",
       properties: {
         analytics_mode: "aggregate_v1",
-        page: "/ru/case/seligoai",
-        lang: "ru",
+        page: "/en/case/seligoai",
+        lang: "en",
         case_id: "seligoai",
         channel: "email",
         $process_person_profile: false,
@@ -150,11 +150,10 @@ describe("server privacy boundary", () => {
   it("keeps the finite allowlist in sync with published content", () => {
     const expected = [
       "/en",
-      "/ru",
       "/en/jobs",
       "/en/cases",
       ...getPosts().map((p) => `/en/cases/${p.slug}`),
-      ...getCases().flatMap((c) => [`/en/case/${c.id}`, `/ru/case/${c.id}`]),
+      ...getCases().map((c) => `/en/case/${c.id}`),
     ];
     expect([...pages].sort()).toEqual(expected.sort());
     expect(knownPage("/en/?utm_source=private#private")).toBe("/en");

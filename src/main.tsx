@@ -1,8 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot, hydrateRoot } from "react-dom/client";
 import App from "./App";
-import { setDataLang } from "./data/portfolio";
-import { extractLang } from "./hooks/useRoute";
 import {
   handleAnalyticsAuxClick,
   handleAnalyticsClick,
@@ -31,8 +29,6 @@ const container = document.getElementById("root");
 if (!container) {
   throw new Error("Root container not found");
 }
-
-setDataLang(extractLang(window.location.pathname));
 
 // Remove legacy tracking storage. No analytics SDK is loaded.
 initAnalytics();

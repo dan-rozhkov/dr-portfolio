@@ -52,7 +52,7 @@
 }
 
 .writing-filter a:hover,
-.writing-filter a[aria-current="page"] {
+.writing-filter a.is-active {
   color: var(--ink);
 }
 
@@ -70,6 +70,7 @@
 }
 
 .writing-stream .case-card {
+  min-width: 0;
   margin-bottom: 44px;
   padding: 0 0 44px;
   border-bottom: 1px solid var(--line);
@@ -112,7 +113,7 @@
   font-size: var(--text-sm);
 }
 
-.case-card h2 {
+.case-card-title {
   margin: 10px 0 12px;
   font-size: var(--text-2xl);
   font-weight: 500;
@@ -369,29 +370,10 @@
   }
 }
 
-/* Home: the three newest cases */
-.home-cases-grid {
-  align-content: start;
-  min-height: max(100vh, 700px);
-  padding-top: var(--space-3xl);
-  padding-bottom: 56px;
-}
-
-.home-cases-head {
-  display: flex;
-  grid-column: 1 / -1;
-  gap: 24px;
-  align-items: baseline;
-  justify-content: space-between;
-}
-
-.home-cases-head h2 {
-  margin: 0;
-  font-size: var(--text-lg);
-  font-weight: 500;
-  line-height: 1.1;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+/* Home: the Cases layout with the newest three cards */
+.home-cases {
+  padding-top: var(--space-2xl);
+  padding-bottom: var(--space-xl);
 }
 
 .home-cases-all {
@@ -415,51 +397,9 @@
   outline-offset: 3px;
 }
 
-.home-cases-list {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  grid-column: 1 / -1;
-  gap: var(--gap);
-}
-
-.home-cases-list .writing-thumb {
-  margin-bottom: 20px;
-}
-
-.home-cases-list .case-card h2 {
-  margin: 8px 0 10px;
-  font-size: clamp(24px, 2.2vw, 36px);
-  line-height: 1.1;
-}
-
-.home-cases-list .case-card p {
-  font-size: var(--text-base);
-}
-
 @media (--mobile) {
-  .home-cases-grid {
-    min-height: auto;
-    padding-top: 30px;
-    padding-bottom: 36px;
-  }
-
-  .home-cases-head {
-    align-items: center;
-    margin-bottom: 24px;
-    padding-top: 18px;
-    border-top: 1.5px solid #111;
-  }
-
-  .home-cases-head h2 {
-    text-transform: none;
-  }
-
-  .home-cases-list {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-
-  .home-cases-all {
-    padding: 10px 18px;
+  .home-cases {
+    padding-top: var(--space-xl);
+    padding-bottom: var(--space-xl);
   }
 }

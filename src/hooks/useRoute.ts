@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BASE_NO_SLASH } from "../lib/url";
+import { BASE_NO_SLASH, baseWithLang } from "../lib/url";
 import type { Lang } from "../i18n/translations";
 
 export type Route =
@@ -9,16 +9,10 @@ export type Route =
   | { name: "post"; slug: string; lang: "en" }
   | { name: "jobs"; lang: "en" };
 
-export function extractLang(pathname: string): Lang {
-  const rel = (pathname || "/").replace(BASE_NO_SLASH, "") || "/";
-  const m = rel.match(/^\/(en|ru)(\/|$)/);
-  return m ? (m[1] as Lang) : "en";
-}
-
 export function parseRoute(pathname: string, search = ""): Route {
-  const lang = extractLang(pathname);
+  const lang: Lang = "en";
   const rel = (pathname || "/").replace(BASE_NO_SLASH, "") || "/";
-  // Strip language prefix for case matching
+  // /ru/ was removed (public/_redirects sends it to /en/); old /ru/ paths still open the English page.
   const stripped = rel.replace(/^\/(en|ru)\//, "/").replace(/^\/(en|ru)$/, "/");
   const m = stripped.match(/^\/case\/([\w-]+)\/?$/);
   if (m) return { name: "case", id: m[1], lang };
@@ -86,8 +80,7 @@ export function useRoute(initialPath: string): [Route, (r: Route) => void] {
           el.scrollIntoView();
         } else if (action === "home") {
           event.preventDefault();
-          const lang = extractLang(window.location.pathname);
-          const targetPath = `/${lang}${href}`;
+          const targetPath = `${baseWithLang("en")}${href}`;
           window.history.pushState({}, "", targetPath);
           setRoute(parseRoute(targetPath));
           requestAnimationFrame(() => {
