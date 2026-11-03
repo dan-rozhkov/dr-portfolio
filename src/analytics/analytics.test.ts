@@ -1,302 +1,136 @@
 // @vitest-environment jsdom
-import { beforeEach, describe, expect, it, vi, type Mock } from "vitest";
-import type { PostHog } from "posthog-js";
+// @vitest-environment-options {"url":"https://drozhkov.com/en/"}
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
   __testing,
-  denyConsent,
-  getConsent,
-  grantConsent,
-  handleAnalyticsAuxClick,
-  handleAnalyticsClick,
   initAnalytics,
-  trackCaseEnd,
   trackPage,
+  trackCaseEnd,
+  trackResumeClick,
+  trackContactClick,
+  handleAnalyticsClick,
+  handleAnalyticsAuxClick,
 } from "./analytics";
-import { CONSENT_KEY } from "./consent";
-import { POSTHOG_KEY } from "./config";
 
-function fakePosthog() {
-  return {
-    init: vi.fn(),
-    capture: vi.fn(),
-    opt_in_capturing: vi.fn(),
-    opt_out_capturing: vi.fn(),
-    reset: vi.fn(),
-    set_config: vi.fn(),
-    identify: vi.fn(),
-  };
-}
-
-type Fake = ReturnType<typeof fakePosthog>;
-
-let ph: Fake;
-let loader: Mock<() => Promise<PostHog>>;
-
-function setup({ enabledHost = true } = {}) {
-  ph = fakePosthog();
-  loader = vi.fn(async () => ph as unknown as PostHog);
-  __testing.reset({ loader, enabledHost: () => enabledHost });
-}
-
-const events = () => ph.capture.mock.calls.map((c) => c[0]);
-
+const send = vi.fn(async () => new Response(null, { status: 204 }));
 beforeEach(() => {
+  __testing.reset();
   localStorage.clear();
   sessionStorage.clear();
-  window.history.replaceState({}, "", "/en/");
-  setup();
+  vi.stubGlobal("fetch", send);
+  send.mockClear();
 });
+afterEach(() => vi.unstubAllGlobals());
+const payloads = () =>
+  send.mock.calls.map((call) =>
+    JSON.parse((call as unknown as [string, RequestInit])[1].body as string),
+  );
 
-describe("before any choice", () => {
-  it("loads nothing and sends nothing", () => {
+describe("identifier-free browser collection", () => {
+  it("sends fixed page/case/CV/contact events and deduplicates effects and case ends", () => {
     initAnalytics();
-    trackPage("/en/");
-    trackCaseEnd("sber");
-    expect(getConsent()).toBeNull();
-    expect(loader).not.toHaveBeenCalled();
-    expect(ph.capture).not.toHaveBeenCalled();
-  });
-});
-
-describe("reject", () => {
-  it("stores the choice, never loads the SDK, sends nothing", () => {
-    denyConsent();
-    trackPage("/en/case/sber");
-    expect(localStorage.getItem(CONSENT_KEY)).toBe("denied");
-    expect(loader).not.toHaveBeenCalled();
-    expect(ph.capture).not.toHaveBeenCalled();
-  });
-
-  it("a stored rejection keeps the SDK off on the next visit", () => {
-    localStorage.setItem(CONSENT_KEY, "denied");
-    initAnalytics();
-    trackPage("/en/");
-    expect(loader).not.toHaveBeenCalled();
-  });
-});
-
-describe("accept", () => {
-  it("initialises once with the project key and a locked-down config", async () => {
-    await grantConsent();
-    expect(localStorage.getItem(CONSENT_KEY)).toBe("granted");
-    expect(loader).toHaveBeenCalledTimes(1);
-    expect(ph.init).toHaveBeenCalledTimes(1);
-    const [key, config] = ph.init.mock.calls[0];
-    expect(key).toBe(POSTHOG_KEY);
-    expect(config).toMatchObject({
-      api_host: "https://eu.i.posthog.com",
-      person_profiles: "never",
-      autocapture: false,
-      capture_pageview: false,
-      capture_pageleave: false,
-      disable_session_recording: true,
-      capture_heatmaps: false,
-      disable_surveys: true,
-      advanced_disable_flags: true,
-      persistence: "localStorage",
-      opt_out_capturing_by_default: true,
-    });
-    expect(ph.opt_in_capturing).toHaveBeenCalledWith({ captureEventName: false });
-    expect(ph.identify).not.toHaveBeenCalled();
-  });
-
-  it("sends the current pageview right away", async () => {
-    await grantConsent();
-    expect(events()).toEqual(["$pageview"]);
-  });
-
-  it("restores an earlier yes on the next visit", async () => {
-    localStorage.setItem(CONSENT_KEY, "granted");
-    initAnalytics();
-    await vi.waitFor(() => expect(events()).toEqual(["$pageview"]));
-  });
-
-  it("does nothing on hosts other than drozhkov.com", async () => {
-    setup({ enabledHost: false });
-    await grantConsent();
-    trackPage("/en/case/sber");
-    expect(loader).not.toHaveBeenCalled();
-    expect(getConsent()).toBe("granted");
-  });
-
-  it("does not initialise if consent is withdrawn while the SDK downloads", async () => {
-    let release: (v: PostHog) => void = () => {};
-    loader.mockImplementation(() => new Promise<PostHog>((r) => (release = r)));
-    const pending = grantConsent();
-    denyConsent();
-    release(ph as unknown as PostHog);
-    await pending;
-    expect(ph.init).not.toHaveBeenCalled();
-    expect(ph.capture).not.toHaveBeenCalled();
-  });
-});
-
-describe("pageviews and cases", () => {
-  beforeEach(async () => {
-    await grantConsent();
-    ph.capture.mockClear();
-  });
-
-  it("does not duplicate pageviews for the same path", () => {
-    trackPage("/en/");
-    trackPage("/en");
-    trackPage("/en/writing/");
-    trackPage("/en/writing");
-    expect(events()).toEqual(["$pageview"]);
-  });
-
-  it("sends case_viewed with the case id and language", () => {
-    trackPage("/ru/case/sber/");
-    expect(ph.capture.mock.calls).toEqual([
-      ["$pageview", undefined],
-      ["case_viewed", { case_id: "sber", lang: "ru" }],
+    trackPage("/en/case/seligoai/?utm_source=private@example.com#secret");
+    trackPage("/en/case/seligoai");
+    trackCaseEnd("seligoai");
+    trackCaseEnd("seligoai");
+    trackContactClick("email");
+    trackResumeClick();
+    expect(payloads()).toEqual([
+      { event: "$pageview", page: "/en/case/seligoai" },
+      { event: "case_viewed", page: "/en/case/seligoai" },
+      { event: "case_end_reached", page: "/en/case/seligoai" },
+      { event: "contact_clicked", page: "/en/case/seligoai", channel: "email" },
+      { event: "resume_clicked", page: "/en/case/seligoai" },
     ]);
+    for (const call of send.mock.calls) {
+      expect(call).toEqual([
+        "/api/aggregate",
+        expect.objectContaining({
+          credentials: "omit",
+          referrerPolicy: "no-referrer",
+          redirect: "error",
+          mode: "same-origin",
+          keepalive: true,
+        }),
+      ]);
+    }
+    expect(localStorage.length).toBe(0);
+    expect(sessionStorage.length).toBe(0);
+    expect(document.cookie).toBe("");
   });
 
-  it("sends case_end_reached once per case pageview", () => {
-    window.history.replaceState({}, "", "/en/case/sber");
-    trackPage("/en/case/sber");
-    trackCaseEnd("sber");
-    trackCaseEnd("sber");
-    expect(ph.capture).toHaveBeenLastCalledWith("case_end_reached", { case_id: "sber", lang: "en" });
-    expect(events().filter((e) => e === "case_end_reached")).toHaveLength(1);
-
-    window.history.replaceState({}, "", "/en/case/other");
-    trackPage("/en/case/other");
+  it("drops unknown paths and mismatched cases, including personal data in paths", () => {
+    trackPage("/en/writing/private-person");
+    trackContactClick("email");
+    expect(send).not.toHaveBeenCalled();
+    trackPage("/en/case/seligoai");
     trackCaseEnd("other");
-    expect(events().filter((e) => e === "case_end_reached")).toHaveLength(2);
-  });
-});
-
-describe("repeat and concurrent starts", () => {
-  it("pressing Accept again does not send a second pageview", async () => {
-    await grantConsent();
-    await grantConsent();
-    expect(events().filter((e) => e === "$pageview")).toHaveLength(1);
-    expect(ph.init).toHaveBeenCalledTimes(1);
+    expect(payloads()).toHaveLength(2);
   });
 
-  it("Accept, Reject, Accept during the SDK download sends one pageview", async () => {
-    window.history.replaceState({}, "", "/en/case/sber");
-    const first = grantConsent();
-    denyConsent();
-    const second = grantConsent();
-    await Promise.all([first, second]);
-    expect(events().filter((e) => e === "$pageview")).toHaveLength(1);
-    expect(events().filter((e) => e === "case_viewed")).toHaveLength(1);
-  });
-
-  it("restoring consent while Accept is pressed sends one pageview", async () => {
-    localStorage.setItem(CONSENT_KEY, "granted");
-    initAnalytics();
-    await grantConsent();
-    expect(events().filter((e) => e === "$pageview")).toHaveLength(1);
-  });
-});
-
-describe("case end before consent", () => {
-  it("is sent if the visitor accepts while still on that case", async () => {
-    window.history.replaceState({}, "", "/en/case/sber");
-    trackPage("/en/case/sber");
-    trackCaseEnd("sber");
-    expect(ph.capture).not.toHaveBeenCalled();
-    await grantConsent();
-    expect(events()).toEqual(["$pageview", "case_viewed", "case_end_reached"]);
-  });
-
-  it("is dropped after navigating to another page", async () => {
-    window.history.replaceState({}, "", "/en/case/sber");
-    trackCaseEnd("sber");
-    window.history.replaceState({}, "", "/en/");
-    trackPage("/en/");
-    await grantConsent();
-    expect(events()).not.toContain("case_end_reached");
-  });
-
-  it("is never sent after a rejection", () => {
-    denyConsent();
-    window.history.replaceState({}, "", "/en/case/sber");
-    trackCaseEnd("sber");
-    expect(loader).not.toHaveBeenCalled();
-  });
-});
-
-describe("contact and resume clicks", () => {
-  function click(attrs: Record<string, string>) {
+  it("never sends link addresses or link text, including middle clicks", () => {
+    trackPage("/en");
+    send.mockClear();
     const a = document.createElement("a");
-    for (const [k, v] of Object.entries(attrs)) a.setAttribute(k, v);
-    const span = document.createElement("span");
-    a.appendChild(span);
-    document.body.appendChild(a);
-    handleAnalyticsClick({ target: span } as unknown as MouseEvent);
-    a.remove();
-  }
-
-  it("counts a middle-click, ignores other aux buttons", async () => {
-    await grantConsent();
-    ph.capture.mockClear();
-    const a = document.createElement("a");
-    a.setAttribute("data-analytics", "resume");
-    document.body.appendChild(a);
-    handleAnalyticsAuxClick({ target: a, button: 2 } as unknown as MouseEvent);
+    a.href = "mailto:private@example.com?body=secret";
+    a.dataset.analytics = "contact-email";
+    a.textContent = "private";
+    handleAnalyticsClick({ target: a } as unknown as MouseEvent);
+    a.dataset.analytics = "resume";
     handleAnalyticsAuxClick({ target: a, button: 1 } as unknown as MouseEvent);
-    a.remove();
-    expect(events()).toEqual(["resume_clicked"]);
-  });
-
-  it("sends nothing without consent", () => {
-    click({ href: "mailto:someone@example.com", "data-analytics": "contact-email" });
-    expect(ph.capture).not.toHaveBeenCalled();
-  });
-
-  it("sends the channel only, never the address or URL", async () => {
-    await grantConsent();
-    ph.capture.mockClear();
-    click({ href: "mailto:someone@example.com", "data-analytics": "contact-email" });
-    click({ href: "https://www.linkedin.com/in/x/", "data-analytics": "contact-linkedin" });
-    click({ href: "/cv.pdf", "data-analytics": "resume" });
-    click({ href: "/en/writing/" });
-    expect(ph.capture.mock.calls).toEqual([
-      ["contact_clicked", { channel: "email" }],
-      ["contact_clicked", { channel: "linkedin" }],
-      ["resume_clicked", undefined],
+    expect(payloads()).toEqual([
+      { event: "contact_clicked", page: "/en", channel: "email" },
+      { event: "resume_clicked", page: "/en" },
     ]);
-    expect(JSON.stringify(ph.capture.mock.calls)).not.toContain("example.com");
   });
-});
 
-describe("withdraw", () => {
-  it("opts out, resets, wipes PostHog storage and stops sending", async () => {
-    await grantConsent();
-    localStorage.setItem(`ph_${POSTHOG_KEY}_posthog`, '{"distinct_id":"abc"}');
-    localStorage.setItem(`__ph_opt_in_out_${POSTHOG_KEY}`, "1");
-    sessionStorage.setItem(`ph_${POSTHOG_KEY}_window_id`, "w");
-    localStorage.setItem("unrelated", "keep");
-    document.cookie = `ph_${POSTHOG_KEY}_posthog=x; path=/`;
-    ph.capture.mockClear();
+  it("respects DNT and GPC", () => {
+    Object.defineProperty(navigator, "doNotTrack", { configurable: true, value: "1" });
+    trackPage("/en");
+    expect(send).not.toHaveBeenCalled();
+    Object.defineProperty(navigator, "doNotTrack", { configurable: true, value: null });
+    Object.defineProperty(navigator, "globalPrivacyControl", { configurable: true, value: true });
+    trackPage("/ru");
+    expect(send).not.toHaveBeenCalled();
+    Object.defineProperty(navigator, "globalPrivacyControl", { configurable: true, value: false });
+  });
 
-    denyConsent();
+  it("never collects on previews or localhost", () => {
+    window.history.replaceState({}, "", "/en");
+    // Host policy is checked separately because jsdom cannot navigate to another origin.
+    expect(isAnalyticsHost("localhost")).toBe(false);
+    expect(isAnalyticsHost("preview.workers.dev")).toBe(false);
+    expect(isAnalyticsHost("drozhkov.com.attacker.com")).toBe(false);
+  });
 
-    expect(ph.opt_out_capturing).toHaveBeenCalled();
-    expect(ph.reset).toHaveBeenCalled();
-    expect(ph.set_config).toHaveBeenLastCalledWith({ disable_persistence: true });
-    expect(localStorage.getItem(CONSENT_KEY)).toBe("denied");
-    expect(localStorage.getItem("unrelated")).toBe("keep");
-    expect(Object.keys(localStorage).filter((k) => k.includes("ph_"))).toEqual([]);
-    expect(Object.keys(sessionStorage).filter((k) => k.includes("ph_"))).toEqual([]);
+  it("deletes legacy stores without adding markers or touching unrelated data", () => {
+    for (const storage of [localStorage, sessionStorage]) {
+      storage.setItem("ph_old_posthog", "private-id");
+      storage.setItem("__ph_opt_in_out_old", "1");
+      storage.setItem("dr_analytics_consent", "denied");
+      storage.setItem("theme", "dark");
+    }
+    document.cookie = "ph_old=x; Path=/";
+    document.cookie = "theme=dark; Path=/";
+    initAnalytics();
+    initAnalytics();
+    for (const storage of [localStorage, sessionStorage])
+      expect(Object.keys(storage)).toEqual(["theme"]);
     expect(document.cookie).not.toContain("ph_");
-
-    trackPage("/en/case/sber");
-    trackCaseEnd("sber");
-    expect(ph.capture).not.toHaveBeenCalled();
+    expect(document.cookie).toContain("theme=dark");
+    document.cookie = "theme=; Max-Age=0; Path=/";
   });
 
-  it("can opt back in later in the same session", async () => {
-    await grantConsent();
-    denyConsent();
-    ph.capture.mockClear();
-    await grantConsent();
-    expect(ph.init).toHaveBeenCalledTimes(1);
-    expect(events()).toEqual(["$pageview"]);
+  it("handles blocked stores and failed networking without breaking the page", async () => {
+    const remove = vi.spyOn(Storage.prototype, "removeItem").mockImplementation(() => {
+      throw new Error("blocked");
+    });
+    localStorage.setItem("ph_old", "x");
+    expect(() => initAnalytics()).not.toThrow();
+    remove.mockRestore();
+    send.mockRejectedValueOnce(new Error("offline"));
+    expect(() => trackPage("/en")).not.toThrow();
+    await Promise.resolve();
   });
 });
+import { isAnalyticsHost } from "./config";

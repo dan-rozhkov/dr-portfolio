@@ -1,10 +1,10 @@
 import { getProfile } from "./data/portfolio";
-import { useT } from "./i18n/context";
-import { ConsentSettingsButton } from "./components/ConsentBanner";
+import { useLang, useT } from "./i18n/context";
 
 export default function Contact() {
   const profile = getProfile();
   const t = useT();
+  const lang = useLang();
 
   return (
     <section className="section contact" id="contact">
@@ -12,14 +12,18 @@ export default function Contact() {
         <h2>{t("contact.heading")}</h2>
         <div className="contact-methods">
           <a href={`mailto:${profile.email}`} data-cursor="SAY HI" data-analytics="contact-email">
-            {t("contact.email")}<span>{profile.email}</span>
+            {t("contact.email")}
+            <span>{profile.email}</span>
           </a>
           <a href={profile.linkedin} data-cursor="OPEN" data-analytics="contact-linkedin">
-            {t("contact.linkedin")}<span>{profile.linkedinLabel}</span>
+            {t("contact.linkedin")}
+            <span>{profile.linkedinLabel}</span>
           </a>
         </div>
         <div className="contact-year">
-          <ConsentSettingsButton className="contact-privacy" />
+          <a className="contact-privacy" href={`/privacy.html#${lang}`}>
+            {lang === "ru" ? "Конфиденциальность" : "Privacy"}
+          </a>
           <span>© {profile.year}</span>
         </div>
       </div>

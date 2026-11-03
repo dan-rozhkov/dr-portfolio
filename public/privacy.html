@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="referrer" content="no-referrer" />
+    <title>Privacy · Danil Rozhkov</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        font:
+          17px/1.65 system-ui,
+          sans-serif;
+      }
+      body {
+        max-width: 46rem;
+        margin: 4rem auto;
+        padding: 0 1.5rem;
+      }
+      h1,
+      h2 {
+        line-height: 1.2;
+      }
+      section {
+        margin-block: 3rem;
+      }
+      a {
+        color: inherit;
+        text-underline-offset: 0.2em;
+      }
+    </style>
+  </head>
+  <body>
+    <nav aria-label="Language"><a href="#en">English</a> · <a href="#ru" lang="ru">Русский</a></nav>
+    <section id="en" lang="en">
+      <h1>Privacy</h1>
+      <p>
+        This portfolio counts views of published pages and case studies, case completions, and CV
+        and contact-link clicks. Only a fixed page path, language, event type, case label and
+        contact channel (email or LinkedIn) can enter analytics.
+      </p>
+      <p>
+        The site sends these events through its Cloudflare Worker to the existing PostHog EU
+        project. Every event uses the same site-wide aggregate label. Analytics cannot distinguish
+        visitors or sessions. It does not use cookies, browser-storage identifiers, fingerprinting,
+        session recording, link targets, form contents, referrers, or URL query strings and
+        fragments. The PostHog browser SDK is not loaded. Old PostHog storage is removed where
+        browser permissions allow.
+      </p>
+      <p>
+        Cloudflare receives ordinary connection data, including your IP address, to deliver the site
+        and receive event requests. The Worker does not forward your IP address, cookies, User-Agent
+        or Referer to PostHog. PostHog receives the server connection and event time. These
+        providers may process infrastructure logs under their own policies. This page does not
+        promise that hosting infrastructure processes no personal data.
+      </p>
+      <p>
+        PostHog stores individual sanitized events for aggregate counts. This is not a database
+        containing only precomputed totals. Earlier consent-based analytics data may still exist in
+        the project. This change does not delete historical records. The site respects Do Not Track
+        and Global Privacy Control for new analytics requests.
+      </p>
+      <p>
+        No cookies does not automatically mean that consent is unnecessary. Applicable requirements
+        depend on jurisdiction and provider settings. External email and LinkedIn destinations have
+        their own privacy practices.
+      </p>
+      <p>
+        See <a href="https://www.cloudflare.com/privacypolicy/">Cloudflare privacy</a> and
+        <a href="https://posthog.com/privacy">PostHog privacy</a>. Questions:
+        <a href="/en/#contact">contact Danil</a>.
+      </p>
+      <p>
+        The portfolio also loads its General Sans fonts from Fontshare. The font provider receives
+        ordinary connection data when your browser requests these fonts.
+      </p>
+      <a href="/en/">Back to portfolio</a>
+    </section>
+    <section id="ru" lang="ru">
+      <h2>Конфиденциальность</h2>
+      <p>
+        Портфолио считает просмотры опубликованных страниц и кейсов, переходы к концу кейсов и клики
+        по резюме и контактам. В аналитику могут попасть только разрешённый путь страницы, язык, тип
+        события, название кейса и канал связи: email или LinkedIn.
+      </p>
+      <p>
+        События проходят через Cloudflare Worker в существующий проект PostHog EU. Все события
+        используют одну общую метку сайта. Аналитика не различает посетителей и сессии. Она не
+        использует cookies, идентификаторы в хранилище браузера, цифровые отпечатки или запись
+        сессий. Адреса ссылок, содержимое форм, Referer, параметры URL и фрагменты не передаются.
+        Браузерный SDK PostHog не загружается. Старые данные PostHog удаляются из хранилищ, где это
+        разрешает браузер.
+      </p>
+      <p>
+        Cloudflare получает обычные данные соединения, включая IP, для доставки сайта и приёма
+        событий. Worker не передаёт IP посетителя, cookies, User-Agent или Referer в PostHog.
+        PostHog получает серверное соединение и время события. Провайдеры могут обрабатывать
+        инфраструктурные журналы по своим правилам. Эта страница не обещает полного отсутствия
+        обработки персональных данных инфраструктурой.
+      </p>
+      <p>
+        PostHog хранит отдельные очищенные события для подсчёта итогов. Это не база только с
+        готовыми суммами. В проекте могут оставаться старые данные, собранные с согласием. Это
+        изменение не удаляет историю. Сайт учитывает Do Not Track и Global Privacy Control при
+        отправке новой аналитики.
+      </p>
+      <p>
+        Отсутствие cookies само по себе не освобождает от получения согласия. Применимые требования
+        зависят от юрисдикции и настроек провайдеров. Внешние сервисы email и LinkedIn используют
+        собственные правила обработки данных.
+      </p>
+      <p>
+        Правила <a href="https://www.cloudflare.com/privacypolicy/">Cloudflare</a> и
+        <a href="https://posthog.com/privacy">PostHog</a>. Вопросы:
+        <a href="/ru/#contact">связаться с Даниилом</a>.
+      </p>
+      <p>
+        Портфолио также загружает шрифт General Sans через Fontshare. При запросе шрифта провайдер
+        получает обычные данные соединения браузера.
+      </p>
+      <a href="/ru/">Вернуться в портфолио</a>
+    </section>
+  </body>
+</html>

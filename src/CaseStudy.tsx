@@ -17,7 +17,7 @@ export default function CaseStudy({ study }: { study: CaseStudyType }) {
     const el = endRef.current;
     if (!el || typeof IntersectionObserver === "undefined") return undefined;
     const observer = new IntersectionObserver((entries) => {
-      // trackCaseEnd sends once per pageview; before consent it is held until Accept on this page.
+      // Report the case end once per pageview.
       if (entries.some((e) => e.isIntersecting)) trackCaseEnd(study.id);
     });
     observer.observe(el);

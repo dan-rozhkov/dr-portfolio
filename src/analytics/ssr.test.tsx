@@ -15,6 +15,7 @@ describe("prerender with analytics", () => {
     const analytics = await import("./analytics");
     analytics.initAnalytics();
     analytics.trackPage("/en/");
-    expect(analytics.getConsent()).toBeNull();
+    expect(render("/en/")).toContain('href="/privacy.html#en"');
+    expect(render("/ru/")).toContain('href="/privacy.html#ru"');
   });
 });

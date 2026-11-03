@@ -20,13 +20,10 @@ import JobsPage from "./jobs/JobsPage";
 import PostPage from "./writing/PostPage";
 import { getPost } from "./writing/posts";
 import { getPageTitle } from "./lib/pageTitle";
-import ConsentBanner from "./components/ConsentBanner";
 import { trackPage } from "./analytics/analytics";
 
 export default function App({ initialPath }: { initialPath?: string }) {
-  const path =
-    initialPath ??
-    (typeof window !== "undefined" ? window.location.pathname : "/");
+  const path = initialPath ?? (typeof window !== "undefined" ? window.location.pathname : "/");
 
   const [route] = useRoute(path);
   const lang = route.lang;
@@ -39,7 +36,7 @@ export default function App({ initialPath }: { initialPath?: string }) {
     document.title = pageTitle;
   }, [pageTitle]);
 
-  // One pageview per real pathname change; no-op until analytics is accepted.
+  // Count only known pages. Repeated effects and query/hash changes do not add views.
   useEffect(() => {
     trackPage(window.location.pathname);
   }, [route]);
@@ -53,7 +50,6 @@ export default function App({ initialPath }: { initialPath?: string }) {
           <Header />
           <CaseStudy study={study} />
           <ContactObserver />
-          <ConsentBanner />
         </I18nProvider>
       );
     }
@@ -67,7 +63,6 @@ export default function App({ initialPath }: { initialPath?: string }) {
         <WritingIndex category={route.category} />
         <Contact />
         <ContactObserver />
-        <ConsentBanner />
       </I18nProvider>
     );
   }
@@ -80,7 +75,6 @@ export default function App({ initialPath }: { initialPath?: string }) {
         <JobsPage />
         <Contact />
         <ContactObserver />
-        <ConsentBanner />
       </I18nProvider>
     );
   }
@@ -92,7 +86,6 @@ export default function App({ initialPath }: { initialPath?: string }) {
         <Header />
         <PostPage post={getPost(route.slug)} />
         <ContactObserver />
-        <ConsentBanner />
       </I18nProvider>
     );
   }
@@ -115,7 +108,6 @@ export default function App({ initialPath }: { initialPath?: string }) {
       <CaseIndicator />
       <ContactObserver />
       <ScrollFade />
-      <ConsentBanner />
     </I18nProvider>
   );
 }
