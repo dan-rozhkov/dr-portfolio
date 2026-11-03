@@ -425,7 +425,7 @@
 
 @media (--mobile) {
   .home-cases {
-    padding-top: 32px;
+    padding-top: 88px;
     padding-bottom: var(--space-xl);
   }
 }
