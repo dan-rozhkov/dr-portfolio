@@ -18,6 +18,8 @@ links:
   - label: Code
     url: https://github.com/dan-rozhkov/pen-editor-desktop
 cover: /images/writing/sideform-desktop/cover.webp
+coverLive: liquid-gradient
+coverMark: /images/writing/sideform-desktop/mark.svg
 ogImage: /images/writing/sideform-desktop/og.jpg
 ---
 
@@ -27,8 +29,6 @@ ogImage: /images/writing/sideform-desktop/og.jpg
 Sideform's agent designs on a canvas — but inside a browser tab it was boxed in.
 :::
 
-![Sideform Desktop in dark: the agent designed a focus app home screen](/images/writing/sideform-desktop/dark-theme.webp "full")
-
 It couldn't browse with the user's logins, couldn't look at other apps, and kept work in the tab's storage. I wanted to give the agent a real desktop to work in.
 
 ## Solution
@@ -37,9 +37,7 @@ It couldn't browse with the user's logins, couldn't look at other apps, and kept
 One window: the agent on the left, canvas, browser and documents on the right.
 :::
 
-![Start window: agent panel, start cards and Recent list](/images/writing/sideform-desktop/start-window.webp "full")
-
-![Start cards: Canvas, Browser, Document](/images/writing/sideform-desktop/start-cards.webp)
+![Start page: hovering the Canvas, Browser and Document cards and opening a new canvas tab](/images/writing/sideform-desktop/cu-start.mp4 "full")
 
 An empty window offers a canvas, a site or a brief in one click. I kept the same web editor inside, so every web release lands on the desktop for free.
 
@@ -59,25 +57,31 @@ The agent lays out a real screen, with photos and large type, right on the canva
 You talk on the left and watch the agent work on the right.
 :::
 
-![Agent panel: a prompt, a reply and a finished Design step](/images/writing/sideform-desktop/agent-panel.webp)
+![Typing a task, switching the agent count from x1 to x3 and sending it](/images/writing/sideform-desktop/cu-composer.mp4 "full")
 
-I docked the agent beside every tab and made it hide with Cmd+Option+B, so the canvas gets full width when you need it. It slides away instead of jumping, and respects Reduce Motion.
-
-![Chat composer](/images/writing/sideform-desktop/agent-composer.webp)
+The composer sets how many agents take the task at once. I docked the panel beside every tab and made it hide with Cmd+Option+B, so the canvas gets full width when you need it.
 
 ## Browser
 
 :::logline
-Three agents can work one page at the same time.
+A browser built for an agent, not only for a person.
 :::
 
-![Three agent cursors fill a pre-order form together and place the order](/images/writing/sideform-desktop/video-browser.mp4 "full")
+:::slider
+### Address bar
+Type a few letters and the pages you visited come up first.
+![Address bar suggestions from history, then the chosen page opens](/images/writing/sideform-desktop/cu-omnibox.mp4)
 
-One prompt can start several browse agents. I gave each one a named cursor in its own colour, so you see who fills which field and can step in at any moment.
+### Three agents
+Each agent gets a named cursor in its own colour, so you see who fills which field.
+![Three agent cursors fill a pre-order form together and place the order](/images/writing/sideform-desktop/video-browser.mp4)
 
-![Address bar suggestions from history](/images/writing/sideform-desktop/address-suggestions.webp)
+### Passwords
+The agent signs in with your saved login, and the password never reaches the AI model.
+![The agent fills a sign-in form from Passwords and signs in](/images/writing/sideform-desktop/cu-passwords.mp4)
+:::
 
-The address bar suggests pages you visited, and a run can be saved as a trace to step through later.
+Ads and trackers are blocked by default, and a run can be saved as a trace to step through later.
 
 ## Docs
 
@@ -89,61 +93,15 @@ The brief lives one tab away from the design.
 
 The agent writes a brief in a document tab and pulls the screen it just designed straight from the canvas. Select any text and a floating toolbar formats it.
 
-## Tabs
-
-:::logline
-Canvas, web, history and logins live in one tab strip.
-:::
-
-:::slider
-### Canvas
-Design screens with the agent, with pages, layers and export.
-![Canvas tab with a focus app home screen](/images/writing/sideform-desktop/tab-canvas.webp)
-
-### Browser
-The agent finds references on the open web with your own session. Ads and trackers are blocked by default.
-![Built-in browser tab](/images/writing/sideform-desktop/tab-browser.webp)
-
-### History
-Visited pages, grouped by day and searchable.
-![History tab](/images/writing/sideform-desktop/tab-history.webp)
-
-### Passwords
-Saved logins let the agent sign in to a site, and the password never reaches the AI model.
-![Passwords tab with demo logins](/images/writing/sideform-desktop/tab-passwords.webp)
-:::
-
 ## Control
 
 :::logline
 The agent can work in other Mac apps — only after you allow it.
 :::
 
-![Browser settings: traces, ad blocking, MCP browser control](/images/writing/sideform-desktop/settings-browser.webp)
+![A native dialog asks before the agent controls Notes; allowing once lets the task finish](/images/writing/sideform-desktop/cu-permission.mp4 "full")
 
-Sideform asks first in a native dialog: allow once or until you quit. Password managers are always blocked, and risky switches stay off by default, so outside agents can't drive the browser until you allow it.
-
-## Craft
-
-:::logline
-It feels like a Mac app, in light and in dark.
-:::
-
-:::slider
-### Canvas
-The agent turns a short brief into a landing page, section by section.
-![Dark canvas with a landing page and its layers](/images/writing/sideform-desktop/dark-canvas.webp)
-
-### Browser
-It opens references with your own session, right next to the chat.
-![Dark browser tab with a reference site](/images/writing/sideform-desktop/dark-browser.webp)
-
-### Document
-It keeps the brief, the sections and a checklist in a document tab.
-![Dark document tab with a project brief](/images/writing/sideform-desktop/dark-doc.webp)
-:::
-
-The tab bar is translucent glass and follows the editor's theme. Native menus cover open, export, Settings and Reveal in Finder.
+Sideform asks first in a native dialog: allow once or until you quit. Password managers are always blocked.
 
 ## On disk
 
@@ -151,9 +109,9 @@ The tab bar is translucent glass and follows the editor's theme. Native menus co
 Canvases, documents and chats are files on your Mac.
 :::
 
-![Recent list](/images/writing/sideform-desktop/recent-list.webp)
+![Filtering the Recent list and reopening a canvas as a tab](/images/writing/sideform-desktop/cu-recent.mp4 "full")
 
-Quitting loses nothing: the app waits for unsaved work to finish writing. Any file reopens from Recent.
+Quitting loses nothing: the app waits for unsaved work to finish writing. Any file reopens from Recent in a couple of keystrokes.
 
 ## For coding agents
 
@@ -161,7 +119,9 @@ Quitting loses nothing: the app waits for unsaved work to finish writing. Any fi
 Claude Code and Cursor can edit the open canvas too.
 :::
 
-The app runs a local MCP server with 37 tools. Install the Sideform agent plugin and it works with no setup and no token to copy.
+![Settings: turning on MCP control of the built-in browser](/images/writing/sideform-desktop/cu-settings.mp4 "full")
+
+The app runs a local MCP server with 37 tools. Risky switches stay off by default, so outside agents can't drive the browser until you turn it on.
 
 :::outcomes
 - 277 — commits from 18 Jul to 1 Nov 2026

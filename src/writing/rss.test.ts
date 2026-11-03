@@ -11,7 +11,7 @@ describe("buildRss", () => {
   it("is RSS 2.0 with one item per post", () => {
     expect(xml).toContain('<rss version="2.0">');
     expect(xml.match(/<item>/g)).toHaveLength(2);
-    expect(xml).toContain("<title>Danil Rozhkov — Writing</title>");
+    expect(xml).toContain("<title>Danil Rozhkov — Cases</title>");
   });
   it("escapes xml", () => {
     expect(xml).toContain("Tom &amp; Jerry");

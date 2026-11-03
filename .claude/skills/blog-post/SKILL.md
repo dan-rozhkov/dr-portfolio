@@ -101,6 +101,7 @@ Do not deploy if either step was skipped.
 
 Every correction Danil sends becomes a rule here (and in Claude's memory). Newest first.
 
+- 2026-11-03 — Sideform posts: no static screenshots, only videos. Close-ups of UI parts are made as dark-theme stageshow animations with the `sideform-stageshow` skill (`~/prj/pen-editor-app/.claude/skills/`).
 - 2026-11-03 — Sideform posts: cover is the landing's LiquidGradient (static frame t=3) with the Sideform app icon centred, not a screenshot; posts match the Biscuit Pet post in media density and include the stageshow promo videos.
 - 2026-11-01 — Image corner radius was too big; images have no rounding site-wide.
 - 2026-10-31 — Texts too long. Shorten and make them sell Danil as a professional, in the voice and length of the case studies.

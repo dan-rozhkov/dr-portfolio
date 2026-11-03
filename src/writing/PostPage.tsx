@@ -2,6 +2,7 @@ import Contact from "../Contact";
 import type { Post, PostBlock, PostSection } from "./types";
 import { Media, Outcomes, Section, Slider, Subhead } from "../components/caseBlocks";
 import { writingLink } from "../lib/writingUrl";
+import { LiveCover } from "../components/LiveCover";
 
 const DATE_FORMAT = new Intl.DateTimeFormat("en-GB", {
   day: "numeric",
@@ -15,12 +16,23 @@ function formatDate(iso: string): string {
 }
 
 function repoName(url: string, fallback: string): string {
-  const last = url.replace(/[?#].*$/, "").split("/").filter(Boolean).pop();
+  const last = url
+    .replace(/[?#].*$/, "")
+    .split("/")
+    .filter(Boolean)
+    .pop();
   return last && !/^https?:$/.test(last) ? last : fallback;
 }
 
 function Cover({ post }: { post: Post }) {
   if (!post.cover) return null;
+  if (post.coverLive) {
+    return (
+      <div className="post-cover">
+        <LiveCover fallback={post.cover} mark={post.coverMark} alt={post.title} loading="eager" />
+      </div>
+    );
+  }
   return (
     <div className="post-cover">
       <Media src={post.cover} alt={post.title} loading="eager" />
@@ -36,13 +48,24 @@ function Label({ label }: { label: string }) {
   );
 }
 
-function Block({ block, label, outcomesLabel }: { block: PostBlock; label: string; outcomesLabel?: string }) {
+function Block({
+  block,
+  label,
+  outcomesLabel,
+}: {
+  block: PostBlock;
+  label: string;
+  outcomesLabel?: string;
+}) {
   switch (block.kind) {
     case "prose":
       return (
         <div className="cs-row">
           <Label label={label} />
-          <div className="cs-case-text post-body" dangerouslySetInnerHTML={{ __html: block.html }} />
+          <div
+            className="cs-case-text post-body"
+            dangerouslySetInnerHTML={{ __html: block.html }}
+          />
         </div>
       );
     case "logline":

@@ -15,6 +15,7 @@ stack:
   - Zustand
   - fal
 cover: /images/writing/biscuit-pet/cover.webp
+thumb: /images/writing/biscuit-pet/thumb.webp
 ogImage: /images/writing/biscuit-pet/og.jpg
 ---
 

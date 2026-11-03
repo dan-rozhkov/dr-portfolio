@@ -28,6 +28,9 @@ export interface PostSection {
   blocks: PostBlock[];
 }
 
+export const COVER_LIVE = ["liquid-gradient"] as const;
+export type CoverLive = (typeof COVER_LIVE)[number];
+
 export interface Post {
   slug: string;
   title: string;
@@ -40,6 +43,12 @@ export interface Post {
   links: { label: string; url: string }[];
   /** path under public/ */
   cover?: string;
+  /** path under public/; list-card image on the Cases page, falls back to cover */
+  thumb?: string;
+  /** a live cover drawn over `cover` (which stays as the no-WebGL fallback) */
+  coverLive?: CoverLive;
+  /** path under public/; a mark centred on the live cover */
+  coverMark?: string;
   /** path under public/; raster (not WebP) for social previews */
   ogImage?: string;
   readMinutes: number;

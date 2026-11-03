@@ -81,6 +81,32 @@
   text-decoration: none;
 }
 
+.writing-thumb {
+  aspect-ratio: 16 / 10;
+  margin-bottom: 24px;
+  background: var(--line);
+  overflow: hidden;
+}
+
+.writing-thumb > img,
+.writing-thumb > .live-cover {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.writing-stream article a:hover .writing-thumb > * {
+  transform: scale(1.02);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .writing-thumb > * {
+    transition: none;
+  }
+}
+
 .writing-meta {
   color: var(--muted);
   font-size: var(--text-sm);
@@ -242,3 +268,42 @@
   padding-bottom: var(--space-3xl);
 }
 
+
+/* Live cover: the gradient canvas over its static fallback, a mark centred on top. */
+.live-cover {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  background: #020202;
+  overflow: hidden;
+}
+
+.live-cover-fallback,
+.live-cover-canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.live-cover-canvas {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.live-cover-canvas[data-ready="true"] {
+  opacity: 1;
+}
+
+.live-cover-mark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 22%;
+  transform: translate(-50%, -50%);
+}
+
+.writing-thumb .live-cover {
+  height: 100%;
+}

@@ -3,7 +3,8 @@ import { filterPosts, isCategory } from "./filter";
 import { CATEGORY_LABEL } from "./types";
 import type { Category } from "./types";
 import { postLink, writingLink } from "../lib/writingUrl";
-import { BASE } from "../lib/url";
+import { BASE, assetUrl } from "../lib/url";
+import { LiveCover } from "../components/LiveCover";
 
 const CATEGORIES = Object.keys(CATEGORY_LABEL) as Category[];
 
@@ -27,8 +28,8 @@ export default function WritingIndex({ category }: { category: string | null }) 
     <main className="writing-page">
       <section className="grid-shell writing">
         <aside className="writing-side">
-          <h1 className="writing-title">Writing</h1>
-          <p>What I build and why. Long reads on design engineering, AI tooling and product decisions.</p>
+          <h1 className="writing-title">Cases</h1>
+          <p>Products I designed and built, and the decisions behind them.</p>
           <ul className="writing-filter">
             <li>
               <a href={writingLink()} aria-current={active === null ? "page" : undefined}>
@@ -54,17 +55,34 @@ export default function WritingIndex({ category }: { category: string | null }) 
               {all.length === 0 ? "First post is on its way." : "No posts in this category yet."}
             </p>
           ) : (
-            posts.map((p) => (
-              <article key={p.slug}>
-                <a href={postLink(p.slug)}>
-                  <div className="writing-meta">
-                    {formatDate(p.date)} · {CATEGORY_LABEL[p.category]}
-                  </div>
-                  <h2>{p.title}</h2>
-                  <p>{p.dek}</p>
-                </a>
-              </article>
-            ))
+            posts.map((p, i) => {
+              const image = p.thumb ?? p.cover;
+              return (
+                <article key={p.slug}>
+                  <a href={postLink(p.slug)}>
+                    {image && (
+                      <div className="writing-thumb">
+                        {p.coverLive && p.cover && !p.thumb ? (
+                          <LiveCover
+                            fallback={p.cover}
+                            mark={p.coverMark}
+                            alt=""
+                            loading={i === 0 ? "eager" : "lazy"}
+                          />
+                        ) : (
+                          <img src={assetUrl(image)} alt="" loading={i === 0 ? "eager" : "lazy"} />
+                        )}
+                      </div>
+                    )}
+                    <div className="writing-meta">
+                      {formatDate(p.date)} · {CATEGORY_LABEL[p.category]}
+                    </div>
+                    <h2>{p.title}</h2>
+                    <p>{p.dek}</p>
+                  </a>
+                </article>
+              );
+            })
           )}
         </div>
       </section>

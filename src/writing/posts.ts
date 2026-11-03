@@ -2,8 +2,8 @@ import { Marked } from "marked";
 import type { Token, TokensList } from "marked";
 import { parse as parseYaml } from "yaml";
 import { assetUrl } from "../lib/url";
-import { CATEGORY_LABEL } from "./types";
-import type { Category, Post, PostBlock, PostSection, PostSliderItem } from "./types";
+import { CATEGORY_LABEL, COVER_LIVE } from "./types";
+import type { Category, CoverLive, Post, PostBlock, PostSection, PostSliderItem } from "./types";
 
 export function readMinutes(text: string): number {
   const words = text.trim().split(/\s+/).filter(Boolean).length;
@@ -244,6 +244,10 @@ export function parsePost(raw: string, slug: string): Post {
   const tldr = strList(fm.tldr);
   if (tldr.length === 0) fail("missing tldr");
 
+  const coverLive = str(fm.coverLive);
+  if (coverLive !== undefined && !(COVER_LIVE as readonly string[]).includes(coverLive)) fail("bad coverLive");
+  if (coverLive !== undefined && !str(fm.cover)) fail("coverLive needs a cover fallback");
+
   const links = Array.isArray(fm.links)
     ? fm.links.flatMap((l: unknown) => {
         const o = (l ?? {}) as Record<string, unknown>;
@@ -265,6 +269,9 @@ export function parsePost(raw: string, slug: string): Post {
     stack: strList(fm.stack),
     links,
     cover: str(fm.cover),
+    thumb: str(fm.thumb),
+    coverLive: coverLive as CoverLive | undefined,
+    coverMark: str(fm.coverMark),
     ogImage: str(fm.ogImage),
     readMinutes: readMinutes(proseWords(body)),
     sections: splitSections(body, bodyLine, fail),

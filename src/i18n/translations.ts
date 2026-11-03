@@ -37,7 +37,7 @@ export interface Translations {
 const en: Translations = {
   "nav.work": "Work",
   "nav.about": "About",
-  "nav.writing": "Writing",
+  "nav.writing": "Cases",
   "nav.jobs": "Jobs",
   "nav.contact": "Contact",
   "nav.contactMobile": "@",
@@ -64,7 +64,7 @@ const en: Translations = {
 const ru: Translations = {
   "nav.work": "Работы",
   "nav.about": "О себе",
-  "nav.writing": "Writing",
+  "nav.writing": "Cases",
   "nav.jobs": "Jobs",
   "nav.contact": "Контакты",
   "nav.contactMobile": "@",
