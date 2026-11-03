@@ -43,6 +43,11 @@ uniform float u_dither;
 uniform float u_exposure;
 uniform float u_contrast;
 uniform float u_saturation;
+// Halftone: dot-grid columns across the canvas (0 = off). Each cell samples the field at its
+// centre and draws one dot sized and coloured by it, over black.
+uniform float u_halftone;
+uniform float u_dotMin;
+uniform float u_dotMax;
 
 // === CONSTANTS ===
 const float GOLDEN_ANGLE = 2.3999632;
@@ -214,7 +219,12 @@ vec3 applyContrastSaturation(vec3 linearRgb, float contrast, float saturation) {
 
 // === MAIN ===
 void main() {
-    vec2 fragCoord = v_uv * u_resolution;
+    vec2 pixel = v_uv * u_resolution;
+    vec2 fragCoord = pixel;
+    float halftone = step(0.5, u_halftone);
+    float cellPx = u_resolution.x / max(u_halftone, 1.0);
+    vec2 cellCenter = (floor(pixel / cellPx) + 0.5) * cellPx;
+    fragCoord = mix(pixel, cellCenter, halftone);
     vec2 r = u_resolution;
     vec2 p = (fragCoord * 2.0 - r) / r.y;
 
@@ -296,13 +306,22 @@ void main() {
     float val = totalVal / totalWeight;
     val = clamp((val - 0.3) / 0.4, 0.0, 1.0);
     val = pow(val, exp(-u_distBias));
-    val = clamp(val + (dither - 0.5) * u_dither, 0.0, 1.0);
+    val = clamp(val + (dither - 0.5) * u_dither * (1.0 - halftone), 0.0, 1.0);
 
     vec3 col = paletteN(val, colorCount);
     col *= u_exposure;
     col = applyContrastSaturation(col, u_contrast, u_saturation);
     col = softGamutMap(col);
     col = toSrgb(col);
+
+    if (halftone > 0.5) {
+        // Dot radius grows with the field; a faint glow keeps the ribbon's body
+        float lum = clamp(dot(col, vec3(0.2126, 0.7152, 0.0722)) * 1.4, 0.0, 1.0);
+        float radius = 0.5 * cellPx * mix(u_dotMin, u_dotMax, sqrt(lum));
+        float dist = length(pixel - cellCenter);
+        float dotMask = 1.0 - smoothstep(radius - 0.75 * u_pixelRatio, radius + 0.5 * u_pixelRatio, dist);
+        col = col * dotMask + col * lum * lum * 0.08;
+    }
 
     fragColor = vec4(col, 1.0);
 }
@@ -311,11 +330,12 @@ void main() {
 /** Colour presets: `sideform` is the landing's palette, unchanged; the others reuse the shader. */
 const GRADIENTS = {
   sideform: { palette: ["#020202", "#020202", "#3c50a5", "#c0d5d0", "#ff4000", "#020202"], seed: 36, uniforms: {} },
-  // Same shader, its own shape: a single diagonal S-ribbon instead of the landing's corner wave
+  // Same shader, its own look: a halftone dot grid (64 columns) over one diagonal
+  // S-ribbon, violet dots fading out to a pale mint crest
   qure: {
-    palette: ["#020202", "#020202", "#1f3f9e", "#c4f1e6", "#1fae9c", "#020202"],
+    palette: ["#1c1240", "#331a78", "#5236c4", "#2f86e2", "#36d6cc", "#b4f7d2", "#2b9fd8", "#331a78"],
     seed: 58,
-    uniforms: { u_scale: 0.55 },
+    uniforms: { u_scale: 0.55, u_exposure: 1, u_halftone: 64, u_dotMin: 0.14, u_dotMax: 0.7 },
   },
 } as const satisfies Record<
   string,
@@ -342,6 +362,9 @@ const NUMBER_UNIFORMS: Record<string, number> = {
   u_exposure: 1.1,
   u_contrast: 1.1,
   u_saturation: 1,
+  u_halftone: 0,
+  u_dotMin: 0.14,
+  u_dotMax: 0.82,
 };
 
 function hexToRgba(hex: string): [number, number, number, number] {
