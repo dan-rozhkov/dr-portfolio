@@ -64,6 +64,7 @@ export default function WritingIndex({ category }: { category: string | null }) 
                       <div className="writing-thumb">
                         {p.coverLive && p.cover && !p.thumb ? (
                           <LiveCover
+                            variant={p.coverLive}
                             fallback={p.cover}
                             mark={p.coverMark}
                             alt=""

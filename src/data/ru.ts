@@ -110,7 +110,7 @@ export const extraWork: ExtraWork = {
 
 export const about: string[] = [
   "Senior product designer с 8+ годами опыта в B2B SaaS, дизайн-системах и AI-продуктах. Проектирую сложные платформы и остаюсь рядом с разработкой до момента, когда продукт попадает к пользователю.",
-  "Design Engineer в JetBrains, Lead Product Designer в Sber, ранее — Openprovider, SnapSoft и ClearScale. Для меня важны системы, точные детали взаимодействия и те незаметные решения, которые делают сложные инструменты очевидными.",
+  "Design Engineer в JetBrains, ранее — Lead Product Designer в Sber, а также Openprovider, SnapSoft и ClearScale. Для меня важны системы, точные детали взаимодействия и те незаметные решения, которые делают сложные инструменты очевидными.",
 ];
 
 export const skills: string[] = [

@@ -18,6 +18,8 @@ links:
   - label: Site
     url: https://quretests.com/
 cover: /images/writing/qure/cover.webp
+coverLive: qure-gradient
+coverMark: /images/writing/qure/mark.svg
 ogImage: /images/writing/qure/og.jpg
 ---
 

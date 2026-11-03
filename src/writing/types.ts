@@ -28,7 +28,7 @@ export interface PostSection {
   blocks: PostBlock[];
 }
 
-export const COVER_LIVE = ["liquid-gradient"] as const;
+export const COVER_LIVE = ["liquid-gradient", "qure-gradient"] as const;
 export type CoverLive = (typeof COVER_LIVE)[number];
 
 export interface Post {

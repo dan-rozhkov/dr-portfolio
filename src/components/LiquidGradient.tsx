@@ -308,14 +308,18 @@ void main() {
 }
 `;
 
-const PALETTE = ["#020202", "#020202", "#3c50a5", "#c0d5d0", "#ff4000", "#020202"];
+/** Colour presets: `sideform` is the landing's palette, unchanged; the others reuse the shader. */
+const GRADIENTS = {
+  sideform: { palette: ["#020202", "#020202", "#3c50a5", "#c0d5d0", "#ff4000", "#020202"], seed: 36 },
+  qure: { palette: ["#020202", "#020202", "#1f3f9e", "#c4f1e6", "#1fae9c", "#020202"], seed: 36 },
+} as const;
+export type GradientName = keyof typeof GRADIENTS;
 
 /** Seconds into the animation used for the single frame drawn under reduced motion. */
 const STATIC_FRAME_TIME = 3;
 const MAX_PIXEL_RATIO = 2;
 
 const NUMBER_UNIFORMS: Record<string, number> = {
-  u_seed: 36,
   u_speed: 1,
   u_loop: 0,
   u_scale: 0.64,
@@ -369,7 +373,8 @@ function freeResources(gl: WebGL2RenderingContext, r: GlResources) {
 }
 
 /** Compiles the program and uploads buffers + constant uniforms. Called again after a context restore. */
-function buildResources(gl: WebGL2RenderingContext): GlResources | null {
+function buildResources(gl: WebGL2RenderingContext, preset: GradientName): GlResources | null {
+  const { palette, seed } = GRADIENTS[preset];
   const vertex = compile(gl, gl.VERTEX_SHADER, VERTEX_SOURCE);
   const fragment = compile(gl, gl.FRAGMENT_SHADER, FRAGMENT_SOURCE);
   const program = gl.createProgram();
@@ -394,9 +399,10 @@ function buildResources(gl: WebGL2RenderingContext): GlResources | null {
   gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
 
   const colors = new Float32Array(8 * 4);
-  PALETTE.forEach((hex, i) => colors.set(hexToRgba(hex), i * 4));
+  palette.forEach((hex, i) => colors.set(hexToRgba(hex), i * 4));
   gl.uniform4fv(gl.getUniformLocation(program, "u_colors"), colors);
-  gl.uniform1i(gl.getUniformLocation(program, "u_colors_length"), PALETTE.length);
+  gl.uniform1i(gl.getUniformLocation(program, "u_colors_length"), palette.length);
+  gl.uniform1f(gl.getUniformLocation(program, "u_seed"), seed);
   for (const [name, value] of Object.entries(NUMBER_UNIFORMS)) {
     gl.uniform1f(gl.getUniformLocation(program, name), value);
   }
@@ -418,7 +424,7 @@ function buildResources(gl: WebGL2RenderingContext): GlResources | null {
 const pendingRelease = new WeakMap<HTMLCanvasElement, ReturnType<typeof setTimeout>>();
 
 /** Starts the gradient on `canvas`. Returns a cleanup, or null without WebGL2 (the fallback image shows). */
-function startGradient(canvas: HTMLCanvasElement): (() => void) | null {
+function startGradient(canvas: HTMLCanvasElement, preset: GradientName): (() => void) | null {
   let gl: WebGL2RenderingContext | null = null;
   try {
     gl = canvas.getContext("webgl2", {
@@ -433,7 +439,7 @@ function startGradient(canvas: HTMLCanvasElement): (() => void) | null {
   const context = gl;
   clearTimeout(pendingRelease.get(canvas));
   pendingRelease.delete(canvas);
-  let resources = buildResources(context);
+  let resources = buildResources(context, preset);
   if (!resources) return null;
 
   const reducedMotion =
@@ -511,7 +517,7 @@ function startGradient(canvas: HTMLCanvasElement): (() => void) | null {
   };
   const onRestored = () => {
     if (disposed) return;
-    resources = buildResources(context);
+    resources = buildResources(context, preset);
     if (!resources) return;
     lost = false;
     resize();
@@ -544,12 +550,18 @@ function startGradient(canvas: HTMLCanvasElement): (() => void) | null {
 }
 
 /** Decorative animated gradient that fills its positioned parent. Draws nothing without WebGL2. */
-export function LiquidGradient({ className }: { className?: string }) {
+export function LiquidGradient({
+  className,
+  preset = "sideform",
+}: {
+  className?: string;
+  preset?: GradientName;
+}) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    return startGradient(canvas) ?? undefined;
-  }, []);
+    return startGradient(canvas, preset) ?? undefined;
+  }, [preset]);
   return <canvas ref={canvasRef} className={className} aria-hidden="true" />;
 }

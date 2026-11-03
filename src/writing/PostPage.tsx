@@ -41,7 +41,7 @@ function Cover({ post }: { post: Post }) {
   if (post.coverLive) {
     return (
       <div className="post-cover">
-        <LiveCover fallback={post.cover} mark={post.coverMark} alt={post.title} loading="eager" />
+        <LiveCover variant={post.coverLive} fallback={post.cover} mark={post.coverMark} alt={post.title} loading="eager" />
       </div>
     );
   }

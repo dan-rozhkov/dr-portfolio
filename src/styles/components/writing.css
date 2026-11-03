@@ -304,6 +304,15 @@
   transform: translate(-50%, -50%);
 }
 
+/* Qure's ring-and-cursor mark reads larger than Sideform's: smaller, and set a touch
+   below centre so the ring, not the cursor tail, sits on the optical middle. */
+.live-cover--qure .live-cover-mark {
+  top: 53%;
+  height: 17%;
+  /* keeps the white mark legible when the bright band passes under it */
+  filter: drop-shadow(0 2px 14px rgb(0 0 0 / 0.35));
+}
+
 .writing-thumb .live-cover {
   height: 100%;
 }
