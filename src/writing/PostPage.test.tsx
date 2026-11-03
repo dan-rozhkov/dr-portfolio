@@ -36,7 +36,8 @@ describe("PostPage", () => {
     expect(html).toContain("First bullet");
     expect(html).toContain("Second bullet");
     expect(html).toContain("Published");
-    expect(html).toContain("28 Oct 2026");
+    expect(html).toContain("Oct 2026");
+    expect(html).not.toContain("28 Oct");
     expect(html).toContain("4 min");
     expect(html).toContain("React, Vite");
     expect(html).toContain("https://example.com/repo");

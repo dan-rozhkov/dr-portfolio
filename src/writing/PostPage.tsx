@@ -3,17 +3,8 @@ import type { Post, PostBlock, PostSection } from "./types";
 import { Media, Outcomes, Section, Slider, Subhead } from "../components/caseBlocks";
 import { casesLink } from "../lib/writingUrl";
 import { LiveCover } from "../components/LiveCover";
+import { formatMonthYear } from "./date";
 
-const DATE_FORMAT = new Intl.DateTimeFormat("en-GB", {
-  day: "numeric",
-  month: "short",
-  year: "numeric",
-  timeZone: "UTC",
-});
-
-function formatDate(iso: string): string {
-  return DATE_FORMAT.format(new Date(`${iso}T00:00:00Z`));
-}
 
 const isRepo = (url: string) => /^https?:\/\/(www\.)?github\.com\//.test(url);
 
@@ -165,7 +156,7 @@ export default function PostPage({ post }: { post: Post | undefined }) {
           <dl className="cs-title-meta">
             <div>
               <dt>Published</dt>
-              <dd>{formatDate(post.date)}</dd>
+              <dd>{formatMonthYear(post.date)}</dd>
             </div>
             <div>
               <dt>Read</dt>

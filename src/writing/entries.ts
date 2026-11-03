@@ -2,6 +2,7 @@ import { getCases } from "../data/portfolio";
 import type { Lang } from "../i18n/translations";
 import { caseLink } from "../lib/url";
 import { postLink } from "../lib/writingUrl";
+import { formatMonthYear } from "./date";
 import { getPosts } from "./posts";
 import type { Category, CoverLive } from "./types";
 
@@ -21,17 +22,6 @@ export interface CaseEntry {
   live?: { variant: CoverLive; fallback: string; mark?: string };
 }
 
-const DATE_FORMAT = new Intl.DateTimeFormat("en-US", {
-  month: "short",
-  day: "numeric",
-  year: "numeric",
-  timeZone: "UTC",
-});
-
-function formatDate(iso: string): string {
-  return DATE_FORMAT.format(new Date(`${iso}T00:00:00Z`));
-}
-
 /** Cases page category of each home-page case study. */
 export const CASE_CATEGORY: Record<string, Category> = {
   "sber-india-proto": "ai-tools",
@@ -49,7 +39,7 @@ export function getEntries(lang: Lang = "en"): CaseEntry[] {
     title: p.title,
     dek: p.dek,
     category: p.category,
-    when: formatDate(p.date),
+    when: formatMonthYear(p.date),
     sortKey: p.date,
     image: p.thumb ?? p.cover,
     live:
