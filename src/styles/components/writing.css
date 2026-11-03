@@ -139,6 +139,7 @@
   .writing {
     display: block;
     padding-top: 24px;
+    padding-inline: var(--pad);
   }
 
   .writing-side {
@@ -151,9 +152,9 @@
     padding-bottom: 32px;
   }
 
-  /* Card images run edge to edge, like post images; the text keeps the page padding. */
+  /* Card images run edge to edge by exactly the page padding (no 100vw: it counts desktop scrollbars). */
   .writing-stream .writing-thumb {
-    margin-inline: -20px;
+    margin-inline: calc(-1 * var(--pad));
   }
 }
 
