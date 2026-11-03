@@ -46,6 +46,8 @@ uniform float u_saturation;
 // Halftone: dot-grid columns across the canvas (0 = off). Each cell samples the field at its
 // centre and draws one dot sized and coloured by it, over black.
 uniform float u_halftone;
+// Smallest dot-grid cell in CSS px (0 = columns only)
+uniform float u_cellPx;
 uniform float u_dotMin;
 uniform float u_dotMax;
 // Shape: 0 = the liquid field; 1 = an eclipse, a dark disc above a glowing horizon,
@@ -223,24 +225,38 @@ vec3 applyContrastSaturation(vec3 linearRgb, float contrast, float saturation) {
 }
 
 // Eclipse field: e is aspect-correct (x across, y up, 0 at the centre), tt is time.
+// Perspective distance from the ripple centre (ellipses wider than tall)
+vec2 rippleCentre(float tt) { return vec2(0.03 * sin(tt * 0.1), 0.08); }
+float rippleDist(vec2 e, float tt) { return length((e - rippleCentre(tt)) * vec2(0.55, 1.3)); }
+
 float eclipseField(vec2 e, float tt) {
-    // Glowing horizon: a wide soft band that sways and curves up toward the edges
-    float horizon = -0.5 + 0.04 * sin(e.x * 1.3 + tt * 0.35) + 0.08 * e.x * e.x;
-    float band = exp(-pow((e.y - horizon) / 0.2, 2.0));
-    // Blue sky that dims toward the disc and fades out below the horizon
-    float sky = 0.5 + 0.08 * e.y;
-    sky *= smoothstep(horizon - 0.6, horizon - 0.05, e.y);
-    // The disc sits in front of the band: soft at the top, crisp at the bottom
-    vec2 c = vec2(0.06 * sin(tt * 0.12), 0.02 + 0.03 * sin(tt * 0.2));
-    vec2 d2 = e - c;
-    float dist = length(d2);
-    float radius = 0.74;
-    float soft = mix(0.012, 0.3, smoothstep(-0.2, 0.7, d2.y / radius));
-    float disc = smoothstep(radius + soft, radius - soft, dist);
-    float shade = exp(-max(dist - radius, 0.0) / 0.35);
-    float v = sky * (1.0 - 0.45 * shade);
-    v = max(v, band);
-    v = mix(v, 0.05, disc);
+    // Ripples on water (or sound waves) seen at an angle: rings flattened into ellipses, spreading out from
+    // a dark centre where the drop fell. The near (lower) side of each ring catches the light.
+    vec2 d2 = e - rippleCentre(tt);
+    float dist = rippleDist(e, tt);
+    // Water: mid blue, darker toward the bottom of the frame
+    float water = 0.5 + 0.05 * e.y;
+    water *= smoothstep(-1.1, -0.45, e.y) * 0.85 + 0.15;
+    // The dark centre: hazy on top, firmer at the bottom
+    float radius = 0.46;
+    float soft = mix(0.03, 0.22, smoothstep(-0.6, 0.9, d2.y / radius));
+    // The centre keeps a rounder shape than the flattened rings
+    float holeDist = length(d2 * vec2(0.95, 1.2)) * 0.82;
+    float hole = smoothstep(radius + soft, radius - soft, holeDist);
+    float halo = exp(-max(holeDist - radius, 0.0) / 0.22);
+    float v = water * (1.0 - 0.3 * halo);
+    v = mix(v, 0.14 + 0.06 * d2.y, hole);
+    // Rings travel outward, appear at the rim of the centre and fade as they spread
+    // Thick, soft pulses, like a sound wave: a strong front and a weaker one behind it
+    float spacing = 0.78;
+    float phase = fract((dist - tt * 0.1 - 0.05) / spacing);
+    float born = smoothstep(radius - 0.05, radius + 0.3, dist);
+    float fade = exp(-max(dist - 1.0, 0.0) * 1.4);
+    // Thick and bright on the near (bottom) side, thinning out like a crescent toward the far side
+    float nearSide = smoothstep(0.8, -0.6, d2.y);
+    float width = 0.04 + 0.22 * nearSide;
+    float ring = exp(-pow(abs(phase - 0.5) / width, 3.0));
+    v = max(v, ring * born * fade * (0.35 + 0.65 * nearSide));
     return v;
 }
 
@@ -257,7 +273,8 @@ void main() {
     vec2 pixel = v_uv * u_resolution;
     vec2 fragCoord = pixel;
     float halftone = step(0.5, u_halftone);
-    float cellPx = u_resolution.x / max(u_halftone, 1.0);
+    // Columns set the density; u_cellPx (CSS px) is the smallest cell, so small canvases keep readable dots
+    float cellPx = max(u_cellPx * u_pixelRatio, u_resolution.x / max(u_halftone, 1.0));
     vec2 cellCenter = (floor(pixel / cellPx) + 0.5) * cellPx;
     fragCoord = mix(pixel, cellCenter, halftone);
     vec2 r = u_resolution;
@@ -355,16 +372,29 @@ void main() {
     if (halftone > 0.5) {
         // Dot radius grows with the field; a faint glow keeps the ribbon's body
         float lum = clamp(dot(col, vec3(0.2126, 0.7152, 0.0722)) * 1.4, 0.0, 1.0);
-        float radius = 0.5 * cellPx * mix(u_dotMin, u_dotMax, sqrt(lum));
+        float ground01 = step(0.001, u_dotGround);
+        // On a coloured ground: tiny sparks in the sky, big dots only where it glows
+        float size = mix(sqrt(lum), 0.32 + 0.68 * smoothstep(0.6, 0.95, val), ground01);
+        // Ripples: dots grow with distance from the centre until they nearly merge
+        float spread = 0.0;
+        if (u_shape > 0.5) {
+            spread = smoothstep(0.6, 1.7, rippleDist((cellCenter * 2.0 - r) / r.y, u_time * u_speed));
+            size = max(size, spread * 1.12);
+        }
+        float radius = 0.5 * cellPx * mix(u_dotMin, u_dotMax, size);
         float dist = length(pixel - cellCenter);
         float dotMask = 1.0 - smoothstep(radius - 0.75 * u_pixelRatio, radius + 0.5 * u_pixelRatio, dist);
-        vec3 ink = mix(col, vec3(1.0), 0.35 * step(0.001, u_dotGround));
+        // On a coloured ground the dots are lighter than the field under them
+        // Big outer dots take the field's colour, so merged dots read as the surface itself
+        vec3 ink = mix(col, vec3(1.0), 0.7 * ground01 * (1.0 - spread));
         // The ground between dots is the smooth field at this pixel, not the cell's sample
         vec3 ground = col;
         if (u_shape > 0.5) {
             ground = shadeValue(clamp(eclipseField((pixel * 2.0 - r) / r.y, u_time * u_speed), 0.0, 1.0), colorCount);
         }
-        col = mix(ground * u_dotGround, ink, dotMask) + col * lum * lum * 0.08 * (1.0 - step(0.001, u_dotGround));
+        // Gaps between merged outer dots stay dark, so the grid still reads
+        float groundK = u_dotGround * (1.0 - 0.45 * spread);
+        col = mix(ground * groundK, ink, dotMask) + col * lum * lum * 0.08 * (1.0 - ground01);
     }
 
     fragColor = vec4(col, 1.0);
@@ -374,20 +404,21 @@ void main() {
 /** Colour presets: `sideform` is the landing's palette, unchanged; the others reuse the shader. */
 const GRADIENTS = {
   sideform: { palette: ["#020202", "#020202", "#3c50a5", "#c0d5d0", "#ff4000", "#020202"], seed: 36, uniforms: {} },
-  // Same shader, its own look: a halftone eclipse, a dark disc in front of a glowing
-  // horizon on a blue field, drawn as an 80-column dot grid
+  // Same shader, its own look (after Danil's reference): a halftone eclipse, a soft
+  // dark blob above a glowing horizon on a blue field, a dot grid of 140 columns, never finer than 4px
   qure: {
-    palette: ["#05061e", "#0d1458", "#1a2a9c", "#2448c8", "#2f74e2", "#2fc6d8", "#9ff2d8", "#f2fffb"],
+    palette: ["#020818", "#04173d", "#082a6c", "#0f3f9a", "#1a57bd", "#2f8aa2", "#8fdcea", "#effcff"],
     seed: 58,
     uniforms: {
       u_scale: 0.55,
       u_exposure: 1,
       u_contrast: 1.05,
       u_shape: 1,
-      u_halftone: 80,
+      u_halftone: 140,
+      u_cellPx: 4,
       u_dotMin: 0.14,
-      u_dotMax: 0.6,
-      u_dotGround: 0.55,
+      u_dotMax: 0.95,
+      u_dotGround: 0.7,
     },
   },
 } as const satisfies Record<
@@ -419,6 +450,7 @@ const NUMBER_UNIFORMS: Record<string, number> = {
   u_dotMin: 0.14,
   u_dotMax: 0.82,
   u_shape: 0,
+  u_cellPx: 0,
   u_dotGround: 0,
 };
 
