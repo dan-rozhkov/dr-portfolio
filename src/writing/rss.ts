@@ -19,12 +19,13 @@ export function buildRss(posts: RssPost[], origin: string): string {
   const base = origin.replace(/\/+$/, "");
   const items = posts
     .map((p) => {
-      const link = `${base}/en/writing/${p.slug}/`;
+      const link = `${base}/en/cases/${p.slug}/`;
       return [
         "    <item>",
         `      <title>${esc(p.title)}</title>`,
         `      <link>${esc(link)}</link>`,
-        `      <guid>${esc(link)}</guid>`,
+        // Guids keep the old /en/writing/ address so feed readers don't show the posts again.
+        `      <guid isPermaLink="false">${esc(`${base}/en/writing/${p.slug}/`)}</guid>`,
         `      <pubDate>${new Date(`${p.date}T00:00:00Z`).toUTCString()}</pubDate>`,
         `      <description>${esc(p.dek)}</description>`,
         "    </item>",
@@ -35,8 +36,8 @@ export function buildRss(posts: RssPost[], origin: string): string {
 <rss version="2.0">
   <channel>
     <title>Danil Rozhkov — Cases</title>
-    <link>${esc(`${base}/en/writing/`)}</link>
-    <description>What I build and why. Long reads on design engineering, AI tooling and product decisions.</description>
+    <link>${esc(`${base}/en/cases/`)}</link>
+    <description>Products I designed and built, and the decisions behind them.</description>
     <language>en</language>
 ${items}
   </channel>

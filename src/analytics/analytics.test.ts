@@ -60,7 +60,7 @@ describe("identifier-free browser collection", () => {
   });
 
   it("drops unknown paths and mismatched cases, including personal data in paths", () => {
-    trackPage("/en/writing/private-person");
+    trackPage("/en/cases/private-person");
     trackContactClick("email");
     expect(send).not.toHaveBeenCalled();
     trackPage("/en/case/seligoai");

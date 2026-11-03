@@ -111,18 +111,45 @@ for (const lang of LANGS) {
   }
 }
 
-// English-only pages: writing index, posts, jobs, RSS
+// English-only pages: cases index, posts, jobs, RSS
 const allPosts = postSlugs();
-writePage(path.join(distDir, "en", "writing", "index.html"), "/en/writing/");
+writePage(path.join(distDir, "en", "cases", "index.html"), "/en/cases/");
 for (const slug of allPosts) {
   writePage(
-    path.join(distDir, "en", "writing", slug, "index.html"),
-    `/en/writing/${slug}/`
+    path.join(distDir, "en", "cases", slug, "index.html"),
+    `/en/cases/${slug}/`
   );
 }
 writePage(path.join(distDir, "en", "jobs", "index.html"), "/en/jobs/");
-fs.writeFileSync(path.join(distDir, "en", "writing", "rss.xml"), rss(SITE_ORIGIN));
-console.log("wrote en/writing/rss.xml");
+const feed = rss(SITE_ORIGIN);
+fs.writeFileSync(path.join(distDir, "en", "cases", "rss.xml"), feed);
+console.log("wrote en/cases/rss.xml");
+
+// /en/writing/ was the old address of /en/cases/: keep old links and feed readers working.
+function writeRedirect(outPath, target) {
+  const url = `${SITE_ORIGIN}${target}`;
+  const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script>location.replace(${JSON.stringify(target)} + location.search + location.hash)</script>
+  <meta http-equiv="refresh" content="0;url=${escapeAttr(target)}">
+  <link rel="canonical" href="${escapeAttr(url)}">
+  <meta name="robots" content="noindex">
+  <title>Danil Rozhkov</title>
+</head>
+<body><p><a href="${escapeAttr(target)}">${escapeHtml(url)}</a></p></body>
+</html>
+`;
+  fs.mkdirSync(path.dirname(outPath), { recursive: true });
+  fs.writeFileSync(outPath, html);
+  console.log("redirect", path.relative(distDir, outPath), "->", target);
+}
+writeRedirect(path.join(distDir, "en", "writing", "index.html"), "/en/cases/");
+for (const slug of allPosts) {
+  writeRedirect(path.join(distDir, "en", "writing", slug, "index.html"), `/en/cases/${slug}/`);
+}
+fs.writeFileSync(path.join(distDir, "en", "writing", "rss.xml"), feed);
 
 // Root redirect to /en/
 const redirectHtml = `<!DOCTYPE html>
@@ -189,8 +216,8 @@ for (const item of allCases) {
 
 // English-only pages: single en alternate
 const enOnly = [
-  `/en/writing/`,
-  ...allPosts.map((s) => `/en/writing/${s}/`),
+  `/en/cases/`,
+  ...allPosts.map((s) => `/en/cases/${s}/`),
   `/en/jobs/`,
 ];
 for (const route of enOnly) {

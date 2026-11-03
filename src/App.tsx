@@ -1,16 +1,15 @@
 import { useEffect } from "react";
-import { getCases, getCaseStudy, setDataLang } from "./data/portfolio";
+import { getCaseStudy, setDataLang } from "./data/portfolio";
 import CaseStudy from "./CaseStudy";
 import Contact from "./Contact";
 import Header from "./components/Header";
 import CustomCursor from "./components/CustomCursor";
 import Hero from "./components/Hero";
-import CaseSection from "./components/CaseSection";
+import LatestCases from "./components/LatestCases";
 import ExtraWork from "./components/ExtraWork";
 import About from "./components/About";
 import Recognition from "./components/Recognition";
 import SkillsPhysics from "./components/SkillsPhysics";
-import CaseIndicator from "./components/CaseIndicator";
 import ContactObserver from "./components/ContactObserver";
 import ScrollFade from "./components/ScrollFade";
 import { useRoute } from "./hooks/useRoute";
@@ -30,7 +29,6 @@ export default function App({ initialPath }: { initialPath?: string }) {
   setDataLang(lang);
 
   const pageTitle = getPageTitle(route);
-  const cases = getCases();
 
   useEffect(() => {
     document.title = pageTitle;
@@ -55,7 +53,7 @@ export default function App({ initialPath }: { initialPath?: string }) {
     }
   }
 
-  if (route.name === "writing") {
+  if (route.name === "cases") {
     return (
       <I18nProvider lang={lang}>
         <CustomCursor />
@@ -96,16 +94,13 @@ export default function App({ initialPath }: { initialPath?: string }) {
       <Header />
       <main className="snap-container">
         <Hero />
-        {cases.map((item, index) => (
-          <CaseSection item={item} first={index === 0} key={item.id} />
-        ))}
+        <LatestCases />
         <ExtraWork />
         <About />
         <Recognition />
         <SkillsPhysics />
         <Contact />
       </main>
-      <CaseIndicator />
       <ContactObserver />
       <ScrollFade />
     </I18nProvider>

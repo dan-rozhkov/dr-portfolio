@@ -2,18 +2,22 @@ import { describe, expect, it } from "vitest";
 import { hashAction, parseRoute } from "./useRoute";
 
 describe("parseRoute", () => {
-  it("parses writing index", () => {
-    expect(parseRoute("/en/writing/")).toEqual({ name: "writing", lang: "en", category: null });
+  it("parses cases index", () => {
+    expect(parseRoute("/en/cases/")).toEqual({ name: "cases", lang: "en", category: null });
   });
-  it("parses writing category and forces en", () => {
-    expect(parseRoute("/ru/writing", "?category=ai-tools")).toEqual({
-      name: "writing",
+  it("keeps old /writing URLs on the cases routes", () => {
+    expect(parseRoute("/en/writing/")).toEqual({ name: "cases", lang: "en", category: null });
+    expect(parseRoute("/en/writing/qure/")).toEqual({ name: "post", slug: "qure", lang: "en" });
+  });
+  it("parses cases category and forces en", () => {
+    expect(parseRoute("/ru/cases", "?category=ai-tools")).toEqual({
+      name: "cases",
       lang: "en",
       category: "ai-tools",
     });
   });
   it("parses post", () => {
-    expect(parseRoute("/en/writing/pen-editor/")).toEqual({
+    expect(parseRoute("/en/cases/pen-editor/")).toEqual({
       name: "post",
       slug: "pen-editor",
       lang: "en",

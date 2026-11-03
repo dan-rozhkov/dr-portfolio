@@ -1,12 +1,12 @@
 import { BASE } from "./url";
 
-export function writingLink(category?: string): string {
-  const base = `${BASE}en/writing/`;
+export function casesLink(category?: string): string {
+  const base = `${BASE}en/cases/`;
   return category ? `${base}?category=${encodeURIComponent(category)}` : base;
 }
 
 export function postLink(slug: string): string {
-  return `${BASE}en/writing/${slug}/`;
+  return `${BASE}en/cases/${slug}/`;
 }
 
 export function jobsLink(): string {

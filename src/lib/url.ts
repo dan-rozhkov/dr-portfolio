@@ -12,5 +12,5 @@ export function assetUrl(src: string): string {
 }
 
 export function caseLink(id: string, lang: Lang = "en"): string {
-  return `${BASE}${lang}/case/${id}`;
+  return `${BASE}${lang}/case/${id}/`;
 }

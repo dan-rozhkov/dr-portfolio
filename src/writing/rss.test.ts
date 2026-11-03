@@ -17,8 +17,9 @@ describe("buildRss", () => {
     expect(xml).toContain("Tom &amp; Jerry");
     expect(xml).toContain("First &lt;dek&gt;");
   });
-  it("uses link as guid and RFC-822 date", () => {
-    expect(xml).toContain("<guid>https://x.test/en/writing/a/</guid>");
+  it("keeps the old guid, links to /cases, RFC-822 date", () => {
+    expect(xml).toContain("<link>https://x.test/en/cases/a/</link>");
+    expect(xml).toContain('<guid isPermaLink="false">https://x.test/en/writing/a/</guid>');
     expect(xml).toContain("<pubDate>Wed, 28 Oct 2026 00:00:00 GMT</pubDate>");
   });
   it("handles zero posts", () => {

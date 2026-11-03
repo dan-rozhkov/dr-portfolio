@@ -25,7 +25,7 @@ Recruiters and hiring managers (goal: they write to Danil), and people coming fr
 
 ## Post file format
 
-- One file per post: `content/posts/<slug>.md`. The slug is the URL: `/en/writing/<slug>/`. Files starting with `_` are skipped.
+- One file per post: `content/posts/<slug>.md`. The slug is the URL: `/en/cases/<slug>/`. Files starting with `_` are skipped.
 - Images: `public/images/writing/<slug>/` (cover as `.webp`/`.jpg` ≤ 400 KB, or `.mp4`/`.webm`). Use a real screenshot of the running project, never a mockup from another product. The cover is shown at its natural size on the light-gray rounded case-media block (no black backdrop); omit `cover` and nothing is rendered.
 - Parser: `src/writing/posts.ts`. A missing `title`, `dek`, `date`, `tldr` or a bad `category` fails the build.
 
@@ -81,7 +81,7 @@ Directives (`:::logline`, `:::slider`, `:::outcomes`) sit on their own lines and
 ```bash
 npm run build
 npx vite preview --port 4173 &   # serves dist/; kill it afterwards
-npm run shots -- /en/writing/ /en/writing/<slug>/
+npm run shots -- /en/cases/ /en/cases/<slug>/
 ```
 
 `scripts/screenshots.mjs` writes `shots/<path>-desktop.png` (1440 wide) and `shots/<path>-mobile.png` (390 wide), full page, and exits non-zero if a mobile page scrolls horizontally. `SHOTS_ORIGIN` changes the server, `PW_CHROMIUM` the browser binary. Open every PNG and look at it.
@@ -101,6 +101,7 @@ Do not deploy if either step was skipped.
 
 Every correction Danil sends becomes a rule here (and in Claude's memory). Newest first.
 
+- 2026-11-03 — One Cases list: `/en/writing/` moved to `/en/cases/` (old URLs redirect). The Cases page lists posts and the home-page case studies together (`src/writing/entries.ts`; a home case needs a `category` in `src/data/en.ts` and `ru.ts`). The home page shows only the 3 newest as cards plus an "All cases" button.
 - 2026-11-03 — Card thumbs are shown 16:10 (`object-fit: cover`), so crop the thumb to 16:10 yourself and keep the whole subject in frame (Biscuit's paws were cut off). Biscuit art uses the app's own colour grade (`PACK_GRADE` in `~/prj/tamagochi-exp/tools/make-event-stills.sh`, saturation 1.20) on the raw `.work/*/nano-banana-pro.png`, so it looks as rich as in the app.
 
 - 2026-11-03 — Qure case cover is live: the approved swirl animation (`coverLive: qure-swirl`, `src/components/SwirlCover.tsx`, one turn per π/0.5 ≈ 6.3 s), static `cover-swirl.webp` as fallback, reduced-motion frame and list thumbnail (`thumb`). LiquidGradient is back to the untouched Sideform shader.

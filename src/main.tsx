@@ -19,7 +19,6 @@ import "./styles/components/about.css";
 import "./styles/components/recognition.css";
 import "./styles/components/skills-physics.css";
 import "./styles/components/contact.css";
-import "./styles/components/case-indicator.css";
 import "./styles/components/case-study.css";
 import "./styles/components/writing.css";
 import "./styles/components/jobs.css";

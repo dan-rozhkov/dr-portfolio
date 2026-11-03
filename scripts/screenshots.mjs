@@ -1,4 +1,4 @@
-// Usage: npm run shots -- /en/writing/ [more paths]
+// Usage: npm run shots -- /en/cases/ [more paths]
 // Needs `vite preview --port 4173` running. Set PW_CHROMIUM to use a custom browser binary.
 import { mkdirSync } from "node:fs";
 import { chromium } from "playwright";

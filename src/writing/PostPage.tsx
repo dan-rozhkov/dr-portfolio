@@ -1,7 +1,7 @@
 import Contact from "../Contact";
 import type { Post, PostBlock, PostSection } from "./types";
 import { Media, Outcomes, Section, Slider, Subhead } from "../components/caseBlocks";
-import { writingLink } from "../lib/writingUrl";
+import { casesLink } from "../lib/writingUrl";
 import { LiveCover } from "../components/LiveCover";
 
 const DATE_FORMAT = new Intl.DateTimeFormat("en-GB", {
@@ -136,8 +136,8 @@ export default function PostPage({ post }: { post: Post | undefined }) {
         <section className="cs-title-grid post-head">
           <h1 className="cs-title-name">Post not found</h1>
           <div className="cs-title-intro">
-            <a className="post-back" href={writingLink()}>
-              All writing
+            <a className="post-back" href={casesLink()}>
+              All cases
             </a>
           </div>
         </section>
@@ -149,8 +149,8 @@ export default function PostPage({ post }: { post: Post | undefined }) {
   return (
     <main className="post-page">
       <article>
-        <a className="post-back-link" href={writingLink()}>
-          ← All writing
+        <a className="post-back-link" href={casesLink()}>
+          ← All cases
         </a>
         <header className="cs-title-grid post-head">
           <h1 className="cs-title-name">{post.title}</h1>

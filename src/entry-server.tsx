@@ -28,8 +28,8 @@ export function postSlugs(): string[] {
   return getPosts().map((p) => p.slug);
 }
 
-const WRITING_DESCRIPTION =
-  "What I build and why. Long reads on design engineering, AI tooling and product decisions.";
+const CASES_DESCRIPTION =
+  "Products I designed and built, and the decisions behind them: design engineering, AI tools and product building.";
 const JOBS_DESCRIPTION =
   "Design engineer and product builder roles worldwide, tracked by my own agent and checked three times a week.";
 
@@ -48,7 +48,7 @@ export function pageMeta(path: string): {
   const legacy = route.name === "home" || route.name === "case";
   let image = "/portrait.png";
   let type: "website" | "article" = "website";
-  if (route.name === "writing") description = WRITING_DESCRIPTION;
+  if (route.name === "cases") description = CASES_DESCRIPTION;
   else if (route.name === "jobs") description = JOBS_DESCRIPTION;
   else if (route.name === "post") {
     const post = getPost(route.slug);

@@ -61,8 +61,8 @@ try {
       "/en/",
       "/ru/",
       "/en/case/seligoai/",
-      "/en/writing/",
-      "/en/writing/biscuit-pet/",
+      "/en/cases/",
+      "/en/cases/biscuit-pet/",
       "/en/jobs/",
     ]) {
       await page.goto(

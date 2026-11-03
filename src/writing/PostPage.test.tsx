@@ -63,7 +63,7 @@ describe("PostPage", () => {
   it("renders a not-found block for an unknown post", () => {
     const html = render(undefined);
     expect(html).toContain("Post not found");
-    expect(html).toContain("/en/writing/");
+    expect(html).toContain("/en/cases/");
   });
 
   it("renders rich blocks with the case-study markup", () => {

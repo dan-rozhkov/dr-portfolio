@@ -1,18 +1,5 @@
-.case-grid {
-  align-items: start;
-  min-height: max(100vh, 700px);
-  padding-top: 200px;
-  padding-bottom: 56px;
-}
-
 @custom-media --mobile (max-width: 900px);
 
-.case-copy {
-  grid-column: 1 / 5;
-  align-self: start;
-}
-
-.case-copy h2,
 .extra-list h2,
 .list-section h2 {
   margin: 0 0 16px;
@@ -21,30 +8,6 @@
   line-height: 1.1;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-}
-
-.case-copy p {
-  margin: 0 0 16px;
-}
-
-.case-meta {
-  margin: 24px 0 0;
-}
-
-.case-meta div {
-  display: grid;
-  grid-template-columns: 34% 1fr;
-  gap: 16px;
-  padding: 14px 0;
-  border-top: 1px solid var(--line);
-}
-
-.case-meta dt {
-  color: var(--muted);
-}
-
-.case-meta dd {
-  margin: 0;
 }
 
 .case-media,
@@ -82,30 +45,6 @@
   height: 100%;
   object-fit: cover;
   object-position: top;
-}
-
-.case-media-mobile {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.mobile-stack {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  align-items: start;
-  width: 100%;
-  height: 100%;
-  min-height: 520px;
-}
-
-.mobile-stack span {
-  display: block;
-  width: 100%;
-  aspect-ratio: 9 / 18;
-  border-radius: var(--radius-lg);
-  background: #fff;
 }
 
 .desktop-composition,
@@ -406,19 +345,6 @@
 }
 
 @media (--mobile) {
-  .case-grid {
-    display: block;
-    min-height: auto;
-    padding-top: 30px;
-    padding-bottom: 36px;
-    padding-inline: 20px;
-  }
-
-  .case {
-    padding-inline: 0;
-  }
-
-  .case-copy h2,
   .extra-list h2,
   .list-section h2 {
     margin-bottom: 10px;
@@ -426,36 +352,6 @@
     border-top: 1.5px solid #111;
     font-size: var(--text-lg);
     text-transform: none;
-  }
-
-  .case-copy p {
-    color: rgb(0 0 0 / 66%);
-  }
-
-  .case-copy p + p {
-    display: none;
-  }
-
-  .case-meta {
-    margin: 16px 0 20px;
-    color: var(--muted);
-  }
-
-  .case-meta div {
-    display: none;
-    padding: 0;
-    border: 0;
-  }
-
-  .case-meta div:first-child {
-    display: flex;
-    gap: 16px;
-    justify-content: space-between;
-    overflow-wrap: anywhere;
-  }
-
-  .case-meta dt {
-    display: none;
   }
 
   .case-media,
@@ -470,16 +366,6 @@
   .preview-stage {
     min-height: 0;
     border-radius: 0;
-  }
-
-  .mobile-stack {
-    gap: 10px;
-    min-height: 0;
-    padding: 12px;
-  }
-
-  .mobile-stack span {
-    border-radius: var(--radius-sm);
   }
 
   .desktop-composition {

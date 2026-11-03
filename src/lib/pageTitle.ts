@@ -13,7 +13,7 @@ export function getPageTitle(route: Route): string {
     }
   }
 
-  if (route.name === "writing") {
+  if (route.name === "cases") {
     return `Cases | ${siteTitle}`;
   }
 

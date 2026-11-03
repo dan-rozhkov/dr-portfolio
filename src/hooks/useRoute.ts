@@ -5,7 +5,7 @@ import type { Lang } from "../i18n/translations";
 export type Route =
   | { name: "home"; lang: Lang }
   | { name: "case"; id: string; lang: Lang }
-  | { name: "writing"; lang: "en"; category: string | null }
+  | { name: "cases"; lang: "en"; category: string | null }
   | { name: "post"; slug: string; lang: "en" }
   | { name: "jobs"; lang: "en" };
 
@@ -22,10 +22,11 @@ export function parseRoute(pathname: string, search = ""): Route {
   const stripped = rel.replace(/^\/(en|ru)\//, "/").replace(/^\/(en|ru)$/, "/");
   const m = stripped.match(/^\/case\/([\w-]+)\/?$/);
   if (m) return { name: "case", id: m[1], lang };
-  if (/^\/writing\/?$/.test(stripped)) {
-    return { name: "writing", lang: "en", category: new URLSearchParams(search).get("category") };
+  // /writing is the old address of /cases.
+  if (/^\/(cases|writing)\/?$/.test(stripped)) {
+    return { name: "cases", lang: "en", category: new URLSearchParams(search).get("category") };
   }
-  const post = stripped.match(/^\/writing\/([\w-]+)\/?$/);
+  const post = stripped.match(/^\/(?:cases|writing)\/([\w-]+)\/?$/);
   if (post) return { name: "post", slug: post[1], lang: "en" };
   if (/^\/jobs\/?$/.test(stripped)) return { name: "jobs", lang: "en" };
   return { name: "home", lang };

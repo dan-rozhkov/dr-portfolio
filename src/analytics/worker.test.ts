@@ -152,8 +152,8 @@ describe("server privacy boundary", () => {
       "/en",
       "/ru",
       "/en/jobs",
-      "/en/writing",
-      ...getPosts().map((p) => `/en/writing/${p.slug}`),
+      "/en/cases",
+      ...getPosts().map((p) => `/en/cases/${p.slug}`),
       ...getCases().flatMap((c) => [`/en/case/${c.id}`, `/ru/case/${c.id}`]),
     ];
     expect([...pages].sort()).toEqual(expected.sort());
