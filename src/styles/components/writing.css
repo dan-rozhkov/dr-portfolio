@@ -69,11 +69,11 @@
   grid-column: 6 / 16;
 }
 
+/* Spacing alone separates the cards; no divider. */
 .writing-stream .case-card {
   min-width: 0;
   margin-bottom: 44px;
   padding: 0 0 44px;
-  border-bottom: 1px solid var(--line);
 }
 
 .case-card a {
@@ -158,11 +158,10 @@
   }
 }
 
-/* Home: no divider between the last card and the All cases button */
+/* Home: a tighter gap between the last card and the All cases button */
 .writing--compact .case-card:has(+ .home-cases-all) {
   margin-bottom: 40px;
   padding-bottom: 0;
-  border-bottom: 0;
 }
 
 /* Post page */
