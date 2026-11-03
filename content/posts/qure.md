@@ -17,10 +17,8 @@ stack:
 links:
   - label: Site
     url: https://quretests.com/
-cover: /images/writing/qure/cover-ripples.webp
-coverLive: qure-gradient
-coverMark: /images/writing/qure/mark.svg
-ogImage: /images/writing/qure/og-ripples.jpg
+cover: /images/writing/qure/cover-swirl.webp
+ogImage: /images/writing/qure/og-swirl.png
 ---
 
 ## Challenge

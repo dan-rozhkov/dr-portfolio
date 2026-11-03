@@ -101,6 +101,8 @@ Do not deploy if either step was skipped.
 
 Every correction Danil sends becomes a rule here (and in Claude's memory). Newest first.
 
+- 2026-11-03 — Qure cover approved: a static dithered Swirl (after Paper Shaders' Dithering swirl, 8×8 Bayer, ground #180010) with the Qure mark in the centre and dots in a blue→cyan→pale→amber→orange diagonal gradient (`cover-swirl.webp`). The animated version goes to Notion for approval first.
+- 2026-11-03 — Qure cover redo: work in iterations. Start static, matched to the reference (https://pin.it/oxRCTBhem), and send each iteration to Notion (private draft) for Danil's approval before touching the site; animate only after the static look is approved.
 - 2026-11-03 — Before reporting any visual change as done, check it side by side with the reference (rendered on the real page, desktop and mobile).
 - 2026-11-03 — Post mobile layout: images and videos run edge to edge (no side padding), section labels are small (14px), and spacing is tight and even (20px inside a section, 64px between sections, no empty label line).
 - 2026-11-03 — Qure cover: own look, never a 1:1 copy of Sideform. Final: halftone ripples seen from above — a big soft dark centre, near-round wide glowing rings spreading outward (brighter on the near side), calm low-contrast dots that are tiny at the centre and grow outward until they nearly merge (preset `qure` in `LiquidGradient`). The static fallback must be the shader's own t=3 frame, saved under a new filename whenever it changes, so opening the page never flashes an old gradient. Before reporting a visual done, compare it to the reference side by side on the live page, desktop and mobile.
