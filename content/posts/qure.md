@@ -17,10 +17,10 @@ stack:
 links:
   - label: Site
     url: https://quretests.com/
-cover: /images/writing/qure/cover.webp
+cover: /images/writing/qure/cover-ripples.webp
 coverLive: qure-gradient
 coverMark: /images/writing/qure/mark.svg
-ogImage: /images/writing/qure/og.jpg
+ogImage: /images/writing/qure/og-ripples.jpg
 ---
 
 ## Challenge

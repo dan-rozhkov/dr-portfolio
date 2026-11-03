@@ -225,9 +225,9 @@ vec3 applyContrastSaturation(vec3 linearRgb, float contrast, float saturation) {
 }
 
 // Eclipse field: e is aspect-correct (x across, y up, 0 at the centre), tt is time.
-// Perspective distance from the ripple centre (ellipses wider than tall)
-vec2 rippleCentre(float tt) { return vec2(0.03 * sin(tt * 0.1), 0.08); }
-float rippleDist(vec2 e, float tt) { return length((e - rippleCentre(tt)) * vec2(0.55, 1.3)); }
+// Distance from the ripple centre: nearly round rings, as if seen from above
+vec2 rippleCentre(float tt) { return vec2(0.03 * sin(tt * 0.1), 0.1); }
+float rippleDist(vec2 e, float tt) { return length((e - rippleCentre(tt)) * vec2(0.95, 1.05)); }
 
 float eclipseField(vec2 e, float tt) {
     // Ripples on water (or sound waves) seen at an angle: rings flattened into ellipses, spreading out from
@@ -241,22 +241,23 @@ float eclipseField(vec2 e, float tt) {
     float radius = 0.46;
     float soft = mix(0.03, 0.22, smoothstep(-0.6, 0.9, d2.y / radius));
     // The centre keeps a rounder shape than the flattened rings
-    float holeDist = length(d2 * vec2(0.95, 1.2)) * 0.82;
+    float holeDist = length(d2 * vec2(1.0, 1.08)) * 0.85;
     float hole = smoothstep(radius + soft, radius - soft, holeDist);
     float halo = exp(-max(holeDist - radius, 0.0) / 0.22);
     float v = water * (1.0 - 0.3 * halo);
     v = mix(v, 0.14 + 0.06 * d2.y, hole);
     // Rings travel outward, appear at the rim of the centre and fade as they spread
     // Thick, soft pulses, like a sound wave: a strong front and a weaker one behind it
-    float spacing = 0.78;
-    float phase = fract((dist - tt * 0.1 - 0.05) / spacing);
+    float spacing = 1.0;
+    // Phase set so the first frame (t = 3, also the static fallback) shows a full, bright ring
+    float phase = fract((dist - tt * 0.1 - 0.12) / spacing);
     float born = smoothstep(radius - 0.05, radius + 0.3, dist);
     float fade = exp(-max(dist - 1.0, 0.0) * 1.4);
     // Thick and bright on the near (bottom) side, thinning out like a crescent toward the far side
-    float nearSide = smoothstep(0.8, -0.6, d2.y);
-    float width = 0.04 + 0.22 * nearSide;
+    float nearSide = smoothstep(0.9, -0.7, d2.y);
+    float width = 0.12 + 0.24 * nearSide;
     float ring = exp(-pow(abs(phase - 0.5) / width, 3.0));
-    v = max(v, ring * born * fade * (0.35 + 0.65 * nearSide));
+    v = max(v, ring * born * fade * (0.55 + 0.45 * nearSide));
     return v;
 }
 
@@ -386,7 +387,7 @@ void main() {
         float dotMask = 1.0 - smoothstep(radius - 0.75 * u_pixelRatio, radius + 0.5 * u_pixelRatio, dist);
         // On a coloured ground the dots are lighter than the field under them
         // Big outer dots take the field's colour, so merged dots read as the surface itself
-        vec3 ink = mix(col, vec3(1.0), 0.7 * ground01 * (1.0 - spread));
+        vec3 ink = mix(col, vec3(1.0), 0.32 * ground01 * (1.0 - spread));
         // The ground between dots is the smooth field at this pixel, not the cell's sample
         vec3 ground = col;
         if (u_shape > 0.5) {
@@ -418,7 +419,7 @@ const GRADIENTS = {
       u_cellPx: 4,
       u_dotMin: 0.14,
       u_dotMax: 0.95,
-      u_dotGround: 0.7,
+      u_dotGround: 0.84,
     },
   },
 } as const satisfies Record<
