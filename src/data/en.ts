@@ -17,7 +17,8 @@ export interface Profile {
 }
 
 export interface Hero {
-  lines: string[];
+  /** company names listed in withLogos get their mark inline */
+  text: string;
 }
 
 export interface CaseSummary {
@@ -79,11 +80,7 @@ export const profile: Profile = {
 };
 
 export const hero: Hero = {
-  lines: [
-    "Lead Product Designer",
-    "building B2B products with AI",
-    "from logic to shipped UI",
-  ],
+  text: "Design Engineer at JetBrains, previously Lead Product Designer at Sber, with past work at Openprovider, SnapSoft, and ClearScale. I care about systems, precise interaction details, and the quiet decisions that make complex tools feel obvious.",
 };
 
 export const cases: CaseSummary[] = [
@@ -173,7 +170,6 @@ export const extraWork: ExtraWork = {
 
 export const about: string[] = [
   "Senior product designer with 8+ years in B2B SaaS, design systems, and AI products. I design complex platforms and stay close to engineering until they ship.",
-  "Design Engineer at JetBrains, previously Lead Product Designer at Sber, with past work at Openprovider, SnapSoft, and ClearScale. I care about systems, precise interaction details, and the quiet decisions that make complex tools feel obvious.",
 ];
 
 export const skills: string[] = [

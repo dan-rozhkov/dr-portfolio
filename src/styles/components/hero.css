@@ -1,20 +1,24 @@
+/* Short on purpose: the first case image peeks in below it. */
+.hero {
+  min-height: auto;
+}
+
 .hero-grid {
-  grid-template-rows: 1fr auto;
-  min-height: max(100vh, 700px);
-  padding-top: 112px;
+  row-gap: 48px;
+  padding-top: 168px;
   padding-bottom: 32px;
 }
 
 @custom-media --mobile (max-width: 900px);
 
 .hero h1 {
-  grid-column: 5 / 15;
-  align-self: center;
+  grid-column: 5 / 16;
   margin: 0;
-  font-size: var(--text-3xl);
+  font-size: var(--text-2xl);
   font-weight: 500;
   line-height: 1.06;
-  text-wrap: balance;
+  letter-spacing: -0.02em;
+  text-wrap: pretty;
 }
 
 .hero-meta {
@@ -48,18 +52,15 @@
   }
 
   .hero-grid {
-    display: flex;
-    align-items: center;
-    min-height: 100vh;
-    padding-top: 80px;
-    padding-bottom: 40px;
+    display: block;
+    padding-top: 128px;
+    padding-bottom: 8px;
     padding-inline: 20px;
   }
 
   .hero h1 {
     font-size: var(--text-2xl);
     line-height: 1.08;
-    overflow-wrap: anywhere;
   }
 
   .hero-meta {

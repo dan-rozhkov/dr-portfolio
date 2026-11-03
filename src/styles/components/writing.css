@@ -370,26 +370,52 @@
   }
 }
 
-/* Home: the Cases layout with the newest three cards */
+/* Home: the newest three cards, in line with the hero text */
 .home-cases {
-  padding-top: var(--space-2xl);
   padding-bottom: var(--space-xl);
 }
 
+.writing--compact {
+  padding-top: 0;
+}
+
+.writing--compact .writing-stream {
+  grid-column: 5 / 16;
+}
+
+
 .home-cases-all {
-  display: inline-flex;
-  gap: 10px;
+  display: flex;
+  gap: 24px;
   align-items: center;
-  padding: 12px 22px;
+  width: 100%;
+  padding: 18px 28px;
   border: 1px solid var(--ink);
   border-radius: 999px;
   color: var(--ink);
+  font-size: var(--text-lg);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   text-decoration: none;
   white-space: nowrap;
 }
 
-.home-cases-all span {
+.home-cases-label span {
+  margin-left: 0.4em;
   color: var(--muted);
+}
+
+.home-cases-arrow {
+  flex: 1;
+  min-width: 48px;
+  overflow: visible;
+  fill: none;
+  stroke: currentcolor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.5;
 }
 
 .home-cases-all:focus-visible {
@@ -399,7 +425,7 @@
 
 @media (--mobile) {
   .home-cases {
-    padding-top: var(--space-xl);
+    padding-top: 32px;
     padding-bottom: var(--space-xl);
   }
 }
