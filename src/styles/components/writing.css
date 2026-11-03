@@ -304,13 +304,14 @@
   transform: translate(-50%, -50%);
 }
 
-/* Qure's ring-and-cursor mark reads larger than Sideform's: smaller, and set a touch
-   below centre so the ring, not the cursor tail, sits on the optical middle. */
-.live-cover--qure .live-cover-mark {
-  top: 53%;
+/* Qure's mark matches the static swirl cover: 17% of the height, centred. */
+.live-cover--qure-swirl .live-cover-mark {
   height: 17%;
-  /* keeps the white mark legible when the bright band passes under it */
-  filter: drop-shadow(0 2px 14px rgb(0 0 0 / 0.35));
+}
+
+/* The swirl's pixels stay crisp when the canvas is scaled */
+.live-cover--qure-swirl .live-cover-canvas {
+  image-rendering: pixelated;
 }
 
 .writing-thumb .live-cover {

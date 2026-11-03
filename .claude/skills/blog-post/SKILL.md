@@ -101,6 +101,7 @@ Do not deploy if either step was skipped.
 
 Every correction Danil sends becomes a rule here (and in Claude's memory). Newest first.
 
+- 2026-11-03 — Qure case cover is live: the approved swirl animation (`coverLive: qure-swirl`, `src/components/SwirlCover.tsx`, one turn per π/0.5 ≈ 6.3 s), static `cover-swirl.webp` as fallback, reduced-motion frame and list thumbnail (`thumb`). LiquidGradient is back to the untouched Sideform shader.
 - 2026-11-03 — Qure cover approved: a static dithered Swirl (after Paper Shaders' Dithering swirl, 8×8 Bayer, ground #180010) with the Qure mark in the centre and dots in a blue→cyan→pale→amber→orange diagonal gradient (`cover-swirl.webp`). The animated version goes to Notion for approval first.
 - 2026-11-03 — Qure cover redo: work in iterations. Start static, matched to the reference (https://pin.it/oxRCTBhem), and send each iteration to Notion (private draft) for Danil's approval before touching the site; animate only after the static look is approved.
 - 2026-11-03 — Before reporting any visual change as done, check it side by side with the reference (rendered on the real page, desktop and mobile).

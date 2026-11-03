@@ -1,16 +1,12 @@
 import { assetUrl } from "../lib/url";
 import type { CoverLive } from "../writing/types";
-import { LiquidGradient, type GradientName } from "./LiquidGradient";
-
-const PRESET: Record<CoverLive, GradientName> = {
-  "liquid-gradient": "sideform",
-  "qure-gradient": "qure",
-};
+import { LiquidGradient } from "./LiquidGradient";
+import { SwirlCover } from "./SwirlCover";
 
 /**
- * A cover drawn live: the landing's gradient with a mark centred on it. The static
- * `fallback` image sits underneath and stays visible until the first frame is drawn,
- * and for good where WebGL2 is unavailable.
+ * A cover drawn live with a mark centred on it: the Sideform landing's gradient, or
+ * Qure's dithered swirl. The static `fallback` image sits underneath and stays visible
+ * until the first frame is drawn, and for good where the canvas can't draw.
  */
 export function LiveCover({
   fallback,
@@ -27,11 +23,15 @@ export function LiveCover({
 }) {
   return (
     <div
-      className={`live-cover live-cover--${PRESET[variant]}`}
+      className={`live-cover live-cover--${variant}`}
       {...(alt ? { role: "img", "aria-label": alt } : { "aria-hidden": true })}
     >
       <img className="live-cover-fallback" src={assetUrl(fallback)} alt="" loading={loading} />
-      <LiquidGradient className="live-cover-canvas" preset={PRESET[variant]} />
+      {variant === "qure-swirl" ? (
+        <SwirlCover className="live-cover-canvas" />
+      ) : (
+        <LiquidGradient className="live-cover-canvas" />
+      )}
       {mark && <img className="live-cover-mark" src={assetUrl(mark)} alt="" />}
     </div>
   );

@@ -43,18 +43,6 @@ uniform float u_dither;
 uniform float u_exposure;
 uniform float u_contrast;
 uniform float u_saturation;
-// Halftone: dot-grid columns across the canvas (0 = off). Each cell samples the field at its
-// centre and draws one dot sized and coloured by it, over black.
-uniform float u_halftone;
-// Smallest dot-grid cell in CSS px (0 = columns only)
-uniform float u_cellPx;
-uniform float u_dotMin;
-uniform float u_dotMax;
-// Shape: 0 = the liquid field; 1 = an eclipse, a dark disc above a glowing horizon,
-// with the liquid field only adding texture
-uniform float u_shape;
-// Halftone ground: 0 = dots on black, >0 = the gradient itself shows between dots at this brightness
-uniform float u_dotGround;
 
 // === CONSTANTS ===
 const float GOLDEN_ANGLE = 2.3999632;
@@ -224,60 +212,9 @@ vec3 applyContrastSaturation(vec3 linearRgb, float contrast, float saturation) {
     return oklabToLinear(lab);
 }
 
-// Eclipse field: e is aspect-correct (x across, y up, 0 at the centre), tt is time.
-// Distance from the ripple centre: nearly round rings, as if seen from above
-vec2 rippleCentre(float tt) { return vec2(0.03 * sin(tt * 0.1), 0.1); }
-float rippleDist(vec2 e, float tt) { return length((e - rippleCentre(tt)) * vec2(0.95, 1.05)); }
-
-float eclipseField(vec2 e, float tt) {
-    // Ripples on water (or sound waves) seen at an angle: rings flattened into ellipses, spreading out from
-    // a dark centre where the drop fell. The near (lower) side of each ring catches the light.
-    vec2 d2 = e - rippleCentre(tt);
-    float dist = rippleDist(e, tt);
-    // Water: mid blue, darker toward the bottom of the frame
-    float water = 0.5 + 0.05 * e.y;
-    water *= smoothstep(-1.1, -0.45, e.y) * 0.85 + 0.15;
-    // The dark centre: hazy on top, firmer at the bottom
-    float radius = 0.46;
-    float soft = mix(0.03, 0.22, smoothstep(-0.6, 0.9, d2.y / radius));
-    // The centre keeps a rounder shape than the flattened rings
-    float holeDist = length(d2 * vec2(1.0, 1.08)) * 0.85;
-    float hole = smoothstep(radius + soft, radius - soft, holeDist);
-    float halo = exp(-max(holeDist - radius, 0.0) / 0.22);
-    float v = water * (1.0 - 0.3 * halo);
-    v = mix(v, 0.14 + 0.06 * d2.y, hole);
-    // Rings travel outward, appear at the rim of the centre and fade as they spread
-    // Thick, soft pulses, like a sound wave: a strong front and a weaker one behind it
-    float spacing = 1.0;
-    // Phase set so the first frame (t = 3, also the static fallback) shows a full, bright ring
-    float phase = fract((dist - tt * 0.1 - 0.12) / spacing);
-    float born = smoothstep(radius - 0.05, radius + 0.3, dist);
-    float fade = exp(-max(dist - 1.0, 0.0) * 1.4);
-    // Thick and bright on the near (bottom) side, thinning out like a crescent toward the far side
-    float nearSide = smoothstep(0.9, -0.7, d2.y);
-    float width = 0.12 + 0.24 * nearSide;
-    float ring = exp(-pow(abs(phase - 0.5) / width, 3.0));
-    v = max(v, ring * born * fade * (0.55 + 0.45 * nearSide));
-    return v;
-}
-
-vec3 shadeValue(float v, int count) {
-    vec3 col = paletteN(v, count);
-    col *= u_exposure;
-    col = applyContrastSaturation(col, u_contrast, u_saturation);
-    col = softGamutMap(col);
-    return toSrgb(col);
-}
-
 // === MAIN ===
 void main() {
-    vec2 pixel = v_uv * u_resolution;
-    vec2 fragCoord = pixel;
-    float halftone = step(0.5, u_halftone);
-    // Columns set the density; u_cellPx (CSS px) is the smallest cell, so small canvases keep readable dots
-    float cellPx = max(u_cellPx * u_pixelRatio, u_resolution.x / max(u_halftone, 1.0));
-    vec2 cellCenter = (floor(pixel / cellPx) + 0.5) * cellPx;
-    fragCoord = mix(pixel, cellCenter, halftone);
+    vec2 fragCoord = v_uv * u_resolution;
     vec2 r = u_resolution;
     vec2 p = (fragCoord * 2.0 - r) / r.y;
 
@@ -358,81 +295,27 @@ void main() {
 
     float val = totalVal / totalWeight;
     val = clamp((val - 0.3) / 0.4, 0.0, 1.0);
-
-    if (u_shape > 0.5) {
-        vec2 e = (fragCoord * 2.0 - r) / r.y;
-        float liquid = val;
-        float v = eclipseField(e, u_time * u_speed);
-        val = clamp(v + (liquid - 0.5) * 0.10, 0.0, 1.0);
-    }
     val = pow(val, exp(-u_distBias));
-    val = clamp(val + (dither - 0.5) * u_dither * (1.0 - halftone), 0.0, 1.0);
+    val = clamp(val + (dither - 0.5) * u_dither, 0.0, 1.0);
 
-    vec3 col = shadeValue(val, colorCount);
-
-    if (halftone > 0.5) {
-        // Dot radius grows with the field; a faint glow keeps the ribbon's body
-        float lum = clamp(dot(col, vec3(0.2126, 0.7152, 0.0722)) * 1.4, 0.0, 1.0);
-        float ground01 = step(0.001, u_dotGround);
-        // On a coloured ground: tiny sparks in the sky, big dots only where it glows
-        float size = mix(sqrt(lum), 0.32 + 0.68 * smoothstep(0.6, 0.95, val), ground01);
-        // Ripples: dots grow with distance from the centre until they nearly merge
-        float spread = 0.0;
-        if (u_shape > 0.5) {
-            spread = smoothstep(0.6, 1.7, rippleDist((cellCenter * 2.0 - r) / r.y, u_time * u_speed));
-            size = max(size, spread * 1.12);
-        }
-        float radius = 0.5 * cellPx * mix(u_dotMin, u_dotMax, size);
-        float dist = length(pixel - cellCenter);
-        float dotMask = 1.0 - smoothstep(radius - 0.75 * u_pixelRatio, radius + 0.5 * u_pixelRatio, dist);
-        // On a coloured ground the dots are lighter than the field under them
-        // Big outer dots take the field's colour, so merged dots read as the surface itself
-        vec3 ink = mix(col, vec3(1.0), 0.32 * ground01 * (1.0 - spread));
-        // The ground between dots is the smooth field at this pixel, not the cell's sample
-        vec3 ground = col;
-        if (u_shape > 0.5) {
-            ground = shadeValue(clamp(eclipseField((pixel * 2.0 - r) / r.y, u_time * u_speed), 0.0, 1.0), colorCount);
-        }
-        // Gaps between merged outer dots stay dark, so the grid still reads
-        float groundK = u_dotGround * (1.0 - 0.45 * spread);
-        col = mix(ground * groundK, ink, dotMask) + col * lum * lum * 0.08 * (1.0 - ground01);
-    }
+    vec3 col = paletteN(val, colorCount);
+    col *= u_exposure;
+    col = applyContrastSaturation(col, u_contrast, u_saturation);
+    col = softGamutMap(col);
+    col = toSrgb(col);
 
     fragColor = vec4(col, 1.0);
 }
 `;
 
-/** Colour presets: `sideform` is the landing's palette, unchanged; the others reuse the shader. */
-const GRADIENTS = {
-  sideform: { palette: ["#020202", "#020202", "#3c50a5", "#c0d5d0", "#ff4000", "#020202"], seed: 36, uniforms: {} },
-  // Same shader, its own look (after Danil's reference): a halftone eclipse, a soft
-  // dark blob above a glowing horizon on a blue field, a dot grid of 140 columns, never finer than 4px
-  qure: {
-    palette: ["#020818", "#04173d", "#082a6c", "#0f3f9a", "#1a57bd", "#2f8aa2", "#8fdcea", "#effcff"],
-    seed: 58,
-    uniforms: {
-      u_scale: 0.55,
-      u_exposure: 1,
-      u_contrast: 1.05,
-      u_shape: 1,
-      u_halftone: 140,
-      u_cellPx: 4,
-      u_dotMin: 0.14,
-      u_dotMax: 0.95,
-      u_dotGround: 0.84,
-    },
-  },
-} as const satisfies Record<
-  string,
-  { palette: readonly string[]; seed: number; uniforms: Record<string, number> }
->;
-export type GradientName = keyof typeof GRADIENTS;
+const PALETTE = ["#020202", "#020202", "#3c50a5", "#c0d5d0", "#ff4000", "#020202"];
 
 /** Seconds into the animation used for the single frame drawn under reduced motion. */
 const STATIC_FRAME_TIME = 3;
 const MAX_PIXEL_RATIO = 2;
 
 const NUMBER_UNIFORMS: Record<string, number> = {
+  u_seed: 36,
   u_speed: 1,
   u_loop: 0,
   u_scale: 0.64,
@@ -447,12 +330,6 @@ const NUMBER_UNIFORMS: Record<string, number> = {
   u_exposure: 1.1,
   u_contrast: 1.1,
   u_saturation: 1,
-  u_halftone: 0,
-  u_dotMin: 0.14,
-  u_dotMax: 0.82,
-  u_shape: 0,
-  u_cellPx: 0,
-  u_dotGround: 0,
 };
 
 function hexToRgba(hex: string): [number, number, number, number] {
@@ -492,8 +369,7 @@ function freeResources(gl: WebGL2RenderingContext, r: GlResources) {
 }
 
 /** Compiles the program and uploads buffers + constant uniforms. Called again after a context restore. */
-function buildResources(gl: WebGL2RenderingContext, preset: GradientName): GlResources | null {
-  const { palette, seed } = GRADIENTS[preset];
+function buildResources(gl: WebGL2RenderingContext): GlResources | null {
   const vertex = compile(gl, gl.VERTEX_SHADER, VERTEX_SOURCE);
   const fragment = compile(gl, gl.FRAGMENT_SHADER, FRAGMENT_SOURCE);
   const program = gl.createProgram();
@@ -518,12 +394,10 @@ function buildResources(gl: WebGL2RenderingContext, preset: GradientName): GlRes
   gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
 
   const colors = new Float32Array(8 * 4);
-  palette.forEach((hex, i) => colors.set(hexToRgba(hex), i * 4));
+  PALETTE.forEach((hex, i) => colors.set(hexToRgba(hex), i * 4));
   gl.uniform4fv(gl.getUniformLocation(program, "u_colors"), colors);
-  gl.uniform1i(gl.getUniformLocation(program, "u_colors_length"), palette.length);
-  gl.uniform1f(gl.getUniformLocation(program, "u_seed"), seed);
-  const overrides: Record<string, number> = GRADIENTS[preset].uniforms;
-  for (const [name, value] of Object.entries({ ...NUMBER_UNIFORMS, ...overrides })) {
+  gl.uniform1i(gl.getUniformLocation(program, "u_colors_length"), PALETTE.length);
+  for (const [name, value] of Object.entries(NUMBER_UNIFORMS)) {
     gl.uniform1f(gl.getUniformLocation(program, name), value);
   }
   return {
@@ -544,7 +418,7 @@ function buildResources(gl: WebGL2RenderingContext, preset: GradientName): GlRes
 const pendingRelease = new WeakMap<HTMLCanvasElement, ReturnType<typeof setTimeout>>();
 
 /** Starts the gradient on `canvas`. Returns a cleanup, or null without WebGL2 (the fallback image shows). */
-function startGradient(canvas: HTMLCanvasElement, preset: GradientName): (() => void) | null {
+function startGradient(canvas: HTMLCanvasElement): (() => void) | null {
   let gl: WebGL2RenderingContext | null = null;
   try {
     gl = canvas.getContext("webgl2", {
@@ -559,7 +433,7 @@ function startGradient(canvas: HTMLCanvasElement, preset: GradientName): (() => 
   const context = gl;
   clearTimeout(pendingRelease.get(canvas));
   pendingRelease.delete(canvas);
-  let resources = buildResources(context, preset);
+  let resources = buildResources(context);
   if (!resources) return null;
 
   const reducedMotion =
@@ -637,7 +511,7 @@ function startGradient(canvas: HTMLCanvasElement, preset: GradientName): (() => 
   };
   const onRestored = () => {
     if (disposed) return;
-    resources = buildResources(context, preset);
+    resources = buildResources(context);
     if (!resources) return;
     lost = false;
     resize();
@@ -670,18 +544,12 @@ function startGradient(canvas: HTMLCanvasElement, preset: GradientName): (() => 
 }
 
 /** Decorative animated gradient that fills its positioned parent. Draws nothing without WebGL2. */
-export function LiquidGradient({
-  className,
-  preset = "sideform",
-}: {
-  className?: string;
-  preset?: GradientName;
-}) {
+export function LiquidGradient({ className }: { className?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    return startGradient(canvas, preset) ?? undefined;
-  }, [preset]);
+    return startGradient(canvas) ?? undefined;
+  }, []);
   return <canvas ref={canvasRef} className={className} aria-hidden="true" />;
 }

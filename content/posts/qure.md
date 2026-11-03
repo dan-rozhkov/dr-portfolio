@@ -18,6 +18,9 @@ links:
   - label: Site
     url: https://quretests.com/
 cover: /images/writing/qure/cover-swirl.webp
+coverLive: qure-swirl
+coverMark: /images/writing/qure/mark.svg
+thumb: /images/writing/qure/cover-swirl.webp
 ogImage: /images/writing/qure/og-swirl.png
 ---
 
