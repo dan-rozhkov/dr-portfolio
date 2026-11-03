@@ -102,7 +102,7 @@ Do not deploy if either step was skipped.
 Every correction Danil sends becomes a rule here (and in Claude's memory). Newest first.
 
 - 2026-11-03 — Post mobile layout: images and videos run edge to edge (no side padding), section labels are small (14px), and spacing is tight and even (20px inside a section, 64px between sections, no empty label line).
-- 2026-11-03 — Qure cover: the same live shader principle as Sideform but its own look — never a 1:1 copy. Final (from Danil's Pinterest reference): a halftone dot grid over a diagonal S-ribbon, violet dots fading out to a pale mint crest (`coverLive: qure-gradient`; preset `qure` in `LiquidGradient`: seed 58, scale 0.55, `u_halftone` 64 columns, dots 0.14–0.7 of a cell), the mark smaller (17%) and a touch below centre, with a soft shadow; `cover.webp`/`og.jpg` are its t=3 frame.
+- 2026-11-03 — Qure cover: the same live shader principle as Sideform but its own look — never a 1:1 copy. Final (Danil's second Pinterest reference): a halftone eclipse — a dark disc in front of a glowing mint horizon on a blue field, small dots (80 columns, 0.14–0.6 of a cell) over a smooth ground (`coverLive: qure-gradient`; preset `qure` in `LiquidGradient`, `u_shape: 1`, `u_dotGround: 0.55`).
 - 2026-11-03 — Don't mention JetBrains in the Qure case; JetBrains appears only on the home page About line, before Sber, with the new JetBrains logo.
 - 2026-11-03 — The ban on writing about qure-app is lifted: Danil is allowed to write about Qure publicly, but only in his portfolio.
 - 2026-11-03 — Sideform posts: no static screenshots, only videos. Close-ups of UI parts are made as dark-theme stageshow animations with the `sideform-stageshow` skill (`~/prj/pen-editor-app/.claude/skills/`).

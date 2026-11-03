@@ -48,6 +48,11 @@ uniform float u_saturation;
 uniform float u_halftone;
 uniform float u_dotMin;
 uniform float u_dotMax;
+// Shape: 0 = the liquid field; 1 = an eclipse, a dark disc above a glowing horizon,
+// with the liquid field only adding texture
+uniform float u_shape;
+// Halftone ground: 0 = dots on black, >0 = the gradient itself shows between dots at this brightness
+uniform float u_dotGround;
 
 // === CONSTANTS ===
 const float GOLDEN_ANGLE = 2.3999632;
@@ -217,6 +222,36 @@ vec3 applyContrastSaturation(vec3 linearRgb, float contrast, float saturation) {
     return oklabToLinear(lab);
 }
 
+// Eclipse field: e is aspect-correct (x across, y up, 0 at the centre), tt is time.
+float eclipseField(vec2 e, float tt) {
+    // Glowing horizon: a wide soft band that sways and curves up toward the edges
+    float horizon = -0.5 + 0.04 * sin(e.x * 1.3 + tt * 0.35) + 0.08 * e.x * e.x;
+    float band = exp(-pow((e.y - horizon) / 0.2, 2.0));
+    // Blue sky that dims toward the disc and fades out below the horizon
+    float sky = 0.5 + 0.08 * e.y;
+    sky *= smoothstep(horizon - 0.6, horizon - 0.05, e.y);
+    // The disc sits in front of the band: soft at the top, crisp at the bottom
+    vec2 c = vec2(0.06 * sin(tt * 0.12), 0.02 + 0.03 * sin(tt * 0.2));
+    vec2 d2 = e - c;
+    float dist = length(d2);
+    float radius = 0.74;
+    float soft = mix(0.012, 0.3, smoothstep(-0.2, 0.7, d2.y / radius));
+    float disc = smoothstep(radius + soft, radius - soft, dist);
+    float shade = exp(-max(dist - radius, 0.0) / 0.35);
+    float v = sky * (1.0 - 0.45 * shade);
+    v = max(v, band);
+    v = mix(v, 0.05, disc);
+    return v;
+}
+
+vec3 shadeValue(float v, int count) {
+    vec3 col = paletteN(v, count);
+    col *= u_exposure;
+    col = applyContrastSaturation(col, u_contrast, u_saturation);
+    col = softGamutMap(col);
+    return toSrgb(col);
+}
+
 // === MAIN ===
 void main() {
     vec2 pixel = v_uv * u_resolution;
@@ -305,14 +340,17 @@ void main() {
 
     float val = totalVal / totalWeight;
     val = clamp((val - 0.3) / 0.4, 0.0, 1.0);
+
+    if (u_shape > 0.5) {
+        vec2 e = (fragCoord * 2.0 - r) / r.y;
+        float liquid = val;
+        float v = eclipseField(e, u_time * u_speed);
+        val = clamp(v + (liquid - 0.5) * 0.10, 0.0, 1.0);
+    }
     val = pow(val, exp(-u_distBias));
     val = clamp(val + (dither - 0.5) * u_dither * (1.0 - halftone), 0.0, 1.0);
 
-    vec3 col = paletteN(val, colorCount);
-    col *= u_exposure;
-    col = applyContrastSaturation(col, u_contrast, u_saturation);
-    col = softGamutMap(col);
-    col = toSrgb(col);
+    vec3 col = shadeValue(val, colorCount);
 
     if (halftone > 0.5) {
         // Dot radius grows with the field; a faint glow keeps the ribbon's body
@@ -320,7 +358,13 @@ void main() {
         float radius = 0.5 * cellPx * mix(u_dotMin, u_dotMax, sqrt(lum));
         float dist = length(pixel - cellCenter);
         float dotMask = 1.0 - smoothstep(radius - 0.75 * u_pixelRatio, radius + 0.5 * u_pixelRatio, dist);
-        col = col * dotMask + col * lum * lum * 0.08;
+        vec3 ink = mix(col, vec3(1.0), 0.35 * step(0.001, u_dotGround));
+        // The ground between dots is the smooth field at this pixel, not the cell's sample
+        vec3 ground = col;
+        if (u_shape > 0.5) {
+            ground = shadeValue(clamp(eclipseField((pixel * 2.0 - r) / r.y, u_time * u_speed), 0.0, 1.0), colorCount);
+        }
+        col = mix(ground * u_dotGround, ink, dotMask) + col * lum * lum * 0.08 * (1.0 - step(0.001, u_dotGround));
     }
 
     fragColor = vec4(col, 1.0);
@@ -330,12 +374,21 @@ void main() {
 /** Colour presets: `sideform` is the landing's palette, unchanged; the others reuse the shader. */
 const GRADIENTS = {
   sideform: { palette: ["#020202", "#020202", "#3c50a5", "#c0d5d0", "#ff4000", "#020202"], seed: 36, uniforms: {} },
-  // Same shader, its own look: a halftone dot grid (64 columns) over one diagonal
-  // S-ribbon, violet dots fading out to a pale mint crest
+  // Same shader, its own look: a halftone eclipse, a dark disc in front of a glowing
+  // horizon on a blue field, drawn as an 80-column dot grid
   qure: {
-    palette: ["#1c1240", "#331a78", "#5236c4", "#2f86e2", "#36d6cc", "#b4f7d2", "#2b9fd8", "#331a78"],
+    palette: ["#05061e", "#0d1458", "#1a2a9c", "#2448c8", "#2f74e2", "#2fc6d8", "#9ff2d8", "#f2fffb"],
     seed: 58,
-    uniforms: { u_scale: 0.55, u_exposure: 1, u_halftone: 64, u_dotMin: 0.14, u_dotMax: 0.7 },
+    uniforms: {
+      u_scale: 0.55,
+      u_exposure: 1,
+      u_contrast: 1.05,
+      u_shape: 1,
+      u_halftone: 80,
+      u_dotMin: 0.14,
+      u_dotMax: 0.6,
+      u_dotGround: 0.55,
+    },
   },
 } as const satisfies Record<
   string,
@@ -365,6 +418,8 @@ const NUMBER_UNIFORMS: Record<string, number> = {
   u_halftone: 0,
   u_dotMin: 0.14,
   u_dotMax: 0.82,
+  u_shape: 0,
+  u_dotGround: 0,
 };
 
 function hexToRgba(hex: string): [number, number, number, number] {
