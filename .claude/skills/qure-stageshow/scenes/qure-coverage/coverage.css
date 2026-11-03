@@ -1,0 +1,103 @@
+/* Tests workspace is the hero; the chat is quiet context */
+.qm .qm-app { grid-template-columns: 300px 1fr; }
+.qm .qm-app .q-top::after { left: 300px; }
+.qm .qm-quiet { color: var(--q-mfg); }
+
+.qm .qm-work { position: relative; min-width: 0; min-height: 0; display: flex; flex-direction: column; }
+
+/* WorkspaceHeader + TestsWorkspaceViewMenu: text-lg semibold title with a chevron */
+.qm .qm-head { flex: none; display: flex; align-items: center; gap: 6px; height: 48px; padding: 0 16px 0 18px; width: 472px; box-sizing: border-box; }
+.qm .qm-title { display: inline-flex; align-items: center; gap: 6px; height: 30px; margin-left: -8px; padding: 0 8px; border-radius: 7px; font-size: 18px; font-weight: 600; line-height: 24px; white-space: nowrap; }
+.qm .qm-title svg { color: var(--q-mfg); }
+.qm .qm-count { font-size: 18px; color: var(--q-mfg); font-variant-numeric: tabular-nums; }
+.qm .qm-small { width: 26px; height: 26px; }
+.qm .qm-actions { margin-left: auto; display: flex; gap: 2px; }
+
+/* DropdownMenuContent, min-w-40 */
+.qm .qm-menu {
+  position: absolute;
+  left: 12px;
+  top: 44px;
+  z-index: 20;
+  width: 160px;
+  padding: 4px;
+  border-radius: 10px;
+  background: var(--q-card);
+  box-shadow: inset 0 0 0 1px var(--q-border), 0 10px 30px -8px rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  transform: scale(0.97) translateY(-4px);
+  transform-origin: top left;
+  transition: opacity 140ms ease-out, transform 160ms ease-out;
+}
+.qm .qm-menu[data-open] { opacity: 1; transform: none; }
+.qm .qm-menu-item { display: flex; align-items: center; justify-content: space-between; height: 32px; padding: 0 10px; border-radius: 6px; font-size: 13.5px; }
+.qm .qm-menu-item svg { color: var(--q-mfg); }
+.qm .qm-menu-item[data-hover-on] { background: var(--q-secondary); }
+
+.qm .qm-body { position: relative; flex: 1; min-height: 0; }
+
+/* Tests list (quiet) */
+.qm .qm-list { position: absolute; inset: 0 auto auto 0; width: 472px; padding: 0 16px; box-sizing: border-box; transition: opacity 200ms ease; }
+.qm .qm-list[data-hidden] { opacity: 0; }
+.qm .qm-trow { display: flex; align-items: center; gap: 9px; height: 36px; padding: 0 2px; border-bottom: 1px solid var(--q-border); font-size: 13px; white-space: nowrap; }
+.qm .qm-trow svg { flex: none; color: var(--q-mfg); }
+.qm .qm-trow-name { color: oklch(0.86 0 0); }
+.qm .qm-trow-file { color: var(--q-dim); font-size: 12px; }
+.qm .qm-fill { height: 6px; border-radius: 3px; background: var(--q-muted); }
+
+/* Canvas shell: radial muted glow (bg-[radial-gradient(...muted/0.4...58%)]) */
+.qm .qm-canvas {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 220ms ease;
+  background: radial-gradient(circle at 170px 126px, oklch(0.276 0 0 / 0.55), transparent 240px);
+}
+.qm .qm-canvas[data-show] { opacity: 1; }
+.qm .qm-svg { position: absolute; left: 0; top: 0; overflow: visible; }
+.qm .qm-edge { stroke: #64748b; stroke-dashoffset: var(--len); transition: stroke-dashoffset 420ms ease-out, opacity 220ms ease, stroke-width 220ms ease; }
+.qm .qm-svg[data-grown] .qm-edge { stroke-dashoffset: 0; }
+.qm .qm-node { transform: scale(0); transform-box: fill-box; transform-origin: center; transition: transform 380ms cubic-bezier(0.34, 1.4, 0.64, 1), opacity 220ms ease; }
+.qm .qm-svg[data-grown] .qm-node { transform: scale(1); }
+.qm .qm-circle { transition: r 180ms ease, stroke-width 180ms ease; }
+.qm .qm-label { fill: #e2e8f0; paint-order: stroke; stroke: #111827; stroke-width: 3; stroke-linejoin: round; font-family: inherit; }
+
+/* Zoom ToggleGroup, top right of the visible canvas */
+.qm .qm-zoom { position: absolute; left: 352px; top: 8px; display: flex; border-radius: 8px; background: oklch(0.209 0 0 / 0.9); box-shadow: inset 0 0 0 1px var(--q-input); }
+.qm .qm-zoom span { display: grid; place-items: center; width: 30px; height: 30px; color: var(--q-mfg); }
+.qm .qm-zoom span + span { box-shadow: -1px 0 0 var(--q-input); }
+
+/* Legend: bottom-4 left-4 rounded-xl border bg-accent px-4 py-3 */
+.qm .qm-legend {
+  position: absolute;
+  left: 16px;
+  bottom: 12px;
+  width: 168px;
+  padding: 10px 14px 11px;
+  border-radius: 12px;
+  background: var(--q-secondary);
+  box-shadow: inset 0 0 0 1px var(--q-border);
+  font-size: 12px;
+  color: var(--q-mfg);
+}
+.qm .qm-legend-title { margin-bottom: 8px; font-size: 13px; font-weight: 500; color: var(--q-fg); }
+.qm .qm-legend span { display: flex; align-items: center; gap: 8px; height: 20px; }
+.qm .qm-legend i { width: 10px; height: 10px; border-radius: 50%; flex: none; }
+
+/* MapDetail: right-4 top-14 w-72 rounded-xl border bg-accent */
+.qm .qm-detail { position: absolute; left: 268px; top: 46px; width: 196px; opacity: 0; transform: translateY(-4px); transition: opacity 180ms ease-out, transform 200ms ease-out; }
+.qm .qm-detail[data-show] { opacity: 1; transform: none; }
+.qm .qm-card { border-radius: 12px; background: var(--q-secondary); box-shadow: inset 0 0 0 1px var(--q-border); overflow: hidden; animation: qm-swap 220ms ease-out; }
+@keyframes qm-swap { from { opacity: 0.4; } to { opacity: 1; } }
+.qm .qm-card-head { display: flex; align-items: center; gap: 10px; padding: 10px 10px 9px 12px; color: var(--q-mfg); }
+.qm .qm-card-title { flex: 1; font-size: 13.5px; font-weight: 500; color: var(--q-fg); }
+.qm .qm-card-body { padding: 10px 12px 12px; border-top: 1px solid oklch(1 0 0 / 5%); }
+.qm .qm-card-text { font-size: 13px; line-height: 1.45; color: var(--q-mfg); }
+.qm .qm-dl { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; font-size: 13px; }
+.qm .qm-dl span { display: flex; flex-direction: column; gap: 2px; }
+.qm .qm-dl i { font-style: normal; color: var(--q-mfg); }
+.qm .qm-dl b { font-weight: 500; font-variant-numeric: tabular-nums; }
+.qm .qm-card-foot { padding: 12px; border-top: 1px solid oklch(1 0 0 / 5%); }
+.qm .qm-plan { display: flex; justify-content: center; align-items: center; height: 32px; border-radius: 8px; background: oklch(0.922 0 0); color: oklch(0.205 0 0); font-size: 13px; font-weight: 500; }
+.qm .qm-pop { animation: q-in 260ms ease-out both; }
+.qm .qm-svg, .qm .qm-detail, .qm .qm-menu { will-change: transform; }

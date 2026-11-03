@@ -14,7 +14,7 @@ Recruiters and hiring managers (goal: they write to Danil), and people coming fr
 ## Rules
 
 - Facts only from the project repo in `~/prj/<project>` or from Danil. Never invent metrics, dates, stack or outcomes.
-- Never write about qure-app.
+- Qure (`~/prj/qure-app`, a JetBrains product) may be written about **only on this portfolio site** — never in LinkedIn/X posts, Notion shares or other channels (permission given to Danil on 2026-11-03). Title: Design Engineer. Credit only features Danil authored that landed on qure-app `main` (check `git log main --author=daniil.rozhkov@jetbrains.com` and per-file authorship); teammates' features and unmerged branches are product context at most. Never use internal business data from `knowledge/`.
 - `~/prj/pen-editor-app` (pen-editor) is the product **Sideform** — always call it Sideform. Posts about it are only about (1) a part extracted as a library (Figma clipboard decoder, LLM-tolerant batch DSL with atomic rollback, TS flexbox engine, …) or (2) the desktop version (`pen-editor-desktop`). No general build-and-shut-down post-mortem; never claim Sideform was shut down.
 - Short and selling, like the cases in `src/data/en.ts`: each text block is 1–3 sentences; a section opens with a one-line logline; write in first person about Danil's decisions and their effect ("I designed…", "I kept…, so users…"); end with outcomes. Cut anything that doesn't show his judgment, craft or result. A post reads in 2–3 minutes.
 - Product focus: lead with what the user can do, what problem it solves and how it feels. Technical internals get one short line at most, or are left out.
@@ -101,6 +101,7 @@ Do not deploy if either step was skipped.
 
 Every correction Danil sends becomes a rule here (and in Claude's memory). Newest first.
 
+- 2026-11-03 — The ban on writing about qure-app is lifted: Danil is allowed to write about Qure publicly, but only in his portfolio.
 - 2026-11-03 — Sideform posts: no static screenshots, only videos. Close-ups of UI parts are made as dark-theme stageshow animations with the `sideform-stageshow` skill (`~/prj/pen-editor-app/.claude/skills/`).
 - 2026-11-03 — Sideform posts: cover is the landing's LiquidGradient (static frame t=3) with the Sideform app icon centred, not a screenshot; posts match the Biscuit Pet post in media density and include the stageshow promo videos.
 - 2026-11-01 — Image corner radius was too big; images have no rounding site-wide.

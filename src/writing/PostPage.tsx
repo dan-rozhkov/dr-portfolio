@@ -15,6 +15,18 @@ function formatDate(iso: string): string {
   return DATE_FORMAT.format(new Date(`${iso}T00:00:00Z`));
 }
 
+const isRepo = (url: string) => /^https?:\/\/(www\.)?github\.com\//.test(url);
+
+/** Visible text for a meta link: the repo name for GitHub, the host for any other site. */
+function linkText(url: string, fallback: string): string {
+  if (isRepo(url)) return repoName(url, fallback);
+  try {
+    return new URL(url).hostname.replace(/^www\./, "");
+  } catch {
+    return fallback;
+  }
+}
+
 function repoName(url: string, fallback: string): string {
   const last = url
     .replace(/[?#].*$/, "")
@@ -167,13 +179,13 @@ export default function PostPage({ post }: { post: Post | undefined }) {
             )}
             {post.links.length > 0 && (
               <div>
-                <dt>Code</dt>
+                <dt>{post.links.every((l) => isRepo(l.url)) ? "Code" : "Links"}</dt>
                 <dd>
                   {post.links.map((l, i) => (
                     <span key={l.url}>
                       {i > 0 && ", "}
                       <a href={l.url} target="_blank" rel="noopener noreferrer">
-                        {repoName(l.url, l.label)} ↗
+                        {linkText(l.url, l.label)} ↗
                       </a>
                     </span>
                   ))}

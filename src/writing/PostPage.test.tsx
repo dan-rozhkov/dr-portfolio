@@ -51,6 +51,15 @@ describe("PostPage", () => {
     expect(html).not.toContain("Code");
   });
 
+  it("titles repo links Code and site links Links with their host", () => {
+    const repo = render({ ...post, links: [{ label: "GitHub", url: "https://github.com/me/tool" }] });
+    expect(repo).toContain("<dt>Code</dt>");
+    expect(repo).toContain(">tool<");
+    const site = render({ ...post, links: [{ label: "Site", url: "https://www.quretests.com/download?x=1" }] });
+    expect(site).toContain("<dt>Links</dt>");
+    expect(site).toContain(">quretests.com<");
+  });
+
   it("renders a not-found block for an unknown post", () => {
     const html = render(undefined);
     expect(html).toContain("Post not found");
