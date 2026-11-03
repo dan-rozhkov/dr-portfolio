@@ -1,10 +1,10 @@
 ---
 title: Qure
-dek: A JetBrains desktop app where an AI agent turns manual web testing into end-to-end tests in your own repo.
+dek: A desktop app where an AI agent turns manual web testing into end-to-end tests in your own repo.
 date: 2026-11-03
 category: design-engineering
 tldr:
-  - Qure is a desktop app from JetBrains. You record a flow in its built-in browser or describe it in chat, and an AI agent writes the test in your repository and runs it until it passes.
+  - Qure is a desktop app for QA teams. You record a flow in its built-in browser or describe it in chat, and an AI agent writes the test in your repository and runs it until it passes.
   - I'm the Design Engineer on the team. I design features and ship the UI myself — 76 pull requests merged from 10 August to 14 October 2026.
   - I built the chat-first start, the Tests workspace with its coverage map and insights, and test plans that run from the chat.
   - I also wrote the design system for coding agents, so UI they write matches ours.

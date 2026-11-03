@@ -36,8 +36,15 @@
   width: auto;
   height: 0.9em;
   margin-right: 0.1em;
-  border-radius: 50%;
   vertical-align: -0.08em;
+}
+
+.inline-brand {
+  white-space: nowrap;
+}
+
+.inline-logo--round {
+  border-radius: 50%;
 }
 
 @media (--mobile) {
