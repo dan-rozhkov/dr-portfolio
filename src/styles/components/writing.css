@@ -150,6 +150,18 @@
     margin-bottom: 32px;
     padding-bottom: 32px;
   }
+
+  /* Card images run edge to edge, like post images; the text keeps the page padding. */
+  .writing-stream .writing-thumb {
+    margin-inline: -20px;
+  }
+}
+
+/* Home: no divider between the last card and the All cases button */
+.writing--compact .case-card:has(+ .home-cases-all) {
+  margin-bottom: 40px;
+  padding-bottom: 0;
+  border-bottom: 0;
 }
 
 /* Post page */
