@@ -41,4 +41,4 @@ Reference UI: run the component book from a worktree of qure-app (`cd frontend &
 
 ## Scenes
 
-`scenes/qure-shared` (chrome, composer, cursor, CSS) and four finished scenes: `qure-record` (record a flow → agent writes and replays the test), `qure-tests` (Tests workspace → last run replay with steps), `qure-coverage` (coverage map), `qure-plan` (test plan in chat → run → report). Rendered copies live in `public/images/writing/qure/`.
+`scenes/qure-shared` (chrome, composer, cursor, CSS) and four finished scenes: `qure-record` (record a flow → agent writes and replays the test), `qure-tests` (Tests workspace → last run replay with steps), `qure-coverage` (coverage map), `qure-plan` (test plan in chat → run → report).
