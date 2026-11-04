@@ -2,8 +2,8 @@
   "generatedFrom": "labor-market-radar",
   "lastCheck": "2026-11-04T06:47:43.118Z",
   "stats": {
-    "open": 63,
-    "newThisWeek": 28,
+    "open": 54,
+    "newThisWeek": 22,
     "closedThisWeek": 1
   },
   "jobs": [
@@ -101,63 +101,6 @@
       "url": "https://geekjob.ru/vacancy/6ae84c79e60a0eda250e160a"
     },
     {
-      "id": "indrive_168add7b-ba86-4350-9fda-ec7dd5a64aae",
-      "title": "CRM Marketing Manager",
-      "company": "inDrive",
-      "family": "GTM Engineer",
-      "location": "Lima, Peru",
-      "mode": "hybrid",
-      "seniority": null,
-      "salary": null,
-      "firstSeen": "2026-11-02T06:42:45.494Z",
-      "lastChecked": "2026-11-04T06:33:43.821Z",
-      "skills": [
-        "workflow automation",
-        "crm operations",
-        "experimentation",
-        "revenue funnel"
-      ],
-      "url": "https://indrive.pinpointhq.com/en/postings/168add7b-ba86-4350-9fda-ec7dd5a64aae"
-    },
-    {
-      "id": "openai_4d1ede8c-3d4c-4503-8408-81e4b68c5c91",
-      "title": "Full Stack Software Engineer, Product Explorations",
-      "company": "OpenAI",
-      "family": "Product Builder",
-      "location": "San Francisco",
-      "mode": "hybrid",
-      "seniority": null,
-      "salary": null,
-      "firstSeen": "2026-11-02T06:37:28.233Z",
-      "lastChecked": "2026-11-04T06:33:41.546Z",
-      "skills": [
-        "product discovery",
-        "prototyping",
-        "production delivery",
-        "frontend coding"
-      ],
-      "url": "https://jobs.ashbyhq.com/openai/4d1ede8c-3d4c-4503-8408-81e4b68c5c91"
-    },
-    {
-      "id": "openai_7f4c5eef-37f9-4454-a1fb-ef1e66b075d9",
-      "title": "Forward Deployed Engineer (FDE) - Seattle",
-      "company": "OpenAI",
-      "family": "Product Builder",
-      "location": "Seattle",
-      "mode": "hybrid",
-      "seniority": null,
-      "salary": null,
-      "firstSeen": "2026-11-02T06:37:24.255Z",
-      "lastChecked": "2026-11-04T06:33:41.013Z",
-      "skills": [
-        "product discovery",
-        "prototyping",
-        "frontend coding",
-        "production delivery"
-      ],
-      "url": "https://jobs.ashbyhq.com/openai/7f4c5eef-37f9-4454-a1fb-ef1e66b075d9"
-    },
-    {
       "id": "openai_ca9e0aeb-6df1-4b73-8ec0-2e9e124712f1",
       "title": "Applied AI Engineer, Plugins",
       "company": "OpenAI",
@@ -175,25 +118,6 @@
         "api integration"
       ],
       "url": "https://jobs.ashbyhq.com/openai/ca9e0aeb-6df1-4b73-8ec0-2e9e124712f1"
-    },
-    {
-      "id": "miro_8894283002",
-      "title": "Forward Deployed Consultant, Manufacturing",
-      "company": "Miro",
-      "family": "Product Builder",
-      "location": "Amsterdam, Netherlands +1",
-      "mode": null,
-      "seniority": null,
-      "salary": null,
-      "firstSeen": "2026-10-31T21:07:14.123Z",
-      "lastChecked": "2026-11-04T06:33:42.330Z",
-      "skills": [
-        "product discovery",
-        "prototyping",
-        "workflow automation",
-        "api integration"
-      ],
-      "url": "https://miro.com/careers/vacancy/8894283002/"
     },
     {
       "id": "cognition_dabc56df-b50a-4056-9e01-14ca3e0b12a4",
@@ -475,24 +399,6 @@
       "url": "https://jobs.ashbyhq.com/oyster/f4caa57f-bdb1-42d8-a884-12bf341f677c"
     },
     {
-      "id": "maple_ce08234e-7918-4775-879b-afb066a30460",
-      "title": "Growth Engineer",
-      "company": "Maple",
-      "family": "GTM Engineer",
-      "location": "New York, NY (HQ)",
-      "mode": "onsite",
-      "seniority": null,
-      "salary": null,
-      "firstSeen": "2026-10-30T06:45:00.000Z",
-      "lastChecked": "2026-11-04T06:33:27.196Z",
-      "skills": [
-        "workflow automation",
-        "production delivery",
-        "ai assisted building"
-      ],
-      "url": "https://jobs.ashbyhq.com/maple/ce08234e-7918-4775-879b-afb066a30460"
-    },
-    {
       "id": "oyster_440f7cfe-3649-411c-8009-3ad09213435d",
       "title": "Senior AI Solutions Engineer - GTM",
       "company": "Oyster",
@@ -510,24 +416,6 @@
         "production delivery"
       ],
       "url": "https://jobs.ashbyhq.com/oyster/440f7cfe-3649-411c-8009-3ad09213435d"
-    },
-    {
-      "id": "notion_10437426-14c8-4c45-8075-67959ce80393",
-      "title": "Forward Deployed Engineer, GTM, AMER",
-      "company": "Notion",
-      "family": "Product Builder",
-      "location": "San Francisco, California +1",
-      "mode": "hybrid",
-      "seniority": null,
-      "salary": null,
-      "firstSeen": "2026-10-28T06:50:00.000Z",
-      "lastChecked": "2026-11-04T06:33:42.008Z",
-      "skills": [
-        "product discovery",
-        "api integration",
-        "production delivery"
-      ],
-      "url": "https://jobs.ashbyhq.com/notion/10437426-14c8-4c45-8075-67959ce80393"
     },
     {
       "id": "baseten_81d573b6-741c-4140-a36b-6892456eca73",
@@ -793,25 +681,6 @@
       "url": "https://jobs.ashbyhq.com/gorgias/7e0dd321-1276-49b1-b6ca-2b0950075132"
     },
     {
-      "id": "notion_45f60d0e-e44f-40c5-985e-4096a8966860",
-      "title": "Growth Engineer, Startups & SMBs",
-      "company": "Notion",
-      "family": "GTM Engineer",
-      "location": "New York, United States",
-      "mode": "hybrid",
-      "seniority": null,
-      "salary": "$150–180k / yr",
-      "firstSeen": "2026-10-25T13:02:26.000Z",
-      "lastChecked": "2026-11-04T06:33:22.376Z",
-      "skills": [
-        "experimentation",
-        "product analytics",
-        "workflow automation",
-        "frontend coding"
-      ],
-      "url": "https://jobs.ashbyhq.com/notion/45f60d0e-e44f-40c5-985e-4096a8966860"
-    },
-    {
       "id": "nord_e28c220f-9695-4dd9-93ac-d2592e08385c",
       "title": "Agentic Product Engineer · Senior · Saily",
       "company": "Nord Security",
@@ -980,24 +849,6 @@
       "url": "https://www.granola.ai/jobs/gtm-systems-lead"
     },
     {
-      "id": "granola_494fe9a6-0144-4ebd-89a8-b8a187f93ff1",
-      "title": "Growth Engineer",
-      "company": "Granola",
-      "family": "Product Builder",
-      "location": "London, United Kingdom",
-      "mode": "onsite",
-      "seniority": null,
-      "salary": null,
-      "firstSeen": "2026-10-24T18:01:53.000Z",
-      "lastChecked": "2026-11-04T06:31:58.888Z",
-      "skills": [
-        "frontend coding",
-        "product analytics",
-        "experimentation"
-      ],
-      "url": "https://www.granola.ai/jobs/growth-engineer"
-    },
-    {
       "id": "bc2e339e-37ba-5024-bfd3-06000ee0dcf9",
       "title": "Product Engineer",
       "company": "PostHog",
@@ -1103,25 +954,6 @@
         "frontend coding"
       ],
       "url": "https://nordsecurity.com/careers/0d9ac726-81db-48fb-a9b8-f64ecad8e37c/"
-    },
-    {
-      "id": "lingokids_8373955",
-      "title": "Senior CRM Manager - Automation & AI",
-      "company": "Lingokids",
-      "family": "GTM Engineer",
-      "location": "Remote (international, outside Spain) +1",
-      "mode": "remote",
-      "seniority": "senior",
-      "salary": null,
-      "firstSeen": "2026-10-24T18:01:53.000Z",
-      "lastChecked": "2026-11-04T06:32:36.469Z",
-      "skills": [
-        "crm operations",
-        "workflow automation",
-        "ai assisted building",
-        "api integration"
-      ],
-      "url": "https://jobs.lingokids.com/jobs/8373955-senior-crm-manager-automation-ai"
     },
     {
       "id": "restream_746f524f-c124-479b-ad0c-ccaac34b9381",

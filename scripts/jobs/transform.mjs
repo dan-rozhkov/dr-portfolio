@@ -58,7 +58,10 @@ const orNull = (value) => {
 // exclusions win; reject backend/infra titles even if a later collection mislabels them.
 export function isTargetRole(row) {
   if (/(?:^|[;|\s])target_selection=excluded(?:$|[;|\s])/.test(row.notes ?? "")) return false;
-  return !/\b(?:dev\s*ops|back[ -]?end|site reliability|infrastructure engineer|platform engineer)\b/i.test(row.title_original ?? "");
+  const title = row.title_original ?? "";
+  if (/\b(?:dev\s*ops|back[ -]?end|site reliability|infrastructure engineer|platform engineer)\b/i.test(title)) return false;
+  // Off-filter for Design Engineer / Product Builder / GTM Engineer, per Danil's review.
+  return !/\b(?:forward[ -]deployed|growth engineer|full[ -]?stack software engineer)\b|\bcrm\b.*\bmanager\b/i.test(title);
 }
 
 export function transformRows(rows) {
