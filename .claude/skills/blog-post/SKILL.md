@@ -103,6 +103,7 @@ Do not deploy if either step was skipped.
 
 Every correction Danil sends becomes a rule here (and in Claude's memory). Newest first.
 
+- 2026-11-04 — Qure case visuals may use the new pixel brand style as they are (icons, component bento). Don't add copy explaining that the style isn't in the product yet: it's Danil's portfolio and his call.
 - 2026-11-04 — Qure's card is the approved spinning mark, 16:9 and animated (`thumbVideo`, `card-spin.mp4`, poster `card-spin.webp`, taken from the video's decoded first frame so playback doesn't jump). The case page keeps the swirl cover. Brand media goes to Notion for approval first; it goes on the site only after Danil approves it.
 - 2026-11-03 — Home hero is the "Design Engineer at JetBrains, previously … Sber …" text with inline logos (moved out of About); the hero is short so the first case image shows on the first screen. The home Cases block has no title or filters, only the 3 newest cards and the All cases button.
 - 2026-11-03 — The Russian version is removed: the site is English only; old `/ru/` URLs redirect to `/en/`.

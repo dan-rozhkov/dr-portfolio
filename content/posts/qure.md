@@ -79,8 +79,6 @@ A design system written for coding agents as much as for people.
 
 Foundations, component specs and product compositions live in plain text that an agent reads before it touches the UI. A dark catalog of the real components runs without a backend, so any change can be checked by eye. Token audits and drift reports flag one-off values, so AI-written UI stays on the system.
 
-I'm now moving the system to a new pixel language: a set of 16-pixel icons redrawn from the ones the app uses, and components in a mono typeface with almost square corners.
-
 ![28 white pixel icons in a grid](/images/writing/qure/brand-icons.webp "full")
 
 ![Buttons, inputs, a select, a test list and a run progress bar in the new pixel style](/images/writing/qure/brand-components.webp "full")
