@@ -81,7 +81,7 @@ Foundations, component specs and product compositions live in plain text that an
 
 ![White pixel icons switching in a grid, like an LED matrix](/images/writing/qure/brand-icons-led.mp4 "full")
 
-![Buttons, inputs, a select, a test list and a run progress bar in the new pixel style](/images/writing/qure/brand-components-cold.webp "full")
+![An agent fills in a test, runs it and gets the results across buttons, inputs, a select and a test list](/images/writing/qure/brand-bento.mp4 "full")
 
 :::outcomes
 - 76 — pull requests merged in nine weeks
