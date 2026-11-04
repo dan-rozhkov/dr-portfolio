@@ -77,19 +77,13 @@ I built test plans and then moved the wizard into the chat, so planning, running
 A design system written for coding agents as much as for people.
 :::
 
-:::slider
-### Specs
-Foundations, component specs and product compositions in plain text that an agent reads before it touches the UI.
-![Component book: Tests folder navigation](/images/writing/qure/book-tests.webp)
+Foundations, component specs and product compositions live in plain text that an agent reads before it touches the UI. A dark catalog of the real components runs without a backend, so any change can be checked by eye. Token audits and drift reports flag one-off values, so AI-written UI stays on the system.
 
-### Component book
-A dark catalog of the real components and screens that runs without a backend, so any change can be checked by eye.
-![Component book: chat start actions](/images/writing/qure/book-start.webp)
+I'm now moving the system to a new pixel language: a set of 16-pixel icons redrawn from the ones the app uses, and components in a mono typeface with almost square corners.
 
-### Checks
-Token audits and drift reports flag one-off values, so AI-written UI stays on the system.
-![Component book: the composer attaching the selected tests to a message](/images/writing/qure/book-composer.webp)
-:::
+![28 white pixel icons in a grid](/images/writing/qure/brand-icons.webp "full")
+
+![Buttons, inputs, a select, a test list and a run progress bar in the new pixel style](/images/writing/qure/brand-components.webp "full")
 
 :::outcomes
 - 76 — pull requests merged in nine weeks
