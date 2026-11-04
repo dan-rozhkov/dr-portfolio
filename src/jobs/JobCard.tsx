@@ -9,7 +9,7 @@ const LOGOS: Record<string, { src: string; ratio: number }> = logos;
 
 // Each half of the strip must outrun a 2560px screen: about 10px per character at --text-lg.
 const STRIP_CHARS = 200;
-const SEPARATOR_CHARS = 4;
+const SEPARATOR_CHARS = 5;
 const SECONDS_PER_CHAR = 0.16;
 
 const NEW_COPIES = [0, 1, 2, 3, 4, 5];
@@ -56,7 +56,7 @@ function TagStrip({ tags }: { tags: string[] }) {
         {Array.from({ length: repeats * 2 }, (_, copy) => (
           <span className="jobs-strip-group" aria-hidden={copy > 0 || undefined} key={copy}>
             {tags.map((t) => (
-              <span key={t}>{t}</span>
+              <span key={t}>#{t.replaceAll(" ", "_")}</span>
             ))}
           </span>
         ))}

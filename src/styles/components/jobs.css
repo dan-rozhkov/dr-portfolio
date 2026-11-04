@@ -189,19 +189,12 @@
   animation-play-state: paused;
 }
 
-.jobs-strip-group,
-.jobs-strip-group span {
+.jobs-strip-group {
   display: flex;
-  align-items: center;
 }
 
-.jobs-strip-group span::after {
-  content: "";
-  width: 5px;
-  height: 5px;
-  margin-inline: 18px;
-  border-radius: 50%;
-  background: var(--muted);
+.jobs-strip-group span {
+  margin-right: 36px;
 }
 
 @keyframes jobs-strip {
