@@ -14,15 +14,12 @@ const SECONDS_PER_CHAR = 0.16;
 
 const NEW_COPIES = [0, 1, 2, 3, 4, 5];
 
-/** Logos of any shape get the same visual weight: width follows the square root of the ratio. */
+/** Every logo fills the same frame: wide ones reach its width, compact ones its height. */
 function Logo({ company }: { company: string }) {
   const logo = LOGOS[company];
   // A company fresh from the radar has no logo file yet.
   if (!logo) return <span className="jobs-logo-name">{company}</span>;
-  const style = {
-    "--logo-scale": Math.sqrt(logo.ratio).toFixed(3),
-    aspectRatio: logo.ratio,
-  } as CSSProperties;
+  const style = { "--logo-ratio": logo.ratio, aspectRatio: logo.ratio } as CSSProperties;
   return <img className="jobs-logo" src={assetUrl(logo.src)} alt="" loading="lazy" style={style} />;
 }
 

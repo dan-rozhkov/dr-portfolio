@@ -13,47 +13,47 @@
   },
   "ChatPlace": {
     "src": "/images/jobs/logos/chatplace.svg",
-    "ratio": 12.0
+    "ratio": 12.53
   },
   "ClickHouse": {
     "src": "/images/jobs/logos/clickhouse.svg",
-    "ratio": 3.38
+    "ratio": 6.04
   },
   "Cognition": {
     "src": "/images/jobs/logos/cognition.svg",
-    "ratio": 1.0
+    "ratio": 0.87
   },
   "Collinear AI": {
     "src": "/images/jobs/logos/collinear-ai.svg",
-    "ratio": 6.29
+    "ratio": 6.3
   },
   "Cracken": {
     "src": "/images/jobs/logos/cracken.svg",
-    "ratio": 7.31
+    "ratio": 7.79
   },
   "Duvo Inc": {
     "src": "/images/jobs/logos/duvo.svg",
-    "ratio": 4.05
+    "ratio": 4.28
   },
   "Finix": {
     "src": "/images/jobs/logos/finix.svg",
-    "ratio": 3.3
+    "ratio": 3.06
   },
   "Firework": {
     "src": "/images/jobs/logos/firework.svg",
-    "ratio": 5.54
+    "ratio": 7.2
   },
   "Fireworks": {
     "src": "/images/jobs/logos/fireworks.svg",
-    "ratio": 2.05
+    "ratio": 2.15
   },
   "Gorgias": {
     "src": "/images/jobs/logos/gorgias.svg",
-    "ratio": 3.76
+    "ratio": 3.84
   },
   "Granola": {
     "src": "/images/jobs/logos/granola.svg",
-    "ratio": 3.72
+    "ratio": 4.66
   },
   "HUD": {
     "src": "/images/jobs/logos/hud.svg",
@@ -65,11 +65,11 @@
   },
   "Koyfin": {
     "src": "/images/jobs/logos/koyfin.svg",
-    "ratio": 3.46
+    "ratio": 3.47
   },
   "Langdock": {
     "src": "/images/jobs/logos/langdock.svg",
-    "ratio": 5.1
+    "ratio": 5.06
   },
   "Linear": {
     "src": "/images/jobs/logos/linear.svg",
@@ -85,47 +85,47 @@
   },
   "Nebius": {
     "src": "/images/jobs/logos/nebius.svg",
-    "ratio": 3.64
+    "ratio": 6.48
   },
   "Nord Security": {
     "src": "/images/jobs/logos/nord-security.svg",
-    "ratio": 3.59
+    "ratio": 3.56
   },
   "Numeric": {
     "src": "/images/jobs/logos/numeric.svg",
-    "ratio": 0.96
+    "ratio": 0.99
   },
   "OpenAI": {
     "src": "/images/jobs/logos/openai.svg",
-    "ratio": 3.74
+    "ratio": 3.71
   },
   "OpenGov": {
     "src": "/images/jobs/logos/opengov.svg",
-    "ratio": 3.21
+    "ratio": 5.19
   },
   "Orbital": {
     "src": "/images/jobs/logos/orbital.svg",
-    "ratio": 3.43
+    "ratio": 3.53
   },
   "Oyster": {
     "src": "/images/jobs/logos/oyster.svg",
-    "ratio": 3.7
+    "ratio": 3.8
   },
   "Pigment": {
     "src": "/images/jobs/logos/pigment.svg",
-    "ratio": 5.44
+    "ratio": 6.92
   },
   "Plurio by Elly Analytics": {
     "src": "/images/jobs/logos/plurio.svg",
-    "ratio": 3.45
+    "ratio": 3.93
   },
   "PostHog": {
     "src": "/images/jobs/logos/posthog.svg",
-    "ratio": 1.86
+    "ratio": 1.85
   },
   "Restream": {
     "src": "/images/jobs/logos/restream.svg",
-    "ratio": 4.85
+    "ratio": 5.08
   },
   "SageOx": {
     "src": "/images/jobs/logos/sageox.webp",
@@ -137,7 +137,7 @@
   },
   "Sanity": {
     "src": "/images/jobs/logos/sanity.svg",
-    "ratio": 1.0
+    "ratio": 1.24
   },
   "Temper": {
     "src": "/images/jobs/logos/temper.webp",
@@ -157,10 +157,10 @@
   },
   "Watershed": {
     "src": "/images/jobs/logos/watershed.svg",
-    "ratio": 4.68
+    "ratio": 4.83
   },
   "Workyard": {
     "src": "/images/jobs/logos/workyard.svg",
-    "ratio": 9.06
+    "ratio": 9.14
   }
 }

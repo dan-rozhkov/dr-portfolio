@@ -123,8 +123,11 @@
 }
 
 .jobs-logo {
+  --logo-frame-w: 120px;
+  --logo-frame-h: 34px;
+
   display: block;
-  width: calc(var(--logo-scale) * 6%);
+  width: min(var(--logo-frame-w), calc(var(--logo-frame-h) * var(--logo-ratio)));
   height: auto;
 }
 
@@ -265,7 +268,8 @@
   }
 
   .jobs-logo {
-    width: calc(var(--logo-scale) * 10%);
+    --logo-frame-w: 104px;
+    --logo-frame-h: 30px;
   }
 
   .jobs-stamp {
