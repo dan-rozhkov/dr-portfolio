@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { badge, filterJobs, isStale } from "./filter";
+import { filterJobs, isNew, isStale, sinceLabel } from "./filter";
 import type { Job } from "./types";
 
 const mk = (id: string, family: Job["family"], mode: Job["mode"], firstSeen = "2026-10-24T00:00:00Z"): Job => ({
@@ -38,12 +38,18 @@ describe("isStale", () => {
   });
 });
 
-describe("badge", () => {
+describe("isNew", () => {
   const last = "2026-10-30T09:30:00Z";
-  it("says New for recent", () => {
-    expect(badge(mk("x", "GTM Engineer", null, "2026-10-28T00:00:00Z"), last)).toBe("New");
+  it("is true inside the 7-day window", () => {
+    expect(isNew(mk("x", "GTM Engineer", null, "2026-10-28T00:00:00Z"), last)).toBe(true);
   });
-  it("says Since for older", () => {
-    expect(badge(mk("x", "GTM Engineer", null, "2026-10-20T00:00:00Z"), last)).toBe("Since 20 Oct");
+  it("is false for older roles", () => {
+    expect(isNew(mk("x", "GTM Engineer", null, "2026-10-20T00:00:00Z"), last)).toBe(false);
+  });
+});
+
+describe("sinceLabel", () => {
+  it("shows the first-seen date", () => {
+    expect(sinceLabel(mk("x", "GTM Engineer", null, "2026-10-20T00:00:00Z"))).toBe("Since 20 Oct");
   });
 });

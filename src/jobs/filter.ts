@@ -10,6 +10,12 @@ const SHORT_DATE = new Intl.DateTimeFormat("en-GB", {
   timeZone: "UTC",
 });
 
+export const MODE_LABEL: Record<NonNullable<Job["mode"]>, string> = {
+  remote: "Remote",
+  hybrid: "Hybrid",
+  onsite: "On-site",
+};
+
 export function filterJobs(
   jobs: Job[],
   f: { family: JobFamily | null; mode: Job["mode"] },
@@ -23,8 +29,10 @@ export function isStale(lastCheck: string, now: Date): boolean {
   return now.getTime() - new Date(lastCheck).getTime() > 4 * DAY;
 }
 
-export function badge(job: Job, lastCheck: string): string {
-  const age = new Date(lastCheck).getTime() - new Date(job.firstSeen).getTime();
-  if (age <= NEW_WINDOW) return "New";
+export function isNew(job: Job, lastCheck: string): boolean {
+  return new Date(lastCheck).getTime() - new Date(job.firstSeen).getTime() <= NEW_WINDOW;
+}
+
+export function sinceLabel(job: Job): string {
   return `Since ${SHORT_DATE.format(new Date(job.firstSeen))}`;
 }

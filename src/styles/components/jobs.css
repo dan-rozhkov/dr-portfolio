@@ -101,71 +101,136 @@
 }
 
 .jobs-list {
-  display: grid;
   grid-column: 6 / 17;
-  gap: 16px;
   min-width: 0;
 }
 
+/* Cards reuse the case card; only the pieces below are Jobs' own. */
 .jobs-card {
+  margin-bottom: 88px;
+}
+
+.jobs-thumb {
+  position: relative;
+  background: #efefef;
+}
+
+.jobs-logo-field {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  transition: transform 0.6s ease;
+}
+
+.jobs-logo {
   display: block;
-  padding: 28px 32px 8px;
-  border-radius: var(--radius-md);
-  background: #fff;
-  color: inherit;
-  text-decoration: none;
-  transition: box-shadow var(--t-base);
+  width: calc(var(--logo-scale) * 6%);
+  height: auto;
 }
 
-.jobs-card:hover {
-  box-shadow: var(--shadow-soft);
-}
-
-.jobs-top {
-  display: flex;
-  gap: 24px;
-  justify-content: space-between;
-  margin-bottom: 18px;
-}
-
-.jobs-top > div:first-child {
-  min-width: 0;
-}
-
-.jobs-top h2 {
-  margin: 0 0 6px;
-  font-size: 24px;
+.jobs-logo-name {
+  font-size: var(--text-lg);
   font-weight: 500;
   letter-spacing: -0.01em;
-  overflow-wrap: anywhere;
 }
 
-.jobs-salary {
-  margin-top: 4px;
-  font-size: var(--text-sm);
+.jobs-stamp {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 72px;
 }
 
-.jobs-badge {
-  align-self: start;
-  padding: 6px 12px;
-  border-radius: 999px;
-  background: #eee;
-  font-size: var(--text-xs);
+/* Only the logo takes the case card's hover zoom. */
+.case-card a:hover .writing-thumb > .jobs-stamp {
+  transform: none;
+}
+
+.jobs-stamp svg {
+  display: block;
+  overflow: visible;
+  animation: jobs-spin 14s linear infinite;
+}
+
+.jobs-stamp text {
+  fill: var(--ink);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+/* Runs out to the page's right edge, past the card; the left end fades under the column edge. */
+.jobs-strip {
+  margin-top: 24px;
+  margin-right: calc(-1 * var(--pad));
+  padding-block: 14px;
+  font-size: var(--text-lg);
   white-space: nowrap;
+  overflow: hidden;
+  border-block: 1px solid var(--line);
+  mask-image: linear-gradient(to right, transparent, #000 56px);
 }
 
-.jobs-chips {
+.jobs-strip-track {
   display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-bottom: 24px;
+  width: max-content;
+  animation: jobs-strip var(--strip-time) linear infinite;
 }
 
-.jobs-chips span {
-  padding: 5px 10px;
-  border-radius: 999px;
-  background: #eee;
-  font-size: var(--text-xs);
+.jobs-card a:hover .jobs-strip-track,
+.jobs-card a:hover .jobs-stamp svg,
+.jobs-card a:focus-visible .jobs-strip-track,
+.jobs-card a:focus-visible .jobs-stamp svg,
+.jobs-card.is-offscreen .jobs-strip-track,
+.jobs-card.is-offscreen .jobs-stamp svg {
+  animation-play-state: paused;
+}
+
+.jobs-strip-group,
+.jobs-strip-group span {
+  display: flex;
+  align-items: center;
+}
+
+.jobs-strip-group span::after {
+  content: "";
+  width: 5px;
+  height: 5px;
+  margin-inline: 18px;
+  border-radius: 50%;
+  background: var(--muted);
+}
+
+@keyframes jobs-strip {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes jobs-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jobs-stamp svg,
+  .jobs-strip-track {
+    animation: none;
+  }
+
+  .jobs-logo-field {
+    transition: none;
+  }
+
+  /* Standing still, the strip shows each tag once and nothing fades. */
+  .jobs-strip {
+    mask-image: none;
+  }
+
+  .jobs-strip-group[aria-hidden] {
+    display: none;
+  }
 }
 
 .jobs-empty {
@@ -191,14 +256,27 @@
   }
 
   .jobs-card {
-    padding: 22px 20px 4px;
+    margin-bottom: 56px;
   }
 
-  .jobs-top {
-    gap: 12px;
+  /* Edge to edge by exactly the page padding, like the case cards. */
+  .jobs-card .writing-thumb {
+    margin-inline: calc(-1 * var(--pad));
   }
 
-  .jobs-top h2 {
-    font-size: 20px;
+  .jobs-logo {
+    width: calc(var(--logo-scale) * 10%);
+  }
+
+  .jobs-stamp {
+    top: 12px;
+    right: 12px;
+    width: 60px;
+  }
+
+  .jobs-strip {
+    margin-inline: calc(-1 * var(--pad));
+    font-size: var(--text-sm);
+    mask-image: none;
   }
 }

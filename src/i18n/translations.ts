@@ -5,7 +5,6 @@ export interface Translations {
   "nav.work": string;
   "nav.about": string;
   "nav.writing": string;
-  "nav.jobs": string;
   "nav.contact": string;
   "nav.contactMobile": string;
   "nav.cv": string;
@@ -36,7 +35,6 @@ const en: Translations = {
   "nav.work": "Work",
   "nav.about": "About",
   "nav.writing": "Cases",
-  "nav.jobs": "Jobs",
   "nav.contact": "Contact",
   "nav.contactMobile": "@",
   "nav.cv": "CV ↗",

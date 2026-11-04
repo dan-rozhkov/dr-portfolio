@@ -8,7 +8,3 @@ export function casesLink(category?: string): string {
 export function postLink(slug: string): string {
   return `${BASE}en/cases/${slug}/`;
 }
-
-export function jobsLink(): string {
-  return `${BASE}en/jobs/`;
-}

@@ -1,0 +1,166 @@
+{
+  "atomGTM": {
+    "src": "/images/jobs/logos/atomgtm.webp",
+    "ratio": 3.42
+  },
+  "Baseten": {
+    "src": "/images/jobs/logos/baseten.svg",
+    "ratio": 5.32
+  },
+  "bunny.net": {
+    "src": "/images/jobs/logos/bunny.svg",
+    "ratio": 3.47
+  },
+  "ChatPlace": {
+    "src": "/images/jobs/logos/chatplace.svg",
+    "ratio": 12.0
+  },
+  "ClickHouse": {
+    "src": "/images/jobs/logos/clickhouse.svg",
+    "ratio": 3.38
+  },
+  "Cognition": {
+    "src": "/images/jobs/logos/cognition.svg",
+    "ratio": 1.0
+  },
+  "Collinear AI": {
+    "src": "/images/jobs/logos/collinear-ai.svg",
+    "ratio": 6.29
+  },
+  "Cracken": {
+    "src": "/images/jobs/logos/cracken.svg",
+    "ratio": 7.31
+  },
+  "Duvo Inc": {
+    "src": "/images/jobs/logos/duvo.svg",
+    "ratio": 4.05
+  },
+  "Finix": {
+    "src": "/images/jobs/logos/finix.svg",
+    "ratio": 3.3
+  },
+  "Firework": {
+    "src": "/images/jobs/logos/firework.svg",
+    "ratio": 5.54
+  },
+  "Fireworks": {
+    "src": "/images/jobs/logos/fireworks.svg",
+    "ratio": 2.05
+  },
+  "Gorgias": {
+    "src": "/images/jobs/logos/gorgias.svg",
+    "ratio": 3.76
+  },
+  "Granola": {
+    "src": "/images/jobs/logos/granola.svg",
+    "ratio": 3.72
+  },
+  "HUD": {
+    "src": "/images/jobs/logos/hud.svg",
+    "ratio": 2.22
+  },
+  "JetBrains": {
+    "src": "/images/jobs/logos/jetbrains.svg",
+    "ratio": 4.66
+  },
+  "Koyfin": {
+    "src": "/images/jobs/logos/koyfin.svg",
+    "ratio": 3.46
+  },
+  "Langdock": {
+    "src": "/images/jobs/logos/langdock.svg",
+    "ratio": 5.1
+  },
+  "Linear": {
+    "src": "/images/jobs/logos/linear.svg",
+    "ratio": 4.0
+  },
+  "Maple": {
+    "src": "/images/jobs/logos/maple.svg",
+    "ratio": 3.57
+  },
+  "Modal": {
+    "src": "/images/jobs/logos/modal.svg",
+    "ratio": 1.92
+  },
+  "Nebius": {
+    "src": "/images/jobs/logos/nebius.svg",
+    "ratio": 3.64
+  },
+  "Nord Security": {
+    "src": "/images/jobs/logos/nord-security.svg",
+    "ratio": 3.59
+  },
+  "Numeric": {
+    "src": "/images/jobs/logos/numeric.svg",
+    "ratio": 0.96
+  },
+  "OpenAI": {
+    "src": "/images/jobs/logos/openai.svg",
+    "ratio": 3.74
+  },
+  "OpenGov": {
+    "src": "/images/jobs/logos/opengov.svg",
+    "ratio": 3.21
+  },
+  "Orbital": {
+    "src": "/images/jobs/logos/orbital.svg",
+    "ratio": 3.43
+  },
+  "Oyster": {
+    "src": "/images/jobs/logos/oyster.svg",
+    "ratio": 3.7
+  },
+  "Pigment": {
+    "src": "/images/jobs/logos/pigment.svg",
+    "ratio": 5.44
+  },
+  "Plurio by Elly Analytics": {
+    "src": "/images/jobs/logos/plurio.svg",
+    "ratio": 3.45
+  },
+  "PostHog": {
+    "src": "/images/jobs/logos/posthog.svg",
+    "ratio": 1.86
+  },
+  "Restream": {
+    "src": "/images/jobs/logos/restream.svg",
+    "ratio": 4.85
+  },
+  "SageOx": {
+    "src": "/images/jobs/logos/sageox.webp",
+    "ratio": 3.88
+  },
+  "Samba TV": {
+    "src": "/images/jobs/logos/samba-tv.webp",
+    "ratio": 1.23
+  },
+  "Sanity": {
+    "src": "/images/jobs/logos/sanity.svg",
+    "ratio": 1.0
+  },
+  "Temper": {
+    "src": "/images/jobs/logos/temper.webp",
+    "ratio": 4.6
+  },
+  "Tendos.ai": {
+    "src": "/images/jobs/logos/tendos.svg",
+    "ratio": 3.72
+  },
+  "Uniti AI": {
+    "src": "/images/jobs/logos/uniti-ai.svg",
+    "ratio": 4.06
+  },
+  "Viktor": {
+    "src": "/images/jobs/logos/viktor.svg",
+    "ratio": 5.84
+  },
+  "Watershed": {
+    "src": "/images/jobs/logos/watershed.svg",
+    "ratio": 4.68
+  },
+  "Workyard": {
+    "src": "/images/jobs/logos/workyard.svg",
+    "ratio": 9.06
+  }
+}

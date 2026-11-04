@@ -71,6 +71,11 @@ function writePage(outPath, routePath) {
       '<div id="root"></div>',
       `<div id="root">${html}</div>`
     );
+  if (meta.noindex) {
+    const tag = '<meta name="robots" content="noindex">';
+    full = full.replace("</head>", `  ${tag}\n  </head>`);
+    if (!full.includes(tag)) throw new Error(`noindex missing from ${outPath}`);
+  }
 
   const tokens = {
     "%PAGE_URL%": escapeAttr(pageUrl(routePath)),
@@ -177,7 +182,6 @@ const sitemapUrls = [
   ...allCases.map((item) => `/en/case/${item.id}/`),
   `/en/cases/`,
   ...allPosts.map((slug) => `/en/cases/${slug}/`),
-  `/en/jobs/`,
 ].map((route) => `  <url><loc>${pageUrl(route)}</loc><lastmod>${today}</lastmod></url>`);
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>

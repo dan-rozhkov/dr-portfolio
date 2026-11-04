@@ -37,6 +37,7 @@ export function pageMeta(path: string): {
   ogDescription: string;
   image: string;
   type: "website" | "article";
+  noindex: boolean;
 } {
   const route = parseRoute(path);
   const title = pageTitle(path);
@@ -57,7 +58,8 @@ export function pageMeta(path: string): {
     }
   }
   if (!legacy) ogDescription = description;
-  return { title, description, ogDescription, image, type };
+  // Jobs is reachable by direct link only, so search engines must not list it.
+  return { title, description, ogDescription, image, type, noindex: route.name === "jobs" };
 }
 
 export function rss(origin: string): string {

@@ -1,6 +1,6 @@
 import { getProfile } from "../data/portfolio";
 import { assetUrl } from "../lib/url";
-import { casesLink, jobsLink } from "../lib/writingUrl";
+import { casesLink } from "../lib/writingUrl";
 import { useT } from "../i18n/context";
 
 export default function Header() {
@@ -19,7 +19,6 @@ export default function Header() {
           <a className="desktop-only" href="#work">{t("nav.work")}</a>
           <a className="desktop-only" href="#about">{t("nav.about")}</a>
           <a href={casesLink()}>{t("nav.writing")}</a>
-          <a href={jobsLink()}>{t("nav.jobs")}</a>
         </div>
         <div className="nav-actions">
           <a className="contact-link" href="#contact">

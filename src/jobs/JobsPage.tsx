@@ -1,22 +1,16 @@
 import { useEffect, useState } from "react";
 import data from "../data/jobs.json";
-import { badge, filterJobs, isStale } from "./filter";
+import { filterJobs, isStale, MODE_LABEL } from "./filter";
+import JobCard from "./JobCard";
 import type { Job, JobFamily, JobsData } from "./types";
 
 const { jobs, stats, lastCheck } = data as JobsData;
 
 const FAMILIES: JobFamily[] = ["Design Engineer", "Product Builder", "GTM Engineer"];
-const MODES: { value: NonNullable<Job["mode"]>; label: string }[] = [
-  { value: "remote", label: "Remote" },
-  { value: "hybrid", label: "Hybrid" },
-  { value: "onsite", label: "On-site" },
-];
-const MODE_LABEL: Record<NonNullable<Job["mode"]>, string> = {
-  remote: "remote",
-  hybrid: "hybrid",
-  onsite: "on-site",
-};
-
+const MODES = (Object.keys(MODE_LABEL) as NonNullable<Job["mode"]>[]).map((value) => ({
+  value,
+  label: MODE_LABEL[value],
+}));
 const FAMILY_COUNT = Object.fromEntries(FAMILIES.map((f) => [f, jobs.filter((j) => j.family === f).length]));
 const MODE_COUNT = Object.fromEntries(MODES.map((m) => [m.value, jobs.filter((j) => j.mode === m.value).length]));
 
@@ -40,6 +34,18 @@ export default function JobsPage() {
   }, []);
 
   const shown = filterJobs(jobs, { family, mode });
+
+  // Off-screen cards stop their strip and stamp, so a long list doesn't drain a phone.
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) e.target.classList.toggle("is-offscreen", !e.isIntersecting);
+      },
+      { rootMargin: "200px" },
+    );
+    document.querySelectorAll(".jobs-card").forEach((card) => observer.observe(card));
+    return () => observer.disconnect();
+  }, [family, mode]);
 
   return (
     <main className="jobs-page">
@@ -81,25 +87,7 @@ export default function JobsPage() {
           {shown.length === 0 ? (
             <p className="jobs-empty">No roles match these filters.</p>
           ) : (
-            shown.map((j) => (
-              <a key={j.id} className="jobs-card" href={j.url} target="_blank" rel="noopener noreferrer">
-                <div className="jobs-top">
-                  <div>
-                    <h2>{j.title}</h2>
-                    <div className="jobs-muted">
-                      {[j.company, j.location, j.mode ? MODE_LABEL[j.mode] : ""].filter(Boolean).join(" · ")}
-                    </div>
-                    {j.salary && <div className="jobs-salary">{j.salary}</div>}
-                  </div>
-                  <span className="jobs-badge">{badge(j, lastCheck)}</span>
-                </div>
-                {j.skills.length > 0 && (
-                  <div className="jobs-chips">
-                    {j.skills.map((s) => <span key={s}>{s}</span>)}
-                  </div>
-                )}
-              </a>
-            ))
+            shown.map((j) => <JobCard job={j} lastCheck={lastCheck} key={j.id} />)
           )}
         </div>
       </section>
