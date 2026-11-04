@@ -23,7 +23,7 @@ const STOPS: [number, [number, number, number]][] = [
   [1, [255, 107, 41]],
 ];
 
-const BACKGROUND = "#180010";
+const BACKGROUND = "#0E1014";
 const COLUMNS = 100; // grid columns across the cover
 const PIXEL = 0.58; // pixel size as a share of a grid cell
 const START = 1; // shader time of the first (and reduced-motion) frame
