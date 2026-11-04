@@ -59,7 +59,7 @@ I merged test management into one Tests panel: folders, manual cases kept as Mar
 See what the suite really covers, and what nobody has checked.
 :::
 
-![Qure Demo Day 2026 badge and lanyard](/images/writing/qure/demo-day-badge.jpg "full")
+![Pixel Qure mark spinning next to animated pixel letters](/images/writing/qure/brand-duo.mp4 "full")
 
 The coverage map links suites, cases and the screens they touch. A link counts as verified only when the last run proves it, and unknown coverage stays visible instead of looking green.
 
