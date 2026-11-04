@@ -103,6 +103,7 @@ Do not deploy if either step was skipped.
 
 Every correction Danil sends becomes a rule here (and in Claude's memory). Newest first.
 
+- 2026-11-04 — Sideform post: the approved Dock image (`dock.webp`, in Challenge) is a deliberate exception to "only videos" and "no black background", and it keeps the Apple icons. App icons in such images are real macOS 26 glass renders (system icons through NSWorkspace, ours compiled from `.icon` with actool), never the old `.icns` files.
 - 2026-11-04 — Jobs page: Forward Deployed roles, Growth Engineer, CRM managers and Full Stack Software Engineer are outside the filters, not rejections. Filter them by title in `scripts/jobs/transform.mjs`, keep them `active` in the radar as `adjacent` with `target_selection=excluded`. GTM Engineer - Growth and Product Engineer (Full Stack) stay.
 - 2026-11-04 — The site header overlaps page content on mobile while scrolling on purpose. It's a design decision: don't change it or report it as a problem.
 - 2026-11-04 — Qure ground is cold near-black `#0E1014`, never the warm burgundy `#180010`. Keep gradients calm like the swirl (mostly cyan, pale, amber). When an asset's colour changes, save it under a new filename so a cached old one can't flash.

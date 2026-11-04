@@ -31,6 +31,8 @@ Sideform's agent designs on a canvas — but inside a browser tab it was boxed i
 
 It couldn't browse with the user's logins, couldn't look at other apps, and kept work in the tab's storage. I wanted to give the agent a real desktop to work in.
 
+![Sideform in the macOS Dock, between Photos and Home](/images/writing/sideform-desktop/dock.webp "full")
+
 ## Solution
 
 :::logline
