@@ -103,6 +103,7 @@ Do not deploy if either step was skipped.
 
 Every correction Danil sends becomes a rule here (and in Claude's memory). Newest first.
 
+- 2026-11-04 — Jobs page: Forward Deployed roles, Growth Engineer, CRM managers and Full Stack Software Engineer are outside the filters, not rejections. Filter them by title in `scripts/jobs/transform.mjs`, keep them `active` in the radar as `adjacent` with `target_selection=excluded`. GTM Engineer - Growth and Product Engineer (Full Stack) stay.
 - 2026-11-04 — The site header overlaps page content on mobile while scrolling on purpose. It's a design decision: don't change it or report it as a problem.
 - 2026-11-04 — Qure ground is cold near-black `#0E1014`, never the warm burgundy `#180010`. Keep gradients calm like the swirl (mostly cyan, pale, amber). When an asset's colour changes, save it under a new filename so a cached old one can't flash.
 - 2026-11-04 — Qure case visuals may use the new pixel brand style as they are (icons, component bento). Don't add copy explaining that the style isn't in the product yet: it's Danil's portfolio and his call.
