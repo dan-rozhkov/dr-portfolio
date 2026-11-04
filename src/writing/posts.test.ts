@@ -66,6 +66,15 @@ describe("parsePost", () => {
   it("throws on bad date", () => {
     expect(() => parsePost(valid.replace("2026-10-01", "soon"), "x")).toThrow(/x\.md: bad date/);
   });
+
+  it("needs a thumb poster and a video file for thumbVideo", () => {
+    const withMeta = (lines: string) => valid.replace("---\nIntro", `${lines}\n---\nIntro`);
+    expect(parsePost(withMeta("thumb: /a.webp\nthumbVideo: /a.mp4"), "x").thumbVideo).toBe("/a.mp4");
+    expect(() => parsePost(withMeta("thumbVideo: /a.mp4"), "x")).toThrow(/x\.md: thumbVideo needs/);
+    expect(() => parsePost(withMeta("thumb: /a.webp\nthumbVideo: /a.webp"), "x")).toThrow(
+      /x\.md: thumbVideo must be/,
+    );
+  });
 });
 
 describe("readMinutes", () => {

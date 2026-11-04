@@ -89,7 +89,12 @@
   overflow: hidden;
 }
 
+.writing-thumb--wide {
+  aspect-ratio: 16 / 9;
+}
+
 .writing-thumb > img,
+.writing-thumb > video,
 .writing-thumb > .live-cover {
   display: block;
   width: 100%;

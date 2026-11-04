@@ -43,6 +43,8 @@ links:                       # optional; only public URLs you checked (gh repo v
   - label: Code
     url: https://github.com/dan-rozhkov/<repo>
 cover: /images/writing/<slug>/cover.webp  # optional; omit → no cover
+thumb: /images/writing/<slug>/thumb.webp  # optional; card image, 16:10
+thumbVideo: /images/writing/<slug>/card.mp4  # optional; looping 16:9 card video, needs thumb as its poster
 ---
 
 ## Section label
@@ -101,6 +103,7 @@ Do not deploy if either step was skipped.
 
 Every correction Danil sends becomes a rule here (and in Claude's memory). Newest first.
 
+- 2026-11-04 — Qure's card is the approved spinning mark, 16:9 and animated (`thumbVideo`, `card-spin.mp4`, poster `card-spin.webp`, taken from the video's decoded first frame so playback doesn't jump). The case page keeps the swirl cover. Brand media goes to Notion for approval first; it goes on the site only after Danil approves it.
 - 2026-11-03 — Home hero is the "Design Engineer at JetBrains, previously … Sber …" text with inline logos (moved out of About); the hero is short so the first case image shows on the first screen. The home Cases block has no title or filters, only the 3 newest cards and the All cases button.
 - 2026-11-03 — The Russian version is removed: the site is English only; old `/ru/` URLs redirect to `/en/`.
 - 2026-11-03 — One Cases list: `/en/writing/` moved to `/en/cases/` (old URLs redirect). The Cases page lists posts and the home-page case studies together (`src/writing/entries.ts`; a new home case needs a category in `CASE_CATEGORY` there). The home page shows only the 3 newest as cards plus an "All cases" button.

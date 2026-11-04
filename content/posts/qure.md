@@ -20,7 +20,8 @@ links:
 cover: /images/writing/qure/cover-swirl.webp
 coverLive: qure-swirl
 coverMark: /images/writing/qure/mark.svg
-thumb: /images/writing/qure/cover-swirl.webp
+thumb: /images/writing/qure/card-spin.webp
+thumbVideo: /images/writing/qure/card-spin.mp4
 ogImage: /images/writing/qure/og-swirl.png
 ---
 

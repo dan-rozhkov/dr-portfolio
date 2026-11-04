@@ -45,6 +45,8 @@ export interface Post {
   cover?: string;
   /** path under public/; list-card image on the Cases page, falls back to cover */
   thumb?: string;
+  /** path under public/; looping 16:9 card video, `thumb` is its poster */
+  thumbVideo?: string;
   /** a live cover drawn over `cover` (which stays as the no-WebGL fallback) */
   coverLive?: CoverLive;
   /** path under public/; a mark centred on the live cover */

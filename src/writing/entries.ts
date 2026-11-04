@@ -19,6 +19,8 @@ export interface CaseEntry {
   sortKey: string;
   /** path under public/ */
   image?: string;
+  /** looping card video; `image` is its poster */
+  video?: string;
   live?: { variant: CoverLive; fallback: string; mark?: string };
 }
 
@@ -42,6 +44,7 @@ export function getEntries(lang: Lang = "en"): CaseEntry[] {
     when: formatMonthYear(p.date),
     sortKey: p.date,
     image: p.thumb ?? p.cover,
+    video: p.thumbVideo,
     live:
       p.coverLive && p.cover && !p.thumb
         ? { variant: p.coverLive, fallback: p.cover, mark: p.coverMark }

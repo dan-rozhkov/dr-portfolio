@@ -2,6 +2,7 @@ import { CATEGORY_LABEL } from "./types";
 import type { CaseEntry } from "./entries";
 import { assetUrl } from "../lib/url";
 import { LiveCover } from "../components/LiveCover";
+import { ThumbVideo } from "../components/ThumbVideo";
 
 export default function CaseCard({
   entry,
@@ -18,8 +19,10 @@ export default function CaseCard({
     <article className="case-card">
       <a href={entry.href}>
         {entry.image && (
-          <div className="writing-thumb">
-            {entry.live ? (
+          <div className={entry.video ? "writing-thumb writing-thumb--wide" : "writing-thumb"}>
+            {entry.video ? (
+              <ThumbVideo src={entry.video} poster={entry.image} />
+            ) : entry.live ? (
               <LiveCover
                 variant={entry.live.variant}
                 fallback={entry.live.fallback}

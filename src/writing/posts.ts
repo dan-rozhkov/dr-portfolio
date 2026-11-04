@@ -244,6 +244,9 @@ export function parsePost(raw: string, slug: string): Post {
   const tldr = strList(fm.tldr);
   if (tldr.length === 0) fail("missing tldr");
 
+  const thumbVideo = str(fm.thumbVideo);
+  if (thumbVideo && !str(fm.thumb)) fail("thumbVideo needs a thumb poster");
+  if (thumbVideo && !/\.(mp4|webm)$/i.test(thumbVideo)) fail("thumbVideo must be .mp4 or .webm");
   const coverLive = str(fm.coverLive);
   if (coverLive !== undefined && !(COVER_LIVE as readonly string[]).includes(coverLive)) fail("bad coverLive");
   if (coverLive !== undefined && !str(fm.cover)) fail("coverLive needs a cover fallback");
@@ -270,6 +273,7 @@ export function parsePost(raw: string, slug: string): Post {
     links,
     cover: str(fm.cover),
     thumb: str(fm.thumb),
+    thumbVideo,
     coverLive: coverLive as CoverLive | undefined,
     coverMark: str(fm.coverMark),
     ogImage: str(fm.ogImage),
