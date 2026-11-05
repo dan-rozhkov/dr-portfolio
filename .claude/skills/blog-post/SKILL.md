@@ -103,6 +103,7 @@ Do not deploy if either step was skipped.
 
 Every correction Danil sends becomes a rule here (and in Claude's memory). Newest first.
 
+- 2026-11-05 — The Published/Read/Code block runs the full content width on mobile, on posts and cases alike (`align-self: stretch` on `.cs-title-meta`); desktop stays as it was.
 - 2026-11-05 — Suflyor Icon section: Danil's phone mockup sits next to the app icon as two tiles in one full-width image (`icon-home-screen-v2.webp`). It's a mockup he supplied, so it's an approved exception to "real screenshots only".
 - 2026-11-05 — Sideform goes above Biscuit Pet. Their dates are swapped to do it (Sideform 2026-11-01, Biscuit 2026-10-31), so the case order is Qure, Suflyor, Sideform, Biscuit.
 - 2026-11-05 — Suflyor case sits second, right after Qure. Cases sort by date, so its `date` is 2026-11-02 (only the month shows). The card is the approved beige animation; a video cover has no poster, so the cover stays the static first frame and the video goes in the Motion section. A post with a video needs its own `ogImage`.

@@ -405,6 +405,7 @@ body:has(.case-study)::-webkit-scrollbar {
 
   .cs-title-meta {
     display: block;
+    align-self: stretch;
     margin-top: 8px;
   }
 
