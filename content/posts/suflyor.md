@@ -36,18 +36,13 @@ The wordmark is drawn letter by letter: heavy, wide and round. I balanced the sp
 
 ## Icon
 
-:::slider
+![The Suflyor app icon next to the same icon on an iPhone Home Screen](/images/writing/suflyor/icon-home-screen-v2.webp "full")
 
-### App icon
-
-The mark on warm beige, for the iPhone Home Screen.
-![Suflyor app icon: the red bubble on a beige background](/images/writing/suflyor/icon-16x10.webp)
-
-### Favicon
+The mark sits on warm beige, so it stands apart on the iPhone Home Screen.
 
 At 16 px brows turn into noise, so the favicon drops them, smooths the edge and enlarges the eyes.
+
 ![Simplified Suflyor favicon with larger eyes and no brows](/images/writing/suflyor/favicon-16x10.webp)
-:::
 
 ## Motion
 
