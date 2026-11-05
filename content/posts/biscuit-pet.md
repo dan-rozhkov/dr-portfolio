@@ -1,7 +1,7 @@
 ---
 title: Biscuit Pet
 dek: A cozy iOS virtual pet — a fennec fox you feed, play with, wash and put to bed in short visits.
-date: 2026-11-01
+date: 2026-10-31
 category: product-building
 tldr:
   - Biscuit Pet is a virtual pet for iPhone. Biscuit lives on while the app is closed, so a 30-second visit always matters.

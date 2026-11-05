@@ -1,7 +1,7 @@
 ---
 title: Sideform Desktop
 dek: A macOS app that puts an AI design agent next to your canvas, a real browser and your documents.
-date: 2026-10-31
+date: 2026-11-01
 category: design-engineering
 tldr:
   - Sideform is an AI design editor. I designed and built its macOS app — the agent docked on the left, canvas, browser and document tabs on the right.
