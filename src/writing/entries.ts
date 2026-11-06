@@ -63,6 +63,7 @@ export function getEntries(lang: Lang = "en"): CaseEntry[] {
       // "2026" sorts before "2026-11-03": a dated post of the same year comes first.
       sortKey: years.slice(-4),
       image: c.preview?.src,
+      video: c.previewVideo,
     };
   });
 

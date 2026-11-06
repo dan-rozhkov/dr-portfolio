@@ -29,6 +29,8 @@ export interface CaseSummary {
   visual: string;
   variant?: "mobile";
   preview?: { src: string; alt: string };
+  /** looping card video; `preview` is its poster */
+  previewVideo?: string;
 }
 
 export interface ExtraWork {
@@ -68,6 +70,8 @@ export interface CaseStudy {
   heroImage?: string;
   heroImageAlt?: string;
   heroBackground?: string;
+  /** looping hero video; `heroImage` is its poster */
+  heroVideo?: string;
 }
 
 export const profile: Profile = {
@@ -86,9 +90,9 @@ export const hero: Hero = {
 export const cases: CaseSummary[] = [
   {
     id: "sber-india-proto",
-    title: "Sber India Prototype Tool",
+    title: "Caldera AI",
     description: [
-      "An internal AI tool for Sber's India arm that turns a brief or a Figma file into a working UI prototype, ready to test hypotheses and demo to stakeholders.",
+      "Sber India's internal AI tool that turns a brief or a Figma file into a working UI prototype, ready to test hypotheses and demo to stakeholders.",
       "I lead the tool end-to-end — pipeline, Claude Code and Figma MCP integration, product decisions, and rollout to designers and PMs.",
     ],
     meta: [
@@ -98,7 +102,8 @@ export const cases: CaseSummary[] = [
       ["Output", "AI prototyping pipeline, design-system integration"],
     ],
     visual: "ai",
-    preview: { src: "images/sber-india-proto/case-preview.png", alt: "Sber India prototype tool component grid" },
+    preview: { src: "images/sber-india-proto/caldera-cover.webp", alt: "Caldera AI logo" },
+    previewVideo: "images/sber-india-proto/caldera-cover.mp4",
   },
   {
     id: "openprovider",
@@ -246,7 +251,7 @@ const caseSections: Record<string, CaseSection[]> = {
     {
       kind: "image",
       src: "/images/sber-india-proto/big-preview.png",
-      alt: "Sber India prototype tool preview",
+      alt: "Caldera AI preview",
       aspect: "3200 / 2128",
     },
     {
@@ -767,13 +772,15 @@ interface HeroImage {
   src: string;
   alt: string;
   background?: string;
+  /** looping video; `src` is its poster */
+  video?: string;
 }
 
 const caseHeroImages: Record<string, HeroImage> = {
   "sber-india-proto": {
-    src: "/images/sber-india-proto/hero-inner.png",
-    alt: "Sber India prototype tool component grid",
-    background: "rgb(248 248 248)",
+    src: "/images/sber-india-proto/caldera-cover.webp",
+    alt: "Caldera AI logo",
+    video: "/images/sber-india-proto/caldera-cover.mp4",
   },
   openprovider: {
     src: "/images/openprovider/hero.png",
@@ -806,6 +813,7 @@ export const caseStudies: Record<string, CaseStudy> = Object.fromEntries(
       heroImage: caseHeroImages[c.id]?.src,
       heroImageAlt: caseHeroImages[c.id]?.alt,
       heroBackground: caseHeroImages[c.id]?.background,
+      heroVideo: caseHeroImages[c.id]?.video,
     },
   ])
 );

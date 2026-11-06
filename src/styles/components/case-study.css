@@ -168,6 +168,10 @@ body:has(.case-study)::-webkit-scrollbar {
   background: transparent;
 }
 
+.cs-hero video.cs-image {
+  aspect-ratio: 16 / 10;
+}
+
 .cs-subhead {
   display: grid;
   grid-template-columns: repeat(16, minmax(0, 1fr));
