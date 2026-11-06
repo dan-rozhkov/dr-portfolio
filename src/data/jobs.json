@@ -1,12 +1,47 @@
 {
   "generatedFrom": "labor-market-radar",
-  "lastCheck": "2026-11-04T06:47:43.118Z",
+  "lastCheck": "2026-11-06T06:47:40.066Z",
   "stats": {
-    "open": 54,
-    "newThisWeek": 22,
-    "closedThisWeek": 1
+    "open": 62,
+    "newThisWeek": 21,
+    "closedThisWeek": 0
   },
   "jobs": [
+    {
+      "id": "mintlify_1e231925-7a38-41c9-a31c-26bf15457888",
+      "title": "Senior Product Engineer",
+      "company": "Mintlify",
+      "family": "Product Builder",
+      "location": "San Francisco, California, United States",
+      "mode": "onsite",
+      "seniority": "senior",
+      "salary": null,
+      "firstSeen": "2026-11-06T06:34:26.772Z",
+      "lastChecked": "2026-11-06T06:34:26.772Z",
+      "skills": [
+        "product discovery",
+        "production delivery"
+      ],
+      "url": "https://jobs.ashbyhq.com/mintlify/1e231925-7a38-41c9-a31c-26bf15457888"
+    },
+    {
+      "id": "linear_0c7c2e26-0a98-42cf-a47c-9a3999fb513b",
+      "title": "Product Engineer",
+      "company": "Linear",
+      "family": "Product Builder",
+      "location": "North America",
+      "mode": "remote",
+      "seniority": null,
+      "salary": null,
+      "firstSeen": "2026-11-06T06:34:25.520Z",
+      "lastChecked": "2026-11-06T06:34:25.520Z",
+      "skills": [
+        "frontend coding",
+        "product discovery",
+        "production delivery"
+      ],
+      "url": "https://jobs.ashbyhq.com/linear/0c7c2e26-0a98-42cf-a47c-9a3999fb513b"
+    },
     {
       "id": "sanity_6cb743de-5d19-43d2-837e-c60cf4dc449b",
       "title": "Senior GTM Engineer, Systems Engineering",
@@ -17,7 +52,7 @@
       "seniority": "Senior",
       "salary": null,
       "firstSeen": "2026-11-04T06:36:08.381Z",
-      "lastChecked": "2026-11-04T06:41:49.287Z",
+      "lastChecked": "2026-11-06T06:47:40.066Z",
       "skills": [
         "workflow automation",
         "api integration",
@@ -36,7 +71,7 @@
       "seniority": null,
       "salary": null,
       "firstSeen": "2026-11-04T06:36:08.381Z",
-      "lastChecked": "2026-11-04T06:41:51.306Z",
+      "lastChecked": "2026-11-06T06:40:31.741Z",
       "skills": [
         "workflow automation",
         "api integration",
@@ -55,7 +90,7 @@
       "seniority": null,
       "salary": null,
       "firstSeen": "2026-11-04T06:36:07.877Z",
-      "lastChecked": "2026-11-04T06:41:45.549Z",
+      "lastChecked": "2026-11-06T06:40:30.751Z",
       "skills": [
         "product discovery",
         "production delivery"
@@ -72,7 +107,7 @@
       "seniority": null,
       "salary": null,
       "firstSeen": "2026-11-04T06:36:07.515Z",
-      "lastChecked": "2026-11-04T06:41:43.399Z",
+      "lastChecked": "2026-11-06T06:40:30.155Z",
       "skills": [
         "interface design",
         "frontend coding",
@@ -91,7 +126,7 @@
       "seniority": "Senior",
       "salary": null,
       "firstSeen": "2026-11-04T06:33:44.619Z",
-      "lastChecked": "2026-11-04T06:35:28.717Z",
+      "lastChecked": "2026-11-06T06:40:28.765Z",
       "skills": [
         "interface design",
         "prototyping",
@@ -110,7 +145,7 @@
       "seniority": null,
       "salary": null,
       "firstSeen": "2026-11-02T06:37:21.231Z",
-      "lastChecked": "2026-11-04T06:33:40.018Z",
+      "lastChecked": "2026-11-06T06:40:25.336Z",
       "skills": [
         "product discovery",
         "prototyping",
@@ -129,7 +164,7 @@
       "seniority": null,
       "salary": null,
       "firstSeen": "2026-10-31T20:55:32.891Z",
-      "lastChecked": "2026-11-04T06:33:38.342Z",
+      "lastChecked": "2026-11-06T06:40:24.680Z",
       "skills": [
         "crm operations",
         "api integration",
@@ -148,7 +183,7 @@
       "seniority": "staff|principal",
       "salary": null,
       "firstSeen": "2026-10-31T20:55:29.302Z",
-      "lastChecked": "2026-11-04T06:33:37.321Z",
+      "lastChecked": "2026-11-06T06:40:23.139Z",
       "skills": [
         "production delivery",
         "frontend coding",
@@ -167,7 +202,7 @@
       "seniority": null,
       "salary": null,
       "firstSeen": "2026-10-31T20:55:28.920Z",
-      "lastChecked": "2026-11-04T06:33:37.880Z",
+      "lastChecked": "2026-11-06T06:40:22.839Z",
       "skills": [
         "production delivery",
         "product discovery",
@@ -186,7 +221,7 @@
       "seniority": null,
       "salary": null,
       "firstSeen": "2026-10-31T20:55:28.339Z",
-      "lastChecked": "2026-11-04T06:33:36.874Z",
+      "lastChecked": "2026-11-06T06:40:22.335Z",
       "skills": [
         "product discovery",
         "ai assisted building"
@@ -203,7 +238,7 @@
       "seniority": null,
       "salary": null,
       "firstSeen": "2026-10-31T20:55:27.936Z",
-      "lastChecked": "2026-11-04T06:33:36.499Z",
+      "lastChecked": "2026-11-06T06:40:21.359Z",
       "skills": [
         "production delivery",
         "product discovery",
@@ -221,7 +256,7 @@
       "seniority": null,
       "salary": null,
       "firstSeen": "2026-10-31T20:55:27.219Z",
-      "lastChecked": "2026-11-04T06:33:35.903Z",
+      "lastChecked": "2026-11-06T06:40:21.777Z",
       "skills": [
         "production delivery",
         "frontend coding",
@@ -240,7 +275,7 @@
       "seniority": null,
       "salary": null,
       "firstSeen": "2026-10-31T20:55:26.065Z",
-      "lastChecked": "2026-11-04T06:33:34.902Z",
+      "lastChecked": "2026-11-06T06:40:19.693Z",
       "skills": [
         "production delivery",
         "frontend coding",
@@ -259,7 +294,7 @@
       "seniority": null,
       "salary": null,
       "firstSeen": "2026-10-31T20:55:23.344Z",
-      "lastChecked": "2026-11-04T06:33:33.844Z",
+      "lastChecked": "2026-11-06T06:40:20.065Z",
       "skills": [
         "interface design",
         "frontend coding",
@@ -277,7 +312,7 @@
       "seniority": null,
       "salary": null,
       "firstSeen": "2026-10-31T20:55:21.371Z",
-      "lastChecked": "2026-11-04T06:33:32.965Z",
+      "lastChecked": "2026-11-06T06:40:17.877Z",
       "skills": [
         "interface design",
         "production delivery",
@@ -295,7 +330,7 @@
       "seniority": null,
       "salary": null,
       "firstSeen": "2026-10-31T20:55:20.204Z",
-      "lastChecked": "2026-11-04T06:33:32.387Z",
+      "lastChecked": "2026-11-06T06:40:17.935Z",
       "skills": [
         "interface design",
         "frontend coding",
@@ -314,7 +349,7 @@
       "seniority": "senior",
       "salary": null,
       "firstSeen": "2026-10-31T20:55:19.748Z",
-      "lastChecked": "2026-11-04T06:33:31.909Z",
+      "lastChecked": "2026-11-06T06:40:16.802Z",
       "skills": [
         "interface design",
         "product discovery",
@@ -333,7 +368,7 @@
       "seniority": null,
       "salary": null,
       "firstSeen": "2026-10-31T20:55:19.143Z",
-      "lastChecked": "2026-11-04T06:33:31.311Z",
+      "lastChecked": "2026-11-06T06:40:16.211Z",
       "skills": [
         "interface design",
         "frontend coding",
@@ -352,7 +387,7 @@
       "seniority": "senior",
       "salary": null,
       "firstSeen": "2026-10-31T20:55:18.763Z",
-      "lastChecked": "2026-11-04T06:33:30.817Z",
+      "lastChecked": "2026-11-06T06:40:15.627Z",
       "skills": [
         "frontend coding",
         "design systems",
@@ -371,7 +406,7 @@
       "seniority": null,
       "salary": null,
       "firstSeen": "2026-10-30T06:45:00.000Z",
-      "lastChecked": "2026-11-04T06:33:25.793Z",
+      "lastChecked": "2026-11-06T06:47:40.066Z",
       "skills": [
         "production delivery",
         "product discovery",
@@ -381,7 +416,7 @@
     },
     {
       "id": "oyster_f4caa57f-bdb1-42d8-a884-12bf341f677c",
-      "title": "Senior Go-to-Market Engineer",
+      "title": "Senior Go-to-Market Architect",
       "company": "Oyster",
       "family": "GTM Engineer",
       "location": "Spain +8",
@@ -389,7 +424,7 @@
       "seniority": "senior",
       "salary": null,
       "firstSeen": "2026-10-30T06:45:00.000Z",
-      "lastChecked": "2026-11-04T06:33:26.888Z",
+      "lastChecked": "2026-11-06T06:40:11.427Z",
       "skills": [
         "crm operations",
         "api integration",
@@ -403,12 +438,12 @@
       "title": "Senior AI Solutions Engineer - GTM",
       "company": "Oyster",
       "family": "GTM Engineer",
-      "location": "EMEA +6",
+      "location": "EMEA +7",
       "mode": "remote",
       "seniority": "senior",
       "salary": null,
       "firstSeen": "2026-10-30T06:45:00.000Z",
-      "lastChecked": "2026-11-04T06:33:28.302Z",
+      "lastChecked": "2026-11-06T06:40:12.986Z",
       "skills": [
         "ai assisted building",
         "workflow automation",
@@ -416,6 +451,56 @@
         "production delivery"
       ],
       "url": "https://jobs.ashbyhq.com/oyster/440f7cfe-3649-411c-8009-3ad09213435d"
+    },
+    {
+      "id": "incident_b4edacb2-1008-476f-9b96-d5c9f39b81a9",
+      "title": "Product Engineer",
+      "company": "incident.io",
+      "family": "Product Builder",
+      "location": "London, United Kingdom",
+      "mode": null,
+      "seniority": null,
+      "salary": null,
+      "firstSeen": "2026-10-28T06:50:00.000Z",
+      "lastChecked": "2026-11-06T06:33:02.901Z",
+      "skills": [
+        "product discovery",
+        "production delivery"
+      ],
+      "url": "https://jobs.ashbyhq.com/incident/b4edacb2-1008-476f-9b96-d5c9f39b81a9"
+    },
+    {
+      "id": "baseten_7428d7cc-36d7-4d02-b19a-bd558fba6751",
+      "title": "Product Platform - Product Engineer",
+      "company": "Baseten",
+      "family": "Product Builder",
+      "location": "San Francisco +2",
+      "mode": "hybrid",
+      "seniority": null,
+      "salary": null,
+      "firstSeen": "2026-10-28T06:50:00.000Z",
+      "lastChecked": "2026-11-06T06:33:04.573Z",
+      "skills": [],
+      "url": "https://jobs.ashbyhq.com/baseten/7428d7cc-36d7-4d02-b19a-bd558fba6751"
+    },
+    {
+      "id": "sambatv_a0a1f3cc-9b2e-4440-b5c1-45ea050cf0b1",
+      "title": "AI Product Engineer",
+      "company": "Samba",
+      "family": "Product Builder",
+      "location": "San Francisco, California, United States",
+      "mode": "onsite",
+      "seniority": null,
+      "salary": "$150–200k / yr",
+      "firstSeen": "2026-10-28T06:50:00.000Z",
+      "lastChecked": "2026-11-06T06:34:41.656Z",
+      "skills": [
+        "workflow automation",
+        "api integration",
+        "ai assisted building",
+        "production delivery"
+      ],
+      "url": "https://jobs.lever.co/sambatv/a0a1f3cc-9b2e-4440-b5c1-45ea050cf0b1"
     },
     {
       "id": "baseten_81d573b6-741c-4140-a36b-6892456eca73",
@@ -427,7 +512,7 @@
       "seniority": null,
       "salary": null,
       "firstSeen": "2026-10-28T06:40:00.000Z",
-      "lastChecked": "2026-11-04T06:33:23.247Z",
+      "lastChecked": "2026-11-06T06:40:07.642Z",
       "skills": [
         "interface design",
         "frontend coding",
@@ -446,7 +531,7 @@
       "seniority": null,
       "salary": "€135–200k / yr",
       "firstSeen": "2026-10-28T06:40:00.000Z",
-      "lastChecked": "2026-11-04T06:33:23.821Z",
+      "lastChecked": "2026-11-06T06:40:08.496Z",
       "skills": [
         "interface design",
         "frontend coding",
@@ -465,7 +550,7 @@
       "seniority": null,
       "salary": null,
       "firstSeen": "2026-10-28T06:40:00.000Z",
-      "lastChecked": "2026-11-04T06:33:24.322Z",
+      "lastChecked": "2026-11-06T06:40:08.848Z",
       "skills": [
         "interface design",
         "frontend coding",
@@ -484,7 +569,7 @@
       "seniority": "senior",
       "salary": "€135–200k / yr",
       "firstSeen": "2026-10-28T06:40:00.000Z",
-      "lastChecked": "2026-11-04T06:33:24.842Z",
+      "lastChecked": "2026-11-06T06:40:09.413Z",
       "skills": [
         "product discovery",
         "production delivery",
@@ -503,7 +588,7 @@
       "seniority": null,
       "salary": null,
       "firstSeen": "2026-10-25T13:02:26.000Z",
-      "lastChecked": "2026-11-04T06:33:10.943Z",
+      "lastChecked": "2026-11-06T06:39:56.718Z",
       "skills": [
         "workflow automation",
         "api integration",
@@ -522,7 +607,7 @@
       "seniority": null,
       "salary": null,
       "firstSeen": "2026-10-25T13:02:26.000Z",
-      "lastChecked": "2026-11-04T06:33:11.927Z",
+      "lastChecked": "2026-11-06T06:39:57.617Z",
       "skills": [
         "data enrichment",
         "crm operations",
@@ -541,7 +626,7 @@
       "seniority": null,
       "salary": null,
       "firstSeen": "2026-10-25T13:02:26.000Z",
-      "lastChecked": "2026-11-04T06:33:12.762Z",
+      "lastChecked": "2026-11-06T06:39:58.272Z",
       "skills": [
         "crm operations",
         "workflow automation",
@@ -560,7 +645,7 @@
       "seniority": null,
       "salary": "$140–180k / yr",
       "firstSeen": "2026-10-25T13:02:26.000Z",
-      "lastChecked": "2026-11-04T06:33:16.856Z",
+      "lastChecked": "2026-11-06T06:40:03.009Z",
       "skills": [
         "crm operations",
         "workflow automation",
@@ -579,7 +664,7 @@
       "seniority": null,
       "salary": null,
       "firstSeen": "2026-10-25T13:02:26.000Z",
-      "lastChecked": "2026-11-04T06:33:18.047Z",
+      "lastChecked": "2026-11-06T06:40:03.336Z",
       "skills": [
         "ai assisted building",
         "workflow automation",
@@ -597,7 +682,7 @@
       "seniority": null,
       "salary": null,
       "firstSeen": "2026-10-25T13:02:26.000Z",
-      "lastChecked": "2026-11-04T06:33:17.631Z",
+      "lastChecked": "2026-11-06T06:39:59.556Z",
       "skills": [
         "workflow automation",
         "production delivery",
@@ -615,7 +700,7 @@
       "seniority": null,
       "salary": null,
       "firstSeen": "2026-10-25T13:02:26.000Z",
-      "lastChecked": "2026-11-04T06:33:20.543Z",
+      "lastChecked": "2026-11-06T06:40:06.193Z",
       "skills": [
         "data enrichment",
         "workflow automation",
@@ -634,7 +719,7 @@
       "seniority": null,
       "salary": "$175–215k / yr",
       "firstSeen": "2026-10-25T13:02:26.000Z",
-      "lastChecked": "2026-11-04T06:33:20.859Z",
+      "lastChecked": "2026-11-06T06:40:06.862Z",
       "skills": [
         "ai assisted building",
         "api integration",
@@ -653,7 +738,7 @@
       "seniority": null,
       "salary": null,
       "firstSeen": "2026-10-25T13:02:26.000Z",
-      "lastChecked": "2026-11-04T06:33:21.272Z",
+      "lastChecked": "2026-11-06T06:40:04.415Z",
       "skills": [
         "crm operations",
         "data enrichment",
@@ -672,13 +757,30 @@
       "seniority": null,
       "salary": null,
       "firstSeen": "2026-10-25T13:02:26.000Z",
-      "lastChecked": "2026-11-04T06:33:21.961Z",
+      "lastChecked": "2026-11-06T06:40:05.323Z",
       "skills": [
         "ai assisted building",
         "workflow automation",
         "api integration"
       ],
       "url": "https://jobs.ashbyhq.com/gorgias/7e0dd321-1276-49b1-b6ca-2b0950075132"
+    },
+    {
+      "id": "28707871-647a-5596-bf2f-5d8e7c02672f",
+      "title": "CRM Administrator",
+      "company": "Sweed",
+      "family": "GTM Engineer",
+      "location": "",
+      "mode": "remote",
+      "seniority": "senior",
+      "salary": null,
+      "firstSeen": "2026-10-25T07:37:54.881Z",
+      "lastChecked": "2026-11-06T06:39:54.483Z",
+      "skills": [
+        "crm operations",
+        "workflow automation"
+      ],
+      "url": "https://wantapply.com/crm-administrator-at-sweed"
     },
     {
       "id": "nord_e28c220f-9695-4dd9-93ac-d2592e08385c",
@@ -690,7 +792,7 @@
       "seniority": "senior",
       "salary": null,
       "firstSeen": "2026-10-25T07:23:23.306Z",
-      "lastChecked": "2026-11-04T06:33:01.531Z",
+      "lastChecked": "2026-11-06T06:39:53.169Z",
       "skills": [
         "frontend coding",
         "production delivery",
@@ -708,7 +810,7 @@
       "seniority": "senior",
       "salary": null,
       "firstSeen": "2026-10-25T07:19:12.809Z",
-      "lastChecked": "2026-11-04T06:33:00.860Z",
+      "lastChecked": "2026-11-06T06:39:52.584Z",
       "skills": [
         "interface design",
         "frontend coding",
@@ -727,7 +829,7 @@
       "seniority": "lead",
       "salary": null,
       "firstSeen": "2026-10-25T07:13:48.863Z",
-      "lastChecked": "2026-11-04T06:33:03.413Z",
+      "lastChecked": "2026-11-06T06:39:55.876Z",
       "skills": [
         "workflow automation",
         "api integration",
@@ -746,7 +848,7 @@
       "seniority": "lead",
       "salary": null,
       "firstSeen": "2026-10-24T18:01:53.000Z",
-      "lastChecked": "2026-11-04T06:31:51.775Z",
+      "lastChecked": "2026-11-06T06:39:32.907Z",
       "skills": [
         "workflow automation",
         "api integration",
@@ -765,7 +867,7 @@
       "seniority": "lead",
       "salary": null,
       "firstSeen": "2026-10-24T18:01:53.000Z",
-      "lastChecked": "2026-11-04T06:31:52.240Z",
+      "lastChecked": "2026-11-06T06:39:33.153Z",
       "skills": [
         "api integration",
         "workflow automation",
@@ -784,7 +886,7 @@
       "seniority": null,
       "salary": null,
       "firstSeen": "2026-10-24T18:01:53.000Z",
-      "lastChecked": "2026-11-04T06:31:55.732Z",
+      "lastChecked": "2026-11-06T06:39:35.525Z",
       "skills": [
         "interface design",
         "frontend coding",
@@ -803,7 +905,7 @@
       "seniority": null,
       "salary": null,
       "firstSeen": "2026-10-24T18:01:53.000Z",
-      "lastChecked": "2026-11-04T06:31:56.328Z",
+      "lastChecked": "2026-11-06T06:39:35.862Z",
       "skills": [
         "interface design",
         "frontend coding",
@@ -821,7 +923,7 @@
       "seniority": null,
       "salary": null,
       "firstSeen": "2026-10-24T18:01:53.000Z",
-      "lastChecked": "2026-11-04T06:31:56.984Z",
+      "lastChecked": "2026-11-06T06:39:36.172Z",
       "skills": [
         "product discovery",
         "frontend coding",
@@ -840,30 +942,13 @@
       "seniority": null,
       "salary": null,
       "firstSeen": "2026-10-24T18:01:53.000Z",
-      "lastChecked": "2026-11-04T06:31:58.286Z",
+      "lastChecked": "2026-11-06T06:39:36.698Z",
       "skills": [
         "api integration",
         "crm operations",
         "data enrichment"
       ],
       "url": "https://www.granola.ai/jobs/gtm-systems-lead"
-    },
-    {
-      "id": "bc2e339e-37ba-5024-bfd3-06000ee0dcf9",
-      "title": "Product Engineer",
-      "company": "PostHog",
-      "family": "Product Builder",
-      "location": "Remote +1",
-      "mode": "remote",
-      "seniority": null,
-      "salary": null,
-      "firstSeen": "2026-10-24T18:01:53.000Z",
-      "lastChecked": "2026-11-04T06:32:02.171Z",
-      "skills": [
-        "frontend coding",
-        "production delivery"
-      ],
-      "url": "https://posthog.com/careers/product-engineer"
     },
     {
       "id": "d3411621-3ccd-560f-b9b8-5f1b26884760",
@@ -875,12 +960,31 @@
       "seniority": "middle/senior",
       "salary": "$72–126k / yr",
       "firstSeen": "2026-10-24T18:01:53.000Z",
-      "lastChecked": "2026-11-04T06:32:03.638Z",
+      "lastChecked": "2026-11-06T06:39:38.888Z",
       "skills": [
         "workflow automation",
         "ai assisted building"
       ],
       "url": "https://www.plurio.ai/careers/ai-marketing-engineer"
+    },
+    {
+      "id": "61c76322-2639-5955-8326-596198421171",
+      "title": "Senior GTM Engineer",
+      "company": "Oyster",
+      "family": "GTM Engineer",
+      "location": "EMEA",
+      "mode": "remote",
+      "seniority": "senior",
+      "salary": null,
+      "firstSeen": "2026-10-24T18:01:53.000Z",
+      "lastChecked": "2026-11-06T06:39:40.768Z",
+      "skills": [
+        "crm operations",
+        "api integration",
+        "workflow automation",
+        "ai assisted building"
+      ],
+      "url": "https://wantapply.com/senior-gtm-engineer-at-oyster"
     },
     {
       "id": "b244437c-72cf-5531-a15f-401fb240ceea",
@@ -892,7 +996,7 @@
       "seniority": null,
       "salary": null,
       "firstSeen": "2026-10-24T18:01:53.000Z",
-      "lastChecked": "2026-11-04T06:32:15.577Z",
+      "lastChecked": "2026-11-06T06:39:44.695Z",
       "skills": [
         "workflow automation",
         "api integration",
@@ -910,7 +1014,7 @@
       "seniority": "lead",
       "salary": null,
       "firstSeen": "2026-10-24T18:01:53.000Z",
-      "lastChecked": "2026-11-04T06:32:17.895Z",
+      "lastChecked": "2026-11-06T06:39:42.942Z",
       "skills": [
         "product discovery",
         "product analytics",
@@ -929,7 +1033,7 @@
       "seniority": "middle/senior",
       "salary": null,
       "firstSeen": "2026-10-24T18:01:53.000Z",
-      "lastChecked": "2026-11-04T06:32:35.362Z",
+      "lastChecked": "2026-11-06T06:39:44.620Z",
       "skills": [
         "design systems",
         "interface design",
@@ -947,13 +1051,50 @@
       "seniority": "Mid-Senior",
       "salary": null,
       "firstSeen": "2026-10-24T18:01:53.000Z",
-      "lastChecked": "2026-11-04T06:47:43.118Z",
+      "lastChecked": "2026-11-06T06:47:40.066Z",
       "skills": [
         "design systems",
         "interface design",
         "frontend coding"
       ],
       "url": "https://nordsecurity.com/careers/0d9ac726-81db-48fb-a9b8-f64ecad8e37c/"
+    },
+    {
+      "id": "359e2577-c037-5240-ada3-a352d17777ac",
+      "title": "Senior Design Engineer, AI Platforms",
+      "company": "Chess.com",
+      "family": "Design Engineer",
+      "location": "Worldwide remote",
+      "mode": "remote",
+      "seniority": "senior",
+      "salary": null,
+      "firstSeen": "2026-10-24T18:01:53.000Z",
+      "lastChecked": "2026-11-06T06:39:46.402Z",
+      "skills": [
+        "interface design",
+        "frontend coding",
+        "design systems",
+        "ai assisted building"
+      ],
+      "url": "https://wantapply.com/senior-design-engineer-ai-platforms-at-chess-com"
+    },
+    {
+      "id": "05c5c29e-1230-5e61-a502-228d903967ff",
+      "title": "Senior Design Engineer",
+      "company": "Turquoise Health",
+      "family": "Design Engineer",
+      "location": "United States",
+      "mode": "remote",
+      "seniority": "senior",
+      "salary": null,
+      "firstSeen": "2026-10-24T18:01:53.000Z",
+      "lastChecked": "2026-11-06T06:39:46.870Z",
+      "skills": [
+        "frontend coding",
+        "design systems",
+        "interface design"
+      ],
+      "url": "https://wantapply.com/senior-design-engineer-at-turquoise-health"
     },
     {
       "id": "restream_746f524f-c124-479b-ad0c-ccaac34b9381",
@@ -965,7 +1106,7 @@
       "seniority": null,
       "salary": null,
       "firstSeen": "2026-10-24T18:01:53.000Z",
-      "lastChecked": "2026-11-04T06:32:54.402Z",
+      "lastChecked": "2026-11-06T06:39:46.756Z",
       "skills": [
         "interface design",
         "prototyping",
@@ -983,7 +1124,7 @@
       "seniority": null,
       "salary": null,
       "firstSeen": "2026-10-24T18:01:53.000Z",
-      "lastChecked": "2026-11-04T06:32:55.316Z",
+      "lastChecked": "2026-11-06T06:39:47.144Z",
       "skills": [
         "interface design",
         "prototyping",
@@ -1001,7 +1142,7 @@
       "seniority": "senior",
       "salary": null,
       "firstSeen": "2026-10-24T18:01:53.000Z",
-      "lastChecked": "2026-11-04T06:32:55.819Z",
+      "lastChecked": "2026-11-06T06:39:47.696Z",
       "skills": [
         "production delivery"
       ],
