@@ -26,7 +26,7 @@ export interface CaseEntry {
 
 /** Cases page category of each home-page case study. */
 export const CASE_CATEGORY: Record<string, Category> = {
-  "sber-india-proto": "ai-tools",
+  caldera: "ai-tools",
   openprovider: "product-building",
   "clearscale-msp": "design-engineering",
   seligoai: "design-engineering",
@@ -72,7 +72,7 @@ export function getEntries(lang: Lang = "en"): CaseEntry[] {
 }
 
 /** Always on the home page, in the last slot, whatever its date. */
-const HOME_PINNED = "case:sber-india-proto";
+const HOME_PINNED = "case:caldera";
 
 /** The home page cards: the newest entries, ending with the pinned one. */
 export function homeEntries(entries: CaseEntry[], limit: number): CaseEntry[] {

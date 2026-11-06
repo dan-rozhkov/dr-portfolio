@@ -7,7 +7,8 @@ import { caseLink } from "../lib/url";
 export default function LatestCases() {
   // Each case used to have its own home section: keep shared links like /en/#openprovider working.
   useEffect(() => {
-    const id = window.location.hash.slice(1);
+    const hash = window.location.hash.slice(1);
+    const id = hash === "sber-india-proto" ? "caldera" : hash; // the case's old id
     if (id && getCases().some((c) => c.id === id)) window.location.replace(caseLink(id));
   }, []);
 

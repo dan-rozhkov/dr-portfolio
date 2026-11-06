@@ -89,7 +89,7 @@ export const hero: Hero = {
 
 export const cases: CaseSummary[] = [
   {
-    id: "sber-india-proto",
+    id: "caldera",
     title: "Caldera AI",
     description: [
       "Sber India's internal AI tool that turns a brief or a Figma file into a working UI prototype, ready to test hypotheses and demo to stakeholders.",
@@ -230,7 +230,7 @@ export const recognition: RecognitionGroup[] = [
 ];
 
 const caseSections: Record<string, CaseSection[]> = {
-  "sber-india-proto": [
+  caldera: [
     {
       label: "Challenge",
       kind: "logline",
@@ -781,7 +781,7 @@ interface HeroImage {
 }
 
 const caseHeroImages: Record<string, HeroImage> = {
-  "sber-india-proto": {
+  caldera: {
     src: "/images/sber-india-proto/caldera-hero.webp",
     alt: "Caldera AI logo",
     bleed: true,

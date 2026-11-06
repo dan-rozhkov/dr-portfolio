@@ -4,7 +4,7 @@ import { render } from "../entry-server";
 
 describe("prerender with analytics", () => {
   it("renders without window and without the consent panel", () => {
-    for (const path of ["/en/", "/en/case/sber-india-proto", "/en/cases/"]) {
+    for (const path of ["/en/", "/en/case/caldera", "/en/cases/"]) {
       const html = render(path);
       expect(html).not.toContain('class="consent"');
       expect(html).toContain("contact-privacy");

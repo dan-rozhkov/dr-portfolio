@@ -41,11 +41,10 @@
 
 .contact-year {
   display: flex;
-  flex-direction: column;
   grid-column: 14 / -1;
   grid-row: 2;
-  gap: 12px;
-  align-items: end;
+  gap: 24px;
+  align-items: baseline;
   align-self: end;
   justify-self: end;
   color: rgb(255 255 255 / 62%);
@@ -79,6 +78,8 @@
 
   .contact-year {
     position: static;
+    justify-content: space-between;
+    width: 100%;
     margin-top: 48px;
   }
 }

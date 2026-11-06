@@ -1,2 +1,4 @@
 /ru /en/ 301
 /ru/* /en/:splat 301
+/en/case/sber-india-proto /en/case/caldera/ 301
+/en/case/sber-india-proto/ /en/case/caldera/ 301

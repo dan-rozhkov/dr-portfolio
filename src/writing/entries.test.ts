@@ -34,12 +34,12 @@ describe("homeEntries", () => {
   it("ends with the pinned case and keeps the limit", () => {
     const home = homeEntries(getEntries(), 4);
     expect(home).toHaveLength(4);
-    expect(home[3].key).toBe("case:sber-india-proto");
+    expect(home[3].key).toBe("case:caldera");
     expect(new Set(home.map((e) => e.key)).size).toBe(4);
   });
 
   it("does not move a pinned case that is missing", () => {
-    const rest = getEntries().filter((e) => e.key !== "case:sber-india-proto");
+    const rest = getEntries().filter((e) => e.key !== "case:caldera");
     expect(homeEntries(rest, 4)).toEqual(rest.slice(0, 4));
   });
 });
