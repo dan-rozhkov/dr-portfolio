@@ -103,6 +103,7 @@ Do not deploy if either step was skipped.
 
 Every correction Danil sends becomes a rule here (and in Claude's memory). Newest first.
 
+- 2026-11-06 — Suflyor now translates between 60 languages, so the case no longer says English to Russian. The App video is `app-call-es.mp4`: an English call translated into Spanish, on the app's current code. Danil asked to publish it straight away, without Notion. Sources: `~/prj/suflyor/out/promo-video/scene-es`.
 - 2026-11-06 — Suflyor App section: one 16:10 video (`app-call.mp4`) laid out as two beige tiles like `icon-home-screen-v2.webp`: the stageshow promo on the left, its stop frame on the right, in an iPhone frame. The phone screens are the app's real markup and CSS; the dialogue is scripted. Sources: `~/prj/suflyor/out/promo-video`.
 - 2026-11-05 — The Published/Read/Code block runs the full content width on mobile, on posts and cases alike (`align-self: stretch` on `.cs-title-meta`); desktop stays as it was.
 - 2026-11-05 — Suflyor Icon section: Danil's phone mockup sits next to the app icon as two tiles in one full-width image (`icon-home-screen-v2.webp`). It's a mockup he supplied, so it's an approved exception to "real screenshots only".

@@ -1,10 +1,10 @@
 ---
 title: Suflyor
-dek: A web app that listens through the microphone and shows live English to Russian translation.
+dek: A web app that listens through the microphone and shows live translation between 60 languages.
 date: 2026-11-02
 category: product-building
 tldr:
-  - Suflyor translates English speech into Russian live and suggests replies, in the browser or installed on the iPhone Home Screen. No bot joins the call.
+  - Suflyor translates speech live between 60 languages and suggests replies, in the browser or installed on the iPhone Home Screen. No bot joins the call.
   - This case covers the brand. I made the logo, the app icon, the favicon and the animated mark.
   - The name is the Russian word for a theatre prompter, so the mark is a speech bubble that watches the conversation with you.
 links:
@@ -60,9 +60,9 @@ The bubble holds a pose, then snaps to the next one: it winks, looks around, jum
 It keeps up with the call, so you can stay in it.
 :::
 
-Tap Start and the Russian appears a moment after the English, with the sentence in progress in bold. When you need an answer, the app suggests one to say out loud.
+Pick the two languages, tap Start and the translation appears a moment after the speech, with the sentence in progress in bold. When you need an answer, the app suggests one to say out loud.
 
-![Suflyor on an iPhone: the app opens, a call in English is translated into Russian live, and a suggested reply appears](/images/writing/suflyor/app-call.mp4 "full")
+![Suflyor on an iPhone: the app opens, a call in English is translated into Spanish live, and a suggested reply appears](/images/writing/suflyor/app-call-es.mp4 "full")
 
 ## 3D
 
