@@ -103,7 +103,7 @@ export const cases: CaseSummary[] = [
     ],
     visual: "ai",
     preview: { src: "images/sber-india-proto/caldera-cover.webp", alt: "Caldera AI logo" },
-    previewVideo: "images/sber-india-proto/caldera-cover.mp4",
+    previewVideo: "images/sber-india-proto/caldera-card.mp4",
   },
   {
     id: "openprovider",

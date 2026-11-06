@@ -163,7 +163,7 @@
   }
 }
 
-/* Home: a tighter gap between the last card and the All cases button */
+/* Home: a tighter gap between the last card and the All cases link */
 .writing--compact .case-card:has(+ .home-cases-all) {
   margin-bottom: 40px;
   padding-bottom: 0;
@@ -387,7 +387,7 @@
   }
 }
 
-/* Home: the newest three cards, in line with the hero text */
+/* Home: the newest four cards, in line with the hero text */
 .home-cases {
   padding-bottom: var(--space-xl);
 }
@@ -401,38 +401,17 @@
 }
 
 
+/* Same look as the "← All cases" link on a post page */
 .home-cases-all {
-  display: flex;
-  gap: 24px;
-  align-items: center;
-  width: 100%;
-  padding: 18px 28px;
-  border: 1px solid var(--ink);
-  border-radius: 999px;
-  color: var(--ink);
-  font-size: var(--text-lg);
-  font-weight: 500;
-  line-height: 1.1;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-.home-cases-label span {
-  margin-left: 0.4em;
+  display: inline-block;
   color: var(--muted);
+  font-size: var(--text-sm);
+  text-decoration: none;
+  transition: color var(--t-fast);
 }
 
-.home-cases-arrow {
-  flex: 1;
-  min-width: 48px;
-  overflow: visible;
-  fill: none;
-  stroke: currentcolor;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 1.5;
+.home-cases-all:hover {
+  color: var(--ink);
 }
 
 .home-cases-all:focus-visible {

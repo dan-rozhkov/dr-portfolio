@@ -85,16 +85,7 @@ export default function CasesList({
         )}
         {compact && (
           <a className="home-cases-all" href={casesLink()}>
-            <span className="home-cases-label">
-              All cases <span>{all.length}</span>
-            </span>
-            {/* The line stretches to the button's width; the head stays at the right end. */}
-            <svg className="home-cases-arrow" height="16" aria-hidden="true">
-              <line x1="0" y1="8" x2="100%" y2="8" />
-              <svg x="100%" overflow="visible">
-                <path d="M-8 1 L-1 8 L-8 15" />
-              </svg>
-            </svg>
+            All cases →
           </a>
         )}
       </div>

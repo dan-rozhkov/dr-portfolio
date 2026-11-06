@@ -3,7 +3,7 @@ import { getCases } from "../data/portfolio";
 import CasesList from "../writing/CasesList";
 import { caseLink } from "../lib/url";
 
-/** The home page Cases block: the Cases page layout with the newest three cards. */
+/** The home page Cases block: the Cases page layout with the newest four cards. */
 export default function LatestCases() {
   // Each case used to have its own home section: keep shared links like /en/#openprovider working.
   useEffect(() => {
@@ -13,7 +13,7 @@ export default function LatestCases() {
 
   return (
     <section className="section home-cases snap-section" id="work">
-      <CasesList category={null} limit={3} heading="h2" />
+      <CasesList category={null} limit={4} heading="h2" />
     </section>
   );
 }
