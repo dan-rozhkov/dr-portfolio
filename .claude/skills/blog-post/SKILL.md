@@ -101,7 +101,7 @@ Do not deploy if either step was skipped.
 
 ## Corrections log
 
-- 2026-11-07 — Sber India case is now Caldera AI (URL unchanged). Its card and hero loop `caldera-cover.mp4`; a case gets a video through `previewVideo` and the hero `video` field. The poster is the last frame, so reduced motion shows the whole logo and the start looks like the loop seam. Brand iterations went to Notion first, and the live deploy followed Danil's go-ahead.
+- 2026-11-07 — Sber India case is now Caldera AI (URL unchanged). Its card loops `caldera-cover.mp4` (a case gets a card video through `previewVideo`); the poster is the last frame, so reduced motion shows the whole logo and the start looks like the loop seam. Inside the case the cover is static and edge to edge (`caldera-hero.webp`, `bleed: true`), no animation there. Brand iterations went to Notion first, and the live deploy followed Danil's go-ahead.
 Every correction Danil sends becomes a rule here (and in Claude's memory). Newest first.
 
 - 2026-11-06 — Suflyor now translates between 60 languages, so the case no longer says English to Russian. The App video is `app-call-es.mp4`: an English call translated into Spanish, on the app's current code. Danil asked to publish it straight away, without Notion. Sources: `~/prj/suflyor/out/promo-video/scene-es`.

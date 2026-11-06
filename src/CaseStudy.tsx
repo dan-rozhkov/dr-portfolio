@@ -3,7 +3,6 @@ import { trackCaseEnd } from "./analytics/analytics";
 import Contact from "./Contact";
 import type { CaseStudy as CaseStudyType } from "./data/portfolio";
 import { Media, Section, Slider } from "./components/caseBlocks";
-import { ThumbVideo } from "./components/ThumbVideo";
 import { groupSections } from "./components/caseGroups";
 
 export default function CaseStudy({ study }: { study: CaseStudyType }) {
@@ -46,24 +45,15 @@ export default function CaseStudy({ study }: { study: CaseStudyType }) {
       </header>
 
       <div
-        className="cs-hero"
+        className={study.heroBleed ? "cs-hero cs-hero--bleed" : "cs-hero"}
         style={study.heroBackground ? { background: study.heroBackground } : undefined}
       >
-        {study.heroVideo && study.heroImage ? (
-          <ThumbVideo
-            className="cs-image"
-            src={study.heroVideo}
-            poster={study.heroImage}
-            label={study.heroImageAlt}
-          />
-        ) : (
-          <Media
-            src={study.heroImage}
-            alt={study.heroImageAlt}
-            aspect="3840 / 1579"
-            loading="eager"
-          />
-        )}
+        <Media
+          src={study.heroImage}
+          alt={study.heroImageAlt}
+          aspect="3840 / 1579"
+          loading="eager"
+        />
       </div>
 
       <div className="cs-sections">

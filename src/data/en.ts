@@ -70,8 +70,8 @@ export interface CaseStudy {
   heroImage?: string;
   heroImageAlt?: string;
   heroBackground?: string;
-  /** looping hero video; `heroImage` is its poster */
-  heroVideo?: string;
+  /** the hero runs edge to edge, without the page gutters */
+  heroBleed?: boolean;
 }
 
 export const profile: Profile = {
@@ -772,15 +772,14 @@ interface HeroImage {
   src: string;
   alt: string;
   background?: string;
-  /** looping video; `src` is its poster */
-  video?: string;
+  bleed?: boolean;
 }
 
 const caseHeroImages: Record<string, HeroImage> = {
   "sber-india-proto": {
-    src: "/images/sber-india-proto/caldera-cover.webp",
+    src: "/images/sber-india-proto/caldera-hero.webp",
     alt: "Caldera AI logo",
-    video: "/images/sber-india-proto/caldera-cover.mp4",
+    bleed: true,
   },
   openprovider: {
     src: "/images/openprovider/hero.png",
@@ -813,7 +812,7 @@ export const caseStudies: Record<string, CaseStudy> = Object.fromEntries(
       heroImage: caseHeroImages[c.id]?.src,
       heroImageAlt: caseHeroImages[c.id]?.alt,
       heroBackground: caseHeroImages[c.id]?.background,
-      heroVideo: caseHeroImages[c.id]?.video,
+      heroBleed: caseHeroImages[c.id]?.bleed,
     },
   ])
 );

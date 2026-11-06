@@ -168,8 +168,8 @@ body:has(.case-study)::-webkit-scrollbar {
   background: transparent;
 }
 
-.cs-hero video.cs-image {
-  aspect-ratio: 16 / 10;
+.cs-hero--bleed {
+  margin-inline: 0;
 }
 
 .cs-subhead {
