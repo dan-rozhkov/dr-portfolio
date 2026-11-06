@@ -294,6 +294,11 @@ const caseSections: Record<string, CaseSection[]> = {
       ],
       text: "The tool moved the India team from static Figma mockups to live, system-accurate prototypes inside the discovery loop. Hypotheses now get tested on working interfaces in hours instead of days, design-system drift disappeared from prototyping, and the same pipeline is becoming the template for AI-first workflows across other Sber teams.",
     },
+    {
+      kind: "image",
+      src: "/images/sber-india-proto/caldera-outline.mp4",
+      alt: "The Caldera logo shown as vector outlines, then in solid white",
+    },
   ],
   "live-studio": [
     {

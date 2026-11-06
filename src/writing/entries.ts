@@ -70,3 +70,13 @@ export function getEntries(lang: Lang = "en"): CaseEntry[] {
   // Stable sort keeps the source order for equal keys.
   return [...posts, ...cases].sort((a, b) => (a.sortKey < b.sortKey ? 1 : a.sortKey > b.sortKey ? -1 : 0));
 }
+
+/** Always on the home page, in the last slot, whatever its date. */
+const HOME_PINNED = "case:sber-india-proto";
+
+/** The home page cards: the newest entries, ending with the pinned one. */
+export function homeEntries(entries: CaseEntry[], limit: number): CaseEntry[] {
+  const pinned = entries.find((e) => e.key === HOME_PINNED);
+  if (!pinned) return entries.slice(0, limit);
+  return [...entries.filter((e) => e !== pinned).slice(0, limit - 1), pinned];
+}

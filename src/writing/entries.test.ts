@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { getCases } from "../data/portfolio";
 import { getPosts } from "./posts";
-import { CASE_CATEGORY, getEntries } from "./entries";
+import { CASE_CATEGORY, getEntries, homeEntries } from "./entries";
 
 describe("getEntries", () => {
   const entries = getEntries("en");
@@ -27,5 +27,19 @@ describe("getEntries", () => {
 
   it("has a category for every home-page case", () => {
     for (const c of getCases()) expect(CASE_CATEGORY[c.id]).toBeDefined();
+  });
+});
+
+describe("homeEntries", () => {
+  it("ends with the pinned case and keeps the limit", () => {
+    const home = homeEntries(getEntries(), 4);
+    expect(home).toHaveLength(4);
+    expect(home[3].key).toBe("case:sber-india-proto");
+    expect(new Set(home.map((e) => e.key)).size).toBe(4);
+  });
+
+  it("does not move a pinned case that is missing", () => {
+    const rest = getEntries().filter((e) => e.key !== "case:sber-india-proto");
+    expect(homeEntries(rest, 4)).toEqual(rest.slice(0, 4));
   });
 });
