@@ -54,6 +54,16 @@ The bubble holds a pose, then snaps to the next one: it winks, looks around, jum
 
 ![The Suflyor mark winks, looks around, jumps in surprise and turns its tail](/images/writing/suflyor/card.mp4 "full")
 
+## App
+
+:::logline
+It keeps up with the call, so you can stay in it.
+:::
+
+Tap Start and the Russian appears a moment after the English, with the sentence in progress in bold. When you need an answer, the app suggests one to say out loud.
+
+![Suflyor on an iPhone: the app opens, a call in English is translated into Russian live, and a suggested reply appears](/images/writing/suflyor/app-call.mp4 "full")
+
 ## 3D
 
 :::logline
