@@ -290,6 +290,30 @@ const caseSections: Record<string, CaseSection[]> = {
       alt: "Prototype tool interface for non-engineers",
     },
     {
+      kind: "image",
+      src: "/images/sber-india-proto/caldera-app-payments.webp",
+      alt: "Caldera Business on desktop: payments waiting for a signature, with RTGS, NEFT and rupee trade transfers and the rail filter open",
+      aspect: "1920 / 1200",
+    },
+    {
+      kind: "image",
+      src: "/images/sber-india-proto/caldera-app-cashflow.webp",
+      alt: "Caldera Business on desktop: cash flow with the rupee balance forecast to December and the ruble balance next to it",
+      aspect: "1920 / 1200",
+    },
+    {
+      kind: "image",
+      src: "/images/sber-india-proto/caldera-app-mobile-home-chart.webp",
+      alt: "Two phone screens: the weekly net inflow by day and by payment rail, and the rupee balance chart with upcoming tax payments",
+      aspect: "1920 / 1200",
+    },
+    {
+      kind: "image",
+      src: "/images/sber-india-proto/caldera-app-mobile-payment-agent.webp",
+      alt: "Two phone screens: a rupee trade payment to a Russian supplier waiting for the second signature, and the Caldera AI voice agent answering a question",
+      aspect: "1920 / 1200",
+    },
+    {
       label: "Outcomes",
       kind: "outcomes",
       stats: [
