@@ -92,14 +92,14 @@ export const cases: CaseSummary[] = [
     id: "caldera",
     title: "Caldera AI",
     description: [
-      "Sber India's internal AI tool that turns a brief or a Figma file into a working UI prototype, ready to test hypotheses and demo to stakeholders.",
-      "I lead the tool end-to-end — pipeline, Claude Code and Figma MCP integration, product decisions, and rollout to designers and PMs.",
+      "Sber India's banking app for Indian and Russian companies that trade with each other: payments in rupees and rubles, approvals, cash flow, and an AI agent that answers in plain language.",
+      "I lead the product design end to end, from payment and approval flows to the desktop and mobile apps and the agent.",
     ],
     meta: [
       ["Years", "2025-2026"],
       ["Role", "Lead Product Designer"],
-      ["Scope", "AI Prototyping, Design Systems, Internal Tools"],
-      ["Output", "AI prototyping pipeline, design-system integration"],
+      ["Scope", "Corporate Banking, AI Agent, Desktop & Mobile"],
+      ["Output", "Desktop and mobile apps, approval flows, AI agent"],
     ],
     visual: "ai",
     preview: { src: "images/sber-india-proto/caldera-cover.webp", alt: "Caldera AI logo" },
@@ -234,7 +234,7 @@ const caseSections: Record<string, CaseSection[]> = {
     {
       label: "Challenge",
       kind: "logline",
-      text: "Discovery at Sber India was bottlenecked by handmade prototypes. Every hypothesis needed a designer to assemble screens, an engineer to wire them up, and a week of calendar time before anyone could test the idea on a user.",
+      text: "Companies trading between India and Russia ran their money through two banking worlds: rupees in one place, rubles in another, approvals in chat, tax dates in a spreadsheet.",
     },
     {
       kind: "image",
@@ -243,51 +243,20 @@ const caseSections: Record<string, CaseSection[]> = {
     },
     {
       kind: "case",
-      text: "The team kept circling the same loop: a PM wrote a brief, a designer mocked it in Figma, a frontend engineer rebuilt it in code, and the prototype landed two sprints later — often answering a question the team had already moved past. Most ideas never made it to a usable surface because the cost of testing was higher than the cost of guessing.",
+      text: "Paying a supplier in Novosibirsk from Mumbai meant checking the ruble balance, converting at the right moment, picking the payment rail and chasing a second signature, often across several apps and calls. One missed step turned into a late payment or a penalty on an Indian tax date.",
     },
     {
       kind: "case",
-      text: "Designers also drifted from the product design system whenever they prototyped fast. One-off mockups skipped tokens, picked the wrong components, and produced prototypes that looked like the product but did not behave like it — which leaked into stakeholder reviews and reset alignment every time.",
-    },
-    {
-      kind: "case",
-      text: "I wanted the team to test ideas on the same rails the production app runs on, in hours instead of days, without adding another tool to learn.",
-    },
-    {
-      kind: "image",
-      src: "/images/sber-india-proto/big-preview.png",
-      alt: "Caldera AI preview",
-      aspect: "3200 / 2128",
+      text: "I wanted the whole treasury day to fit on one screen: what came in, what goes out, what waits for whom, and what is due today.",
     },
     {
       label: "Solution",
       kind: "logline",
-      text: "I built an AI prototyping tool that reads the design system from Figma and writes working React prototypes through Claude Code.",
+      text: "I designed Caldera, one app for a company's money in rupees and rubles, with an AI agent that knows the context of every payment.",
     },
     {
       kind: "case",
-      text: "The tool takes a text brief, a user scenario, or a Figma file as input and produces an interactive prototype in code — onboarding, key product screens, and edge cases for UX testing — pulling components and tokens directly from the Sber India design system instead of inventing UI.",
-    },
-    {
-      kind: "subhead",
-      title: "Figma MCP as the source of truth",
-      text: "Components and tokens are read directly from Figma, so the generator operates inside the existing system rather than around it. Prototypes land on the right rails the first time — no hallucinated buttons, no off-brand spacing, no quiet drift away from the production library.",
-      src: "/images/sber-india-proto/Slider 1.png",
-      alt: "Figma MCP reading design system components",
-    },
-    {
-      kind: "subhead",
-      title: "Claude Code as the executor",
-      text: "Generation and follow-up edits run through a Claude Code agent that knows the prototype repo's structure. Designers and PMs can iterate by typing changes or pushing visual edits, and the agent applies them to the source instead of rewriting screens from scratch.",
-      src: "/images/sber-india-proto/Slider 2.png",
-      alt: "Claude Code generating prototype from brief",
-    },
-    {
-      kind: "subhead",
-      title: "Built for non-engineers",
-      text: "The tool is wired for designers and PMs, not just developers. A brief in plain language produces a runnable prototype; visual edits push back to code; engineering only gets pulled in when the hypothesis is ready to ship.",
-      src: "/images/sber-india-proto/Slider 3.png",
-      alt: "Prototype tool interface for non-engineers",
+      text: "Every payment waits in one queue with its rail, date, amount and the signatures it still needs. RTGS, NEFT, IMPS, rupee trade and tax challans sit side by side, and the filter narrows the list to one rail in a click.",
     },
     {
       kind: "image",
@@ -296,16 +265,28 @@ const caseSections: Record<string, CaseSection[]> = {
       aspect: "1920 / 1200",
     },
     {
+      kind: "case",
+      text: "Cash flow puts the rupee and ruble balances next to each other with a forecast a month ahead, so the team sees a gap before it happens and converts rubles when the rate suits.",
+    },
+    {
       kind: "image",
       src: "/images/sber-india-proto/caldera-app-cashflow.webp",
       alt: "Caldera Business on desktop: cash flow with the rupee balance forecast to December and the ruble balance next to it",
       aspect: "1920 / 1200",
     },
     {
+      kind: "case",
+      text: "On the phone the same day reads at a glance: inflow by day and by rail, the balance chart, and the taxes due next, with today's deadline in orange.",
+    },
+    {
       kind: "image",
       src: "/images/sber-india-proto/caldera-app-mobile-home-chart.webp",
       alt: "Two phone screens: the weekly net inflow by day and by payment rail, and the rupee balance chart with upcoming tax payments",
       aspect: "1920 / 1200",
+    },
+    {
+      kind: "case",
+      text: "A payment opens with everything needed to sign it: the invoice in rubles, the rate, the rupee total and whose turn it is. If a number is unclear, the director asks Caldera by voice and gets a short answer instead of calling the bank.",
     },
     {
       kind: "image",
@@ -317,11 +298,11 @@ const caseSections: Record<string, CaseSection[]> = {
       label: "Outcomes",
       kind: "outcomes",
       stats: [
-        ["12×", "Faster brief-to-prototype than the Figma-to-handoff loop"],
-        ["300+", "Prototypes shipped by designers and PMs in six months"],
-        ["100%", "Design-system compliance across generated prototypes"],
+        ["3", "Currencies on one balance: rupees, rubles and dollars"],
+        ["5", "Payment rails in one queue, from RTGS to tax challans"],
+        ["1", "Screen for the treasury day, on desktop and phone"],
       ],
-      text: "The tool moved the India team from static Figma mockups to live, system-accurate prototypes inside the discovery loop. Hypotheses now get tested on working interfaces in hours instead of days, design-system drift disappeared from prototyping, and the same pipeline is becoming the template for AI-first workflows across other Sber teams.",
+      text: "Caldera turns cross-border treasury into one routine: see both currencies, sign what is due, and ask the agent when a number needs explaining. The same patterns run on desktop and phone, so a director can approve a ruble payment between meetings.",
     },
     {
       kind: "image",
