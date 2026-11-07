@@ -4,6 +4,7 @@ import type { CaseSection } from "../data/portfolio";
 import { useT } from "../i18n/context";
 import { assetUrl } from "../lib/url";
 import type { SubheadSection } from "./caseGroups";
+import { useViewportPlayback, videoSources } from "./video";
 
 function isVideo(src: string): boolean {
   return /\.(mp4|webm|mov)$/i.test(src);
@@ -21,19 +22,8 @@ export function Media({
   loading?: "lazy" | "eager";
 }) {
   if (!src) return <Placeholder aspect={aspect} />;
-  if (isVideo(src)) {
-    return (
-      <video
-        className="cs-image"
-        src={assetUrl(src)}
-        autoPlay
-        loop
-        muted
-        playsInline
-        aria-label={alt || ""}
-      />
-    );
-  }
+  // key: a browser picks among <source> children only on first load, so a new src needs a new element
+  if (isVideo(src)) return <CaseVideo key={src} src={src} alt={alt} eager={loading === "eager"} />;
   return (
     <img
       className="cs-image"
@@ -41,6 +31,31 @@ export function Media({
       alt={alt || ""}
       loading={loading}
     />
+  );
+}
+
+/**
+ * A muted looping video in a case or post. Lazy ones fetch only their header (for the
+ * size) until they come within a screen of view; the eager hero starts right away.
+ */
+function CaseVideo({ src, alt, eager }: { src: string; alt?: string; eager: boolean }) {
+  const ref = useRef<HTMLVideoElement>(null);
+  useViewportPlayback(ref, { rootMargin: "100% 0px" });
+  return (
+    <video
+      ref={ref}
+      className="cs-image"
+      autoPlay={eager}
+      loop
+      muted
+      playsInline
+      preload={eager ? "auto" : "metadata"}
+      aria-label={alt || ""}
+    >
+      {videoSources(src).map((s) => (
+        <source key={s.src} src={s.src} type={s.type} />
+      ))}
+    </video>
   );
 }
 
