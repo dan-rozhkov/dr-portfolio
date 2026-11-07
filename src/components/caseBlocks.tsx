@@ -123,16 +123,6 @@ export function Section({ section }: { section: CaseSection }) {
     );
   }
 
-  if (section.kind === "pair") {
-    return (
-      <div className="cs-pair">
-        {section.items.map((item) => (
-          <Media key={item.src} src={item.src} alt={item.alt} />
-        ))}
-      </div>
-    );
-  }
-
   if (section.kind === "outcomes") {
     return (
       <Outcomes

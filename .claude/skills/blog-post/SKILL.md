@@ -101,7 +101,8 @@ Do not deploy if either step was skipped.
 
 ## Corrections log
 
-- 2026-11-07 — Caldera AI case: a 16:10 `pair` section right after the Challenge logline, the agent chat video (`caldera-agent-chat.mp4`, stageshow recording, 15 s) on the left and Danil's app icon photo (`caldera-app-icon.webp`) on the right; on mobile the halves stack at 4:5. `pair` is a case section kind for two media side by side. The orb and chat iterations went through Notion first.
+- 2026-11-07 — Every image and video in every case runs edge to edge on mobile (case pages too, not only posts: `.cs-image-row`, `.cs-hero`, subhead and slider media in `case-study.css`).
+- 2026-11-07 — A section with two objects is made the Suflyor way: one 1920×1200 file with two 954 px tiles and a 12 px `#f8f8f8` gap, shown as an ordinary full-width `image` row; never two separate media in a CSS grid. Caldera AI has one right after the Challenge logline: the agent chat video (stageshow recording, 15 s) on the left and Danil's app icon photo on the right, baked into `caldera-agent-chat.mp4`. The orb and chat iterations went through Notion first.
 - 2026-11-07 — Sber India case is now Caldera AI at `/en/case/caldera/`; the old `sber-india-proto` URL and home hash redirect to it. Its card loops `caldera-card.mp4`, the reveal then the outline animation, 8.7 s (a case gets a card video through `previewVideo`); the poster is the last frame, so reduced motion shows the whole logo and the start looks like the loop seam. Inside the case the cover is static and edge to edge (`caldera-hero.webp`, `bleed: true`), no animation there. Brand iterations went to Notion first, and the live deploy followed Danil's go-ahead.
 Every correction Danil sends becomes a rule here (and in Claude's memory). Newest first.
 
