@@ -35,6 +35,14 @@ export function Media({
 }
 
 /**
+ * Shown until the first frame: a flat light-grey 16:10 poster. It keeps Safari from
+ * painting the block black and gives the block its usual size before the video loads.
+ */
+const LOADING_POSTER = `data:image/svg+xml,${encodeURIComponent(
+  "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='10'><rect width='16' height='10' fill='#efefef'/></svg>",
+)}`;
+
+/**
  * A muted looping video in a case or post. Lazy ones fetch only their header (for the
  * size) until they come within a screen of view; the eager hero starts right away.
  */
@@ -45,6 +53,7 @@ function CaseVideo({ src, alt, eager }: { src: string; alt?: string; eager: bool
     <video
       ref={ref}
       className="cs-image"
+      poster={LOADING_POSTER}
       autoPlay={eager}
       loop
       muted
