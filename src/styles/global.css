@@ -52,20 +52,11 @@ button {
 }
 
 .snap-container {
-  height: 100vh;
-  overflow-x: hidden;
-  overflow-y: auto;
-  scroll-snap-type: y mandatory;
-  scrollbar-width: none;
-}
-
-.snap-container::-webkit-scrollbar {
-  display: none;
+  overflow-x: clip;
 }
 
 .section {
   min-height: max(100vh, 700px);
-  scroll-snap-align: start;
 }
 
 @media (--mobile) {
@@ -84,14 +75,7 @@ button {
     scroll-margin-top: var(--space-xl);
   }
 
-  .snap-container {
-    height: auto;
-    overflow: visible;
-    scroll-snap-type: none;
-  }
-
   .section {
     min-height: auto;
-    scroll-snap-align: none;
   }
 }

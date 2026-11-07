@@ -36,15 +36,8 @@
 }
 
 @media (--mobile) {
-  .snap-container {
-    height: auto;
-    overflow: visible;
-    scroll-snap-type: none;
-  }
-
   .section {
     min-height: auto;
-    scroll-snap-align: none;
   }
 
   .snap-section {

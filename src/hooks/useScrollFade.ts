@@ -1,20 +1,20 @@
 import { useEffect } from "react";
 
+/** Fade the hero meta out and the contact year in as the page scrolls. */
 export function useScrollFade() {
   useEffect(() => {
-    const scroller = document.querySelector<HTMLElement>(".snap-container");
     const contactSection = document.querySelector<HTMLElement>("#contact");
 
-    if (!scroller || !contactSection) {
+    if (!contactSection) {
       return undefined;
     }
 
     const update = () => {
-      const vh = scroller.clientHeight || window.innerHeight;
-      const scrollTop = scroller.scrollTop;
+      const vh = window.innerHeight;
+      const scrollTop = window.scrollY;
       const heroOpacity = Math.max(0, Math.min(1, 1 - scrollTop / (vh * 0.6)));
 
-      const contactTop = contactSection.offsetTop;
+      const contactTop = contactSection.getBoundingClientRect().top + scrollTop;
       const distance = contactTop - scrollTop;
       const contactOpacity = Math.max(
         0,
@@ -26,11 +26,11 @@ export function useScrollFade() {
     };
 
     update();
-    scroller.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("scroll", update, { passive: true });
     window.addEventListener("resize", update);
 
     return () => {
-      scroller.removeEventListener("scroll", update);
+      window.removeEventListener("scroll", update);
       window.removeEventListener("resize", update);
     };
   }, []);
