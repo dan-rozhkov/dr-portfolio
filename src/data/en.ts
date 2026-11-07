@@ -42,10 +42,17 @@ export interface ExtraWork {
 
 export type SectionStat = [value: string, label: string];
 
+export interface PairItem {
+  src: string;
+  alt: string;
+}
+
 export type CaseSection =
   | { kind: "logline"; label?: string; text: string }
   | { kind: "case"; label?: string; text: string }
   | { kind: "image"; src?: string; alt?: string; aspect?: string }
+  /** two media side by side in one 16:10 row; stacked on mobile */
+  | { kind: "pair"; items: [PairItem, PairItem] }
   | {
       kind: "subhead";
       title: string;
@@ -235,6 +242,19 @@ const caseSections: Record<string, CaseSection[]> = {
       label: "Challenge",
       kind: "logline",
       text: "Discovery at Sber India was bottlenecked by handmade prototypes. Every hypothesis needed a designer to assemble screens, an engineer to wire them up, and a week of calendar time before anyone could test the idea on a user.",
+    },
+    {
+      kind: "pair",
+      items: [
+        {
+          src: "/images/sber-india-proto/caldera-agent-chat.mp4",
+          alt: "Caldera AI voice agent on a phone answering a question about deposit insurance in India",
+        },
+        {
+          src: "/images/sber-india-proto/caldera-app-icon.webp",
+          alt: "Caldera AI app icon: the white mark on a glass tile over orange",
+        },
+      ],
     },
     {
       kind: "case",

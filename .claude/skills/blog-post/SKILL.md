@@ -101,6 +101,7 @@ Do not deploy if either step was skipped.
 
 ## Corrections log
 
+- 2026-11-07 — Caldera AI case: a 16:10 `pair` section right after the Challenge logline, the agent chat video (`caldera-agent-chat.mp4`, stageshow recording, 15 s) on the left and Danil's app icon photo (`caldera-app-icon.webp`) on the right; on mobile the halves stack at 4:5. `pair` is a case section kind for two media side by side. The orb and chat iterations went through Notion first.
 - 2026-11-07 — Sber India case is now Caldera AI at `/en/case/caldera/`; the old `sber-india-proto` URL and home hash redirect to it. Its card loops `caldera-card.mp4`, the reveal then the outline animation, 8.7 s (a case gets a card video through `previewVideo`); the poster is the last frame, so reduced motion shows the whole logo and the start looks like the loop seam. Inside the case the cover is static and edge to edge (`caldera-hero.webp`, `bleed: true`), no animation there. Brand iterations went to Notion first, and the live deploy followed Danil's go-ahead.
 Every correction Danil sends becomes a rule here (and in Claude's memory). Newest first.
 

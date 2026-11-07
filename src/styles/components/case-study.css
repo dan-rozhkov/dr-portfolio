@@ -168,6 +168,26 @@ body:has(.case-study)::-webkit-scrollbar {
   background: transparent;
 }
 
+/* Two media in one 16:10 row, each half 8:10, cropped to fill */
+.cs-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: minmax(0, 1fr);
+  min-height: 0;
+  aspect-ratio: 16 / 10;
+  margin-inline: var(--pad);
+  overflow: hidden;
+}
+
+/* min-height 0 keeps the video's own height from stretching the row */
+.cs-pair .cs-image {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  background: #0a0a0a;
+  object-fit: cover;
+}
+
 .cs-hero--bleed {
   margin-inline: 0;
 }
@@ -460,6 +480,15 @@ body:has(.case-study)::-webkit-scrollbar {
   .cs-image-row,
   .cs-hero {
     border-radius: 0;
+  }
+
+  .cs-pair {
+    grid-template-columns: 1fr;
+    aspect-ratio: auto;
+  }
+
+  .cs-pair .cs-image {
+    aspect-ratio: 4 / 5;
   }
 
   .cs-slider {
