@@ -280,8 +280,8 @@ const caseSections: Record<string, CaseSection[]> = {
     },
     {
       kind: "image",
-      src: "/images/sber-india-proto/caldera-app-mobile-home-chart.webp",
-      alt: "Two phone screens: the weekly net inflow by day and by payment rail, and the rupee balance chart with upcoming tax payments",
+      src: "/images/sber-india-proto/caldera-mobile-statistics-hand-chart.jpg",
+      alt: "A hand holding a phone with Caldera weekly inflow statistics and bottom navigation, beside the rupee balance chart with upcoming tax payments",
       aspect: "1920 / 1200",
     },
     {
