@@ -256,6 +256,16 @@ const caseSections: Record<string, CaseSection[]> = {
     },
     {
       kind: "case",
+      text: "The day starts on the dashboard: the balance across rupee, ruble and dollar accounts, payments by rail, rupee trade from invoice to settlement, spend by category, how fast clients pay, and a treasury health score against last month. Six charts give the finance director the whole picture before the first meeting.",
+    },
+    {
+      kind: "image",
+      src: "/images/sber-india-proto/caldera-app-dashboard.webp",
+      alt: "Caldera Business dashboard on desktop: total balance, payments by rail, rupee trade settlement, spend by category, on-time invoice heatmap and a treasury health radar",
+      aspect: "1920 / 1200",
+    },
+    {
+      kind: "case",
       text: "Every payment waits in one queue with its rail, date, amount and the signatures it still needs. RTGS, NEFT, IMPS, rupee trade and tax challans sit side by side, and the filter narrows the list to one rail in a click.",
     },
     {
