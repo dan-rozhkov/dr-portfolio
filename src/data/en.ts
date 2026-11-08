@@ -260,7 +260,7 @@ const caseSections: Record<string, CaseSection[]> = {
     },
     {
       kind: "image",
-      src: "/images/sber-india-proto/caldera-app-dashboard-v2.webp",
+      src: "/images/sber-india-proto/caldera-app-dashboard-v3.webp",
       alt: "Caldera Business dashboard on desktop: total balance, payments by rail, rupee trade settlement, spend by category, on-time invoice heatmap and a treasury health radar",
       aspect: "1920 / 1200",
     },
