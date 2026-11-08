@@ -290,8 +290,8 @@ const caseSections: Record<string, CaseSection[]> = {
     },
     {
       kind: "image",
-      src: "/images/sber-india-proto/caldera-app-mobile-payment-agent.webp",
-      alt: "Two phone screens: a rupee trade payment to a Russian supplier waiting for the second signature, and the Caldera AI voice agent answering a question",
+      src: "/images/sber-india-proto/caldera-payment-assistant-hand.jpg",
+      alt: "A rupee trade payment awaiting a second signature, beside a hand holding a phone with the dark Caldera AI voice assistant",
       aspect: "1920 / 1200",
     },
     {
