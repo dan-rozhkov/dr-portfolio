@@ -64,6 +64,8 @@ Pick the two languages, tap Start and the translation appears a moment after the
 
 ![Suflyor on an iPhone: the app opens, a call in English is translated into Spanish live, and a suggested reply appears](/images/writing/suflyor/app-call-es.mp4 "full")
 
+During the call, the live translation and transcript stay next to suggested replies, chapters and notes, so you can answer without losing the thread.
+
 ![A hand holding a tablet with Suflyor in landscape: a live Italian to English call transcript on the left, suggested replies, call chapters and notes on the right](/images/writing/suflyor/app-tablet.jpg "full")
 
 ## 3D
