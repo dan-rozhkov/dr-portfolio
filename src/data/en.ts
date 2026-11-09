@@ -296,12 +296,12 @@ const caseSections: Record<string, CaseSection[]> = {
     },
     {
       kind: "case",
-      text: "Back at the desk, the dashboard sums up the month: the balance across rupee, ruble and dollar accounts, payments by rail, rupee trade from invoice to settlement, spend by category, how fast clients pay, and a treasury health score against last month.",
+      text: "Back at the desk, the dashboard sums up the month: the balance across rupee, ruble and dollar accounts, payments by rail, spend by category and how fast clients pay. Around it sit the everyday tools: tax due dates on the calendar, approvals, recent payees and a ruble to rupee conversion in one step.",
     },
     {
       kind: "image",
-      src: "/images/sber-india-proto/caldera-app-dashboard-v4.webp",
-      alt: "Caldera Business dashboard on desktop: total balance, payments by rail, rupee trade settlement, spend by category and on-time invoices",
+      src: "/images/sber-india-proto/caldera-dashboard-bento.webp",
+      alt: "The Caldera dashboard on a laptop against an orange backdrop, beside Caldera components on a grey board: payment calendar with tax due dates, a rupee trade settlement and GST challan approval, weekly inflow, recent payees, the ruble to rupee rate and a ruble conversion form",
       aspect: "1920 / 1200",
     },
     {
