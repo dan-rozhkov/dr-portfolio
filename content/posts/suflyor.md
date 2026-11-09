@@ -74,9 +74,9 @@ During the call, the live translation and transcript stay next to suggested repl
 The call ends, the work goes on.
 :::
 
-On the desktop the call gets the whole window. The translation runs in the middle with the original Italian under the sentence in progress, and suggested replies, chapters and notes stay in the side column. One black bar holds the timer and the Stop button.
+On the desktop the call gets the whole window. New meeting opens it in recording mode, and the Stop button grows into a black bar with the timer. The translation runs in the middle with the original Italian under the sentence in progress. When someone asks a question, suggested replies open in the side column above the chapters and notes.
 
-![Suflyor on desktop during a live call: an Italian to English translation with timestamps, the original under the current sentence, suggested replies and chapters on the right, a black bar with the timer and a red Stop button](/images/writing/suflyor/desktop-live.webp "full")
+![Suflyor on desktop: New meeting starts a call, the Stop button opens into a black bar with the timer, Italian speech arrives as English lines with the original under the current sentence, a question brings three suggested replies, and Stop opens the meeting notes](/images/writing/suflyor/desktop-live.mp4 "full")
 
 After the call, the meeting turns into notes. Action items with owners come first, then a short overview by topic. The people from the call and your recent conversations with them sit on the right, and the field at the bottom answers questions about this meeting.
 
