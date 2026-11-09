@@ -68,6 +68,24 @@ During the call, the live translation and transcript stay next to suggested repl
 
 ![A hand holding a tablet with Suflyor in landscape: a live Italian to English call transcript on the left, suggested replies, call chapters and notes on the right](/images/writing/suflyor/app-tablet.jpg "full")
 
+## Desktop
+
+:::logline
+The call ends, the work goes on.
+:::
+
+On the desktop the call gets the whole window. The translation runs in the middle with the original Italian under the sentence in progress, and suggested replies, chapters and notes stay in the side column. One black bar holds the timer and the Stop button.
+
+![Suflyor on desktop during a live call: an Italian to English translation with timestamps, the original under the current sentence, suggested replies and chapters on the right, a black bar with the timer and a red Stop button](/images/writing/suflyor/desktop-live.webp "full")
+
+After the call, the meeting turns into notes. Action items with owners come first, then a short overview by topic. The people from the call and your recent conversations with them sit on the right, and the field at the bottom answers questions about this meeting.
+
+![Suflyor meeting notes on desktop: action items with owners, a done item crossed out, an overview below, people and recent conversations on the right](/images/writing/suflyor/desktop-notes.webp "full")
+
+Ask Suflyor searches all your meetings at once. Type @ to point it at a person, a company or a meeting, or connect Slack, Notion, Gmail, Calendar and Zoom for fuller answers.
+
+![Ask Suflyor on desktop: a large question field, connected apps under it and three example questions in one block](/images/writing/suflyor/desktop-ask.webp "full")
+
 ## 3D
 
 :::logline
