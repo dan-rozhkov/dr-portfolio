@@ -280,7 +280,7 @@ const caseSections: Record<string, CaseSection[]> = {
     },
     {
       kind: "image",
-      src: "/images/sber-india-proto/caldera-mobile-statistics-hand-chart.jpg",
+      src: "/images/sber-india-proto/caldera-stats-pair.mp4",
       alt: "A hand holding a phone with Caldera weekly inflow statistics and bottom navigation, beside the rupee balance chart with upcoming tax payments",
       aspect: "1920 / 1200",
     },
@@ -290,7 +290,7 @@ const caseSections: Record<string, CaseSection[]> = {
     },
     {
       kind: "image",
-      src: "/images/sber-india-proto/caldera-payment-assistant-hand.jpg",
+      src: "/images/sber-india-proto/caldera-payment-pair.mp4",
       alt: "A rupee trade payment awaiting a second signature, beside a hand holding a phone with the dark Caldera AI voice assistant",
       aspect: "1920 / 1200",
     },
@@ -300,7 +300,7 @@ const caseSections: Record<string, CaseSection[]> = {
     },
     {
       kind: "image",
-      src: "/images/sber-india-proto/caldera-dashboard-bento.webp",
+      src: "/images/sber-india-proto/caldera-bento-pair.mp4",
       alt: "The Caldera dashboard on a laptop against an orange backdrop, beside Caldera components on a grey board: payment calendar with tax due dates, a rupee trade settlement and GST challan approval, weekly inflow, recent payees, the ruble to rupee rate and a ruble conversion form",
       aspect: "1920 / 1200",
     },
