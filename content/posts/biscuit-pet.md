@@ -35,7 +35,7 @@ Biscuit gets hungry, bored, sleepy and scruffy while the app is closed, and he i
 Biscuit is AI-generated, but he looks like the same animal in every frame.
 :::
 
-I wrote a short character bible and made every pose from one master still with nano-banana-pro on fal. Kling and Veo turned the stills into clips, and I measured their colour and corrected the outliers so moods blend.
+I wrote a short character bible and made every pose from one master still with nano-banana-pro on fal. Kling and Veo turned the stills into clips, and I measured their color and corrected the outliers so moods blend.
 
 :::slider
 ### Idle

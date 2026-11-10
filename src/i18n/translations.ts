@@ -49,9 +49,9 @@ const en: Translations = {
   "case.outcomes": "Outcomes",
   "meta.title": "Danil Rozhkov",
   "meta.description": "Personal portfolio for product, interface, and AI-assisted design work.",
-  "meta.ogTitle": "Danil Rozhkov — Lead Product Designer",
+  "meta.ogTitle": "Danil Rozhkov — Design Engineer",
   "meta.ogDescription":
-    "Lead Product Designer for AI and B2B tools, from product logic to shipped UI.",
+    "Design Engineer for AI and B2B tools, from product logic to shipped UI.",
   "nav.ariaLabel": "Primary navigation",
   "case.ariaNav": "Case study navigation",
 };

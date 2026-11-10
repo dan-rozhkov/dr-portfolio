@@ -5,8 +5,8 @@ date: 2026-11-02
 category: product-building
 tldr:
   - Suflyor translates speech live between 60 languages and suggests replies, in the browser or installed on the iPhone Home Screen. No bot joins the call.
-  - This case covers the brand. I made the logo, the app icon, the favicon and the animated mark.
-  - The name is the Russian word for a theatre prompter, so the mark is a speech bubble that watches the conversation with you.
+  - I made the brand: the logo, the app icon, the favicon and the animated mark. I also designed the app for phone, tablet and desktop.
+  - The name is the Russian word for a theater prompter, so the mark is a speech bubble that watches the conversation with you.
 links:
   - label: Code
     url: https://github.com/dan-rozhkov/suflyor
@@ -28,7 +28,7 @@ Suflyor does the same job on a call, so I made the brand a character. It's a spe
 
 ![Suflyor logo: a red speech bubble with a wink, next to the wordmark on cream](/images/writing/suflyor/logo-cream.webp "full")
 
-I kept the mark to one red box and white eyes pushed into the top right corner, so the bubble reads first and the face second. The pupils are cut out in the box colour, which keeps the mark simple at any size.
+I kept the mark to one red box and white eyes pushed into the top right corner, so the bubble reads first and the face second. The pupils are cut out in the box color, which keeps the mark simple at any size.
 
 The wordmark is drawn letter by letter: heavy, wide and round. I balanced the spacing by the white between the letters, then tuned the tricky pairs by eye.
 

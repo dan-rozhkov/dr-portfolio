@@ -20,6 +20,7 @@ Recruiters and hiring managers (goal: they write to Danil), and people coming fr
 - Product focus: lead with what the user can do, what problem it solves and how it feels. Technical internals get one short line at most, or are left out.
 - Visuals like a case study: a post is as rich as the cases on the home page (see `src/data/en.ts` cases): an image or video for almost every section, plus case extras — slider (sticky subheads with media), full-width images, logline statements, outcome stats. Text-only sections are the exception. Use real product screenshots/recordings only.
 - Never put screenshots on a black background. Use the light-gray rounded media block the cases use, or no background at all. Don't bake a backdrop into the image file either — export the screenshot itself.
+- American spelling everywhere on the site (color, theater, gray), in posts, cases and alt texts.
 - TL;DR first: what it is, what Danil did, stack, outcome — scannable in 30 seconds.
 - Drafts are published immediately and publicly. Danil reviews on the live site.
 
@@ -106,6 +107,7 @@ Do not deploy if either step was skipped.
 - 2026-11-07 — Sber India case is now Caldera AI at `/en/case/caldera/`; the old `sber-india-proto` URL and home hash redirect to it. Its card loops `caldera-card.mp4`, the reveal then the outline animation, 8.7 s (a case gets a card video through `previewVideo`); the poster is the last frame, so reduced motion shows the whole logo and the start looks like the loop seam. Inside the case the cover is static and edge to edge (`caldera-hero.webp`, `bleed: true`), no animation there. Brand iterations went to Notion first, and the live deploy followed Danil's go-ahead.
 Every correction Danil sends becomes a rule here (and in Claude's memory). Newest first.
 
+- 2026-11-10 — American spelling site-wide. The outcome metrics in the Openprovider, ClearScale and SeligoAI cases are real (Danil confirmed), so keep them. Those three cases were rewritten in the short Caldera format; keep runs of subheads without media short (2–3), split by a text block, because each run becomes a sticky slider.
 - 2026-11-06 — Suflyor now translates between 60 languages, so the case no longer says English to Russian. The App video is `app-call-es.mp4`: an English call translated into Spanish, on the app's current code. Danil asked to publish it straight away, without Notion. Sources: `~/prj/suflyor/out/promo-video/scene-es`.
 - 2026-11-06 — Suflyor App section: one 16:10 video (`app-call.mp4`) laid out as two beige tiles like `icon-home-screen-v2.webp`: the stageshow promo on the left, its stop frame on the right, in an iPhone frame. The phone screens are the app's real markup and CSS; the dialogue is scripted. Sources: `~/prj/suflyor/out/promo-video`.
 - 2026-11-05 — The Published/Read/Code block runs the full content width on mobile, on posts and cases alike (`align-self: stretch` on `.cs-title-meta`); desktop stays as it was.

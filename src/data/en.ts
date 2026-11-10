@@ -93,7 +93,7 @@ export const cases: CaseSummary[] = [
     title: "Caldera AI",
     description: [
       "Sber India's banking app for Indian and Russian companies that trade with each other: payments in rupees and rubles, approvals, cash flow, and an AI agent that answers in plain language.",
-      "I lead the product design end to end, from payment and approval flows to the desktop and mobile apps and the agent.",
+      "I led the product design end to end, from payment and approval flows to the desktop and mobile apps and the agent.",
     ],
     meta: [
       ["Years", "2025-2026"],
@@ -109,8 +109,8 @@ export const cases: CaseSummary[] = [
     id: "openprovider",
     title: "Openprovider Reseller Dashboard",
     description: [
-      "A reseller dashboard used by 15K+ customers across English, Spanish, and Russian markets.",
-      "I led the UX redesign and shipped a design system for 100+ desktop, tablet, and mobile screens in four months.",
+      "A reseller dashboard used by 15K+ resellers across English, Spanish and Russian markets.",
+      "I led the UX redesign and shipped a design system for 100+ desktop, tablet and mobile screens in four months.",
     ],
     meta: [
       ["Years", "2022-2025"],
@@ -127,7 +127,7 @@ export const cases: CaseSummary[] = [
     title: "ClearScale MSP Portal",
     description: [
       "An enterprise managed-services portal for ClearScale clients with $10M+ in AWS infrastructure.",
-      "I redesigned the portal and moved the frontend to React, TypeScript, Next.js, and Styled Components as the sole designer-developer.",
+      "I redesigned the portal and moved the frontend to React, TypeScript, Next.js and styled-components as the sole designer-developer.",
     ],
     meta: [
       ["Years", "2018-2021"],
@@ -142,8 +142,8 @@ export const cases: CaseSummary[] = [
     id: "seligoai",
     title: "SeligoAI",
     description: [
-      "A US student management platform for recruitment, retention, schedules, performance, materials, and predictive analytics.",
-      "I designed the platform, design system, core components, responsive layouts, and key sections, then helped move them into frontend implementation.",
+      "A US student management platform for recruitment, retention, schedules, performance, materials and predictive analytics.",
+      "I designed the platform and its design system, then built the key sections in the frontend myself.",
     ],
     meta: [
       ["Year", "2024"],
@@ -174,7 +174,7 @@ export const extraWork: ExtraWork = {
 };
 
 export const about: string[] = [
-  "Senior product designer with 8+ years in B2B SaaS, design systems, and AI products. I design complex platforms and stay close to engineering until they ship.",
+  "Product designer and design engineer with 8+ years in B2B SaaS, design systems, and AI products. I design complex platforms and stay close to engineering until they ship.",
 ];
 
 export const skills: string[] = [
@@ -193,12 +193,12 @@ export const recognition: RecognitionGroup[] = [
       [
         "#3 Startup of the Month, ProductRadar ↗",
         "TalkPilot, selected from 500+ submissions",
-        "#talkpilot",
+        "#also-shipped",
       ],
       [
         "Regional Accelerator ↗",
         "TalkPilot, accepted cohort",
-        "#talkpilot",
+        "#also-shipped",
       ],
       [
         "live-studio on npm ↗",
@@ -301,7 +301,7 @@ const caseSections: Record<string, CaseSection[]> = {
     {
       kind: "image",
       src: "/images/sber-india-proto/caldera-bento-pair.mp4",
-      alt: "The Caldera dashboard on a laptop against an orange backdrop, beside Caldera components on a grey board: payment calendar with tax due dates, a rupee trade settlement and GST challan approval, weekly inflow, recent payees, the ruble to rupee rate and a ruble conversion form",
+      alt: "The Caldera dashboard on a laptop against an orange backdrop, beside Caldera components on a gray board: payment calendar with tax due dates, a rupee trade settlement and GST challan approval, weekly inflow, recent payees, the ruble to rupee rate and a ruble conversion form",
       aspect: "1920 / 1200",
     },
     {
@@ -398,15 +398,15 @@ const caseSections: Record<string, CaseSection[]> = {
     {
       label: "Challenge",
       kind: "logline",
-      text: "Openprovider's reseller dashboard supports domain registration, billing, and reseller operations for 15K+ customers. Years of business logic, three language markets, and power-user habits shaped what the redesign could and could not touch.",
+      text: "Openprovider's reseller dashboard runs domains, billing and customer accounts for 15K+ resellers in English, Spanish and Russian.",
     },
     {
       kind: "case",
-      text: "Resellers run their own business on top of Openprovider. Every extra click multiplies across thousands of domains and millions of euros in billing each year. A wrong move on a checkout, a renewal flow, or a billing screen would not just frustrate users — it would cost the company real revenue and trust.",
+      text: "Resellers run their own business on top of it, so every extra click repeats across thousands of domains. A mistake in checkout, renewals or billing costs revenue and trust.",
     },
     {
       kind: "case",
-      text: "The redesign had to protect reseller speed while giving product and engineering a system they could use for every new page, in EN, ES, and RU, across desktop, tablet, and mobile.",
+      text: "The redesign had to keep experienced resellers fast and give the team one system for every new page on desktop, tablet and mobile.",
     },
     {
       kind: "image",
@@ -421,12 +421,12 @@ const caseSections: Record<string, CaseSection[]> = {
     },
     {
       kind: "case",
-      text: "Rather than ship a cosmetic refresh, I treated the design system as a delivery contract. Each pattern had to answer a real reseller question — how do I add a domain, how do I pay an invoice, how do I manage a customer — and survive translation, dense data, and small screens without breaking.",
+      text: "I tied every pattern to a reseller job: add a domain, pay an invoice, manage a customer. Each one had to hold up with long translated labels, dense tables and small screens.",
     },
     {
       kind: "subhead",
-      title: "Multilingual dashboard patterns",
-      text: "I designed English, Spanish, and Russian interfaces around long labels, dense tables, validation states, and reseller terminology from day one. Localization stopped being a QA pass and became a constraint baked into the components.",
+      title: "Three languages from day one",
+      text: "I designed the English, Spanish and Russian interfaces together, around long labels, validation states and reseller terms. Localization became a rule inside the components instead of a late QA pass.",
       src: "/images/openprovider/openprovider-case-cover.png",
       alt: "Openprovider dashboard preview",
       aspect: "2170 / 1356",
@@ -434,35 +434,25 @@ const caseSections: Record<string, CaseSection[]> = {
     {
       kind: "subhead",
       title: "One system across devices",
-      text: "The component set covered desktop, tablet, and mobile flows for domain search, renewals, billing, account management, and admin-heavy pages. Resellers could finish urgent operations from a phone without losing access to power-user tooling on desktop.",
+      text: "The same components cover domain search, renewals, billing and account management on desktop, tablet and mobile. A reseller can finish an urgent task from a phone and keep the dense tools on desktop.",
     },
     {
       kind: "subhead",
-      title: "Shared contract with engineering",
-      text: "I worked with 5+ engineers and product managers across the Netherlands and India. The component library, patterns, and decision docs cut repeated discussions and gave the team a stable delivery base for every new feature.",
+      title: "Shared with engineering",
+      text: "I worked with 5+ engineers and product managers in the Netherlands and India. The component library, patterns and decision docs ended repeated discussions about tables, forms and breakpoints.",
     },
     {
-      label: "Execution",
+      label: "Rollout",
       kind: "logline",
-      text: "I designed the migration path with the final interface, not as a separate roadmap exercise.",
+      text: "I planned the rollout by risk, together with the interface.",
     },
     {
       kind: "case",
-      text: "Some flows could change fast. Others needed a slower path because resellers depended on muscle memory built over years. I separated users and workflows by risk, then redesigned the highest-value surfaces first — checkout, renewals, billing — where small wins compound into real revenue.",
+      text: "Low-stakes pages shipped first and surfaced the system's bugs. Billing, renewals and account admin moved once the system had proven itself.",
     },
     {
       kind: "case",
-      text: "I started with basic styles and controls, then expanded into reseller-specific patterns. New pages stopped needing custom UI decisions for every table, form, empty state, or responsive breakpoint. Designers and engineers shipped faster with fewer review cycles.",
-    },
-    {
-      kind: "subhead",
-      title: "Risk-tiered rollout",
-      text: "Quiet flows shipped first to surface system bugs. Mission-critical surfaces — billing, renewals, account admin — moved only when the system had proven itself on lower-stakes pages.",
-    },
-    {
-      kind: "subhead",
-      title: "Power-user defaults preserved",
-      text: "Keyboard shortcuts, batch operations, and dense tables stayed available. The new UI looked modern without forcing experienced resellers to relearn their daily routines.",
+      text: "Keyboard shortcuts, batch operations and dense tables stayed, so experienced resellers kept their daily routine.",
     },
     {
       kind: "image",
@@ -478,7 +468,7 @@ const caseSections: Record<string, CaseSection[]> = {
         ["−35%", "Support tickets after redesign"],
         ["+22%", "Reseller checkout completion rate"],
       ],
-      text: "The design system shipped to production and became the base for every new product page across desktop, tablet, mobile, EN, ES, and RU. Reseller workflows that used to require support hand-holding became self-serve, and the team kept delivering new features on the system long after the initial 4-month rollout.",
+      text: "The design system went to production and became the base for every new page, on three device sizes and in three languages. Workflows that used to need support became self-serve, and the team kept shipping on the system long after the four-month rollout.",
     },
   ],
   slidesurf: [
@@ -555,15 +545,15 @@ const caseSections: Record<string, CaseSection[]> = {
     {
       label: "Challenge",
       kind: "logline",
-      text: "ClearScale needed an enterprise MSP portal for clients managing $10M+ in AWS infrastructure. The UI had to support daily operations across billing, services, and accounts without turning cloud complexity into a maze.",
+      text: "ClearScale's enterprise clients ran $10M+ of AWS infrastructure through one managed-services portal, and the old frontend slowed every daily job.",
     },
     {
       kind: "case",
-      text: "Enterprise AWS clients lived inside the portal. Account managers checked billing and usage daily, engineers monitored service health, and executives expected the same screens to read at a glance. The legacy frontend made every one of those jobs harder than it needed to be.",
+      text: "Account managers checked billing and usage every day, engineers watched service health, and executives wanted the same screens to read in seconds.",
     },
     {
       kind: "case",
-      text: "The portal needed a full redesign and a frontend migration in parallel. I owned product decisions, UX, UI, and React implementation as the sole designer-developer — which meant design quality and shipping speed depended on the same person.",
+      text: "The portal needed a redesign and a frontend migration at once. I did both as the only designer-developer.",
     },
     {
       kind: "image",
@@ -574,45 +564,36 @@ const caseSections: Record<string, CaseSection[]> = {
     {
       label: "Solution",
       kind: "logline",
-      text: "I redesigned the client workflows and moved the frontend to a modern React stack.",
+      text: "I redesigned the client workflows and rebuilt the frontend in React.",
     },
     {
       kind: "case",
-      text: "Doing design and implementation in one loop made the system honest. If a pattern looked clean in Figma but fell apart in code, I caught it the same day. The component library grew out of real screens instead of speculative tokens, and shipped patterns reflected what the data actually looked like in production.",
+      text: "I designed and built in one loop, so a pattern that looked clean in Figma and broke in code got fixed the same day. The component library grew out of real screens and production data.",
     },
     {
       kind: "subhead",
-      title: "Enterprise dashboard redesign",
-      text: "I reorganized the portal around service monitoring, infrastructure state, and account activity. Expert users got the dense views they needed; business stakeholders got the same data legible at a glance.",
+      title: "One dashboard, two readers",
+      text: "I reorganized the portal around service monitoring, infrastructure state and account activity. Experts keep the dense views, and business stakeholders read the same data without a walkthrough.",
     },
     {
       kind: "subhead",
       title: "React migration",
-      text: "I led the move to React, TypeScript, Next.js, and Styled Components. Reusable components replaced brittle frontend patterns and gave the team room to add new portal sections without rewriting foundations.",
-    },
-    {
-      kind: "subhead",
-      title: "Design and code in one loop",
-      text: "Because I owned design and implementation, prototypes became production UI without a long handoff. Build edge cases shaped the design system while decisions were still cheap to change.",
+      text: "I moved the frontend to React, TypeScript, Next.js and styled-components. Reusable components replaced brittle patterns, so a new portal section no longer meant rewriting the base.",
     },
     {
       label: "Context",
-      kind: "logline",
-      text: "The portal served ClearScale's AWS consulting and managed-services work, where reliability mattered far more than decoration.",
-    },
-    {
       kind: "case",
-      text: "I also worked on data-heavy AWS products during the same period, including data warehouse, data lake, and real-time ingestion workflows. That context shaped how the MSP portal handled operational screens — assume the data is big, assume the user is busy, assume the answer needs to be visible in one glance.",
+      text: "In the same years I worked on data-heavy AWS products: data warehouses, data lakes and real-time ingestion. That set the portal's rule: the data is big, the user is busy, the answer is on the first screen.",
     },
     {
       kind: "subhead",
       title: "Billing without surprises",
-      text: "I redesigned the billing surfaces to surface cost trends, anomalies, and forecast variance in line with how account managers read the numbers — not how the database stored them.",
+      text: "Billing shows cost trends, anomalies and forecast variance the way account managers read the numbers.",
     },
     {
       kind: "subhead",
       title: "Operational dashboards",
-      text: "Service health, incident timelines, and infrastructure state moved to a consistent layout, so engineers could move between accounts without relearning the screen each time.",
+      text: "Service health, incident timelines and infrastructure state share one layout, so engineers switch between accounts without relearning the screen.",
     },
     {
       kind: "image",
@@ -628,22 +609,22 @@ const caseSections: Record<string, CaseSection[]> = {
         ["−40%", "Time-to-resolve on client requests"],
         ["3×", "Faster onboarding for new enterprise clients"],
       ],
-      text: "The redesigned MSP portal gave ClearScale enterprise clients a React-based interface for managed AWS operations and gave internal teams a system they could extend instead of fight. I delivered the work as UI Designer and Frontend Engineer, owning the full path from product decisions to production code.",
+      text: "ClearScale's enterprise clients got a faster portal for managed AWS operations, and the company got a frontend it could extend. I owned the path from product decisions to production code.",
     },
   ],
   seligoai: [
     {
       label: "Challenge",
       kind: "logline",
-      text: "SeligoAI needed to make student recruitment, retention, and performance data usable for the US education market. Nontechnical users — admissions officers, counselors, faculty — needed ML-backed insights they could act on, not another analytics dump.",
+      text: "SeligoAI turns student recruitment, retention and performance data into signals that admissions officers, counselors and faculty can act on.",
     },
     {
       kind: "case",
-      text: "Schools were drowning in data and starving for signal. Spreadsheets, SIS exports, and tutor notes lived in separate corners, and the people who could actually help a student rarely saw the full picture in time. SeligoAI had to turn that scatter into a single, role-aware workflow.",
+      text: "Schools kept spreadsheets, SIS exports and tutor notes in separate places, and the people who could help a student rarely saw the full picture in time.",
     },
     {
       kind: "case",
-      text: "The platform covered schedules, performance tracking, learning materials, role-based dashboards, predictive analytics, and student success indices. Each role needed a distinct workflow inside one visual language so the institution could roll it out without retraining everyone twice.",
+      text: "The platform covers schedules, performance, learning materials, predictive analytics and student success indices. Each role needed its own workflow inside one visual language.",
     },
     {
       kind: "image",
@@ -654,45 +635,41 @@ const caseSections: Record<string, CaseSection[]> = {
     {
       label: "Solution",
       kind: "logline",
-      text: "I designed a responsive platform with bright accents, reusable components, and clear dashboard patterns built around action, not exposure.",
+      text: "I designed a responsive platform where every ML signal leads to an action.",
     },
     {
       kind: "case",
-      text: "Predictive analytics fail when the UI shows a score and stops there. I built the surface to answer the next question — what now, for whom, by when — so ML output translated into work people could pick up the same day.",
+      text: "A risk score alone helps nobody. Each signal answers what to do, for whom and by when, so staff can act on it the same day.",
     },
     {
       kind: "subhead",
       title: "Design system first",
-      text: "I created the core components and UI rules before moving into full pages. That gave the team a base for future sections instead of a pile of one-off screens, and kept later modules visually and behaviorally coherent.",
+      text: "I built the core components and UI rules before the full pages, so later modules look and behave like the first ones.",
     },
     {
       kind: "subhead",
-      title: "Predictive analytics without jargon",
-      text: "The product exposed ML output through success indices and dashboard signals. I focused the UI on actions and status, so users could see where to pay attention without parsing model terminology.",
+      title: "Analytics without jargon",
+      text: "ML output appears as success indices and status signals. Users see where to pay attention without reading model terms.",
     },
     {
       kind: "subhead",
-      title: "Responsive education workflows",
-      text: "I designed the platform for desktop, tablet, and mobile. Schedules, materials, and performance views kept their core data on smaller screens, so faculty could check on a student between classes.",
+      title: "Every screen size",
+      text: "Schedules, materials and performance views keep their core data on tablet and phone, so faculty can check on a student between classes.",
     },
     {
-      label: "Implementation",
-      kind: "logline",
-      text: "The stack supported fast product development and a component-driven interface I owned end-to-end.",
-    },
-    {
+      label: "Build",
       kind: "case",
-      text: "I worked with Next.js, TailwindCSS, and Webpack, combining product design and frontend implementation. The solo setup let me move from component decisions to working sections in short cycles, with no design-to-engineering translation losses.",
+      text: "I built the frontend myself in Next.js and Tailwind CSS, so component decisions turned into working sections in short cycles.",
     },
     {
       kind: "subhead",
       title: "Role-based dashboards",
-      text: "Admissions, advising, and faculty each landed on a tailored home screen sharing the same components. The institution rolled out one product, not three.",
+      text: "Admissions, advising and faculty each land on their own home screen built from the same components. The institution rolls out one product, not three.",
     },
     {
       kind: "subhead",
       title: "Early-warning signals",
-      text: "At-risk indicators surfaced before grades dropped, so advisors could intervene during the term instead of debriefing after it ended.",
+      text: "At-risk indicators show up before grades drop, so advisors step in during the term.",
     },
     {
       kind: "image",
@@ -708,7 +685,7 @@ const caseSections: Record<string, CaseSection[]> = {
         ["5×", "Faster scheduling workflow"],
         ["12+", "US institutions onboarded"],
       ],
-      text: "SeligoAI shipped with a design system, core components, and key sections for student management, recruitment, retention, and predictive analytics. The platform gave nontechnical staff ML-backed signals they could act on the same day — and gave the team a foundation to keep extending after I handed it off.",
+      text: "SeligoAI shipped with a design system and the key sections for student management, recruitment, retention and predictive analytics. Nontechnical staff got ML-backed signals they could act on the same day, and the handoff left the team a system to extend.",
     },
   ],
   talkpilot: [

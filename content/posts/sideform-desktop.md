@@ -73,7 +73,7 @@ Type a few letters and the pages you visited come up first.
 ![Address bar suggestions from history, then the chosen page opens](/images/writing/sideform-desktop/cu-omnibox.mp4)
 
 ### Three agents
-Each agent gets a named cursor in its own colour, so you see who fills which field.
+Each agent gets a named cursor in its own color, so you see who fills which field.
 ![Three agent cursors fill a pre-order form together and place the order](/images/writing/sideform-desktop/video-browser.mp4)
 
 ### Passwords
