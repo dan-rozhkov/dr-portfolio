@@ -41,6 +41,103 @@ function formatLocation(raw) {
   return parts.length > 1 ? `${parts[0]} +${parts.length - 1}` : parts[0];
 }
 
+// Regions come from the RAW location (every ";" part), because the displayed
+// location collapses extras into "+N". A job can match several regions.
+// Each part is classified country-first: an explicit country (or region name)
+// decides alone; city/state keywords are only a fallback when none is named.
+const wordRe = (words, flags = "iu") =>
+  new RegExp(`(?<![\\p{L}\\d])(?:${words.join("|")})(?![\\p{L}\\d])`, flags);
+
+const US_COUNTRY_RE = wordRe(["United States", "North America", "America's"]);
+// Case-sensitive so the pronoun "us" never matches.
+const US_ABBR_RE = /(?<![\p{L}\d.])(?:USA|US)(?![\p{L}\d])|(?<![\p{L}\d])U\.S\.(?:A\.)?/u;
+const EUROPE_COUNTRIES = [
+  "Europe", "European", "EMEA", "United Kingdom", "Great Britain", "England", "Scotland", "Wales",
+  "Northern Ireland", "Ireland", "Germany", "Poland", "Portugal", "Spain", "France", "Netherlands",
+  "Belgium", "Luxembourg", "Switzerland", "Austria", "Italy", "Sweden", "Norway", "Denmark",
+  "Finland", "Estonia", "Latvia", "Lithuania", "Czech Republic", "Czechia", "Slovakia", "Hungary",
+  "Romania", "Bulgaria", "Croatia", "Slovenia", "Serbia", "Greece", "Cyprus", "Malta", "Iceland",
+  "Albania", "Bosnia", "Montenegro", "North Macedonia", "Moldova", "Ukraine", "Monaco",
+];
+const EUROPE_COUNTRY_RE = wordRe(EUROPE_COUNTRIES);
+const EUROPE_ABBR_RE = /(?<![\p{L}\d.])(?:EU|UK)(?![\p{L}\d])/u;
+// Countries and regions that are neither: naming one settles the part as "other".
+const OTHER_COUNTRY_RE = wordRe([
+  "Canada", "Australia", "New Zealand", "Brazil", "Mexico", "Argentina", "Chile", "Colombia", "Peru",
+  "Latin America", "South America", "Central America", "Americas", "India", "Israel", "Singapore",
+  "Japan", "China", "Korea", "Taiwan", "Hong Kong", "Thailand", "Vietnam", "Indonesia", "Philippines",
+  "Pakistan", "Bangladesh", "Turkey", "Turkiye", "UAE", "United Arab Emirates", "Saudi Arabia",
+  "Egypt", "Morocco", "Nigeria", "Kenya", "South Africa", "Armenia", "Kazakhstan", "Uzbekistan",
+  "APAC", "LATAM",
+]);
+// Sub-national names that signal a non-US, non-Europe place when no country is given.
+const OTHER_CONTEXT_RE = wordRe([
+  "Ontario", "Quebec", "British Columbia", "Alberta", "Manitoba", "Saskatchewan", "Nova Scotia",
+  "New Brunswick", "Newfoundland", "New South Wales", "Queensland", "Porto Alegre", "Rio Grande",
+]);
+const CANADA_CODE_RE = /,\s*(?:ON|BC|AB|QC|MB|SK|NS|NB|NL|PE)\b/;
+const US_STATES = [
+  "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware",
+  "Florida", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana",
+  "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri",
+  "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York",
+  "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island",
+  "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia",
+  "Washington", "West Virginia", "Wisconsin", "Wyoming",
+  // "Georgia" is left out on purpose: it is also a country.
+];
+const US_STATE_RE = wordRe(US_STATES);
+// Only codes that are not also ISO country codes (IL, CO, MA, ...); CA is handled separately.
+const US_CODE_RE = /,\s*(?:WA|NY|NJ|TX|DC|FL|OR|PA|VA|NC|AZ|OH|MI|MN|UT)\b/;
+const US_CITY_RE = wordRe([
+  "San Francisco", "Seattle", "Sunnyvale", "San Mateo", "Redwood City", "Austin", "Chicago", "Boston",
+  "Los Angeles", "San Jose", "Palo Alto", "Mountain View", "Menlo Park", "Brooklyn", "Denver",
+  "Atlanta", "Miami", "Portland", "San Diego", "Bay Area", "Silicon Valley",
+]);
+const EUROPE_CITY_RE = wordRe([
+  "Dublin", "London", "Manchester", "Edinburgh", "Berlin", "Munich", "Cologne", "Hamburg", "Frankfurt",
+  "Warsaw", "Krakow", "Lisbon", "Porto", "Madrid", "Barcelona", "Paris", "Amsterdam", "Brussels",
+  "Zurich", "Geneva", "Vienna", "Rome", "Milan", "Stockholm", "Oslo", "Copenhagen", "Helsinki",
+  "Tallinn", "Riga", "Vilnius", "Prague", "Bratislava", "Budapest", "Bucharest", "Sofia", "Zagreb",
+  "Ljubljana", "Belgrade", "Athens", "Limassol", "Paphos", "Nicosia", "Kyiv",
+]);
+
+function classifyPart(raw) {
+  const regions = new Set();
+  // Strip sub-national names first so "New South Wales" never reads as Wales.
+  const hasOtherContext = OTHER_CONTEXT_RE.test(raw) || CANADA_CODE_RE.test(raw);
+  const part = raw.replace(OTHER_CONTEXT_RE, " ");
+  const usCountry = US_COUNTRY_RE.test(part) || US_ABBR_RE.test(part);
+  const euCountry = EUROPE_COUNTRY_RE.test(part) || EUROPE_ABBR_RE.test(part);
+  if (usCountry) regions.add("us");
+  if (euCountry) regions.add("europe");
+  if (usCountry || euCountry || OTHER_COUNTRY_RE.test(part)) return regions;
+
+  // No country named: Canadian/Australian/Brazilian sub-regions settle it as "other".
+  if (hasOtherContext) return regions;
+  if (US_STATE_RE.test(part) || US_CODE_RE.test(part) || /,\s*CA\b/.test(part)) {
+    regions.add("us"); // "Paris, Texas" is a US place, not a European one.
+    return regions;
+  }
+  if (US_CITY_RE.test(part)) regions.add("us");
+  if (EUROPE_CITY_RE.test(part)) regions.add("europe");
+  return regions;
+}
+
+export function classifyRegions(raw) {
+  const regions = new Set();
+  for (const part of (raw ?? "").split(";")) {
+    if (CYRILLIC.test(part)) {
+      regions.add("europe");
+      classifyPart(part.replace(/[Ѐ-ӿ]+/g, " ")).forEach((r) => regions.add(r));
+    } else {
+      classifyPart(part).forEach((r) => regions.add(r));
+    }
+  }
+  const ordered = ["us", "europe"].filter((r) => regions.has(r));
+  return ordered.length ? ordered : ["other"];
+}
+
 function formatSkills(raw) {
   return (raw ?? "")
     .split("|")
@@ -101,6 +198,7 @@ export function transformRows(rows) {
       company: r.company.trim(),
       family: FAMILIES[r.role_family],
       location: formatLocation(r.location),
+      regions: classifyRegions(r.location),
       mode: MODES.has(r.work_mode) ? r.work_mode : null,
       seniority: orNull(r.seniority),
       salary: formatSalary(r),

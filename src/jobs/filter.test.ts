@@ -2,8 +2,8 @@ import { describe, expect, it } from "vitest";
 import { filterJobs, isNew, isStale, sinceLabel } from "./filter";
 import type { Job } from "./types";
 
-const mk = (id: string, family: Job["family"], mode: Job["mode"], firstSeen = "2026-10-24T00:00:00Z"): Job => ({
-  id, title: id, company: "C", family, location: "", mode, seniority: null,
+const mk = (id: string, family: Job["family"], mode: Job["mode"], firstSeen = "2026-10-24T00:00:00Z", regions: Job["regions"] = ["other"]): Job => ({
+  id, title: id, company: "C", family, location: "", regions, mode, seniority: null,
   salary: null, firstSeen, lastChecked: firstSeen, skills: [], url: "https://x.test",
 });
 
@@ -16,16 +16,29 @@ const jobs = [
 
 describe("filterJobs", () => {
   it("filters by family", () => {
-    expect(filterJobs(jobs, { family: "Design Engineer", mode: null }).map((j) => j.id)).toEqual(["a", "b"]);
+    expect(filterJobs(jobs, { family: "Design Engineer", mode: null, region: null }).map((j) => j.id)).toEqual(["a", "b"]);
   });
   it("filters by mode", () => {
-    expect(filterJobs(jobs, { family: null, mode: "remote" }).map((j) => j.id)).toEqual(["a", "c"]);
+    expect(filterJobs(jobs, { family: null, mode: "remote", region: null }).map((j) => j.id)).toEqual(["a", "c"]);
   });
   it("filters by both", () => {
-    expect(filterJobs(jobs, { family: "Design Engineer", mode: "remote" }).map((j) => j.id)).toEqual(["a"]);
+    expect(filterJobs(jobs, { family: "Design Engineer", mode: "remote", region: null }).map((j) => j.id)).toEqual(["a"]);
+  });
+  it("filters by region, including multi-region jobs", () => {
+    const rj = [
+      mk("u", "Design Engineer", "remote", undefined, ["us"]),
+      mk("e", "Design Engineer", "remote", undefined, ["europe"]),
+      mk("b", "Design Engineer", "remote", undefined, ["us", "europe"]),
+      mk("o", "Design Engineer", "remote"),
+    ];
+    const ids = (region: Job["regions"][number]) =>
+      filterJobs(rj, { family: null, mode: null, region }).map((j) => j.id);
+    expect(ids("us")).toEqual(["u", "b"]);
+    expect(ids("europe")).toEqual(["e", "b"]);
+    expect(ids("other")).toEqual(["o"]);
   });
   it("returns all when neither", () => {
-    expect(filterJobs(jobs, { family: null, mode: null })).toHaveLength(4);
+    expect(filterJobs(jobs, { family: null, mode: null, region: null })).toHaveLength(4);
   });
 });
 

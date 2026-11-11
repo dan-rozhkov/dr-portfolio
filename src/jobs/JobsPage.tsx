@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import data from "../data/jobs.json";
-import { filterJobs, isStale, MODE_LABEL } from "./filter";
+import { filterJobs, isStale, MODE_LABEL, REGION_LABEL } from "./filter";
 import JobCard from "./JobCard";
-import type { Job, JobFamily, JobsData } from "./types";
+import type { Job, JobFamily, JobRegion, JobsData } from "./types";
 
 const { jobs, stats, lastCheck } = data as JobsData;
 
@@ -13,6 +13,11 @@ const MODES = (Object.keys(MODE_LABEL) as NonNullable<Job["mode"]>[]).map((value
 }));
 const FAMILY_COUNT = Object.fromEntries(FAMILIES.map((f) => [f, jobs.filter((j) => j.family === f).length]));
 const MODE_COUNT = Object.fromEntries(MODES.map((m) => [m.value, jobs.filter((j) => j.mode === m.value).length]));
+const REGIONS = (Object.keys(REGION_LABEL) as JobRegion[]).map((value) => ({
+  value,
+  label: REGION_LABEL[value],
+}));
+const REGION_COUNT = Object.fromEntries(REGIONS.map((r) => [r.value, jobs.filter((j) => j.regions.includes(r.value)).length]));
 
 const CHECK_FORMAT = new Intl.DateTimeFormat("en-GB", {
   day: "numeric",
@@ -26,6 +31,7 @@ const CHECK_FORMAT = new Intl.DateTimeFormat("en-GB", {
 export default function JobsPage() {
   const [family, setFamily] = useState<JobFamily | null>(null);
   const [mode, setMode] = useState<Job["mode"]>(null);
+  const [region, setRegion] = useState<JobRegion | null>(null);
   const [stale, setStale] = useState(false);
 
   useEffect(() => {
@@ -33,7 +39,7 @@ export default function JobsPage() {
     setStale(isStale(lastCheck, new Date()));
   }, []);
 
-  const shown = filterJobs(jobs, { family, mode });
+  const shown = filterJobs(jobs, { family, mode, region });
 
   // Off-screen cards stop their strip and stamp, so a long list doesn't drain a phone.
   useEffect(() => {
@@ -45,7 +51,7 @@ export default function JobsPage() {
     );
     document.querySelectorAll(".jobs-card").forEach((card) => observer.observe(card));
     return () => observer.disconnect();
-  }, [family, mode]);
+  }, [family, mode, region]);
 
   return (
     <main className="jobs-page">
@@ -76,6 +82,17 @@ export default function JobsPage() {
                 <button type="button" aria-pressed={mode === m.value} onClick={() => setMode(mode === m.value ? null : m.value)}>
                   {m.label}
                   <span>{MODE_COUNT[m.value]}</span>
+                </button>
+              </li>
+            ))}
+          </ul>
+          <div className="jobs-label">Location</div>
+          <ul className="jobs-filter">
+            {REGIONS.map((r) => (
+              <li key={r.value}>
+                <button type="button" aria-pressed={region === r.value} onClick={() => setRegion(region === r.value ? null : r.value)}>
+                  {r.label}
+                  <span>{REGION_COUNT[r.value]}</span>
                 </button>
               </li>
             ))}

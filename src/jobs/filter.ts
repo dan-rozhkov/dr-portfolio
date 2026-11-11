@@ -1,4 +1,4 @@
-import type { Job, JobFamily } from "./types";
+import type { Job, JobFamily, JobRegion } from "./types";
 
 const DAY = 24 * 60 * 60 * 1000;
 // Same window as the "new this week" stat.
@@ -16,12 +16,19 @@ export const MODE_LABEL: Record<NonNullable<Job["mode"]>, string> = {
   onsite: "On-site",
 };
 
+export const REGION_LABEL: Record<JobRegion, string> = {
+  us: "USA",
+  europe: "Europe",
+  other: "Others",
+};
+
 export function filterJobs(
   jobs: Job[],
-  f: { family: JobFamily | null; mode: Job["mode"] },
+  f: { family: JobFamily | null; mode: Job["mode"]; region: JobRegion | null },
 ): Job[] {
   return jobs.filter(
-    (j) => (!f.family || j.family === f.family) && (!f.mode || j.mode === f.mode),
+    (j) => (!f.family || j.family === f.family) && (!f.mode || j.mode === f.mode) &&
+      (!f.region || j.regions.includes(f.region)),
   );
 }
 

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { transformRows } from "./transform.mjs";
+import { classifyRegions, transformRows } from "./transform.mjs";
 
 const base = {
   vacancy_id: "v1",
@@ -43,6 +43,7 @@ describe("transformRows", () => {
       "company",
       "family",
       "location",
+      "regions",
       "mode",
       "seniority",
       "salary",
@@ -137,5 +138,58 @@ describe("transformRows", () => {
     expect(result.lastCheck).toBe("2026-10-30T00:00:00.000Z");
     expect(result.jobs.map((j) => j.id)).toEqual(["new", "old"]);
     expect(result.jobs[1].lastChecked).toBe("2026-10-29T20:00:00.000Z");
+  });
+});
+
+describe("classifyRegions", () => {
+  it.each([
+    ["Berlin, Germany", ["europe"]],
+    ["London", ["europe"]],
+    ["San Francisco, CA, United States", ["us"]],
+    ["New York, NY (HQ)", ["us"]],
+    ["United States; Canada", ["us"]],
+    ["Europe or United States", ["us", "europe"]],
+    ["North America; Europe", ["us", "europe"]],
+    ["Warsaw, Poland; New York, United States", ["us", "europe"]],
+    ["EMEA", ["europe"]],
+    ["European Union or United Kingdom", ["europe"]],
+    ["Remote (Europe)", ["europe"]],
+    ["Pune, India", ["other"]],
+    ["Sydney, Australia", ["other"]],
+    ["Worldwide remote", ["other"]],
+    ["Remote", ["other"]],
+    ["", ["other"]],
+    ["Mexico; India", ["other"]],
+    ["Москва", ["europe"]],
+    ["Latin America", ["other"]],
+    ["Remote, South America; Central America", ["other"]],
+    ["Tel Aviv, IL", ["other"]],
+    ["Toronto, ON, CA", ["other"]],
+    ["Bogota, CO", ["other"]],
+    ["Casablanca, MA", ["other"]],
+    ["Sydney, New South Wales, Australia", ["other"]],
+    ["Porto Alegre, Brazil", ["other"]],
+    ["London, Ontario, Canada", ["other"]],
+    ["London, Ontario", ["other"]],
+    ["Paris, Texas", ["us"]],
+    ["San Francisco, CA", ["us"]],
+    ["U.S.", ["us"]],
+    ["U.S. only", ["us"]],
+    ["Remote (U.S.)", ["us"]],
+    ["European time zones", ["europe"]],
+    ["European remote", ["europe"]],
+    ["Москва; New York", ["us", "europe"]],
+    ["Москва; Pune, India", ["europe"]],
+    ["Newark, New Jersey", ["us"]],
+    ["Austin, Texas", ["us"]],
+    ["Tbilisi, Georgia", ["other"]],
+  ])("%s", (loc, expected) => {
+    expect(classifyRegions(loc)).toEqual(expected);
+  });
+  it("does not match US inside words or lowercase", () => {
+    expect(classifyRegions("Remote, join us; Prussia; Cyprus-based")).not.toContain("us");
+  });
+  it("is exposed on transformed jobs", () => {
+    expect(one({ location: "Berlin, Germany; New York" }).regions).toEqual(["us", "europe"]);
   });
 });

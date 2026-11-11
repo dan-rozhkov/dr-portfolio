@@ -13,6 +13,9 @@
       "company": "Olympus",
       "family": "Product Builder",
       "location": "London, United Kingdom",
+      "regions": [
+        "europe"
+      ],
       "mode": "hybrid",
       "seniority": null,
       "salary": null,
@@ -30,6 +33,9 @@
       "company": "hyperexponential",
       "family": "Product Builder",
       "location": "London, United Kingdom",
+      "regions": [
+        "europe"
+      ],
       "mode": "hybrid",
       "seniority": null,
       "salary": null,
@@ -48,6 +54,9 @@
       "company": "CoinTracker",
       "family": "Product Builder",
       "location": "United States +1",
+      "regions": [
+        "us"
+      ],
       "mode": "remote",
       "seniority": null,
       "salary": null,
@@ -67,6 +76,9 @@
       "company": "Way",
       "family": "Product Builder",
       "location": "San Francisco, United States",
+      "regions": [
+        "us"
+      ],
       "mode": "onsite",
       "seniority": "senior",
       "salary": null,
@@ -85,6 +97,9 @@
       "company": "Array Labs",
       "family": "Product Builder",
       "location": "Redwood City, California, United States",
+      "regions": [
+        "us"
+      ],
       "mode": "onsite",
       "seniority": "senior",
       "salary": "$150–200k / yr",
@@ -104,6 +119,9 @@
       "company": "Halter",
       "family": "GTM Engineer",
       "location": "Auckland, New Zealand",
+      "regions": [
+        "other"
+      ],
       "mode": "onsite",
       "seniority": null,
       "salary": null,
@@ -122,6 +140,9 @@
       "company": "BLP",
       "family": "GTM Engineer",
       "location": "Munich +1",
+      "regions": [
+        "europe"
+      ],
       "mode": "hybrid",
       "seniority": null,
       "salary": null,
@@ -140,6 +161,9 @@
       "company": "Kernel",
       "family": "GTM Engineer",
       "location": "London, United Kingdom",
+      "regions": [
+        "europe"
+      ],
       "mode": "onsite",
       "seniority": null,
       "salary": null,
@@ -159,6 +183,9 @@
       "company": "Kubermatic",
       "family": "GTM Engineer",
       "location": "Remote +1",
+      "regions": [
+        "other"
+      ],
       "mode": "remote",
       "seniority": null,
       "salary": null,
@@ -178,6 +205,9 @@
       "company": "lemlist",
       "family": "GTM Engineer",
       "location": "European Union +1",
+      "regions": [
+        "europe"
+      ],
       "mode": "remote",
       "seniority": null,
       "salary": null,
@@ -197,6 +227,9 @@
       "company": "FlowGen Labs",
       "family": "GTM Engineer",
       "location": "San Francisco Bay Area, United States",
+      "regions": [
+        "us"
+      ],
       "mode": "onsite",
       "seniority": null,
       "salary": null,
@@ -216,6 +249,9 @@
       "company": "Magic",
       "family": "GTM Engineer",
       "location": "New York City, United States",
+      "regions": [
+        "us"
+      ],
       "mode": "onsite",
       "seniority": null,
       "salary": null,
@@ -235,6 +271,9 @@
       "company": "Braintrust",
       "family": "GTM Engineer",
       "location": "San Francisco, United States",
+      "regions": [
+        "us"
+      ],
       "mode": "onsite",
       "seniority": null,
       "salary": null,
@@ -253,6 +292,9 @@
       "company": "Formula",
       "family": "GTM Engineer",
       "location": "Cyprus +5",
+      "regions": [
+        "europe"
+      ],
       "mode": "remote",
       "seniority": null,
       "salary": null,
@@ -272,6 +314,9 @@
       "company": "REMATIQ",
       "family": "GTM Engineer",
       "location": "Berlin, Germany",
+      "regions": [
+        "europe"
+      ],
       "mode": "hybrid",
       "seniority": null,
       "salary": null,
@@ -291,6 +336,9 @@
       "company": "Multiverse",
       "family": "GTM Engineer",
       "location": "London, United Kingdom",
+      "regions": [
+        "europe"
+      ],
       "mode": "hybrid",
       "seniority": null,
       "salary": null,
@@ -310,6 +358,9 @@
       "company": "Forus",
       "family": "GTM Engineer",
       "location": "New York, United States",
+      "regions": [
+        "us"
+      ],
       "mode": "onsite",
       "seniority": null,
       "salary": null,
@@ -324,6 +375,9 @@
       "company": "Clay Labs",
       "family": "GTM Engineer",
       "location": "New York +1",
+      "regions": [
+        "us"
+      ],
       "mode": "hybrid",
       "seniority": null,
       "salary": null,
@@ -343,6 +397,9 @@
       "company": "Inferact",
       "family": "GTM Engineer",
       "location": "San Francisco, California, United States",
+      "regions": [
+        "us"
+      ],
       "mode": "onsite",
       "seniority": null,
       "salary": null,
@@ -362,6 +419,9 @@
       "company": "Stuut",
       "family": "Design Engineer",
       "location": "San Francisco +1",
+      "regions": [
+        "us"
+      ],
       "mode": "hybrid",
       "seniority": null,
       "salary": null,
@@ -381,6 +441,9 @@
       "company": "Aibidia",
       "family": "Design Engineer",
       "location": "London, United Kingdom +1",
+      "regions": [
+        "europe"
+      ],
       "mode": "hybrid",
       "seniority": null,
       "salary": null,
@@ -400,6 +463,9 @@
       "company": "tldraw",
       "family": "Design Engineer",
       "location": "London, United Kingdom",
+      "regions": [
+        "europe"
+      ],
       "mode": "hybrid",
       "seniority": null,
       "salary": null,
@@ -419,6 +485,9 @@
       "company": "WRITER",
       "family": "Design Engineer",
       "location": "New York +4",
+      "regions": [
+        "us"
+      ],
       "mode": "hybrid",
       "seniority": null,
       "salary": null,
@@ -437,6 +506,9 @@
       "company": "Ashby",
       "family": "Design Engineer",
       "location": "Portugal +11",
+      "regions": [
+        "europe"
+      ],
       "mode": "remote",
       "seniority": null,
       "salary": null,
@@ -456,6 +528,9 @@
       "company": "Warp",
       "family": "Design Engineer",
       "location": "New York City, United States",
+      "regions": [
+        "us"
+      ],
       "mode": "onsite",
       "seniority": null,
       "salary": null,
@@ -473,6 +548,9 @@
       "company": "Mintlify",
       "family": "Product Builder",
       "location": "San Francisco, California, United States",
+      "regions": [
+        "us"
+      ],
       "mode": "onsite",
       "seniority": "senior",
       "salary": null,
@@ -490,6 +568,9 @@
       "company": "Linear",
       "family": "Product Builder",
       "location": "North America",
+      "regions": [
+        "us"
+      ],
       "mode": "remote",
       "seniority": null,
       "salary": null,
@@ -508,6 +589,9 @@
       "company": "Fireworks",
       "family": "GTM Engineer",
       "location": "San Mateo, California, United States",
+      "regions": [
+        "us"
+      ],
       "mode": "hybrid",
       "seniority": null,
       "salary": null,
@@ -527,6 +611,9 @@
       "company": "Numeric",
       "family": "Product Builder",
       "location": "San Francisco, United States",
+      "regions": [
+        "us"
+      ],
       "mode": "onsite",
       "seniority": null,
       "salary": null,
@@ -544,6 +631,10 @@
       "company": "Linear",
       "family": "Design Engineer",
       "location": "North America +1",
+      "regions": [
+        "us",
+        "europe"
+      ],
       "mode": "remote",
       "seniority": null,
       "salary": null,
@@ -563,6 +654,9 @@
       "company": "ChatPlace",
       "family": "Design Engineer",
       "location": "Portugal",
+      "regions": [
+        "europe"
+      ],
       "mode": "remote",
       "seniority": "Senior",
       "salary": null,
@@ -582,6 +676,9 @@
       "company": "OpenAI",
       "family": "Product Builder",
       "location": "San Francisco",
+      "regions": [
+        "us"
+      ],
       "mode": "hybrid",
       "seniority": null,
       "salary": null,
@@ -601,6 +698,9 @@
       "company": "Cognition",
       "family": "GTM Engineer",
       "location": "San Francisco, CA, United States",
+      "regions": [
+        "us"
+      ],
       "mode": "onsite",
       "seniority": null,
       "salary": null,
@@ -620,6 +720,10 @@
       "company": "Uniti AI",
       "family": "Product Builder",
       "location": "New York City, United States +1",
+      "regions": [
+        "us",
+        "europe"
+      ],
       "mode": "hybrid",
       "seniority": "staff|principal",
       "salary": null,
@@ -639,6 +743,9 @@
       "company": "HUD",
       "family": "Product Builder",
       "location": "San Francisco, United States +2",
+      "regions": [
+        "us"
+      ],
       "mode": "remote",
       "seniority": null,
       "salary": null,
@@ -658,6 +765,9 @@
       "company": "Collinear AI",
       "family": "Product Builder",
       "location": "Sunnyvale, CA +1",
+      "regions": [
+        "us"
+      ],
       "mode": "hybrid",
       "seniority": null,
       "salary": null,
@@ -675,6 +785,9 @@
       "company": "OpenGov",
       "family": "Product Builder",
       "location": "Pune, India",
+      "regions": [
+        "other"
+      ],
       "mode": "onsite",
       "seniority": null,
       "salary": null,
@@ -693,6 +806,9 @@
       "company": "Workyard",
       "family": "Product Builder",
       "location": "Sydney, Australia",
+      "regions": [
+        "other"
+      ],
       "mode": "hybrid",
       "seniority": null,
       "salary": null,
@@ -712,6 +828,9 @@
       "company": "Viktor",
       "family": "Product Builder",
       "location": "Warsaw, Poland +2",
+      "regions": [
+        "europe"
+      ],
       "mode": "remote",
       "seniority": null,
       "salary": null,
@@ -731,6 +850,9 @@
       "company": "Temper",
       "family": "Design Engineer",
       "location": "San Francisco, CA, United States",
+      "regions": [
+        "us"
+      ],
       "mode": "onsite",
       "seniority": null,
       "salary": null,
@@ -749,6 +871,9 @@
       "company": "SageOx",
       "family": "Design Engineer",
       "location": "Seattle, WA, United States",
+      "regions": [
+        "us"
+      ],
       "mode": "onsite",
       "seniority": null,
       "salary": null,
@@ -767,6 +892,9 @@
       "company": "Duvo Inc",
       "family": "Design Engineer",
       "location": "European Union or United Kingdom",
+      "regions": [
+        "europe"
+      ],
       "mode": "remote",
       "seniority": null,
       "salary": null,
@@ -786,6 +914,9 @@
       "company": "Orbital",
       "family": "Design Engineer",
       "location": "London, United Kingdom",
+      "regions": [
+        "europe"
+      ],
       "mode": "hybrid",
       "seniority": "senior",
       "salary": null,
@@ -805,6 +936,9 @@
       "company": "Cracken",
       "family": "Design Engineer",
       "location": "Europe",
+      "regions": [
+        "europe"
+      ],
       "mode": "remote",
       "seniority": null,
       "salary": null,
@@ -824,6 +958,10 @@
       "company": "ClickHouse",
       "family": "Design Engineer",
       "location": "Europe or United States",
+      "regions": [
+        "us",
+        "europe"
+      ],
       "mode": null,
       "seniority": "senior",
       "salary": null,
@@ -843,6 +981,9 @@
       "company": "Oyster",
       "family": "GTM Engineer",
       "location": "Spain +8",
+      "regions": [
+        "europe"
+      ],
       "mode": "remote",
       "seniority": "senior",
       "salary": null,
@@ -862,6 +1003,10 @@
       "company": "Oyster",
       "family": "GTM Engineer",
       "location": "EMEA +7",
+      "regions": [
+        "us",
+        "europe"
+      ],
       "mode": "remote",
       "seniority": "senior",
       "salary": null,
@@ -881,6 +1026,9 @@
       "company": "incident.io",
       "family": "Product Builder",
       "location": "London, United Kingdom",
+      "regions": [
+        "europe"
+      ],
       "mode": null,
       "seniority": null,
       "salary": null,
@@ -898,6 +1046,9 @@
       "company": "Baseten",
       "family": "Product Builder",
       "location": "San Francisco +2",
+      "regions": [
+        "us"
+      ],
       "mode": "hybrid",
       "seniority": null,
       "salary": null,
@@ -912,6 +1063,9 @@
       "company": "Samba",
       "family": "Product Builder",
       "location": "San Francisco, California, United States",
+      "regions": [
+        "us"
+      ],
       "mode": "onsite",
       "seniority": null,
       "salary": "$150–200k / yr",
@@ -931,6 +1085,9 @@
       "company": "Koyfin",
       "family": "GTM Engineer",
       "location": "United States +1",
+      "regions": [
+        "us"
+      ],
       "mode": "remote",
       "seniority": null,
       "salary": null,
@@ -949,6 +1106,9 @@
       "company": "Modal",
       "family": "GTM Engineer",
       "location": "San Francisco +1",
+      "regions": [
+        "us"
+      ],
       "mode": "onsite",
       "seniority": null,
       "salary": null,
@@ -967,6 +1127,9 @@
       "company": "Baseten",
       "family": "Design Engineer",
       "location": "San Francisco +2",
+      "regions": [
+        "us"
+      ],
       "mode": "hybrid",
       "seniority": null,
       "salary": null,
@@ -986,6 +1149,9 @@
       "company": "Langdock",
       "family": "Design Engineer",
       "location": "Berlin, Germany",
+      "regions": [
+        "europe"
+      ],
       "mode": "onsite",
       "seniority": null,
       "salary": "€135–200k / yr",
@@ -1005,6 +1171,9 @@
       "company": "Maple",
       "family": "Design Engineer",
       "location": "New York, United States",
+      "regions": [
+        "us"
+      ],
       "mode": "onsite",
       "seniority": null,
       "salary": null,
@@ -1024,6 +1193,9 @@
       "company": "Langdock",
       "family": "Product Builder",
       "location": "Berlin, Germany",
+      "regions": [
+        "europe"
+      ],
       "mode": "onsite",
       "seniority": "senior",
       "salary": "€135–200k / yr",
@@ -1043,6 +1215,9 @@
       "company": "Baseten",
       "family": "GTM Engineer",
       "location": "New York, United States +1",
+      "regions": [
+        "us"
+      ],
       "mode": "hybrid",
       "seniority": null,
       "salary": null,
@@ -1062,6 +1237,9 @@
       "company": "Modal",
       "family": "GTM Engineer",
       "location": "New York, United States +1",
+      "regions": [
+        "us"
+      ],
       "mode": "onsite",
       "seniority": null,
       "salary": null,
@@ -1081,6 +1259,9 @@
       "company": "Watershed",
       "family": "GTM Engineer",
       "location": "San Francisco, United States +1",
+      "regions": [
+        "us"
+      ],
       "mode": "onsite",
       "seniority": null,
       "salary": null,
@@ -1100,6 +1281,9 @@
       "company": "Finix",
       "family": "GTM Engineer",
       "location": "San Francisco, United States",
+      "regions": [
+        "us"
+      ],
       "mode": "onsite",
       "seniority": null,
       "salary": "$140–180k / yr",
@@ -1119,6 +1303,9 @@
       "company": "Pigment",
       "family": "GTM Engineer",
       "location": "New York, United States",
+      "regions": [
+        "us"
+      ],
       "mode": "hybrid",
       "seniority": null,
       "salary": null,
@@ -1137,6 +1324,9 @@
       "company": "Maple",
       "family": "GTM Engineer",
       "location": "New York, United States",
+      "regions": [
+        "us"
+      ],
       "mode": "onsite",
       "seniority": null,
       "salary": null,
@@ -1155,6 +1345,9 @@
       "company": "Firework",
       "family": "GTM Engineer",
       "location": "Mexico +1",
+      "regions": [
+        "other"
+      ],
       "mode": "remote",
       "seniority": null,
       "salary": null,
@@ -1174,6 +1367,9 @@
       "company": "Samba TV",
       "family": "GTM Engineer",
       "location": "San Francisco, United States",
+      "regions": [
+        "us"
+      ],
       "mode": "onsite",
       "seniority": null,
       "salary": "$175–215k / yr",
@@ -1193,6 +1389,9 @@
       "company": "Koyfin",
       "family": "GTM Engineer",
       "location": "United States +1",
+      "regions": [
+        "us"
+      ],
       "mode": "remote",
       "seniority": null,
       "salary": null,
@@ -1212,6 +1411,9 @@
       "company": "Gorgias",
       "family": "GTM Engineer",
       "location": "Paris, France",
+      "regions": [
+        "europe"
+      ],
       "mode": "hybrid",
       "seniority": null,
       "salary": null,
@@ -1230,6 +1432,9 @@
       "company": "Sweed",
       "family": "GTM Engineer",
       "location": "",
+      "regions": [
+        "other"
+      ],
       "mode": "remote",
       "seniority": "senior",
       "salary": null,
@@ -1247,6 +1452,9 @@
       "company": "Tendos.ai",
       "family": "Design Engineer",
       "location": "Munich, Germany",
+      "regions": [
+        "europe"
+      ],
       "mode": "onsite",
       "seniority": "senior",
       "salary": null,
@@ -1266,6 +1474,9 @@
       "company": "Nebius",
       "family": "Product Builder",
       "location": "Amsterdam, Netherlands",
+      "regions": [
+        "europe"
+      ],
       "mode": null,
       "seniority": "lead",
       "salary": null,
@@ -1285,6 +1496,9 @@
       "company": "JetBrains",
       "family": "GTM Engineer",
       "location": "Amsterdam, Netherlands +5",
+      "regions": [
+        "europe"
+      ],
       "mode": "hybrid",
       "seniority": "lead",
       "salary": null,
@@ -1304,6 +1518,9 @@
       "company": "JetBrains",
       "family": "Product Builder",
       "location": "Amsterdam, Netherlands +5",
+      "regions": [
+        "europe"
+      ],
       "mode": null,
       "seniority": "lead",
       "salary": null,
@@ -1323,6 +1540,9 @@
       "company": "Granola",
       "family": "Design Engineer",
       "location": "London, United Kingdom",
+      "regions": [
+        "europe"
+      ],
       "mode": "onsite",
       "seniority": null,
       "salary": null,
@@ -1342,6 +1562,9 @@
       "company": "Granola",
       "family": "Design Engineer",
       "location": "London, United Kingdom",
+      "regions": [
+        "europe"
+      ],
       "mode": "onsite",
       "seniority": null,
       "salary": null,
@@ -1360,6 +1583,9 @@
       "company": "Granola",
       "family": "Product Builder",
       "location": "London, United Kingdom",
+      "regions": [
+        "europe"
+      ],
       "mode": "onsite",
       "seniority": null,
       "salary": null,
@@ -1379,6 +1605,9 @@
       "company": "Granola",
       "family": "GTM Engineer",
       "location": "London, United Kingdom",
+      "regions": [
+        "europe"
+      ],
       "mode": null,
       "seniority": null,
       "salary": null,
@@ -1397,6 +1626,9 @@
       "company": "Plurio by Elly Analytics",
       "family": "GTM Engineer",
       "location": "Worldwide +1",
+      "regions": [
+        "other"
+      ],
       "mode": "remote",
       "seniority": "middle/senior",
       "salary": "$72–126k / yr",
@@ -1414,6 +1646,9 @@
       "company": "Oyster",
       "family": "GTM Engineer",
       "location": "EMEA",
+      "regions": [
+        "europe"
+      ],
       "mode": "remote",
       "seniority": "senior",
       "salary": null,
@@ -1433,6 +1668,9 @@
       "company": "atomGTM",
       "family": "GTM Engineer",
       "location": "Remote +1",
+      "regions": [
+        "other"
+      ],
       "mode": "remote",
       "seniority": null,
       "salary": null,
@@ -1451,6 +1689,9 @@
       "company": "bunny.net",
       "family": "Product Builder",
       "location": "Europe preferred +1",
+      "regions": [
+        "europe"
+      ],
       "mode": "remote",
       "seniority": "lead",
       "salary": null,
@@ -1470,6 +1711,9 @@
       "company": "Chess.com",
       "family": "Design Engineer",
       "location": "Worldwide remote",
+      "regions": [
+        "other"
+      ],
       "mode": "remote",
       "seniority": "senior",
       "salary": null,
@@ -1489,6 +1733,9 @@
       "company": "Turquoise Health",
       "family": "Design Engineer",
       "location": "United States",
+      "regions": [
+        "us"
+      ],
       "mode": "remote",
       "seniority": "senior",
       "salary": null,
@@ -1507,6 +1754,9 @@
       "company": "Restream",
       "family": "Design Engineer",
       "location": "Remote (Europe)",
+      "regions": [
+        "europe"
+      ],
       "mode": "remote",
       "seniority": null,
       "salary": null,
@@ -1525,6 +1775,9 @@
       "company": "Restream",
       "family": "Design Engineer",
       "location": "Remote (Europe)",
+      "regions": [
+        "europe"
+      ],
       "mode": "remote",
       "seniority": null,
       "salary": null,
@@ -1543,6 +1796,9 @@
       "company": "Restream",
       "family": "Product Builder",
       "location": "Remote (Europe)",
+      "regions": [
+        "europe"
+      ],
       "mode": "remote",
       "seniority": "senior",
       "salary": null,
