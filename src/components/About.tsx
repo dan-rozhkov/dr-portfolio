@@ -10,8 +10,12 @@ export default function About() {
       <div className="grid-shell about-grid">
         <img
           className="portrait"
-          src={assetUrl("portrait.png")}
+          // portrait.png (800px) stays as the og:image fallback in entry-server.tsx; replace both together
+          src={assetUrl("portrait.webp")}
           alt={`Portrait of ${profile.name}`}
+          width={560}
+          height={560}
+          loading="lazy"
         />
         <div className="about-text">
           {about.map((paragraph) => (

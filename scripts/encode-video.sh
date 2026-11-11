@@ -36,3 +36,6 @@ for src in "$@"; do
   printf '%-60s %6dK  hevc %6dK  webm %6dK\n' "$src" \
     $(( $(stat -f%z "$src") / 1024 )) $(( $(stat -f%z "$hevc") / 1024 )) $(( $(stat -f%z "$webm") / 1024 ))
 done
+
+# Record the new sizes for <video width/height>.
+(cd "$(dirname "$0")/.." && node scripts/video-dims.mjs)

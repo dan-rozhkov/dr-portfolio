@@ -1,23 +1,25 @@
 import { useRef } from "react";
 import { assetUrl } from "../lib/url";
-import { useViewportPlayback, videoSources } from "./video";
+import { lazyVideoProps, useViewportPlayback, videoSize, videoSources } from "./video";
 
 /**
  * A looping card video. It plays only while on screen in a visible tab; under reduced
  * motion it stays on its poster. The card link carries the meaning, so the video is hidden
  * from screen readers.
  */
-export function ThumbVideo(props: { src: string; poster: string }) {
+export function ThumbVideo(props: { src: string; poster: string; lazy?: boolean }) {
   // key: a browser picks among <source> children only on first load, so a new src needs a new element
   return <ThumbVideoPlayer key={props.src} {...props} />;
 }
 
-function ThumbVideoPlayer({ src, poster }: { src: string; poster: string }) {
+function ThumbVideoPlayer({ src, poster, lazy = true }: { src: string; poster: string; lazy?: boolean }) {
   const ref = useRef<HTMLVideoElement>(null);
   useViewportPlayback(ref, { respectReducedMotion: true });
   return (
     <video
       ref={ref}
+      {...videoSize(src)}
+      {...lazyVideoProps(lazy)}
       poster={assetUrl(poster)}
       loop
       muted

@@ -4,7 +4,7 @@ import type { CaseSection } from "../data/portfolio";
 import { useT } from "../i18n/context";
 import { assetUrl } from "../lib/url";
 import type { SubheadSection } from "./caseGroups";
-import { useViewportPlayback, videoSources } from "./video";
+import { lazyVideoProps, useViewportPlayback, videoSize, videoSources } from "./video";
 
 function isVideo(src: string): boolean {
   return /\.(mp4|webm|mov)$/i.test(src);
@@ -53,6 +53,8 @@ function CaseVideo({ src, alt, eager }: { src: string; alt?: string; eager: bool
     <video
       ref={ref}
       className="cs-image"
+      {...videoSize(src)}
+      {...lazyVideoProps(!eager)}
       poster={LOADING_POSTER}
       autoPlay={eager}
       loop

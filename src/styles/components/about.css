@@ -12,6 +12,7 @@
   grid-column: 1 / 5;
   align-self: start;
   width: min(100%, 280px);
+  height: auto; /* the height attribute would otherwise beat the 4:5 crop */
   aspect-ratio: 4 / 5;
   object-fit: cover;
   filter: grayscale(1);

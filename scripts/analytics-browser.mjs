@@ -14,7 +14,6 @@ try {
     const page = await context.newPage();
     const events = [];
     const unexpected = [];
-    let fontStylesheets = 0;
     const errors = [];
     page.on("pageerror", (error) => errors.push(error.message));
     await context.addInitScript(() => {
@@ -27,12 +26,6 @@ try {
     await context.route("**/*", async (route) => {
       const request = route.request();
       const url = new URL(request.url());
-      if (url.hostname === "api.fontshare.com" && url.pathname === "/v2/css") {
-        // Existing typography is outside analytics. Do not contact the font provider in this test.
-        assert.doesNotMatch((await request.allHeaders()).referer || "", /secret|private|utm_/);
-        fontStylesheets++;
-        return route.fulfill({ status: 200, contentType: "text/css", body: "" });
-      }
       if (url.hostname !== "drozhkov.com") {
         unexpected.push(request.url());
         return route.abort();
@@ -131,7 +124,6 @@ try {
         inspectedEvents: events.length,
         banner: "absent",
         unexpectedExternalRequests: unexpected.length,
-        existingFontStylesheets: fontStylesheets,
         storage: "empty",
         privacy: "rendered",
       }),

@@ -1,10 +1,31 @@
 import { useEffect } from "react";
 import type { RefObject } from "react";
 import { assetUrl } from "../lib/url";
+import VIDEO_DIMS from "../data/video-dims.json";
 
 export interface VideoSource {
   src: string;
   type: string;
+}
+
+const DIMS: Record<string, number[] | undefined> = VIDEO_DIMS;
+
+/**
+ * Pixel size of a public video, from src/data/video-dims.json (scripts/video-dims.mjs).
+ * Set as width/height on <video>, it reserves the right box before the file loads.
+ */
+export function videoSize(src: string): { width: number; height: number } | undefined {
+  const dims = DIMS[src.replace(/^\/+/, "")];
+  return dims ? { width: dims[0], height: dims[1] } : undefined;
+}
+
+/**
+ * Native lazy loading for <video>: the browser holds back the poster and `preload` until
+ * the element nears the screen. Chrome 150+; other browsers ignore the attribute and keep
+ * following `preload`. Spread onto <video>, since React's types don't list it yet.
+ */
+export function lazyVideoProps(lazy: boolean): Record<string, string> {
+  return lazy ? { loading: "lazy" } : {};
 }
 
 /**

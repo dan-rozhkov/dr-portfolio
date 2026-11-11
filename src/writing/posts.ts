@@ -25,7 +25,8 @@ const md = new Marked({
     image({ href, title, text }) {
       const esc = (v: string) => v.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
       const src = /^(?:[a-z][a-z0-9+.-]*:|\/\/|#)/i.test(href) ? href : assetUrl(href);
-      return `<img src="${esc(src)}" alt="${esc(text)}"${title ? ` title="${esc(title)}"` : ""}>`;
+      // Body images sit below the post's cover, so none of them is the LCP image.
+      return `<img src="${esc(src)}" alt="${esc(text)}"${title ? ` title="${esc(title)}"` : ""} loading="lazy">`;
     },
   },
 });

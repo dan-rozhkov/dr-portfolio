@@ -198,3 +198,9 @@ describe("directive blocks and prose", () => {
     expect(p.readMinutes).toBe(1);
   });
 });
+
+describe("published posts", () => {
+  it("every post has a cover, so body images (loading=lazy) never hold the LCP", () => {
+    expect(getPosts().filter((p) => !p.cover).map((p) => p.slug)).toEqual([]);
+  });
+});

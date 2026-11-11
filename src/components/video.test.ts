@@ -1,7 +1,7 @@
 import { existsSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
-import { keepsOriginalOnly, videoSources } from "./video";
+import { keepsOriginalOnly, videoSize, videoSources } from "./video";
 
 describe("videoSources", () => {
   it("offers H.265, VP9, then the H.264 original for an .mp4", () => {
@@ -44,5 +44,24 @@ describe("public videos", () => {
       .filter((p) => keepsOriginalOnly(p.replace(/^public\//, "")))
       .flatMap((p) => [p.replace(/\.mp4$/i, ".hevc.mp4"), p.replace(/\.mp4$/i, ".webm")].filter((v) => existsSync(v)));
     expect(extra).toEqual([]);
+  });
+
+  it("every .mp4 has its size recorded (run scripts/video-dims.mjs)", () => {
+    const missing = mp4s("public/images")
+      .map((p) => p.replace(/^public\//, ""))
+      .filter((p) => !videoSize(p));
+    expect(missing).toEqual([]);
+  });
+});
+
+describe("videoSize", () => {
+  it("reads a recorded size with or without a leading slash", () => {
+    const [first] = mp4s("public/images").map((p) => p.replace(/^public\//, ""));
+    expect(videoSize(first)).toEqual(videoSize(`/${first}`));
+    expect(videoSize(first)?.width).toBeGreaterThan(0);
+  });
+
+  it("returns nothing for an unknown file", () => {
+    expect(videoSize("/images/none.mp4")).toBeUndefined();
   });
 });

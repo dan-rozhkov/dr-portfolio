@@ -21,7 +21,7 @@ export default function CaseCard({
         {entry.image && (
           <div className={entry.video ? "writing-thumb writing-thumb--wide" : "writing-thumb"}>
             {entry.video ? (
-              <ThumbVideo src={entry.video} poster={entry.image} />
+              <ThumbVideo src={entry.video} poster={entry.image} lazy={!eager} />
             ) : entry.live ? (
               <LiveCover
                 variant={entry.live.variant}

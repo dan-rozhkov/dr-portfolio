@@ -216,6 +216,9 @@ export default function SkillsPhysics() {
     };
 
     let raf = 0;
+    // Run the simulation only while the stage is near the screen; hidden tabs already
+    // stop requestAnimationFrame. Each frame is a fixed step, so resuming needs no catch-up.
+    let inView = typeof IntersectionObserver === "undefined";
     const clamp = (v: number) =>
       Math.max(-CONFIG.maxSpeed, Math.min(CONFIG.maxSpeed, v));
     const clampAngular = (v: number) =>
@@ -316,9 +319,23 @@ export default function SkillsPhysics() {
       for (const c of chips) {
         c.el.style.transform = `translate(${c.x}px, ${c.y}px) rotate(${c.angle}deg)`;
       }
-      raf = requestAnimationFrame(step);
+      raf = inView ? requestAnimationFrame(step) : 0;
     };
-    raf = requestAnimationFrame(step);
+    const resume = () => {
+      if (raf === 0 && inView) raf = requestAnimationFrame(step);
+    };
+    const observer =
+      typeof IntersectionObserver === "undefined"
+        ? null
+        : new IntersectionObserver(
+            ([entry]) => {
+              inView = entry.isIntersecting;
+              resume();
+            },
+            { rootMargin: "200px 0px" },
+          );
+    observer?.observe(stage);
+    resume();
 
     const onResize = () => {
       const prev = bounds;
@@ -334,6 +351,7 @@ export default function SkillsPhysics() {
 
     return () => {
       cancelAnimationFrame(raf);
+      observer?.disconnect();
       window.removeEventListener("resize", onResize);
       window.removeEventListener("pointerup", onPointerUp);
       stage.removeEventListener("pointerdown", onPointerDown);

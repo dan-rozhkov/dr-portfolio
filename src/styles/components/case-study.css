@@ -148,6 +148,7 @@ body:has(.case-study)::-webkit-scrollbar {
 .cs-image {
   display: block;
   width: 100%;
+  height: auto; /* <video> carries width/height attributes; keep its ratio, not its pixels */
   border-radius: 0;
   background: #ececec;
 }
