@@ -280,7 +280,7 @@ const caseSections: Record<string, CaseSection[]> = {
     },
     {
       kind: "image",
-      src: "/images/sber-india-proto/caldera-stats-pair.mp4",
+      src: "/images/sber-india-proto/caldera-stats-pair-v2.mp4",
       alt: "A hand holding a phone with Caldera weekly inflow statistics and bottom navigation, beside the rupee balance chart with upcoming tax payments",
       aspect: "1920 / 1200",
     },
@@ -290,7 +290,7 @@ const caseSections: Record<string, CaseSection[]> = {
     },
     {
       kind: "image",
-      src: "/images/sber-india-proto/caldera-payment-pair.mp4",
+      src: "/images/sber-india-proto/caldera-payment-pair-v2.mp4",
       alt: "A rupee trade payment awaiting a second signature, beside a hand holding a phone with the dark Caldera AI voice assistant",
       aspect: "1920 / 1200",
     },
