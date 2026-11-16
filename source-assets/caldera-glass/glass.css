@@ -1,0 +1,37 @@
+
+/* ---------- Liquid Glass (iOS 26+), Chromium renders only ---------- */
+.glass{position:relative;isolation:isolate;
+  background:rgba(250,250,252,.6);
+  box-shadow:
+    0 10px 30px -6px rgba(0,0,0,.10),
+    0 2px 6px rgba(0,0,0,.04);
+}
+/* outline: darkest on the left and right ends, faint on top, a bit stronger at the bottom (measured on iOS) */
+.glass:before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;z-index:2;
+  background:
+    linear-gradient(90deg,rgba(0,0,0,.15),rgba(0,0,0,.09) 12%,rgba(0,0,0,.05) 30%,rgba(0,0,0,.05) 70%,rgba(0,0,0,.09) 88%,rgba(0,0,0,.15)),
+    linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.01) 60%,rgba(0,0,0,.05));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;
+  mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)}
+/* specular rim: bright top-left, softer bottom-right, inner glow */
+.glass:after{content:"";position:absolute;inset:1px;border-radius:inherit;pointer-events:none;z-index:2;
+  box-shadow:
+    inset 1.2px 1.4px 0 -.2px rgba(255,255,255,.95),
+    inset -1px -1.4px 0 -.2px rgba(255,255,255,.95),
+    inset 0 0 10px rgba(255,255,255,.55);
+}
+.glass>*{position:relative;z-index:3}
+
+/* floating tab bar */
+.dock{left:16px;right:16px;bottom:26px;padding:0;background:none;-webkit-backdrop-filter:none;backdrop-filter:none;overflow:visible}
+.dock .tb{height:64px;border-radius:32px;padding:5px;gap:0;grid-template-columns:repeat(3,1fr);place-items:stretch;
+  --bezel:20;--refract:12;--blur:2.6;--sat:1.7}
+.tb>span{width:auto;height:auto;border-radius:27px;display:grid;place-items:center}
+.tb>span.on{background:rgba(24,24,27,.085);box-shadow:inset 0 0 6px rgba(255,255,255,.35)}
+.tb .orb{width:auto;height:auto}
+.tb .orb img{width:40px;height:40px}
+.dock .homebar{position:absolute;left:50%;margin:0 0 0 -67px;bottom:-18px}
+
+/* glass controls on the header row */
+.dd.glass{border:0;height:40px;margin:-2px 0;border-radius:20px;padding:0 12px 0 15px;--bezel:12;--refract:8;--blur:1.2}
+.more.glass{position:absolute;background:rgba(250,250,252,.6);--bezel:12;--refract:8;--blur:1.2}
