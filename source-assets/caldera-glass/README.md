@@ -1,6 +1,6 @@
 # Caldera: iOS Liquid Glass in the phone videos
 
-Sources for `caldera-stats-pair-v2` and `caldera-payment-pair-v2` (commit 1cbd898).
+Sources for `caldera-stats-pair-v2` and `caldera-payment-pair-v2` (commit 1cbd898). `caldera-payment-pair-v2` was replaced by `-v3` (glass sheet, left tile re-recorded on top of v2 frames) and removed from `public/`; get it from git history if needed.
 The general technique lives in the global Claude skill `ios-liquid-glass`; these files are the Caldera-specific build.
 
 - `v13.html` — the approved Caldera app prototype (from the Notion embed), the base.
