@@ -165,7 +165,8 @@ body:has(.case-study)::-webkit-scrollbar {
 }
 
 .cs-media-group {
-  --media-gap: clamp(12px, 2vw, 32px);
+  /* Earlier Caldera pairs bake a 12px gutter into their 1920px frames. */
+  --media-gap: clamp(4px, 0.625vw, 12px);
 
   display: grid;
   gap: var(--media-gap);
