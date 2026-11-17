@@ -8,6 +8,8 @@ export interface Translations {
   "nav.contact": string;
   "nav.contactMobile": string;
   "nav.cv": string;
+  "nav.themeDark": string;
+  "nav.themeLight": string;
   // Contact section
   "contact.heading": string;
   "contact.email": string;
@@ -38,6 +40,8 @@ const en: Translations = {
   "nav.contact": "Contact",
   "nav.contactMobile": "@",
   "nav.cv": "CV ↗",
+  "nav.themeDark": "Switch to dark theme",
+  "nav.themeLight": "Switch to light theme",
   "contact.heading": "Let's build something useful together",
   "contact.email": "Get in touch ↗",
   "contact.linkedin": "LinkedIn ↗",

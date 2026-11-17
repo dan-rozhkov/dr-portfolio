@@ -39,8 +39,28 @@
   /* Transition durations */
   --t-fast: 0.16s;
   --t-base: 0.2s;
+  --list-text: rgb(0 0 0 / 66%);
+  --media-bg: #ececec;
+  --media-bg-soft: #efefef;
+  --code-bg: #eee;
 
   color-scheme: light;
+}
+
+/* Dark theme: opt-in via the header toggle, light stays the default. */
+:root[data-theme="dark"] {
+  --bg: #0e0e10;
+  --ink: rgb(255 255 255 / 88%);
+  --muted: rgb(255 255 255 / 50%);
+  --line: #2a2a2e;
+  --dark: #0e0e10;
+  --light: rgb(255 255 255 / 96%);
+  --list-text: rgb(255 255 255 / 66%);
+  --media-bg: #1c1c1f;
+  --media-bg-soft: #1c1c1f;
+  --code-bg: #1c1c1f;
+
+  color-scheme: dark;
 }
 
 @custom-media --mobile (max-width: 900px);

@@ -48,6 +48,35 @@
   pointer-events: auto;
 }
 
+.theme-toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  line-height: 1.1;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.theme-toggle svg {
+  display: block;
+  width: 0.9em;
+  height: 0.9em;
+}
+
+/* Bigger hit area without shifting the row */
+.theme-toggle::after {
+  content: "";
+  position: absolute;
+  inset: -10px;
+}
+
 .mobile-only {
   display: none;
 }

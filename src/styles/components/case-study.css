@@ -80,7 +80,7 @@ body:has(.case-study)::-webkit-scrollbar {
 .cs-hero {
   margin-inline: var(--pad);
   border-radius: 0;
-  background: #efefef;
+  background: var(--media-bg-soft);
   overflow: hidden;
   animation: cs-hero-rise 550ms cubic-bezier(.2,.7,.2,1) both;
 }
@@ -150,13 +150,13 @@ body:has(.case-study)::-webkit-scrollbar {
   width: 100%;
   height: auto; /* <video> carries width/height attributes; keep its ratio, not its pixels */
   border-radius: 0;
-  background: #ececec;
+  background: var(--media-bg);
 }
 
 .cs-image-row {
   margin-inline: var(--pad);
   border-radius: 0;
-  background: #efefef;
+  background: var(--media-bg-soft);
 }
 
 .cs-image-row .cs-image {

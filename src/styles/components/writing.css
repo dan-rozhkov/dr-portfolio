@@ -245,7 +245,7 @@
   width: 100%;
   height: auto;
   border-radius: 0;
-  background: #ececec;
+  background: var(--media-bg);
 }
 
 .post-body a {
@@ -255,7 +255,7 @@
 .post-body pre {
   padding: 16px;
   border-radius: var(--radius-lg);
-  background: #eee;
+  background: var(--code-bg);
   font-size: var(--text-sm);
   overflow-x: auto;
 }

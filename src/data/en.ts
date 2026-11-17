@@ -81,7 +81,7 @@ export interface CaseStudy {
 
 export const profile: Profile = {
   name: "Danil Rozhkov",
-  location: "Georgia",
+  location: "Cyprus",
   year: "2026",
   email: "rozhkov.dev@gmail.com",
   linkedin: "https://www.linkedin.com/in/danil-rozhkov/",
@@ -89,7 +89,7 @@ export const profile: Profile = {
 };
 
 export const hero: Hero = {
-  text: "Design Engineer at JetBrains, previously Lead Product Designer at Sber, with past work at Openprovider, SnapSoft, and ClearScale. I care about systems, precise interaction details, and the quiet decisions that make complex tools feel obvious.",
+  text: "Design Engineer at JetBrains, previously Lead Product Designer at Sber. I care about systems and the quiet details that make complex tools feel obvious.",
 };
 
 export const cases: CaseSummary[] = [

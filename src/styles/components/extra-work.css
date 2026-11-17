@@ -92,7 +92,7 @@
   }
 
   .extra-list p {
-    color: rgb(0 0 0 / 66%);
+    color: var(--list-text);
   }
 
   .large-preview {

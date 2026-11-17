@@ -2,6 +2,7 @@ import { getProfile } from "../data/portfolio";
 import { assetUrl } from "../lib/url";
 import { casesLink } from "../lib/writingUrl";
 import { useT } from "../i18n/context";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Header() {
   const profile = getProfile();
@@ -35,6 +36,7 @@ export default function Header() {
           >
             {t("nav.cv")}
           </a>
+          <ThemeToggle />
         </div>
       </nav>
     </header>
