@@ -164,6 +164,22 @@ body:has(.case-study)::-webkit-scrollbar {
   background: transparent;
 }
 
+.cs-image-pair {
+  display: flex;
+  gap: clamp(12px, 2vw, 32px);
+  background: transparent;
+}
+
+.cs-image-pair > div {
+  min-width: 0;
+}
+
+@media (width <= 600px) {
+  .cs-image-pair {
+    flex-direction: column;
+  }
+}
+
 .cs-hero .cs-image {
   border-radius: 0;
   background: transparent;

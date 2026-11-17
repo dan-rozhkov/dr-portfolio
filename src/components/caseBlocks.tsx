@@ -137,6 +137,25 @@ export function Subhead({ item, html }: { item: SubheadSection; html?: boolean }
 export function Section({ section }: { section: CaseSection }) {
   const t = useT();
 
+  if (section.kind === "image-pair") {
+    return (
+      <div className="cs-image-row cs-image-pair">
+        {section.images.map((image) => (
+          <div key={image.src} style={{ flex: `${image.width / image.height} 1 0` }}>
+            <img
+              className="cs-image"
+              src={assetUrl(image.src)}
+              alt={image.alt}
+              width={image.width}
+              height={image.height}
+              loading="lazy"
+            />
+          </div>
+        ))}
+      </div>
+    );
+  }
+
   if (section.kind === "image") {
     return (
       <div className="cs-image-row">

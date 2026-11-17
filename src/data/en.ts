@@ -47,6 +47,10 @@ export type CaseSection =
   | { kind: "case"; label?: string; text: string }
   | { kind: "image"; src?: string; alt?: string; aspect?: string }
   | {
+      kind: "image-pair";
+      images: { src: string; alt: string; width: number; height: number }[];
+    }
+  | {
       kind: "subhead";
       title: string;
       text: string;
@@ -313,6 +317,23 @@ const caseSections: Record<string, CaseSection[]> = {
         ["1", "Screen for the treasury day, on desktop and phone"],
       ],
       text: "Caldera turns cross-border treasury into one routine: see both currencies, sign what is due, and ask the agent when a number needs explaining. The same patterns run on desktop and phone, so a director can approve a ruble payment between meetings.",
+    },
+    {
+      kind: "image-pair",
+      images: [
+        {
+          src: "/images/sber-india-proto/caldera-brand-glow.jpg",
+          alt: "The Caldera symbol cut through a white tile, lit by an orange and yellow gradient on a dark grid",
+          width: 4800,
+          height: 3584,
+        },
+        {
+          src: "/images/sber-india-proto/caldera-brand-metal.jpg",
+          alt: "A sequence of metallic Caldera logo tiles reflecting warm orange light",
+          width: 5504,
+          height: 3072,
+        },
+      ],
     },
     {
       kind: "image",
