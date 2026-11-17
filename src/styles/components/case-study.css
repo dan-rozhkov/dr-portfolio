@@ -164,20 +164,28 @@ body:has(.case-study)::-webkit-scrollbar {
   background: transparent;
 }
 
-.cs-image-pair {
-  display: flex;
-  gap: clamp(12px, 2vw, 32px);
+.cs-media-group {
+  --media-gap: clamp(12px, 2vw, 32px);
+
+  display: grid;
+  gap: var(--media-gap);
   background: transparent;
+}
+
+.cs-image-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--media-gap);
 }
 
 .cs-image-pair > div {
   min-width: 0;
+  aspect-ratio: 4 / 3;
 }
 
-@media (width <= 600px) {
-  .cs-image-pair {
-    flex-direction: column;
-  }
+.cs-image-pair .cs-image {
+  height: 100%;
+  object-fit: cover;
 }
 
 .cs-hero .cs-image {

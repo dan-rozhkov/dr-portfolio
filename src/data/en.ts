@@ -49,6 +49,7 @@ export type CaseSection =
   | {
       kind: "image-pair";
       images: { src: string; alt: string; width: number; height: number }[];
+      followingMedia?: { src: string; alt: string; aspect?: string };
     }
   | {
       kind: "subhead";
@@ -334,11 +335,10 @@ const caseSections: Record<string, CaseSection[]> = {
           height: 3072,
         },
       ],
-    },
-    {
-      kind: "image",
-      src: "/images/sber-india-proto/caldera-outline.mp4",
-      alt: "The Caldera logo shown as vector outlines, then in solid white",
+      followingMedia: {
+        src: "/images/sber-india-proto/caldera-outline.mp4",
+        alt: "The Caldera logo shown as vector outlines, then in solid white",
+      },
     },
   ],
   "live-studio": [
