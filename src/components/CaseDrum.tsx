@@ -18,9 +18,8 @@ const CASES: DrumCase[] = [
   {
     title: "Caldera",
     href: caseLink("caldera"),
-    video: "images/hero/caldera-app.mp4",
-    poster: "images/hero/caldera-app.webp",
-    light: true,
+    video: "images/hero/caldera-logo.mp4", // the case card's logo video
+    poster: "images/hero/caldera-logo.webp",
   },
   { title: "Qure", href: postLink("qure"), video: "images/hero/qure-full.mp4", poster: "images/hero/qure-full.webp" },
   {
@@ -87,8 +86,11 @@ export default function CaseDrum() {
     const build = (fsIn?: number) => {
       const w = stage.clientWidth;
       fs = fsIn ?? Math.round(Math.min(Math.max(w * 0.11, 64), 190));
-      // phones: the card takes most of the width; wider screens scale it with the title
-      const cw = Math.round(w < 700 ? w * 0.64 : fs * 3);
+      // phones: the card takes most of the width; tablets: twice the desktop ratio
+      // (about two thirds of the width); desktop: three times the type size
+      const byWidth = w < 700 ? w * 0.64 : w < 1200 ? Math.min(fs * 6, w * 0.66) : fs * 3;
+      // landscape tablets are short: keep the card within ~55% of the drum's height
+      const cw = Math.round(Math.min(byWidth, stage.clientHeight * 0.55 * 1.6));
       R = fs * 3.2;
       Rc = R - fs * 0.9;
       gap = fs * 3.4;
