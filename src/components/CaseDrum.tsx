@@ -1,23 +1,50 @@
 import { useEffect, useRef } from "react";
 import { assetUrl, caseLink } from "../lib/url";
 import { postLink } from "../lib/writingUrl";
+import { videoSize, videoSources } from "./video";
 
 interface DrumCase {
   title: string;
   href: string;
-  img: string;
-  /** Light pictures get a darker scrim so the white title stays readable. */
+  /** Full case video, 16:10. */
+  video: string;
+  /** First frame of the video, shown until it plays and under reduced motion. */
+  poster: string;
+  /** Light footage gets a darker scrim so the white title stays readable. */
   light?: boolean;
 }
 
 const CASES: DrumCase[] = [
-  { title: "Caldera", href: caseLink("caldera"), img: "images/hero/caldera.webp" },
-  { title: "Qure", href: postLink("qure"), img: "images/hero/qure.webp" },
-  { title: "Sideform", href: postLink("sideform-desktop"), img: "images/hero/sideform.webp" },
-  { title: "Suflyor", href: postLink("suflyor"), img: "images/hero/suflyor.webp", light: true },
+  {
+    title: "Caldera",
+    href: caseLink("caldera"),
+    video: "images/hero/caldera-app.mp4",
+    poster: "images/hero/caldera-app.webp",
+    light: true,
+  },
+  { title: "Qure", href: postLink("qure"), video: "images/hero/qure-full.mp4", poster: "images/hero/qure-full.webp" },
+  {
+    title: "Sideform",
+    href: postLink("sideform-desktop"),
+    video: "images/hero/sideform-full.mp4",
+    poster: "images/hero/sideform-full.webp",
+  },
+  {
+    title: "Suflyor",
+    href: postLink("suflyor"),
+    video: "images/hero/suflyor-full.mp4",
+    poster: "images/hero/suflyor-full.webp",
+    light: true,
+  },
 ];
 
-const AUTOPLAY_MS = 2800;
+/**
+ * A case stays in front until its video ends, then the drum turns to the next one.
+ * Safety nets, so the drum never sticks: a video that can't play at all hands over after
+ * BLOCKED_MS; one that stops making progress (slow network, decode stall) after STALL_MS.
+ */
+const BLOCKED_MS = 5000;
+const STALL_MS = 8000;
 const DRAG_GAIN = 1.1; // drum px per pointer px
 const SPRING_K = 90;
 const SPRING_D = 19;
@@ -51,6 +78,7 @@ export default function CaseDrum() {
     if (!stage || !drum || !count) return;
     const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
     const cards = [...drum.querySelectorAll<HTMLAnchorElement>(".case-drum-card")];
+    const videos = cards.map((c) => c.querySelector("video") as HTMLVideoElement);
 
     // ---- layout ----
     let fs = 0, R = 1, Rc = 1, gap = 0, total = 1;
@@ -58,8 +86,9 @@ export default function CaseDrum() {
 
     const build = (fsIn?: number) => {
       const w = stage.clientWidth;
-      fs = fsIn ?? Math.round(Math.min(Math.max(w * 0.085, 56), 150));
-      const cw = Math.round(fs * 2.3);
+      fs = fsIn ?? Math.round(Math.min(Math.max(w * 0.11, 64), 190));
+      // phones: the card takes most of the width; wider screens scale it with the title
+      const cw = Math.round(w < 700 ? w * 0.64 : fs * 3);
       R = fs * 3.2;
       Rc = R - fs * 0.9;
       gap = fs * 3.4;
@@ -162,11 +191,50 @@ export default function CaseDrum() {
       });
       return best;
     };
+    // ---- video: only the front card plays, from its start; its `ended` turns the drum ----
+    // React doesn't write `muted` into prerendered HTML and hydration doesn't set it,
+    // and browsers only autoplay muted video.
+    videos.forEach((v) => { v.muted = true; });
+    let playGen = 0, blocked = false, progressAt = performance.now();
+    const syncVideos = () => {
+      const live = !reduced && ready && onScreen && !document.hidden;
+      videos.forEach((v, vi) => {
+        if (vi !== index) {
+          if (!v.paused) v.pause();
+          if (v.currentTime > 0) v.currentTime = 0; // next time it comes round it starts over
+          return;
+        }
+        if (!live) { if (!v.paused) v.pause(); return; }
+        const next = videos[(index + 1) % videos.length];
+        v.preload = "auto";
+        next.preload = "auto"; // so the next turn doesn't wait for the network
+        const gen = ++playGen;
+        blocked = false;
+        progressAt = performance.now();
+        v.play().catch((err: unknown) => {
+          // an interrupted play() (we paused it ourselves) is not a failure
+          if (gen === playGen && !(err instanceof DOMException && err.name === "AbortError")) blocked = true;
+        });
+      });
+    };
+    const onProgress = (e: Event) => {
+      if (videos.indexOf(e.target as HTMLVideoElement) === index) progressAt = performance.now();
+    };
+    const onEnded = (e: Event) => {
+      const vi = videos.indexOf(e.target as HTMLVideoElement);
+      if (vi !== index) return;
+      if (paused()) { videos[vi].currentTime = 0; void videos[vi].play().catch(() => {}); } // loop while held
+      else goTo(index + 1);
+    };
+    const shouldHandOver = (t: number) =>
+      blocked ? t - idleAt > BLOCKED_MS : t - Math.max(idleAt, progressAt) > STALL_MS;
+
     const setIndex = (i: number) => {
       const n = items.length;
       index = ((i % n) + n) % n;
       count.textContent = `${String(index + 1).padStart(2, "0")} / ${String(n).padStart(2, "0")}`;
       cards.forEach((c, ci) => c.setAttribute("aria-current", ci === index ? "true" : "false"));
+      syncVideos();
     };
     const goTo = (i: number) => {
       if (!ready) return;
@@ -188,7 +256,7 @@ export default function CaseDrum() {
       tiltX += (tX - tiltX) * Math.min(1, dt * 6);
       tiltY += (tY - tiltY) * Math.min(1, dt * 6);
       if (paused()) idleAt = t;
-      else if (t - idleAt > AUTOPLAY_MS) {
+      else if (shouldHandOver(t)) {
         goTo(index + 1);
         idleAt = t;
       }
@@ -277,10 +345,15 @@ export default function CaseDrum() {
     const io = new IntersectionObserver(([e]) => {
       onScreen = e.isIntersecting;
       idleAt = performance.now();
+      syncVideos();
       kick();
     });
     io.observe(stage);
-    const onVis = () => { idleAt = performance.now(); kick(); };
+    const onVis = () => { idleAt = performance.now(); syncVideos(); kick(); };
+    videos.forEach((v) => {
+      v.addEventListener("ended", onEnded);
+      v.addEventListener("timeupdate", onProgress);
+    });
     document.addEventListener("visibilitychange", onVis);
 
     let resizeT = 0;
@@ -316,6 +389,11 @@ export default function CaseDrum() {
       clearTimeout(resizeT);
       io.disconnect();
       document.removeEventListener("visibilitychange", onVis);
+      videos.forEach((v) => {
+        v.removeEventListener("ended", onEnded);
+        v.removeEventListener("timeupdate", onProgress);
+        v.pause();
+      });
       window.removeEventListener("resize", onResize);
       stage.removeEventListener("pointerdown", onDown);
       stage.removeEventListener("pointermove", onMove);
@@ -351,7 +429,19 @@ export default function CaseDrum() {
               data-cursor="OPEN"
               data-light={c.light ? "" : undefined}
             >
-              <img src={assetUrl(c.img)} alt="" draggable={false} decoding="async" />
+              <video
+                {...videoSize(c.video)}
+                poster={assetUrl(c.poster)}
+                muted
+                playsInline
+                preload="none"
+                aria-hidden="true"
+                draggable={false}
+              >
+                {videoSources(c.video).map((v) => (
+                  <source key={v.src} src={v.src} type={v.type} />
+                ))}
+              </video>
               <span className="visually-hidden">{c.title}</span>
             </a>
           ))}

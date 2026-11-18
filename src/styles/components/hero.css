@@ -118,7 +118,7 @@
   background: var(--drum-scrim-light);
 }
 
-.case-drum-card img {
+.case-drum-card video {
   display: block;
   width: 100%;
   height: 100%;
