@@ -1,4 +1,4 @@
-/* The hero opens with the full-bleed case drum; the intro text follows below it. */
+/* On tablets and phones the hero opens with the full-bleed case drum, then the intro text. */
 .hero {
   min-height: auto;
 }
@@ -168,5 +168,16 @@
 
   .case-drum-title {
     right: 20px;
+  }
+}
+
+/* Desktop opens straight with the intro: the drum is for tablets and phones only for now. */
+@media (min-width: 1200px) {
+  .case-drum {
+    display: none;
+  }
+
+  .hero-grid {
+    padding-top: 168px;
   }
 }

@@ -125,7 +125,7 @@ export default function CaseDrum() {
     // ---- motion ----
     let index = 0, pos = 0, vel = 0, target = 0;
     let dragging = false, idleAt = performance.now(), last = 0, raf = 0;
-    let onScreen = true, ready = false, focused = false;
+    let onScreen = false, ready = false, focused = false; // the IntersectionObserver sets onScreen
     // No pause on hover: the drum fills most of the first screen, so the cursor is nearly always over it.
     const paused = () => reduced || dragging || focused;
 
@@ -156,7 +156,8 @@ export default function CaseDrum() {
     applyCuts();
     let playGen = 0, blocked = false, progressAt = performance.now();
     const syncVideos = () => {
-      const live = !reduced && ready && onScreen && !document.hidden;
+      // clientWidth is 0 while the drum is hidden (desktop): then nothing plays or preloads
+      const live = !reduced && ready && onScreen && !document.hidden && stage.clientWidth > 0;
       // the gradient only animates while its face is in front
       gradients.forEach((g, gi) => {
         if (!g) return;
@@ -328,6 +329,8 @@ export default function CaseDrum() {
         if (!ready) return;
         build();
         render(pos, performance.now());
+        syncVideos();
+        kick();
       }, 60);
     };
     window.addEventListener("resize", onResize);
