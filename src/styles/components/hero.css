@@ -119,32 +119,25 @@
   outline-offset: -6px;
 }
 
-/* Keeps the count and the title readable over light footage. */
-.case-drum::after {
-  content: "";
-  position: absolute;
-  inset: auto 0 0;
-  height: 160px;
-  background: linear-gradient(to top, var(--drum-scrim), transparent);
-  pointer-events: none;
-}
-
+/* Set like the header (header.css): white with difference blend, so they read on any footage. */
 .case-drum-count,
 .case-drum-title {
   position: absolute;
   z-index: 1;
   bottom: 28px;
-  color: var(--drum-ink);
+  color: var(--drum-ink); /* white: difference turns it into the inverse of what's behind */
   font-size: var(--text-lg);
   font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  mix-blend-mode: difference;
   pointer-events: none;
 }
 
 .case-drum-count {
   left: var(--pad);
-  color: var(--drum-muted);
   font-variant-numeric: tabular-nums;
-  letter-spacing: 0.04em;
 }
 
 .case-drum-title {
