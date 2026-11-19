@@ -80,45 +80,25 @@
 
 .case-drum-axis {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  inset: 0;
   transform-style: preserve-3d;
 }
 
-.case-drum-card,
-.case-drum-glyph {
-  position: absolute;
-  top: 0;
-  left: 0;
-  backface-visibility: hidden;
-  will-change: transform;
-}
-
+/* Each case fills the whole block; the drum's front face sits exactly at the screen plane. */
 .case-drum-card {
-  width: var(--cw, 280px);
-  height: var(--ch, 175px);
-  margin: calc(var(--ch, 175px) / -2) 0 0 calc(var(--cw, 280px) / -2);
-  border-radius: 4px;
+  position: absolute;
+  inset: 0;
   background: var(--drum-card-bg);
   overflow: hidden;
+  backface-visibility: hidden;
 }
 
 .case-drum:not(.is-ready) .case-drum-card:not(:first-child) {
   visibility: hidden;
 }
 
-.case-drum-card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: var(--drum-scrim);
-}
-
-.case-drum-card[data-light]::after {
-  background: var(--drum-scrim-light);
-}
-
-.case-drum-card video {
+.case-drum-card video,
+.case-drum-card .live-cover {
   display: block;
   width: 100%;
   height: 100%;
@@ -126,34 +106,49 @@
   pointer-events: none;
 }
 
-.case-drum-card:focus-visible {
-  outline: 2px solid var(--drum-ink);
-  outline-offset: 4px;
+.case-drum-card .live-cover {
+  aspect-ratio: auto;
 }
 
-/* One letter per element; transform-origin sits on the drum axis. */
-.case-drum-glyph {
-  margin-top: calc(var(--fs) * -0.56);
+.case-drum-card .live-cover-mark {
+  height: clamp(88px, 16%, 160px);
+}
+
+.case-drum-card:focus-visible {
+  outline: 2px solid var(--drum-ink);
+  outline-offset: -6px;
+}
+
+/* Keeps the count and the title readable over light footage. */
+.case-drum::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 160px;
+  background: linear-gradient(to top, var(--drum-scrim), transparent);
+  pointer-events: none;
+}
+
+.case-drum-count,
+.case-drum-title {
+  position: absolute;
+  z-index: 1;
+  bottom: 28px;
   color: var(--drum-ink);
-  font-size: var(--fs);
+  font-size: var(--text-lg);
   font-weight: 500;
-  line-height: 1;
-  white-space: pre;
-  text-shadow: 0 1px 18px rgb(0 0 0 / 22%);
-  transform-origin: 0 50%;
   pointer-events: none;
 }
 
 .case-drum-count {
-  position: absolute;
-  bottom: 28px;
   left: var(--pad);
   color: var(--drum-muted);
-  font-size: var(--text-lg);
-  font-weight: 500;
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.04em;
-  pointer-events: none;
+}
+
+.case-drum-title {
+  right: var(--pad);
 }
 
 @media (--mobile) {
@@ -161,9 +156,17 @@
     height: clamp(440px, 72svh, 640px);
   }
 
-  .case-drum-count {
+  .case-drum-count,
+  .case-drum-title {
     bottom: 20px;
-    left: 20px;
     font-size: var(--text-sm);
+  }
+
+  .case-drum-count {
+    left: 20px;
+  }
+
+  .case-drum-title {
+    right: 20px;
   }
 }

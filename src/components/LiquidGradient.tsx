@@ -466,9 +466,12 @@ function startGradient(canvas: HTMLCanvasElement): (() => void) | null {
     canvas.dataset.ready = "true";
   }
 
+  // A host can hold the animation with data-paused="true" and resume it with a "gradientresume" event.
+  const held = () => canvas.dataset.paused === "true";
+
   function tick() {
     frame = 0;
-    if (disposed || lost || !inView || document.hidden) return;
+    if (disposed || lost || !inView || document.hidden || held()) return;
     render((performance.now() - startedAt) / 1000);
     frame = requestAnimationFrame(tick);
   }
@@ -518,6 +521,7 @@ function startGradient(canvas: HTMLCanvasElement): (() => void) | null {
     schedule();
   };
   document.addEventListener("visibilitychange", onVisibility);
+  canvas.addEventListener("gradientresume", onVisibility);
   canvas.addEventListener("webglcontextlost", onLost);
   canvas.addEventListener("webglcontextrestored", onRestored);
   render(STATIC_FRAME_TIME);
@@ -529,6 +533,7 @@ function startGradient(canvas: HTMLCanvasElement): (() => void) | null {
     resizeObserver?.disconnect();
     intersectionObserver?.disconnect();
     document.removeEventListener("visibilitychange", onVisibility);
+    canvas.removeEventListener("gradientresume", onVisibility);
     canvas.removeEventListener("webglcontextlost", onLost);
     canvas.removeEventListener("webglcontextrestored", onRestored);
     if (resources) freeResources(context, resources);

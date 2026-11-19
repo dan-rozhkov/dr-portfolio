@@ -49,8 +49,7 @@
   --drum-card-bg: #1c1c1f;
   --drum-ink: #fff;
   --drum-muted: rgb(255 255 255 / 56%);
-  --drum-scrim: rgb(0 0 0 / 14%);
-  --drum-scrim-light: rgb(11 11 13 / 38%);
+  --drum-scrim: rgb(0 0 0 / 45%);
 
   color-scheme: light;
 }
