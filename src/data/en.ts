@@ -653,6 +653,47 @@ const caseSections: Record<string, CaseSection[]> = {
       text: "Clearscale's enterprise clients got a faster portal for managed AWS operations, and the company got a frontend it could extend. I owned the path from product decisions to production code.",
     },
     {
+      label: "Concept",
+      kind: "logline",
+      text: "In 2026 I redrew the portal for what Clearscale sells now: AWS operations run together with Claude agents.",
+    },
+    {
+      kind: "case",
+      text: "This part is a concept, not shipped work, and the client and numbers are made up. The portal keeps its job, showing clients the operations they pay for, and adds what the new Clearscale One covers: agents answer first, and named engineers sign off on the risky steps.",
+    },
+    {
+      kind: "image",
+      src: "/images/clearscale/portal-overview.webp",
+      alt: "Concept portal overview: uptime, open requests, monthly spend, security score, a maintenance window waiting for approval and recent activity",
+      aspect: "1440 / 900",
+    },
+    {
+      kind: "case",
+      text: "Whatever waits on the client carries the cover gradient, and the rest of the screen stays black on warm gray. A maintenance window gets approved where it sits: in the week calendar on desktop, with Face ID on the phone.",
+    },
+    {
+      kind: "image",
+      src: "/images/clearscale/portal-maintenance.webp",
+      alt: "Concept maintenance calendar: a week of night windows with the Kubernetes upgrade waiting for approval and its details on the right",
+      aspect: "1440 / 900",
+    },
+    {
+      kind: "image",
+      src: "/images/clearscale/portal-mobile.webp",
+      alt: "Concept iPhone app in Liquid Glass: overview with an approval card, a maintenance window approved with Face ID, and a chat that turns a cost question into a change request",
+      aspect: "1440 / 900",
+    },
+    {
+      kind: "case",
+      text: "Agents get their own section. For each one the client sees runs, quality, cost and the split between Haiku, Sonnet and Opus, so what the AI does on its own is never a black box.",
+    },
+    {
+      kind: "image",
+      src: "/images/clearscale/portal-agents.webp",
+      alt: "Concept agents page: four Claude agents with runs, quality, cost and model mix",
+      aspect: "1440 / 900",
+    },
+    {
       kind: "image",
       src: "/images/clearscale/clearscale-logo-stickers.mp4",
       alt: "Two tiles: the Clearscale logo drawn as outlines and filling in white, and round Clearscale stickers spilling from a frosted envelope",
