@@ -597,6 +597,16 @@ const caseSections: Record<string, CaseSection[]> = {
       text: "I designed and built in one loop, so a pattern that looked clean in Figma and broke in code got fixed the same day. The component library grew out of real screens and production data.",
     },
     {
+      kind: "case",
+      text: "A client signs in through SSO or an email code, lands on the overview and reaches any section in one step. Maintenance goes deepest: from the week calendar to a single window, where the client approves it, moves it, asks the engineer or opens the rollback plan.",
+    },
+    {
+      kind: "image",
+      src: "/images/clearscale/clearscale-user-flow.webp",
+      alt: "Clearscale portal user flow: sign in, overview, six sections, and the maintenance branch down to approving a window",
+      aspect: "1440 / 900",
+    },
+    {
       kind: "subhead",
       title: "One dashboard, two readers",
       text: "I reorganized the portal around service monitoring, infrastructure state and account activity. Experts keep the dense views, and business stakeholders read the same data without a walkthrough.",
