@@ -633,6 +633,11 @@ const caseSections: Record<string, CaseSection[]> = {
       ],
       text: "ClearScale's enterprise clients got a faster portal for managed AWS operations, and the company got a frontend it could extend. I owned the path from product decisions to production code.",
     },
+    {
+      kind: "image",
+      src: "/images/clearscale/clearscale-logo-stickers.mp4",
+      alt: "Two tiles: the Clearscale logo drawn as outlines and filling in white, and round Clearscale stickers spilling from a frosted envelope",
+    },
   ],
   seligoai: [
     {
@@ -810,8 +815,8 @@ const caseHeroImages: Record<string, HeroImage> = {
     alt: "Openprovider dashboard preview",
   },
   "clearscale-msp": {
-    src: "/images/clearscale/clearscale-cover.webp",
-    alt: "Clearscale logo",
+    src: "/images/clearscale/clearscale-hero.mp4",
+    alt: "The Clearscale logo builds from a dot, then a construction grid and colour wipes end on the logo over the gradient",
     bleed: true,
   },
   seligoai: {
