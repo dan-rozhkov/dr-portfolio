@@ -71,12 +71,12 @@ export function getEntries(lang: Lang = "en"): CaseEntry[] {
   return [...posts, ...cases].sort((a, b) => (a.sortKey < b.sortKey ? 1 : a.sortKey > b.sortKey ? -1 : 0));
 }
 
-/** Always on the home page, in the last slot, whatever its date. */
-const HOME_PINNED = "case:caldera";
+/** Always on the home page, in the last slots and in this order, whatever their dates. */
+const HOME_PINNED = ["case:caldera", "case:clearscale-msp"];
 
-/** The home page cards: the newest entries, ending with the pinned one. */
+/** The home page cards: the newest entries, ending with the pinned ones. */
 export function homeEntries(entries: CaseEntry[], limit: number): CaseEntry[] {
-  const pinned = entries.find((e) => e.key === HOME_PINNED);
-  if (!pinned) return entries.slice(0, limit);
-  return [...entries.filter((e) => e !== pinned).slice(0, limit - 1), pinned];
+  const pinned = HOME_PINNED.map((k) => entries.find((e) => e.key === k)).filter((e): e is CaseEntry => !!e);
+  if (pinned.length === 0) return entries.slice(0, limit);
+  return [...entries.filter((e) => !pinned.includes(e)).slice(0, limit - pinned.length), ...pinned];
 }

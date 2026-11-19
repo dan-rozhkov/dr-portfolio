@@ -31,15 +31,16 @@ describe("getEntries", () => {
 });
 
 describe("homeEntries", () => {
-  it("ends with the pinned case and keeps the limit", () => {
+  it("ends with the pinned cases, Caldera then Clearscale, and keeps the limit", () => {
     const home = homeEntries(getEntries(), 4);
     expect(home).toHaveLength(4);
-    expect(home[3].key).toBe("case:caldera");
+    expect(home[2].key).toBe("case:caldera");
+    expect(home[3].key).toBe("case:clearscale-msp");
     expect(new Set(home.map((e) => e.key)).size).toBe(4);
   });
 
-  it("does not move a pinned case that is missing", () => {
-    const rest = getEntries().filter((e) => e.key !== "case:caldera");
+  it("does not move pinned cases that are missing", () => {
+    const rest = getEntries().filter((e) => e.key !== "case:caldera" && e.key !== "case:clearscale-msp");
     expect(homeEntries(rest, 4)).toEqual(rest.slice(0, 4));
   });
 });

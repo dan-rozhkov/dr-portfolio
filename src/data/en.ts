@@ -602,9 +602,8 @@ const caseSections: Record<string, CaseSection[]> = {
     },
     {
       kind: "image",
-      src: "/images/clearscale/clearscale-user-flow.webp",
-      alt: "Clearscale portal user flow: sign in, overview, six sections, and the maintenance branch down to approving a window",
-      aspect: "1440 / 900",
+      src: "/images/clearscale/clearscale-user-flow.mp4",
+      alt: "Clearscale portal user flow: the camera follows a client from sign in through the overview to approving a maintenance window, then pulls back to the whole tree",
     },
     {
       kind: "subhead",
