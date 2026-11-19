@@ -33,7 +33,7 @@ const CASES: DrumCase[] = [
   },
   { title: "Qure", href: postLink("qure"), video: "images/hero/qure-full.mp4", poster: "images/hero/qure-full.webp" },
   {
-    title: "ClearScale",
+    title: "Clearscale",
     href: caseLink("clearscale-msp"),
     // the case card's logo animation (.work/clearscale/anim/v2/work/render_hero.py), logo at 48% so a 1:1 tablet keeps it whole
     video: "images/hero/clearscale-logo.mp4",

@@ -129,9 +129,9 @@ export const cases: CaseSummary[] = [
   },
   {
     id: "clearscale-msp",
-    title: "ClearScale MSP Portal",
+    title: "Clearscale MSP Portal",
     description: [
-      "An enterprise managed-services portal for ClearScale clients with $10M+ in AWS infrastructure.",
+      "The managed-services portal of Clearscale, an AWS Premier Consulting Partner, for clients running $10M+ of AWS infrastructure.",
       "I redesigned the portal and moved the frontend to React, TypeScript, Next.js and styled-components as the sole designer-developer.",
     ],
     meta: [
@@ -222,7 +222,7 @@ export const recognition: RecognitionGroup[] = [
         "/case/openprovider",
       ],
       [
-        "ClearScale MSP Portal ↗",
+        "Clearscale MSP Portal ↗",
         "$10M+ AWS infrastructure, React migration",
         "/case/clearscale-msp",
       ],
@@ -567,7 +567,11 @@ const caseSections: Record<string, CaseSection[]> = {
     {
       label: "Challenge",
       kind: "logline",
-      text: "ClearScale's enterprise clients ran $10M+ of AWS infrastructure through one managed-services portal, and the old frontend slowed every daily job.",
+      text: "Clearscale's enterprise clients ran $10M+ of AWS infrastructure through one managed-services portal, and the old frontend slowed every daily job.",
+    },
+    {
+      kind: "case",
+      text: "Clearscale builds on AWS and then runs what it builds: 24/7 operations, security and support for a monthly fee. The portal was where clients saw that second half.",
     },
     {
       kind: "case",
@@ -580,7 +584,7 @@ const caseSections: Record<string, CaseSection[]> = {
     {
       kind: "image",
       src: "/images/clearscale/billing-history.png",
-      alt: "ClearScale billing history section",
+      alt: "Clearscale billing history: invoices by organization, package and status",
       aspect: "3840 / 1579",
     },
     {
@@ -610,7 +614,7 @@ const caseSections: Record<string, CaseSection[]> = {
     {
       kind: "subhead",
       title: "Billing without surprises",
-      text: "Billing shows cost trends, anomalies and forecast variance the way account managers read the numbers.",
+      text: "Each client buys a support package with hours included. Billing shows the package price, the hours used, the extra-hour rate and every invoice with its status, the way account managers read the numbers.",
     },
     {
       kind: "subhead",
@@ -618,9 +622,14 @@ const caseSections: Record<string, CaseSection[]> = {
       text: "Service health, incident timelines and infrastructure state share one layout, so engineers switch between accounts without relearning the screen.",
     },
     {
+      kind: "subhead",
+      title: "Maintenance windows",
+      text: "Engineers schedule a maintenance window for one or several organizations at once, give a reason and a period, and link the ticket. Jira and Zabbix stay connected per client, so the portal shows the same incidents the team works on.",
+    },
+    {
       kind: "image",
       src: "/images/clearscale/dashboard.png",
-      alt: "ClearScale MSP dashboard",
+      alt: "Clearscale finance report card and the maintenance window form",
       aspect: "2460 / 778",
     },
     {
@@ -631,7 +640,7 @@ const caseSections: Record<string, CaseSection[]> = {
         ["−40%", "Time-to-resolve on client requests"],
         ["3×", "Faster onboarding for new enterprise clients"],
       ],
-      text: "ClearScale's enterprise clients got a faster portal for managed AWS operations, and the company got a frontend it could extend. I owned the path from product decisions to production code.",
+      text: "Clearscale's enterprise clients got a faster portal for managed AWS operations, and the company got a frontend it could extend. I owned the path from product decisions to production code.",
     },
     {
       kind: "image",
