@@ -141,7 +141,7 @@ export const cases: CaseSummary[] = [
       ["Output", "React MSP portal, redesigned client workflows"],
     ],
     visual: "cloud",
-    preview: { src: "images/clearscale/billing-details.png", alt: "ClearScale MSP billing details" },
+    preview: { src: "images/clearscale/clearscale-cover.webp", alt: "Clearscale logo" },
   },
   {
     id: "seligoai",
@@ -809,8 +809,9 @@ const caseHeroImages: Record<string, HeroImage> = {
     alt: "Openprovider dashboard preview",
   },
   "clearscale-msp": {
-    src: "/images/clearscale/billing-details.png",
-    alt: "ClearScale billing details section",
+    src: "/images/clearscale/clearscale-cover.webp",
+    alt: "Clearscale logo",
+    bleed: true,
   },
   seligoai: {
     src: "/images/seligoai/hero.png",
