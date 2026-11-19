@@ -35,7 +35,7 @@ const CASES: DrumCase[] = [
   {
     title: "ClearScale",
     href: caseLink("clearscale-msp"),
-    // the case card's logo animation (.work/clearscale/anim/anim1.py), logo at 48% so a 1:1 tablet keeps it whole
+    // the case card's logo animation (.work/clearscale/anim/v2/work/render_hero.py), logo at 48% so a 1:1 tablet keeps it whole
     video: "images/hero/clearscale-logo.mp4",
     poster: "images/hero/clearscale-logo.webp",
     // one-line lockup is wider than a phone's crop: native 2:3 render, logo at 75% of the width

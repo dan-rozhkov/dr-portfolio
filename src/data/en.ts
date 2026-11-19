@@ -815,8 +815,8 @@ const caseHeroImages: Record<string, HeroImage> = {
     alt: "Openprovider dashboard preview",
   },
   "clearscale-msp": {
-    src: "/images/clearscale/clearscale-hero.mp4",
-    alt: "The Clearscale logo builds from a dot, then a construction grid and colour wipes end on the logo over the gradient",
+    src: "/images/clearscale/clearscale-cover.webp",
+    alt: "Clearscale logo",
     bleed: true,
   },
   seligoai: {
