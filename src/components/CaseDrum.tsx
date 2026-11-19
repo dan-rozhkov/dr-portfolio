@@ -33,6 +33,15 @@ const CASES: DrumCase[] = [
   },
   { title: "Qure", href: postLink("qure"), video: "images/hero/qure-full.mp4", poster: "images/hero/qure-full.webp" },
   {
+    title: "ClearScale",
+    href: caseLink("clearscale-msp"),
+    // the case card's logo animation (.work/clearscale/anim/anim1.py), logo at 48% so a 1:1 tablet keeps it whole
+    video: "images/hero/clearscale-logo.mp4",
+    poster: "images/hero/clearscale-logo.webp",
+    // one-line lockup is wider than a phone's crop: native 2:3 render, logo at 75% of the width
+    portrait: { video: "images/hero/clearscale-logo-portrait.mp4", poster: "images/hero/clearscale-logo-portrait.webp" },
+  },
+  {
     title: "Sideform",
     href: postLink("sideform-desktop"),
     gradient: {

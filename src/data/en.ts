@@ -142,6 +142,7 @@ export const cases: CaseSummary[] = [
     ],
     visual: "cloud",
     preview: { src: "images/clearscale/clearscale-cover.webp", alt: "Clearscale logo" },
+    previewVideo: "images/clearscale/clearscale-card.mp4",
   },
   {
     id: "seligoai",
