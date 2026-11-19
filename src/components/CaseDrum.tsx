@@ -13,6 +13,8 @@ type DrumCase = {
       video: string;
       /** First frame of the video, shown until it plays and under reduced motion. */
       poster: string;
+      /** A 2:3 cut for phones, when the subject can't fit the centre third of the landscape video. */
+      portrait?: { video: string; poster: string };
     }
   | {
       /** The Sideform landing's live gradient with the mark, as on the post cover. */
@@ -26,6 +28,8 @@ const CASES: DrumCase[] = [
     href: caseLink("caldera"),
     video: "images/hero/caldera-logo.mp4", // the case card's logo video
     poster: "images/hero/caldera-logo.webp",
+    // the wordmark is wider than a phone's crop: same video, fitted to the width over its own blur
+    portrait: { video: "images/hero/caldera-logo-portrait.mp4", poster: "images/hero/caldera-logo-portrait.webp" },
   },
   { title: "Qure", href: postLink("qure"), video: "images/hero/qure-full.mp4", poster: "images/hero/qure-full.webp" },
   {
@@ -53,6 +57,8 @@ const CASES: DrumCase[] = [
 const BLOCKED_MS = 5000;
 const STALL_MS = 8000;
 const STILL_MS = 7000;
+/** Phones in portrait get a case's `portrait` cut; same breakpoint as --bp-mobile (900px). */
+const PORTRAIT_MEDIA = "(orientation: portrait) and (max-width: 900px)";
 const DRAG_GAIN = 1.1; // drum width per pointer width
 const SPRING_K = 90;
 const SPRING_D = 19;
@@ -127,6 +133,27 @@ export default function CaseDrum() {
     // React doesn't write `muted` into prerendered HTML and hydration doesn't set it,
     // and browsers only autoplay muted video.
     videos.forEach((v) => { if (v) v.muted = true; });
+
+    // The prerendered markup carries the landscape cut. Swap in the portrait cut on phones in
+    // portrait (in JS, not <source media>, so older browsers never get it on desktop, and so
+    // it follows rotation).
+    const portraitMq = matchMedia(PORTRAIT_MEDIA);
+    const applyCuts = () => {
+      CASES.forEach((c, i) => {
+        const v = videos[i];
+        if (!v || !("video" in c) || !c.portrait) return;
+        const cut = portraitMq.matches ? c.portrait : c;
+        const first = v.querySelector("source");
+        const next = videoSources(cut.video);
+        if (first?.getAttribute("src") === next[0].src) return;
+        v.replaceChildren(...next.map((x) => Object.assign(document.createElement("source"), x)));
+        v.poster = assetUrl(cut.poster);
+        const size = videoSize(cut.video);
+        if (size) { v.width = size.width; v.height = size.height; }
+        v.load();
+      });
+    };
+    applyCuts();
     let playGen = 0, blocked = false, progressAt = performance.now();
     const syncVideos = () => {
       const live = !reduced && ready && onScreen && !document.hidden;
@@ -291,6 +318,8 @@ export default function CaseDrum() {
       v?.addEventListener("timeupdate", onProgress);
     });
     document.addEventListener("visibilitychange", onVis);
+    const onCut = () => { applyCuts(); syncVideos(); };
+    portraitMq.addEventListener("change", onCut);
 
     let resizeT = 0;
     const onResize = () => {
@@ -315,6 +344,7 @@ export default function CaseDrum() {
       clearTimeout(resizeT);
       io.disconnect();
       document.removeEventListener("visibilitychange", onVis);
+      portraitMq.removeEventListener("change", onCut);
       videos.forEach((v) => {
         v?.removeEventListener("ended", onEnded);
         v?.removeEventListener("timeupdate", onProgress);
