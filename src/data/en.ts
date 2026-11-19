@@ -673,7 +673,17 @@ const caseSections: Record<string, CaseSection[]> = {
     {
       kind: "image",
       src: "/images/clearscale/portal-mobile.webp",
-      alt: "Clearscale iPhone app concept in Liquid Glass: overview with an approval card, a maintenance window approved with Face ID, and a chat that turns a cost question into a change request",
+      alt: "Clearscale iPhone app concept in Liquid Glass: overview with an approval card, an incident timeline, monthly cost, and a chat that turns a cost question into a change request",
+      aspect: "1440 / 900",
+    },
+    {
+      kind: "case",
+      text: "The phone app is for the moments that can't wait until morning: an inbox of everything that needs the client, a window approved with Face ID, a new request with the agent's time estimate, and the security score with the findings that matter.",
+    },
+    {
+      kind: "image",
+      src: "/images/clearscale/portal-mobile-2.webp",
+      alt: "Clearscale iPhone app concept: inbox, a maintenance window approved with Face ID, a new request with an agent estimate, and the security score",
       aspect: "1440 / 900",
     },
     {
