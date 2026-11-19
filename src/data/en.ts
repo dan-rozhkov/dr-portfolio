@@ -583,9 +583,9 @@ const caseSections: Record<string, CaseSection[]> = {
     },
     {
       kind: "image",
-      src: "/images/clearscale/billing-history.png",
-      alt: "Clearscale billing history: invoices by organization, package and status",
-      aspect: "3840 / 1579",
+      src: "/images/clearscale/portal-overview.webp",
+      alt: "Clearscale portal overview: uptime, open requests, monthly spend, security score, a maintenance window waiting for approval and recent activity",
+      aspect: "1440 / 900",
     },
     {
       label: "Solution",
@@ -609,12 +609,18 @@ const caseSections: Record<string, CaseSection[]> = {
     {
       kind: "subhead",
       title: "One dashboard, two readers",
-      text: "I reorganized the portal around service monitoring, infrastructure state and account activity. Experts keep the dense views, and business stakeholders read the same data without a walkthrough.",
+      text: "I reorganized the portal around service monitoring, infrastructure state and account activity. Experts keep the dense views, like security findings with a resource and a due date, and business stakeholders read the same data without a walkthrough.",
+      src: "/images/clearscale/portal-security.webp",
+      alt: "Clearscale portal security page: score 92, SOC 2, HIPAA and CIS progress, and findings by severity",
+      aspect: "1440 / 900",
     },
     {
       kind: "subhead",
       title: "React migration",
       text: "I moved the frontend to React, TypeScript, Next.js and styled-components. Reusable components replaced brittle patterns, so a new portal section no longer meant rewriting the base.",
+      src: "/images/clearscale/portal-helpdesk.webp",
+      alt: "Clearscale portal helpdesk: requests with an ID, an owner, an SLA and a status",
+      aspect: "1440 / 900",
     },
     {
       label: "Context",
@@ -624,23 +630,26 @@ const caseSections: Record<string, CaseSection[]> = {
     {
       kind: "subhead",
       title: "Billing without surprises",
-      text: "Each client buys a support package with hours included. Billing shows the package price, the hours used, the extra-hour rate and every invoice with its status, the way account managers read the numbers.",
+      text: "Each client buys a support package with hours included. Cost shows the month's spend against the budget and the forecast, splits it by service and flags an anomaly together with a ready fix, the way account managers read the numbers.",
+      src: "/images/clearscale/portal-cost.webp",
+      alt: "Clearscale portal cost page: daily spend against the budget and forecast, an S3 anomaly with a ready fix, and spend by service",
+      aspect: "1440 / 900",
     },
     {
       kind: "subhead",
       title: "Operational dashboards",
-      text: "Service health, incident timelines and infrastructure state share one layout, so engineers switch between accounts without relearning the screen.",
+      text: "Incidents, requests and security findings share one layout: an ID, a status, an owner and one number that matters. Engineers switch between accounts without relearning the screen.",
+      src: "/images/clearscale/portal-incidents.webp",
+      alt: "Clearscale portal incidents: a grid of cards with an ID, a status, the service and the time to resolve",
+      aspect: "1440 / 900",
     },
     {
       kind: "subhead",
       title: "Maintenance windows",
-      text: "Engineers schedule a maintenance window for one or several organizations at once, give a reason and a period, and link the ticket. Jira and Zabbix stay connected per client, so the portal shows the same incidents the team works on.",
-    },
-    {
-      kind: "image",
-      src: "/images/clearscale/dashboard.png",
-      alt: "Clearscale finance report card and the maintenance window form",
-      aspect: "2460 / 778",
+      text: "Engineers schedule night windows for one or several organizations at once, with a reason, a scope, a rollback plan and a linked ticket. The client approves a window right in the week calendar, and freeze periods like Black Friday block new ones.",
+      src: "/images/clearscale/portal-maintenance.webp",
+      alt: "Clearscale portal maintenance calendar: a week of night windows with the Kubernetes upgrade waiting for approval and its details on the right",
+      aspect: "1440 / 900",
     },
     {
       label: "Outcomes",
@@ -655,32 +664,16 @@ const caseSections: Record<string, CaseSection[]> = {
     {
       label: "Concept",
       kind: "logline",
-      text: "In 2026 I redrew the portal for what Clearscale sells now: AWS operations run together with Claude agents.",
+      text: "The portal grows with what Clearscale sells now: AWS operations run together with Claude agents.",
     },
     {
       kind: "case",
-      text: "This part is a concept, not shipped work, and the client and numbers are made up. The portal keeps its job, showing clients the operations they pay for, and adds what the new Clearscale One covers: agents answer first, and named engineers sign off on the risky steps.",
-    },
-    {
-      kind: "image",
-      src: "/images/clearscale/portal-overview.webp",
-      alt: "Concept portal overview: uptime, open requests, monthly spend, security score, a maintenance window waiting for approval and recent activity",
-      aspect: "1440 / 900",
-    },
-    {
-      kind: "case",
-      text: "Whatever waits on the client carries the cover gradient, and the rest of the screen stays black on warm gray. A maintenance window gets approved where it sits: in the week calendar on desktop, with Face ID on the phone.",
-    },
-    {
-      kind: "image",
-      src: "/images/clearscale/portal-maintenance.webp",
-      alt: "Concept maintenance calendar: a week of night windows with the Kubernetes upgrade waiting for approval and its details on the right",
-      aspect: "1440 / 900",
+      text: "Agents answer first, named engineers sign off on the risky steps, and the client approves from the phone. Whatever waits on the client carries the cover gradient, and the rest stays black on warm gray.",
     },
     {
       kind: "image",
       src: "/images/clearscale/portal-mobile.webp",
-      alt: "Concept iPhone app in Liquid Glass: overview with an approval card, a maintenance window approved with Face ID, and a chat that turns a cost question into a change request",
+      alt: "Clearscale iPhone app concept in Liquid Glass: overview with an approval card, a maintenance window approved with Face ID, and a chat that turns a cost question into a change request",
       aspect: "1440 / 900",
     },
     {
@@ -690,7 +683,7 @@ const caseSections: Record<string, CaseSection[]> = {
     {
       kind: "image",
       src: "/images/clearscale/portal-agents.webp",
-      alt: "Concept agents page: four Claude agents with runs, quality, cost and model mix",
+      alt: "Clearscale portal agents concept: four Claude agents with runs, quality, cost and model mix",
       aspect: "1440 / 900",
     },
     {
