@@ -43,8 +43,10 @@ const CASES: DrumCase[] = [
   {
     title: "Suflyor",
     href: postLink("suflyor"),
+    // 3 s of the logo, then the phone and the desktop from the case (.work/hero-anim/suflyor/build.sh)
     video: "images/hero/suflyor-full.mp4",
     poster: "images/hero/suflyor-full.webp",
+    portrait: { video: "images/hero/suflyor-portrait.mp4", poster: "images/hero/suflyor-portrait.webp" },
   },
 ];
 
