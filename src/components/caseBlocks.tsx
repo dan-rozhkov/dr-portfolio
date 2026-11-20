@@ -202,6 +202,16 @@ export function Section({ section }: { section: CaseSection }) {
 export function Slider({ items, html }: { items: SubheadSection[]; html?: boolean }) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [active, setActive] = useState(0);
+  // The media box is 4:3 by default and crops with object-fit: cover. When every slide declares
+  // the same aspect (framed screenshots), use it, so the screens are never cut at the edges.
+  const ratio = (a?: string) => {
+    const [w, h] = (a ?? "").split("/").map(Number);
+    return w > 0 && h > 0 ? w / h : NaN;
+  };
+  const first = ratio(items[0]?.aspect);
+  const sharedAspect = items.every((item) => Math.abs(ratio(item.aspect) - first) < 0.01)
+    ? items[0].aspect
+    : undefined;
 
   useEffect(() => {
     const update = () => {
@@ -250,7 +260,7 @@ export function Slider({ items, html }: { items: SubheadSection[]; html?: boolea
               </div>
             ))}
           </div>
-          <div className="cs-slider-media">
+          <div className="cs-slider-media" style={sharedAspect ? { aspectRatio: sharedAspect } : undefined}>
             {items.map((item, i) => (
               <div
                 className={`cs-slider-media-slide${

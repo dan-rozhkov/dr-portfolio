@@ -583,9 +583,8 @@ const caseSections: Record<string, CaseSection[]> = {
     },
     {
       kind: "image",
-      src: "/images/clearscale/portal-overview.webp",
-      alt: "Clearscale portal overview: uptime, open requests, monthly spend, security score, a maintenance window waiting for approval and recent activity",
-      aspect: "1440 / 900",
+      src: "/images/clearscale/clearscale-overview.mp4",
+      alt: "Clearscale portal overview builds in with uptime, open requests, monthly spend and security score, then the client approves the Kubernetes upgrade: the card turns scheduled, open requests drop to two and the approval tops the activity feed",
     },
     {
       label: "Solution",
@@ -671,8 +670,8 @@ const caseSections: Record<string, CaseSection[]> = {
     },
     {
       kind: "image",
-      src: "/images/clearscale/clearscale-phone-tabs.mp4",
-      alt: "Clearscale iPhone app concept in Liquid Glass: the client taps through Home, Incidents, Cost and Security, and each screen builds in with its numbers counting up",
+      src: "/images/clearscale/clearscale-phone-app.mp4",
+      alt: "Clearscale iPhone app concept in Liquid Glass: the client taps through Home, Incidents, Cost and Security, each screen building in with its numbers counting up, then asks the chat why S3 cost jumped and gets a change request",
     },
     {
       kind: "case",
