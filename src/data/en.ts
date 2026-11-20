@@ -159,7 +159,7 @@ export const cases: CaseSummary[] = [
     ],
     visual: "education",
     variant: "mobile",
-    preview: { src: "images/seligoai/hero.png", alt: "SeligoAI platform" },
+    preview: { src: "images/seligoai/seligoai-cover.webp", alt: "SeligoAI logo" },
   },
 ];
 
@@ -880,8 +880,9 @@ const caseHeroImages: Record<string, HeroImage> = {
     bleed: true,
   },
   seligoai: {
-    src: "/images/seligoai/hero.png",
-    alt: "SeligoAI student management platform",
+    src: "/images/seligoai/seligoai-cover.webp",
+    alt: "SeligoAI logo",
+    bleed: true,
   },
   talkpilot: {
     src: "/images/talkpilot/hero.png",
