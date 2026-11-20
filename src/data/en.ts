@@ -715,6 +715,11 @@ const caseSections: Record<string, CaseSection[]> = {
     },
     {
       kind: "image",
+      src: "/images/seligoai/seligoai-board.mp4",
+      alt: "SeligoAI brand board builds in: the seligoai wordmark rises with its smiling g, the go app icon blinks, the palette strips slide in, the logo pops on red and the case cover pulls into view",
+    },
+    {
+      kind: "image",
       src: "/images/seligoai/inner-01.png",
       alt: "SeligoAI student management platform",
       aspect: "3840 / 1579",
