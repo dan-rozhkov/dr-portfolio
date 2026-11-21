@@ -32,7 +32,6 @@ export default function Header() {
             href={assetUrl("cv.pdf")}
             target="_blank"
             rel="noopener noreferrer"
-            download
           >
             {t("nav.cv")}
           </a>
