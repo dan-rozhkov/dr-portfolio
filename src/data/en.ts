@@ -180,16 +180,16 @@ export const extraWork: ExtraWork = {
 };
 
 export const about: string[] = [
-  "Product designer and design engineer with 8+ years in B2B SaaS, design systems, and AI products. I design complex platforms and stay close to engineering until they ship.",
+  "Design engineer with 8+ years in B2B SaaS, design systems, and AI products. I design complex platforms and build their interfaces in code myself, all the way to production.",
 ];
 
 export const skills: string[] = [
-  "Product Design",
+  "Design Engineering",
   "Design Systems",
+  "React",
   "AI Products",
-  "B2B SaaS",
   "Prototyping",
-  "UI/UX",
+  "B2B SaaS",
 ];
 
 export const recognition: RecognitionGroup[] = [
@@ -208,7 +208,7 @@ export const recognition: RecognitionGroup[] = [
       ],
       [
         "live-studio on npm ↗",
-        "Open-source, MIT-licensed",
+        "Open-source MCP editor, 2K+ installs",
         "https://www.npmjs.com/package/live-studio",
       ],
     ],
