@@ -244,7 +244,7 @@ const caseSections: Record<string, CaseSection[]> = {
     },
     {
       kind: "image",
-      src: "/images/sber-india-proto/caldera-agent-chat.mp4",
+      src: "/images/sber-india-proto/caldera-agent-chat-v2.mp4",
       alt: "Two tiles: the Caldera AI voice agent on a phone answering a question about deposit insurance in India, and the Caldera AI app icon on orange",
     },
     {
