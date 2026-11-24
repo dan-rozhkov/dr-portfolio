@@ -18,7 +18,7 @@
   margin: 0 0 80px;
   font-size: var(--text-2xl);
   font-weight: 500;
-  line-height: 1.06;
+  line-height: var(--leading-heading);
   letter-spacing: -0.02em;
 }
 
@@ -27,6 +27,7 @@
   grid-template-columns: repeat(3, 1fr);
   grid-column: 5 / 14;
   gap: 48px;
+  line-height: var(--leading-ui);
 }
 
 .contact-methods a {
@@ -48,6 +49,7 @@
   align-self: end;
   justify-self: end;
   color: rgb(255 255 255 / 62%);
+  line-height: var(--leading-ui);
   white-space: nowrap;
 }
 

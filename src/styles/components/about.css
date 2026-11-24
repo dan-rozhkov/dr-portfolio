@@ -23,7 +23,7 @@
   align-self: start;
   font-size: var(--text-2xl);
   font-weight: 500;
-  line-height: 1.06;
+  line-height: var(--leading-heading);
   letter-spacing: -0.02em;
 }
 

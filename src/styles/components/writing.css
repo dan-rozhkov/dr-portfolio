@@ -21,18 +21,20 @@
   margin: 0 0 16px;
   font-size: var(--text-xl);
   font-weight: 500;
+  line-height: var(--leading-heading);
   letter-spacing: -0.02em;
 }
 
 .writing-side p {
   margin: 0 0 32px;
-  line-height: 1.4;
+  line-height: var(--leading-body);
 }
 
 .writing-filter {
   margin: 0 0 28px;
   padding: 0;
   border-top: 1px solid var(--line);
+  line-height: var(--leading-ui);
   list-style: none;
 }
 
@@ -122,7 +124,7 @@
   margin: 10px 0 12px;
   font-size: var(--text-2xl);
   font-weight: 500;
-  line-height: 1.04;
+  line-height: var(--leading-heading);
   letter-spacing: -0.02em;
 }
 
@@ -132,7 +134,7 @@
   margin: 0;
   color: var(--muted);
   font-size: var(--text-lg);
-  line-height: 1.4;
+  line-height: var(--leading-body);
 }
 
 @media (--mobile) {
@@ -207,7 +209,7 @@
   margin: 0;
   padding-left: 20px;
   font-size: var(--text-lg);
-  line-height: 1.4;
+  line-height: var(--leading-body);
 }
 
 .post-back {
@@ -282,8 +284,10 @@
   object-fit: contain;
 }
 
+/* Same text size as the case studies: 20px on desktop, --text-base on mobile */
 .post-sections {
   padding-bottom: var(--space-3xl);
+  font-size: var(--text-lg);
 }
 
 
@@ -347,6 +351,7 @@
   .post-sections {
     gap: 64px;
     margin-top: 0;
+    font-size: var(--text-base);
   }
 
   .post-section {

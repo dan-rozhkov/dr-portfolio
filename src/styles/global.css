@@ -14,7 +14,7 @@ body {
   color: var(--ink);
   font-family: "General Sans", "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
   font-size: var(--text-base);
-  line-height: 1.28;
+  line-height: var(--leading-body);
   letter-spacing: 0;
 
   /* Deliberate: all copy, posts included, sits in narrow balanced columns.

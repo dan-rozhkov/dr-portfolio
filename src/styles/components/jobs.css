@@ -21,12 +21,13 @@
   margin: 0 0 16px;
   font-size: var(--text-xl);
   font-weight: 500;
+  line-height: var(--leading-heading);
   letter-spacing: -0.02em;
 }
 
 .jobs-side p {
   margin: 0 0 32px;
-  line-height: 1.4;
+  line-height: var(--leading-body);
 }
 
 .jobs-side .jobs-stale {
@@ -40,6 +41,7 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
   margin-bottom: 36px;
+  line-height: var(--leading-ui);
 }
 
 .jobs-stats div {
@@ -68,6 +70,7 @@
   margin: 0 0 28px;
   padding: 0;
   border-top: 1px solid var(--line);
+  line-height: var(--leading-ui);
   list-style: none;
 }
 
@@ -134,6 +137,7 @@
 .jobs-logo-name {
   font-size: var(--text-lg);
   font-weight: 500;
+  line-height: var(--leading-ui);
   letter-spacing: -0.01em;
 }
 
@@ -168,6 +172,7 @@
   margin-right: calc(-1 * var(--pad));
   padding-block: 14px;
   font-size: var(--text-lg);
+  line-height: var(--leading-ui);
   white-space: nowrap;
   overflow: hidden;
   border-block: 1px solid var(--line);

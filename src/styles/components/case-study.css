@@ -12,7 +12,7 @@ body:has(.case-study)::-webkit-scrollbar {
 .case-study {
   padding-top: var(--space-2xl);
   font-size: var(--text-lg);
-  line-height: 1.4;
+  line-height: var(--leading-body);
   letter-spacing: 0.005em;
 }
 
@@ -39,7 +39,7 @@ body:has(.case-study)::-webkit-scrollbar {
   align-self: start;
   font-size: var(--text-2xl);
   font-weight: 500;
-  line-height: 1.06;
+  line-height: var(--leading-heading);
   letter-spacing: -0.02em;
   text-wrap: balance;
 }
@@ -137,7 +137,7 @@ body:has(.case-study)::-webkit-scrollbar {
   grid-column: 7 / 16;
   font-size: var(--text-2xl);
   font-weight: 500;
-  line-height: 1.06;
+  line-height: var(--leading-heading);
   letter-spacing: -0.02em;
 }
 
@@ -220,7 +220,7 @@ body:has(.case-study)::-webkit-scrollbar {
   margin: 0 0 16px;
   font-size: var(--text-2xl);
   font-weight: 500;
-  line-height: 1.06;
+  line-height: var(--leading-heading);
   letter-spacing: -0.02em;
 }
 
@@ -294,7 +294,7 @@ body:has(.case-study)::-webkit-scrollbar {
   margin: 0 0 16px;
   font-size: var(--text-2xl);
   font-weight: 500;
-  line-height: 1.06;
+  line-height: var(--leading-heading);
   letter-spacing: -0.02em;
 }
 
@@ -367,7 +367,7 @@ body:has(.case-study)::-webkit-scrollbar {
   margin-bottom: 8px;
   font-size: var(--text-2xl);
   font-weight: 500;
-  line-height: 1.06;
+  line-height: var(--leading-heading);
   letter-spacing: -0.02em;
 }
 
@@ -533,7 +533,7 @@ body:has(.case-study)::-webkit-scrollbar {
     margin: 0;
     font-size: var(--text-2xl);
     font-weight: 500;
-    line-height: 1.06;
+    line-height: var(--leading-heading);
     letter-spacing: -0.02em;
   }
 

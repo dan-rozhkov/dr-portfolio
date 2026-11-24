@@ -16,7 +16,7 @@
   margin: 0;
   font-size: var(--text-2xl);
   font-weight: 500;
-  line-height: 1.06;
+  line-height: var(--leading-heading);
   letter-spacing: -0.02em;
   text-wrap: pretty;
 }
@@ -53,7 +53,6 @@
 
   .hero h1 {
     font-size: var(--text-2xl);
-    line-height: 1.08;
   }
 
   .hero-meta {
