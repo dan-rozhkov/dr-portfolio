@@ -9,7 +9,7 @@ type DrumCase = {
   href: string;
 } & (
   | {
-      /** Full case video, 16:10; cropped to fill the drum. */
+      /** Full case video, 16:10 or 16:9; cropped to fill the drum. */
       video: string;
       /** First frame of the video, shown until it plays and under reduced motion. */
       poster: string;
@@ -23,6 +23,15 @@ type DrumCase = {
 );
 
 const CASES: DrumCase[] = [
+  {
+    title: "Liquid Glass",
+    href: postLink("liquid-glass"),
+    // the Spline-style trio (.work/glass-spline/final): toolbar over a moving gradient, picker lens, glass bolt
+    video: "images/hero/liquid-glass.mp4",
+    poster: "images/hero/liquid-glass.webp",
+    // the picker lens is wider than a phone's crop: a native 2:3 render with every scene re-laid out in the centre
+    portrait: { video: "images/hero/liquid-glass-portrait.mp4", poster: "images/hero/liquid-glass-portrait.webp" },
+  },
   {
     title: "Caldera",
     href: caseLink("caldera"),
@@ -75,7 +84,7 @@ const SPRING_K = 90;
 const SPRING_D = 19;
 
 /**
- * Full-bleed case panels on the faces of a horizontal drum (four cases: a cube). The front
+ * Full-bleed case panels on the faces of a horizontal drum (one face per case). The front
  * face fills the block exactly; between cases the drum turns, pulls back a little and rolls
  * into the direction of travel. It turns by itself, follows drag/swipe with inertia and
  * snaps to a case. One number (pos, in faces) drives every transform; no animation library.

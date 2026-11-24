@@ -35,6 +35,14 @@
     1728,
     1080
   ],
+  "images/hero/liquid-glass-portrait.mp4": [
+    1080,
+    1620
+  ],
+  "images/hero/liquid-glass.mp4": [
+    1920,
+    1080
+  ],
   "images/hero/qure-full.mp4": [
     1120,
     700
@@ -106,6 +114,18 @@
   "images/writing/biscuit-pet/mood-wave.mp4": [
     540,
     960
+  ],
+  "images/writing/liquid-glass/card.mp4": [
+    1920,
+    1080
+  ],
+  "images/writing/liquid-glass/lens-reel.mp4": [
+    1920,
+    1200
+  ],
+  "images/writing/liquid-glass/tulips.mp4": [
+    1920,
+    1080
   ],
   "images/writing/qure/brand-bento.mp4": [
     1920,
