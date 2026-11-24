@@ -17,9 +17,9 @@ stack:
 links:
   - label: Code
     url: https://github.com/dan-rozhkov/ios-liquid-glass
-cover: /images/writing/liquid-glass/cover.webp
+cover: /images/writing/liquid-glass/cover-1610.webp
 thumb: /images/writing/liquid-glass/thumb.webp
-thumbVideo: /images/writing/liquid-glass/card.mp4
+thumbVideo: /images/writing/liquid-glass/trio.mp4
 ogImage: /images/writing/liquid-glass/og.jpg
 ---
 
@@ -31,7 +31,7 @@ Glass only reads when something moves under it.
 
 In mockups, Liquid Glass is usually a blurred rectangle. I wanted the real thing in my case renders: the backdrop bends at the rim, the middle stays sharp, and the edge catches a thin rainbow. So I built it as a skill Claude reaches for whenever a faux iOS screen needs glass.
 
-![A glass toolbar over a moving gradient, a picker lens that sweeps the rows above into arcs, and a glass lightning bolt bending a running line of type](/images/writing/liquid-glass/card.mp4 "full")
+![A glass toolbar over a moving gradient, a picker lens that sweeps the rows above into arcs, and a glass lightning bolt bending a running line of type](/images/writing/liquid-glass/trio.mp4 "full")
 
 ## Matched to iOS
 
@@ -53,7 +53,7 @@ On iOS the glass reacts to your finger.
 
 The tab-bar selection lifts into a clear lens, stretches as it travels and settles back into a pill. Sliders and switches turn into lenses while you hold them, and a pressed button swells and brightens. Every clip is recorded frame by frame, so each take is exactly the same.
 
-![Left: a social post cover with glass sliders, a switch, a button and a tab bar in motion. Right: the iOS tab-bar selection lifts into a lens and slides across the icons](/images/writing/liquid-glass/lens-reel.mp4 "full")
+![Glass in motion: a slider over a rainbow and a blue slider turn into lenses while held, a switch knob crosses as a lens, the plus button swells and brightens, and the tab-bar selection slides across the icons as a lens](/images/writing/liquid-glass/motion.mp4 "full")
 
 ## Any shape
 
@@ -63,7 +63,7 @@ Not just capsules.
 
 For the cover video I took the same lens past capsules: a picker that sweeps the rows above into arcs and a lightning bolt over a running line of type. Over a photo the bend is easiest to see, as the tulips curve around the rim of the toolbar.
 
-![A glass toolbar over pink tulips: stems and petals bend around its rim](/images/writing/liquid-glass/tulips.mp4 "full")
+![A glass toolbar over pink tulips: stems and petals bend around its rim](/images/writing/liquid-glass/tulips-1610.mp4 "full")
 
 ## Outcome
 
