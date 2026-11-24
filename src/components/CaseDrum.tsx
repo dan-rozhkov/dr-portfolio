@@ -26,11 +26,11 @@ const CASES: DrumCase[] = [
   {
     title: "Liquid Glass",
     href: postLink("liquid-glass"),
-    // the Spline-style trio (.work/glass-spline/final): toolbar over a moving gradient, picker lens, glass bolt
-    video: "images/hero/liquid-glass.mp4",
-    poster: "images/hero/liquid-glass.webp",
+    // the Spline-style trio over tulips (.work/glass-spline/final): toolbar over the tulip video, picker lens, glass bolt
+    video: "images/hero/liquid-glass-tulips.mp4",
+    poster: "images/hero/liquid-glass-tulips.webp",
     // the picker lens is wider than a phone's crop: a native 2:3 render with every scene re-laid out in the centre
-    portrait: { video: "images/hero/liquid-glass-portrait.mp4", poster: "images/hero/liquid-glass-portrait.webp" },
+    portrait: { video: "images/hero/liquid-glass-tulips-portrait.mp4", poster: "images/hero/liquid-glass-tulips-portrait.webp" },
   },
   {
     title: "Caldera",

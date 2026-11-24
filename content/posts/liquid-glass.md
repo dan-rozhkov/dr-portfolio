@@ -53,7 +53,7 @@ On iOS the glass reacts to your finger.
 
 The tab-bar selection lifts into a clear lens, stretches as it travels and settles back into a pill. Sliders and switches turn into lenses while you hold them, and a pressed button swells and brightens. Every clip is recorded frame by frame, so each take is exactly the same.
 
-![Glass in motion: a slider over a rainbow and a blue slider turn into lenses while held, a switch knob crosses as a lens, the plus button swells and brightens, and the tab-bar selection slides across the icons as a lens](/images/writing/liquid-glass/motion.mp4 "full")
+![Glass in motion: a small lens slides across the black ios-liquid-glass label and magnifies its letters, a slider over a rainbow and a blue slider turn into lenses while held, a switch knob crosses as a lens next to the outlined GLASS wordmark, the plus button swells and brightens, and the tab-bar selection slides across the icons as a lens](/images/writing/liquid-glass/reel.mp4 "full")
 
 ## Any shape
 
