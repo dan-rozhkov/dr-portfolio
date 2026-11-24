@@ -164,6 +164,12 @@ body:has(.case-study)::-webkit-scrollbar {
   background: transparent;
 }
 
+/* A portrait video sits whole inside a 16:10 block, or it would be almost two screens tall on desktop. Mobile overrides this below. */
+.cs-image-row .cs-image--portrait {
+  aspect-ratio: 16 / 10;
+  object-fit: contain;
+}
+
 .cs-media-group {
   /* Earlier Caldera pairs bake a 12px gutter into their 1920px frames. */
   --media-gap: clamp(4px, 0.625vw, 12px);

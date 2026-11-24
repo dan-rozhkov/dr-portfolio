@@ -50,7 +50,7 @@ function CaseVideo({ src, alt, eager }: { src: string; alt?: string; eager: bool
   const ref = useRef<HTMLVideoElement>(null);
   useViewportPlayback(ref, { rootMargin: "100% 0px" });
   const size = videoSize(src);
-  // Safari keeps the poster's 16:10 box and letterboxes the video; CSS gives a portrait one its own ratio
+  // Safari sizes the box by the 16:10 poster, Chromium by the video; CSS sets a portrait one's ratio explicitly
   const portrait = size && size.height > size.width;
   return (
     <video
