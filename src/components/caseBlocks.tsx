@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import type { CaseSection } from "../data/portfolio";
 import { useT } from "../i18n/context";
 import { assetUrl } from "../lib/url";
@@ -49,11 +49,15 @@ const LOADING_POSTER = `data:image/svg+xml,${encodeURIComponent(
 function CaseVideo({ src, alt, eager }: { src: string; alt?: string; eager: boolean }) {
   const ref = useRef<HTMLVideoElement>(null);
   useViewportPlayback(ref, { rootMargin: "100% 0px" });
+  const size = videoSize(src);
+  // Safari keeps the poster's 16:10 box and letterboxes the video; CSS gives a portrait one its own ratio
+  const portrait = size && size.height > size.width;
   return (
     <video
       ref={ref}
-      className="cs-image"
-      {...videoSize(src)}
+      className={`cs-image${portrait ? " cs-image--portrait" : ""}`}
+      style={portrait ? ({ "--media-ratio": `${size.width} / ${size.height}` } as CSSProperties) : undefined}
+      {...size}
       {...lazyVideoProps(!eager)}
       poster={LOADING_POSTER}
       autoPlay={eager}

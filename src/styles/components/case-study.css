@@ -490,6 +490,11 @@ body:has(.case-study)::-webkit-scrollbar {
     border-radius: 0;
   }
 
+  /* A full-width portrait video takes its own height instead of sitting letterboxed in 16:10 */
+  .cs-image-row .cs-image--portrait {
+    aspect-ratio: var(--media-ratio);
+  }
+
   .cs-subhead-media .cs-image,
   .cs-slider-pair .cs-image {
     width: calc(100% + 2 * var(--pad));
