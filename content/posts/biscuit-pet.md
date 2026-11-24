@@ -5,9 +5,8 @@ date: 2026-10-31
 category: product-building
 tldr:
   - Biscuit Pet is a virtual pet for iPhone. Biscuit lives on while the app is closed, so a 30-second visit always matters.
-  - I designed and built it over four days, 28–31 October 2026 — 79 commits, 75 of them co-written with Claude.
-  - Biscuit is AI-generated video. I made every pose on fal from one master still, so he looks like the same animal in every clip.
-  - Expo and TypeScript, 558 unit tests, with App Store metadata and screenshots prepared for submission.
+  - I designed and built it in four days, with 558 unit tests.
+  - Biscuit is AI-generated video. Every pose comes from one master still, so he looks like the same animal in every clip.
 stack:
   - Expo
   - React Native

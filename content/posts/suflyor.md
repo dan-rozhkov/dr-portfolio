@@ -4,9 +4,9 @@ dek: A web app that listens through the microphone and shows live translation be
 date: 2026-11-02
 category: product-building
 tldr:
-  - Suflyor translates speech live between 60 languages and suggests replies, in the browser or installed on the iPhone Home Screen. No bot joins the call.
-  - I made the brand: the logo, the app icon, the favicon and the animated mark. I also designed the app for phone, tablet and desktop.
-  - The name is the Russian word for a theater prompter, so the mark is a speech bubble that watches the conversation with you.
+  - Suflyor translates speech live between 60 languages and suggests replies. No bot joins the call.
+  - I made the brand and designed the app for phone, tablet and desktop.
+  - The name is Russian for a theater prompter, so the mark is a speech bubble.
 links:
   - label: Code
     url: https://github.com/dan-rozhkov/suflyor

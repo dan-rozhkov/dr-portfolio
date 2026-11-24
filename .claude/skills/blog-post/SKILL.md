@@ -21,7 +21,7 @@ Recruiters and hiring managers (goal: they write to Danil), and people coming fr
 - Visuals like a case study: a post is as rich as the cases on the home page (see `src/data/en.ts` cases): an image or video for almost every section, plus case extras — slider (sticky subheads with media), full-width images, logline statements, outcome stats. Text-only sections are the exception. Use real product screenshots/recordings only.
 - Never put screenshots on a black background. Use the light-gray rounded media block the cases use, or no background at all. Don't bake a backdrop into the image file either — export the screenshot itself.
 - American spelling everywhere on the site (color, theater, gray), in posts, cases and alt texts.
-- TL;DR first: what it is, what Danil did, stack, outcome — scannable in 30 seconds.
+- TL;DR first, 2–3 short bullets, never more: what it is, what Danil did, outcome. The stack goes in the meta block.
 - Drafts are published immediately and publicly. Danil reviews on the live site.
 
 ## Post file format
@@ -36,7 +36,7 @@ title: Project name
 dek: One sentence for the index and the meta description.
 date: 2026-10-31             # YYYY-MM-DD, publication date
 category: design-engineering # design-engineering | ai-tools | product-building
-tldr:                        # 3–5 bullets: what it is, what Danil did, stack, outcome
+tldr:                        # 2–3 short bullets: what it is, what Danil did, outcome (stack goes in `stack`)
   - …
 stack:                       # optional
   - Electron
@@ -107,6 +107,8 @@ Do not deploy if either step was skipped.
 - 2026-11-07 — Sber India case is now Caldera AI at `/en/case/caldera/`; the old `sber-india-proto` URL and home hash redirect to it. Its card loops `caldera-card.mp4`, the reveal then the outline animation, 8.7 s (a case gets a card video through `previewVideo`); the poster is the last frame, so reduced motion shows the whole logo and the start looks like the loop seam. Inside the case the cover is static and edge to edge (`caldera-hero.webp`, `bleed: true`), no animation there. Brand iterations went to Notion first, and the live deploy followed Danil's go-ahead.
 Every correction Danil sends becomes a rule here (and in Claude's memory). Newest first.
 
+- 2026-11-24 — The TL;DR took too much space on mobile: 2–3 bullets at most in every post, no stack bullet.
+- 2026-11-24 — Line height was too tight site-wide. Use the tokens in `tokens.css`: `--leading-heading` (1.15 desktop, 1.2 mobile), `--leading-body` (1.5), `--leading-ui` (1.28, one-line rows only). Post paragraphs are the same size as case ones: 20px desktop, 16px mobile.
 - 2026-11-24 — On mobile a full-width portrait video (Liquid Glass `reel.mp4`, 4:5) runs the full screen width at its own height, beyond 16:10; never letterboxed inside 16:10. On desktop it sits whole in a 16:10 block with light-gray sides, the same in every browser. Check videos in WebKit too: Safari keeps the poster's 16:10 box, Chromium doesn't show the problem.
 - 2026-11-24 — A TL;DR bullet with ": " in it is read as a map by the frontmatter parser and silently dropped. Quote such bullets ("…"), then count the `<li>` in the built page.
 - 2026-11-10 — American spelling site-wide. The outcome metrics in the Openprovider, ClearScale and SeligoAI cases are real (Danil confirmed), so keep them. Those three cases were rewritten in the short Caldera format; keep runs of subheads without media short (2–3), split by a text block, because each run becomes a sticky slider.

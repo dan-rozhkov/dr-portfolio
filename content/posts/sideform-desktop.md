@@ -4,10 +4,9 @@ dek: A macOS app that puts an AI design agent next to your canvas, a real browse
 date: 2026-11-01
 category: design-engineering
 tldr:
-  - Sideform is an AI design editor. I designed and built its macOS app — the agent docked on the left, canvas, browser and document tabs on the right.
-  - I took it from the first spec on 18 July 2026 to v0.9.5 on 1 November — 277 commits, 219 of them co-written with Claude.
-  - It gives the agent what a browser tab can't — the web with your logins, other Mac apps with your permission, and your work saved on disk.
-  - Electron and TypeScript, with a small Swift helper for macOS app control.
+  - Sideform is an AI design editor. I designed and built its macOS app, from the first spec to v0.9.5 in 15 weeks.
+  - The agent works next to your canvas, a real browser and your documents.
+  - It gets what a browser tab can't give it — the web with your logins, other Mac apps with your permission, and your work saved on disk.
 stack:
   - Electron
   - TypeScript

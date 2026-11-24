@@ -4,11 +4,9 @@ dek: A Claude Code skill that draws iOS 26 Liquid Glass in the browser for produ
 date: 2026-11-24
 category: ai-tools
 tldr:
-  - A Claude Code skill that draws iOS 26 Liquid Glass for renders. The glass bends what passes under it, stays sharp in the middle and catches a thin rainbow at the rim.
-  - "Nothing to install: the glass is plain HTML and SVG filters, so any coding agent can use it to make marketing videos with Liquid Glass."
-  - I matched every style to real iOS screenshots and screen recordings, side by side. Light, tinted, dark, clear dark, the floating sheet and the tab-bar drag lens are all in.
-  - "The glass moves like iOS in recorded video. On top of the skill I built custom lenses for the cover: a picker and a lightning bolt."
-  - Open source under MIT. It renders the glass in my Caldera case videos.
+  - A Claude Code skill that draws iOS 26 Liquid Glass for product renders and videos.
+  - It's plain HTML and SVG filters with nothing to install, so any coding agent can make marketing videos with it.
+  - I matched every style to real iOS screens, side by side. Open source under MIT.
 stack:
   - Claude Code
   - SVG filters
