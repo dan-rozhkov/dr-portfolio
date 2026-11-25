@@ -17,7 +17,7 @@ export default function CaseCard({
   const loading = eager ? "eager" : "lazy";
   return (
     <article className="case-card">
-      <a href={entry.href}>
+      <a href={entry.href} data-cursor="VIEW">
         {entry.image && (
           <div className={entry.video ? "writing-thumb writing-thumb--wide" : "writing-thumb"}>
             {entry.video ? (
